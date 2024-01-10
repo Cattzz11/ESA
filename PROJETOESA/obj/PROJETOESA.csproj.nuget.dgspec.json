@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "D:\\ESA\\PROJETOESA\\PROJETOESA\\PROJETOESA.csproj": {}
+    "C:\\projetoESA\\PROJETOESA\\PROJETOESA.csproj": {}
   },
   "projects": {
-    "D:\\ESA\\PROJETOESA\\PROJETOESA\\PROJETOESA.csproj": {
+    "C:\\projetoESA\\PROJETOESA\\PROJETOESA.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\ESA\\PROJETOESA\\PROJETOESA\\PROJETOESA.csproj",
+        "projectUniqueName": "C:\\projetoESA\\PROJETOESA\\PROJETOESA.csproj",
         "projectName": "PROJETOESA",
-        "projectPath": "D:\\ESA\\PROJETOESA\\PROJETOESA\\PROJETOESA.csproj",
-        "packagesPath": "C:\\Users\\catar\\.nuget\\packages\\",
-        "outputPath": "D:\\ESA\\PROJETOESA\\PROJETOESA\\obj\\",
+        "projectPath": "C:\\projetoESA\\PROJETOESA\\PROJETOESA.csproj",
+        "packagesPath": "C:\\Users\\yuarg\\.nuget\\packages\\",
+        "outputPath": "C:\\projetoESA\\PROJETOESA\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\catar\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\yuarg\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -40,6 +40,10 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "dependencies": {
+            "Microsoft.AspNetCore.Components.QuickGrid.EntityFrameworkAdapter": {
+              "target": "Package",
+              "version": "[8.0.0, )"
+            },
             "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore": {
               "target": "Package",
               "version": "[8.0.0, )"
@@ -56,7 +60,15 @@
               "target": "Package",
               "version": "[8.0.0, )"
             },
+            "Microsoft.EntityFrameworkCore.Sqlite": {
+              "target": "Package",
+              "version": "[8.0.0, )"
+            },
             "Microsoft.EntityFrameworkCore.Tools": {
+              "target": "Package",
+              "version": "[8.0.0, )"
+            },
+            "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
               "target": "Package",
               "version": "[8.0.0, )"
             }

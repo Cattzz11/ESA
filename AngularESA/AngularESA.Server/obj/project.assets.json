@@ -459,19 +459,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\catar\\.nuget\\packages\\": {}
+    "C:\\Users\\yuarg\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\ESA\\PROJETOESA\\AngularESA\\AngularESA.Server\\AngularESA.Server.csproj",
+      "projectUniqueName": "C:\\projetoESA\\AngularESA\\AngularESA.Server\\AngularESA.Server.csproj",
       "projectName": "AngularESA.Server",
-      "projectPath": "D:\\ESA\\PROJETOESA\\AngularESA\\AngularESA.Server\\AngularESA.Server.csproj",
-      "packagesPath": "C:\\Users\\catar\\.nuget\\packages\\",
-      "outputPath": "D:\\ESA\\PROJETOESA\\AngularESA\\AngularESA.Server\\obj\\",
+      "projectPath": "C:\\projetoESA\\AngularESA\\AngularESA.Server\\AngularESA.Server.csproj",
+      "packagesPath": "C:\\Users\\yuarg\\.nuget\\packages\\",
+      "outputPath": "C:\\projetoESA\\AngularESA\\AngularESA.Server\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\catar\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\yuarg\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
