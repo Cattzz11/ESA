@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 
+
 interface WeatherForecast {
   date: string;
   temperatureC: number;
@@ -19,9 +20,10 @@ export class AppComponent implements OnInit {
   constructor(private http: HttpClient) {}
 
   ngOnInit() {
-    this.getForecasts();
+    //this.getForecasts();
   }
 
+  /*
   getForecasts() {
     this.http.get<WeatherForecast[]>('/weatherforecast').subscribe(
       (result) => {
@@ -32,6 +34,6 @@ export class AppComponent implements OnInit {
       }
     );
   }
-
+  */
   title = 'angularesa.client';
 }

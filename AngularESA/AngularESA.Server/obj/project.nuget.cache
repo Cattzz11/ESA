@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "SnUz8gNTe8UQsNL9zXXV+MhsFQYxfDH0wYihHhB0cMgOHDvxVJsQ6iXn8hBlpdA83v+YNEZbI/4nus1i47tGCQ==",
+  "dgSpecHash": "ASBP672MQwAvQ11b/H6Rm7IK+J0orlkNVNbzudmS1kBmJxqCMMMBquLHtWhoitrXJ8iD6jmA2G2MnX7VJL6KBg==",
   "success": true,
-  "projectFilePath": "D:\\ESA\\PROJETOESA\\AngularESA\\AngularESA.Server\\AngularESA.Server.csproj",
+  "projectFilePath": "D:\\ESA\\PROJETOESA\\ESA\\AngularESA\\AngularESA.Server\\AngularESA.Server.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\catar\\.nuget\\packages\\microsoft.aspnetcore.spaproxy\\8.0.1\\microsoft.aspnetcore.spaproxy.8.0.1.nupkg.sha512",
     "C:\\Users\\catar\\.nuget\\packages\\microsoft.extensions.apidescription.server\\6.0.5\\microsoft.extensions.apidescription.server.6.0.5.nupkg.sha512",

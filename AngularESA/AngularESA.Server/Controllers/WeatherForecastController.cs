@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace AngularESA.Server.Controllers
 {
+    /*
     [ApiController]
     [Route("[controller]")]
     public class WeatherForecastController : ControllerBase
@@ -29,5 +30,5 @@ namespace AngularESA.Server.Controllers
             })
             .ToArray();
         }
-    }
+    }*/
 }

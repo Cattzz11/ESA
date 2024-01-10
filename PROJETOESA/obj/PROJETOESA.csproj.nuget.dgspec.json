@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\ESA\\PROJETOESA\\PROJETOESA\\PROJETOESA.csproj": {}
+    "D:\\ESA\\PROJETOESA\\ESA\\PROJETOESA\\PROJETOESA.csproj": {}
   },
   "projects": {
-    "D:\\ESA\\PROJETOESA\\PROJETOESA\\PROJETOESA.csproj": {
+    "D:\\ESA\\PROJETOESA\\ESA\\PROJETOESA\\PROJETOESA.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\ESA\\PROJETOESA\\PROJETOESA\\PROJETOESA.csproj",
+        "projectUniqueName": "D:\\ESA\\PROJETOESA\\ESA\\PROJETOESA\\PROJETOESA.csproj",
         "projectName": "PROJETOESA",
-        "projectPath": "D:\\ESA\\PROJETOESA\\PROJETOESA\\PROJETOESA.csproj",
+        "projectPath": "D:\\ESA\\PROJETOESA\\ESA\\PROJETOESA\\PROJETOESA.csproj",
         "packagesPath": "C:\\Users\\catar\\.nuget\\packages\\",
-        "outputPath": "D:\\ESA\\PROJETOESA\\PROJETOESA\\obj\\",
+        "outputPath": "D:\\ESA\\PROJETOESA\\ESA\\PROJETOESA\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\catar\\AppData\\Roaming\\NuGet\\NuGet.Config",

@@ -464,11 +464,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\ESA\\PROJETOESA\\AngularESA\\AngularESA.Server\\AngularESA.Server.csproj",
+      "projectUniqueName": "D:\\ESA\\PROJETOESA\\ESA\\AngularESA\\AngularESA.Server\\AngularESA.Server.csproj",
       "projectName": "AngularESA.Server",
-      "projectPath": "D:\\ESA\\PROJETOESA\\AngularESA\\AngularESA.Server\\AngularESA.Server.csproj",
+      "projectPath": "D:\\ESA\\PROJETOESA\\ESA\\AngularESA\\AngularESA.Server\\AngularESA.Server.csproj",
       "packagesPath": "C:\\Users\\catar\\.nuget\\packages\\",
-      "outputPath": "D:\\ESA\\PROJETOESA\\AngularESA\\AngularESA.Server\\obj\\",
+      "outputPath": "D:\\ESA\\PROJETOESA\\ESA\\AngularESA\\AngularESA.Server\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\catar\\AppData\\Roaming\\NuGet\\NuGet.Config",

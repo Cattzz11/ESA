@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "hClTMfvVcchiaIezAqMd8bn7H+dqOhg79h3MBY9/GT97cjaocPN+Hm1IIl8H/WcGb3GwIPjmyCk4SqX/hFzrFw==",
+  "dgSpecHash": "gwLgLH8CbGzzbY1JcHsYVpPxW0DHppRFoY4QaWcKiW/BuGuP+68d4OyEvnwKtB9M123foezjcWdIP5wsZVFJ7Q==",
   "success": true,
-  "projectFilePath": "D:\\ESA\\PROJETOESA\\PROJETOESA\\PROJETOESA.csproj",
+  "projectFilePath": "D:\\ESA\\PROJETOESA\\ESA\\PROJETOESA\\PROJETOESA.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\catar\\.nuget\\packages\\azure.core\\1.25.0\\azure.core.1.25.0.nupkg.sha512",
     "C:\\Users\\catar\\.nuget\\packages\\azure.identity\\1.7.0\\azure.identity.1.7.0.nupkg.sha512",
