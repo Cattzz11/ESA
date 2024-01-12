@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "D:\\ESA\\PROJETOESA\\ESA\\PROJETOESA\\PROJETOESA.csproj": {}
+    "C:\\Users\\Tiago\\Desktop\\IPS\\ESA\\PROJETOESA\\PROJETOESA.csproj": {}
   },
   "projects": {
-    "D:\\ESA\\PROJETOESA\\ESA\\PROJETOESA\\PROJETOESA.csproj": {
+    "C:\\Users\\Tiago\\Desktop\\IPS\\ESA\\PROJETOESA\\PROJETOESA.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\ESA\\PROJETOESA\\ESA\\PROJETOESA\\PROJETOESA.csproj",
+        "projectUniqueName": "C:\\Users\\Tiago\\Desktop\\IPS\\ESA\\PROJETOESA\\PROJETOESA.csproj",
         "projectName": "PROJETOESA",
-        "projectPath": "D:\\ESA\\PROJETOESA\\ESA\\PROJETOESA\\PROJETOESA.csproj",
-        "packagesPath": "C:\\Users\\catar\\.nuget\\packages\\",
-        "outputPath": "D:\\ESA\\PROJETOESA\\ESA\\PROJETOESA\\obj\\",
+        "projectPath": "C:\\Users\\Tiago\\Desktop\\IPS\\ESA\\PROJETOESA\\PROJETOESA.csproj",
+        "packagesPath": "C:\\Users\\Tiago\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Tiago\\Desktop\\IPS\\ESA\\PROJETOESA\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\catar\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Tiago\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
