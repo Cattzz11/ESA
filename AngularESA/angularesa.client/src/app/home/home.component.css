@@ -1,0 +1,25 @@
+
+@media (min-width: 900px){
+  body {
+    max-width: 100%;
+  }
+}
+#plane {
+  float: right;
+  padding-top: 150px;
+  width: 50%;
+}
+.slogan {
+  font-family: 'Roboto Slab', serif;
+  color: white;
+  text-align: center;
+  font-size: 50px;
+  padding-top: 250px;
+  padding-right: 150px;
+}
+
+body {
+  background-image: url(../../assets/Images/background.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+}
