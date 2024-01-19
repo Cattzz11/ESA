@@ -1,0 +1,31 @@
+﻿@page
+@model LoginExternoModel
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+@{
+    ViewData["Title"] = Localizer["pageRegister.btnRegister"];
+}
+
+<div class="container-fluid p-2">
+    <div class="container mt-5" id="login_Box">
+        <h4 class="text-center py-2 pt-4 pe-3 ps-3">@Localizer["pageRegister.loginExternalRegister"]</h4>
+        <div class="col px-4 pt-2">
+            <form asp-page-handler="Confirmation" asp-route-returnUrl="@Model.Email" method="post">
+                <div class="form-group pb-4">
+                    <input asp-for="Email" type="email" class="form-control" id="formGroupExampleInput" autocomplete="email" readonly />
+                    <span asp-validation-for="Email" class="text-white text-wrap"></span>
+                </div>
+
+                <div asp-validation-summary="ModelOnly" class="myCustomSummary pe-3  text-center text-white fw-bolder align-middle fst-italic text-wrap validation-summary-errors"></div>
+                @* <div class="col" id="espaco"></div>*@
+                <div class=" pb-4 pt-2">
+                    <button type="submit" class="btn text-white btn-lg btn-block" id="btnRegisto">@Localizer["pageRegister.btnRegister"]</button>
+                </div>
+            </form>
+            <div class="col" id="espaco"></div>
+        </div>
+    </div>
+</div>
+@section Scripts {
+<partial name="_ValidationScriptsPartial" />
+}
