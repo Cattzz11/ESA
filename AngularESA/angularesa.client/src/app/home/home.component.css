@@ -1,7 +1,9 @@
-
 @media (min-width: 900px){
   body {
     max-width: 100%;
+    background-image: src("../../assets/Images/background.png");
+    background-repeat: no-repeat;
+    background-size: cover;
   }
 }
 #plane {
@@ -16,10 +18,4 @@
   font-size: 50px;
   padding-top: 250px;
   padding-right: 150px;
-}
-
-body {
-  background-image: url(../../assets/Images/background.png);
-  background-repeat: no-repeat;
-  background-size: cover;
 }

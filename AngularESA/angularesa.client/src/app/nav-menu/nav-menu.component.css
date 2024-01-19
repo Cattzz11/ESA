@@ -26,3 +26,12 @@
     margin-right:50px;
     margin-left:30px;
 }
+
+.navbar {
+  background-image: src("../../assets/Images/background.png");
+  background-repeat:no-repeat;
+  background-size:cover;
+}
+
+
+
