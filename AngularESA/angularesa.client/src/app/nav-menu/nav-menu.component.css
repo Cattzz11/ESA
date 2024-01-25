@@ -19,6 +19,9 @@
   padding-left: 5%;
 }
 .bg-006994 {
+ /* background-image: src("../../assets/Images/background.png");
+  background-repeat: no-repeat;
+  background-size: cover;*/
   background-color: #006994;
 }
 
@@ -27,11 +30,6 @@
     margin-left:30px;
 }
 
-.navbar {
-  background-image: src("../../assets/Images/background.png");
-  background-repeat:no-repeat;
-  background-size:cover;
-}
 
 
 
