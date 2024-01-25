@@ -18,28 +18,29 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
+using PROJETOESA.Models;
 
 namespace PROJETOESA.Areas.Identity.Pages.Account
 {
     public class RegisterModel : PageModel
     {
-        private readonly SignInManager<IdentityUser> _signInManager;
-        private readonly UserManager<IdentityUser> _userManager;
-        private readonly IUserStore<IdentityUser> _userStore;
-        private readonly IUserEmailStore<IdentityUser> _emailStore;
+        private readonly SignInManager<User> _signInManager;
+        private readonly UserManager<User> _userManager;
+        private readonly IUserStore<User> _userStore;
+        private readonly IUserEmailStore<User> _emailStore;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
 
         public RegisterModel(
-            UserManager<IdentityUser> userManager,
-            IUserStore<IdentityUser> userStore,
-            SignInManager<IdentityUser> signInManager,
+            UserManager<User> userManager,
+            IUserStore<User> userStore,
+            SignInManager<User> signInManager,
             ILogger<RegisterModel> logger,
             IEmailSender emailSender)
         {
             _userManager = userManager;
             _userStore = userStore;
-            _emailStore = GetEmailStore();
+            _emailStore = (IUserEmailStore<User>)GetEmailStore();
             _signInManager = signInManager;
             _logger = logger;
             _emailSender = emailSender;
@@ -97,6 +98,24 @@ namespace PROJETOESA.Areas.Identity.Pages.Account
             [Display(Name = "Confirm password")]
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
+
+            [MaxLength(150)]
+            [Required(ErrorMessage = "O nome é obrigatório")]
+            [Display(Name = "Nome")]
+            public String Name { get; set; }
+
+            [Required(ErrorMessage = "A data é obrigatória")]
+            [Display(Name = "Data de Nascimento")]
+            [DataType(DataType.Date)]
+            public DateTime BirthDate { get; set; }
+
+            [MaxLength(150)]
+            [Display(Name = "Ocupação")]
+            public String Occupation { get; set; }
+
+            [MaxLength(150)]
+            [Display(Name = "Nacionalidade")]
+            public String Nationality { get; set; }
         }
 
 
@@ -116,6 +135,10 @@ namespace PROJETOESA.Areas.Identity.Pages.Account
 
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
+                user.Name = Input.Name;
+                user.BirthDate = Input.BirthDate;
+                user.Occupation = Input.Occupation;
+                user.Nationality = Input.Nationality;
                 var result = await _userManager.CreateAsync(user, Input.Password);
 
                 if (result.Succeeded)
@@ -154,27 +177,27 @@ namespace PROJETOESA.Areas.Identity.Pages.Account
             return Page();
         }
 
-        private IdentityUser CreateUser()
+        private User CreateUser()
         {
             try
             {
-                return Activator.CreateInstance<IdentityUser>();
+                return Activator.CreateInstance<User>();
             }
             catch
             {
-                throw new InvalidOperationException($"Can't create an instance of '{nameof(IdentityUser)}'. " +
-                    $"Ensure that '{nameof(IdentityUser)}' is not an abstract class and has a parameterless constructor, or alternatively " +
+                throw new InvalidOperationException($"Can't create an instance of '{nameof(User)}'. " +
+                    $"Ensure that '{nameof(User)}' is not an abstract class and has a parameterless constructor, or alternatively " +
                     $"override the register page in /Areas/Identity/Pages/Account/Register.cshtml");
             }
         }
 
-        private IUserEmailStore<IdentityUser> GetEmailStore()
+        private IUserEmailStore<User> GetEmailStore()
         {
             if (!_userManager.SupportsUserEmail)
             {
                 throw new NotSupportedException("The default UI requires a user store with email support.");
             }
-            return (IUserEmailStore<IdentityUser>)_userStore;
+            return (IUserEmailStore<User>)_userStore;
         }
     }
 }

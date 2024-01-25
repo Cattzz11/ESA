@@ -9,17 +9,18 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using PROJETOESA.Models;
 
 namespace PROJETOESA.Areas.Identity.Pages.Account.Manage
 {
     public class IndexModel : PageModel
     {
-        private readonly UserManager<IdentityUser> _userManager;
-        private readonly SignInManager<IdentityUser> _signInManager;
+        private readonly UserManager<User> _userManager;
+        private readonly SignInManager<User> _signInManager;
 
         public IndexModel(
-            UserManager<IdentityUser> userManager,
-            SignInManager<IdentityUser> signInManager)
+            UserManager<User> userManager,
+            SignInManager<User> signInManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;
@@ -55,21 +56,48 @@ namespace PROJETOESA.Areas.Identity.Pages.Account.Manage
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
+            
+            /*
             [Phone]
             [Display(Name = "Phone number")]
             public string PhoneNumber { get; set; }
+            */
+
+            [MaxLength(150)]
+            [Required(ErrorMessage = "O nome é obrigatório")]
+            [Display(Name = "Nome")]
+            public String Name { get; set; }
+
+            [Required(ErrorMessage = "A data é obrigatória")]
+            [Display(Name = "Data de Nascimento")]
+            [DataType(DataType.Date)]
+            public DateTime BirthDate { get; set; }
+
+            [MaxLength(150)]
+            [Display(Name = "Ocupação")]
+            public String Occupation { get; set; }
+
+            [MaxLength(150)]
+            [Display(Name = "Nacionalidade")]
+            public String Nationality { get; set; }
         }
 
-        private async Task LoadAsync(IdentityUser user)
+        private async Task LoadAsync(User user)
         {
             var userName = await _userManager.GetUserNameAsync(user);
-            var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
+            //var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
+            
 
             Username = userName;
 
             Input = new InputModel
             {
-                PhoneNumber = phoneNumber
+                //PhoneNumber = phoneNumber,
+                Name = user.Name,
+                BirthDate = user.BirthDate,
+                Occupation = user.Occupation,
+                Nationality = user.Nationality
+
             };
         }
 
@@ -99,6 +127,7 @@ namespace PROJETOESA.Areas.Identity.Pages.Account.Manage
                 return Page();
             }
 
+            /*
             var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
             if (Input.PhoneNumber != phoneNumber)
             {
@@ -109,6 +138,7 @@ namespace PROJETOESA.Areas.Identity.Pages.Account.Manage
                     return RedirectToPage();
                 }
             }
+            */
 
             await _signInManager.RefreshSignInAsync(user);
             StatusMessage = "Your profile has been updated";

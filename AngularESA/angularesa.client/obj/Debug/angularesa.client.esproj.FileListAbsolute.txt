@@ -1,0 +1,1 @@
+C:\projetoESA\AngularESA\angularesa.client\obj\Debug\angularesa.client.esproj.CoreCompileInputs.cache
