@@ -1,7 +1,25 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { HomeComponent } from './home/home.component';
+import { CounterComponent } from './counter/counter.component';
+import { FetchDataComponent } from './fetch-data/fetch-data.component';
+import { PeopleComponent } from './People/people.component';
+import { PersonDetailsComponent } from './person-details/person-details.component';
+import { PersonCreateComponent } from './person-create/person-create.component';
+import { PersonEditComponent } from './person-edit/person-edit.component';
+import { PersonDeleteComponent } from './person-delete/person-delete.component';
+import { AuthGuard } from '../api-authorization/authorize.guard';
 
-const routes: Routes = [];
+const routes: Routes = [
+  { path: '', component: HomeComponent, pathMatch: 'full' },
+  { path: 'counter', component: CounterComponent },
+  { path: 'fetch-data', component: FetchDataComponent, canActivate: [AuthGuard] },
+  { path: 'people', component: PeopleComponent },
+  { path: 'person/details/:id', component: PersonDetailsComponent },
+  { path: 'person/create', component: PersonCreateComponent },
+  { path: 'person/edit/:id', component: PersonEditComponent },
+  { path: 'person/delete/:id', component: PersonDeleteComponent },
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

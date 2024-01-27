@@ -1,0 +1,14 @@
+<h4>Selected: </h4>
+<div *ngIf="person">
+  <h4>{{person.name | uppercase}}</h4>
+  <ul>
+    <li>
+      <label>Name:</label>
+      <input [(ngModel)]="person.name" placeholder="Name..." />
+    </li>
+    <li>
+      <label>Age:</label>
+      <input [(ngModel)]="person.age" placeholder="Age..." />
+    </li>
+  </ul>
+</div>

@@ -1,0 +1,10 @@
+<ul class="navbar-nav" *ngIf="!isSignedIn">
+    <li class="nav-item">
+        <a  class="nav-link text-dark" [routerLink]='["/sigin"]'>Login</a>
+    </li>
+</ul>
+<ul class="navbar-nav" *ngIf="isSignedIn">
+  <li class="nav-item">
+        <button class="nav-link text-dark" (click)="signOut()" >Logout</button>
+  </li>
+</ul>

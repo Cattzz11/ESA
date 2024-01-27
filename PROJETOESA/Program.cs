@@ -1,63 +1,46 @@
+﻿using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using PROJETOESA.Data;
 using PROJETOESA.Models;
-
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
-builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseSqlServer(connectionString));
-builder.Services.AddDatabaseDeveloperPageExceptionFilter();
+builder.Services.AddDbContext<PeopleAngularServerContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("PeopleAngularServerContext") ?? throw new InvalidOperationException("Connection string 'PeopleAngularServerContext' not found.")));
 
-builder.Services.AddIdentity<User, IdentityRole>(options =>
-                              options.SignIn.RequireConfirmedAccount = false)
-.AddEntityFrameworkStores<ApplicationDbContext>()
-.AddDefaultTokenProviders()
-.AddDefaultUI()
-.AddRoles<IdentityRole>();
-builder.Services.AddRazorPages();
+builder.Services.AddAuthorization();
+builder.Services.AddIdentityApiEndpoints<ApplicationUser>()
+    .AddEntityFrameworkStores<PeopleAngularServerContext>();
+
+builder.Services.AddControllers();
+// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
+
+app.MapIdentityApi<ApplicationUser>();
+
+app.UseDefaultFiles();
+app.UseStaticFiles();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
-    app.UseMigrationsEndPoint();
+    app.UseSwagger();
+    app.UseSwaggerUI();
 }
-else
-{
-    app.UseExceptionHandler("/Home/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-    app.UseHsts();
-}
+
 
 app.UseHttpsRedirection();
-app.UseStaticFiles();
-
-app.UseRouting();
 
 app.UseAuthorization();
 
-app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
-app.MapRazorPages();
-
-using (var scope = app.Services.CreateScope())
-{
-    var RoleManager =
-           scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
-
-    var roles = new[] { "Cliente", "Premium", "Administrador" };
-
-    foreach(var role in roles) 
-    {
-        if (!await RoleManager.RoleExistsAsync(role))
-            await RoleManager.CreateAsync(new IdentityRole(role));
-    }
-}
+app.MapControllers();
 
 
-    app.Run();
+
+app.MapFallbackToFile("/index.html");
+
+app.Run();

@@ -1,0 +1,10 @@
+{
+"SpaProxyServer": {
+"ServerUrl": "https://localhost:4200",
+"RedirectUrl": "",
+"LaunchCommand": "npm start",
+"WorkingDirectory": "C:\\Users\\danie\\OneDrive\\Documentos\\Meu\\UNI STUFF\\EsA\\HelperLOGIN\\PeopleAngular\\PeopleAngular.Server\\..\\peopleangular.client",
+"MaxTimeoutInSeconds": "120",
+"KeepRunning": "false"
+}
+}

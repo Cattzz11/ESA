@@ -9,7 +9,7 @@ using System;
 
 namespace PROJETOESA.Data.Migrations
 {
-    [DbContext(typeof(ApplicationDbContext))]
+    [DbContext(typeof(PeopleAngularServerContext))]
     [Migration("00000000000000_CreateIdentitySchema")]
     partial class CreateIdentitySchema
     {

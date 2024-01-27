@@ -1,3 +1,14 @@
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html'
+})
+export class AppComponent {
+  title = 'peopleangular.client';
+}
+
+/* Código Original
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 
@@ -22,7 +33,7 @@ export class AppComponent implements OnInit {
     this.getForecasts();
   }
 
-  getForecasts() {
+    getForecasts() {
     this.http.get<WeatherForecast[]>('/weatherforecast').subscribe(
       (result) => {
         this.forecasts = result;
@@ -33,5 +44,5 @@ export class AppComponent implements OnInit {
     );
   }
 
-  title = 'angularesa.client';
-}
+  title = 'peopleangular.client';
+}*/

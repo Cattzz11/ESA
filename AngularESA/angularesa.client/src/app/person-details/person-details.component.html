@@ -1,0 +1,14 @@
+<h4>Person Details: </h4>
+<div *ngIf="person">
+  <h4>{{person.name | uppercase}}</h4>
+
+  <div>
+    <p><strong>Id: </strong> {{person.personId}}</p>
+
+    <p><strong>Name: </strong> {{person.name}}</p>
+
+    <p><strong>Age: </strong> {{person.age}}</p>
+  </div>
+
+  <a routerLink="/people" class="btn btn-primary">Back</a>
+</div>

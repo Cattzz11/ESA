@@ -4,15 +4,14 @@ using PROJETOESA.Models;
 
 namespace PROJETOESA.Data
 {
-    public class ApplicationDbContext : IdentityDbContext<User>
+    public class PeopleAngularServerContext : IdentityDbContext<ApplicationUser>
     {
-        
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
+        public PeopleAngularServerContext(DbContextOptions<PeopleAngularServerContext> options)
             : base(options)
         {
 
-          
+        }
 
-    }
+        public DbSet<Person> Person { get; set; } = default!;
     }
 }

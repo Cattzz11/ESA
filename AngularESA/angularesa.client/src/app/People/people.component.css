@@ -1,0 +1,10 @@
+body {
+}
+img {
+  display: block;
+  max-width: 2%;
+  height: auto;
+}
+.spaced-button {
+  margin-right: 10px;
+}

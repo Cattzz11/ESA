@@ -1,0 +1,23 @@
+<h4>Edit Member</h4>
+
+<form [formGroup]="personForm" (ngSubmit)="onSubmit()">
+  <div class="form-group>">
+    <input type="hidden" id="personId" formControlName="personId" [(ngModel)]="person.personId" />
+    <label for="name">Name:</label>
+    <input formControlName="name" id="name" type="text" [(ngModel)]="person.name" class="form-control" />
+    <div class="alert alert-danger" *ngIf="name?.touched && name?.invalid">
+      <div *ngIf="name?.errors?.['required']">Name is required</div>
+      <div *ngIf="name?.errors?.['minlength']">Name should have at least {{ name?.errors?.['minlength']?.requiredLength }} characters</div>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="age">Age:</label>
+    <input formControlName="age" id="age" type="text" [(ngModel)]="person.age" class="form-control" />
+  </div>
+  <div class="form-group">
+    <button class="btn-primary btn spaced-button" type="submit" [disabled]="!personForm.valid">Save</button>
+    <a routerLink="/people" class="btn btn-primary">Back</a>
+  </div>
+</form>
+
+
