@@ -1,0 +1,35 @@
+.paginaInicial{
+    background-image:url(../../assets/Images/background.png);
+}
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+
+  .nav-item {
+    font-family: 'Roboto Slab', serif;
+    font-size: large;
+    margin-left: auto;
+    padding-right: 10px;
+    padding-left: 10px;
+  }
+}
+#logotipo {
+  width: 30%;
+  padding-left: 5%;
+}
+.bg-006994 {
+ /* background-image: src("../../assets/Images/background.png");
+  background-repeat: no-repeat;
+  background-size: cover;*/
+  background-color: #006994;
+}
+
+.navbar-collapse .nav-item{
+    margin-right:50px;
+    margin-left:30px;
+}
+
+
+
+

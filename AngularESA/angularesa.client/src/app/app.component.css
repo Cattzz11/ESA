@@ -1,6 +1,6 @@
-﻿:host {
-    max-width: 1280px;
-    padding: 2rem;
+/*:host {
+    max-width: 100%;
+    max-height:auto;
     text-align: center;
 }
 
@@ -15,8 +15,6 @@ tr:nth-child(odd) {
 th, td {
     padding-left: 1rem;
     padding-right: 1rem;
-}
+}*/
 
-table {
-    margin: 0 auto;
-}
+

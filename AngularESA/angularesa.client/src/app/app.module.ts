@@ -9,7 +9,7 @@ import { HomeComponent } from './home/home.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { RegisterComponent } from './user/register/register.component';
 import { LoginComponent } from './user/login/login.component';
-
+import { AuthenticationComponent } from './authentication/authentication.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -17,7 +17,8 @@ import { LoginComponent } from './user/login/login.component';
     HomeComponent,
     NavMenuComponent,
     RegisterComponent,
-    LoginComponent
+    LoginComponent,
+    AuthenticationComponent
   ],
   imports: [
     BrowserModule, HttpClientModule,
