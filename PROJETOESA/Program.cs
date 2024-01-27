@@ -1,9 +1,11 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using PROJETOESA.Data;
-using PROJETOESA.Models;
 
 var builder = WebApplication.CreateBuilder(args);
+var aeroHelperApiKey = builder.Configuration["AeroHelper:ServiceApiKey"];
+var services = builder.Services;
+var configuration = builder.Configuration;
 
 // Add services to the container.
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
@@ -11,13 +13,20 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(connectionString));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-builder.Services.AddIdentity<User, IdentityRole>(options =>
-                              options.SignIn.RequireConfirmedAccount = false)
-.AddEntityFrameworkStores<ApplicationDbContext>()
-.AddDefaultTokenProviders()
-.AddDefaultUI()
-.AddRoles<IdentityRole>();
+builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+    .AddEntityFrameworkStores<ApplicationDbContext>()
+    .AddDefaultTokenProviders()
+    .AddDefaultUI()
+    .AddRoles<IdentityRole>();
+builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
+
+services.AddAuthentication().AddGoogle(googleOptions =>
+{
+    googleOptions.ClientId = configuration["Authentication:Google:ClientId"];
+    googleOptions.ClientSecret = configuration["Authentication:Google:ClientSecret"];
+});
+
 
 var app = builder.Build();
 
@@ -38,6 +47,7 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(
@@ -52,12 +62,11 @@ using (var scope = app.Services.CreateScope())
 
     var roles = new[] { "Cliente", "Premium", "Administrador" };
 
-    foreach(var role in roles) 
+    foreach (var role in roles)
     {
         if (!await RoleManager.RoleExistsAsync(role))
             await RoleManager.CreateAsync(new IdentityRole(role));
     }
 }
 
-
-    app.Run();
+app.Run();

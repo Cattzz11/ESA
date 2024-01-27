@@ -83,9 +83,9 @@ namespace PROJETOESA.Areas.Identity.Pages.Account
 
 
         }
-        /// <summary>Solicita um redireionamento para o login externo - Recebe um provider que identifica o tipo de login externo(google ou Microsoft) </summary>
+        /// <summary>Solicita um redirecionamento para o login externo - Recebe um provider que identifica o tipo de login externo(google ou Microsoft) </summary>
         /// <returns>
-        ///  Inicioaliza uma nova instancia ChallengeResult com o provider e com com as propriedades de autenticação
+        ///  Inicializa uma nova instancia ChallengeResult com o provider e com com as propriedades de autenticação
         /// </returns>
         /// <param name="provider"></param>
         /// <param name="returnUrl"></param>
