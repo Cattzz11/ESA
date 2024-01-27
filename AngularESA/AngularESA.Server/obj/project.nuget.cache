@@ -1,0 +1,16 @@
+{
+  "version": 2,
+  "dgSpecHash": "hPTe82pd1v+MB1jo9PGm8On3LeR+OiT6wRLehJK4Z8K1hFQdM+BcfK/KD+YSoHmK5j+GgVxpSOjb6Z2w8sFiuw==",
+  "success": true,
+  "projectFilePath": "C:\\projetoESA\\AngularESA\\AngularESA.Server\\AngularESA.Server.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\yuarg\\.nuget\\packages\\microsoft.aspnetcore.spaproxy\\8.0.1\\microsoft.aspnetcore.spaproxy.8.0.1.nupkg.sha512",
+    "C:\\Users\\yuarg\\.nuget\\packages\\microsoft.extensions.apidescription.server\\6.0.5\\microsoft.extensions.apidescription.server.6.0.5.nupkg.sha512",
+    "C:\\Users\\yuarg\\.nuget\\packages\\microsoft.openapi\\1.2.3\\microsoft.openapi.1.2.3.nupkg.sha512",
+    "C:\\Users\\yuarg\\.nuget\\packages\\swashbuckle.aspnetcore\\6.4.0\\swashbuckle.aspnetcore.6.4.0.nupkg.sha512",
+    "C:\\Users\\yuarg\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\6.4.0\\swashbuckle.aspnetcore.swagger.6.4.0.nupkg.sha512",
+    "C:\\Users\\yuarg\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\6.4.0\\swashbuckle.aspnetcore.swaggergen.6.4.0.nupkg.sha512",
+    "C:\\Users\\yuarg\\.nuget\\packages\\swashbuckle.aspnetcore.swaggerui\\6.4.0\\swashbuckle.aspnetcore.swaggerui.6.4.0.nupkg.sha512"
+  ],
+  "logs": []
+}

@@ -1,0 +1,23 @@
+{
+  "Version": 1,
+  "Hash": "UN4PbEjOi7hpJu5oMbLihbBo57f8ZjfmSrkOUiON7JA=",
+  "Source": "AngularESA.Server",
+  "BasePath": "_content/AngularESA.Server",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [
+    {
+      "Identity": "C:\\projetoESA\\AngularESA\\angularesa.client\\angularesa.client.esproj",
+      "Version": 2,
+      "Source": "angularesa.client",
+      "GetPublishAssetsTargets": "GetCurrentProjectPublishStaticWebAssetItems",
+      "AdditionalPublishProperties": "Configuration=Debug;Platform=AnyCPU",
+      "AdditionalPublishPropertiesToRemove": "WebPublishProfileFile;TargetFramework;RuntimeIdentifier;SelfContained",
+      "GetBuildAssetsTargets": "GetCurrentProjectBuildStaticWebAssetItems",
+      "AdditionalBuildProperties": "Configuration=Debug;Platform=AnyCPU",
+      "AdditionalBuildPropertiesToRemove": "WebPublishProfileFile;TargetFramework;RuntimeIdentifier;SelfContained"
+    }
+  ],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
