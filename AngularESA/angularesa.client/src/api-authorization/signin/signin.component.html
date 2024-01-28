@@ -1,5 +1,8 @@
 <div class="d-flex flex-column align-items-center justify-content-center" *ngIf="!signedIn else signedInAlready">
   <div>Please Sign In to continue. New user? <a href="new">Register now</a>.</div>
+  <div class="m-3">
+    <p>Did you forget your password? <a routerLink="/forgotPassword">Recover it here</a>.</p>
+  </div>
   <form class="form w-50" [formGroup]="loginForm" (submit)="signIn($event)">
     <div class="row m-3">
       <label for="name">Email*</label>
