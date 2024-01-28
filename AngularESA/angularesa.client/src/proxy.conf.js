@@ -2,8 +2,18 @@ const PROXY_CONFIG = [
   {
     context: [
       "/weatherforecast",
+      "/api",
+      "/login",
+      "/logout",
+      "/register",
+      "/refresh",
+      "/confirmEmail",
+      "/resendConfirmationEmail",
+      "/forgotPassword",
+      "/resetPassword",
+      "/manage"
     ],
-    target: "https://localhost:7097",
+    target: "https://localhost:7041",
     secure: false
   }
 ]
