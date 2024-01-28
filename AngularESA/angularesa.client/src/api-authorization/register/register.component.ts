@@ -60,7 +60,7 @@ export class RegisterComponent implements OnInit {
           if (error.error) {
             const errorObj = JSON.parse(error.error);
             if (errorObj && errorObj.errors) {
-              // problem details { "field1": [ "error1", "error2" ], "field2": [ "error1", "error2" ]}
+              //problem details { "field1": [ "error1", "error2" ], "field2": [ "error1", "error2" ]}
               const errorList = errorObj.errors;
               for (let field in errorList) {
                 if (Object.hasOwn(errorList, field)) {
