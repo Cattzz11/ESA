@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using PROJETOESA.Models;
 
@@ -41,6 +43,27 @@ namespace PROJETOESA.Controllers
             // Retorna uma resposta apropriada, como um status 200 OK
             return Ok(new { message = "Logout successful" });
         }
+
+        [HttpPost]
+        [Route("api/change-password")]
+        public async Task<IActionResult> RecoverPassword([FromBody] CustomRecoverPasswordModel model)
+        {
+            var user = await _userManager.FindByEmailAsync(model.Email);
+            if (user == null)
+            {
+                return BadRequest("Utilizador não encontrado.");
+            }
+
+            var token = await _userManager.GeneratePasswordResetTokenAsync(user);
+            var result = await _userManager.ResetPasswordAsync(user, token, model.Password);
+
+            if (result.Succeeded)
+            {
+                return Ok();
+            }
+
+            return BadRequest(result.Errors);
+        }
     }
 
     public class CustomRegisterModel
@@ -49,5 +72,12 @@ namespace PROJETOESA.Controllers
         public string Email { get; set; }
         public string Password { get; set; }
         
+    }
+
+    public class CustomRecoverPasswordModel
+    {
+        public string Email { get; set; }
+        public string Password { get; set; }
+
     }
 }

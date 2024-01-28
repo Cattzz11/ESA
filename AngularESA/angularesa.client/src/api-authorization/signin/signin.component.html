@@ -15,6 +15,10 @@
     <div class="row m-3">
       <button class="col btn btn-primary" [disabled]="!loginForm.valid" type="submit">Sign In</button>
     </div>
+    <div class="row m-3">
+      <!-- Botão para redirecionar para a página de recuperação de senha -->
+      <a routerLink="/recover-password" class="btn btn-link">Forgot Password?</a>
+    </div>
   </form>
 </div>
 

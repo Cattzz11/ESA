@@ -70,3 +70,39 @@ C:\Users\danie\OneDrive\Documentos\Meu\UNI STUFF\EsA\Projeto\ESA\AngularESA\Angu
 C:\Users\danie\OneDrive\Documentos\Meu\UNI STUFF\EsA\Projeto\ESA\AngularESA\AngularESA.Server\obj\Debug\net8.0\AngularESA.Server.pdb
 C:\Users\danie\OneDrive\Documentos\Meu\UNI STUFF\EsA\Projeto\ESA\AngularESA\AngularESA.Server\obj\Debug\net8.0\AngularESA.Server.genruntimeconfig.cache
 C:\Users\danie\OneDrive\Documentos\Meu\UNI STUFF\EsA\Projeto\ESA\AngularESA\AngularESA.Server\obj\Debug\net8.0\ref\AngularESA.Server.dll
+C:\Users\Tiago\Desktop\IPS\ESA\AngularESA\AngularESA.Server\bin\Debug\net8.0\appsettings.Development.json
+C:\Users\Tiago\Desktop\IPS\ESA\AngularESA\AngularESA.Server\bin\Debug\net8.0\appsettings.json
+C:\Users\Tiago\Desktop\IPS\ESA\AngularESA\AngularESA.Server\bin\Debug\net8.0\spa.proxy.json
+C:\Users\Tiago\Desktop\IPS\ESA\AngularESA\AngularESA.Server\bin\Debug\net8.0\AngularESA.Server.exe
+C:\Users\Tiago\Desktop\IPS\ESA\AngularESA\AngularESA.Server\bin\Debug\net8.0\AngularESA.Server.deps.json
+C:\Users\Tiago\Desktop\IPS\ESA\AngularESA\AngularESA.Server\bin\Debug\net8.0\AngularESA.Server.runtimeconfig.json
+C:\Users\Tiago\Desktop\IPS\ESA\AngularESA\AngularESA.Server\bin\Debug\net8.0\AngularESA.Server.dll
+C:\Users\Tiago\Desktop\IPS\ESA\AngularESA\AngularESA.Server\bin\Debug\net8.0\AngularESA.Server.pdb
+C:\Users\Tiago\Desktop\IPS\ESA\AngularESA\AngularESA.Server\bin\Debug\net8.0\Microsoft.AspNetCore.SpaProxy.dll
+C:\Users\Tiago\Desktop\IPS\ESA\AngularESA\AngularESA.Server\bin\Debug\net8.0\Microsoft.OpenApi.dll
+C:\Users\Tiago\Desktop\IPS\ESA\AngularESA\AngularESA.Server\bin\Debug\net8.0\Swashbuckle.AspNetCore.Swagger.dll
+C:\Users\Tiago\Desktop\IPS\ESA\AngularESA\AngularESA.Server\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+C:\Users\Tiago\Desktop\IPS\ESA\AngularESA\AngularESA.Server\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+C:\Users\Tiago\Desktop\IPS\ESA\AngularESA\AngularESA.Server\obj\Debug\net8.0\AngularESA.Server.csproj.AssemblyReference.cache
+C:\Users\Tiago\Desktop\IPS\ESA\AngularESA\AngularESA.Server\obj\Debug\net8.0\spa.proxy.json
+C:\Users\Tiago\Desktop\IPS\ESA\AngularESA\AngularESA.Server\obj\Debug\net8.0\AngularESA.Server.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Tiago\Desktop\IPS\ESA\AngularESA\AngularESA.Server\obj\Debug\net8.0\AngularESA.Server.AssemblyInfoInputs.cache
+C:\Users\Tiago\Desktop\IPS\ESA\AngularESA\AngularESA.Server\obj\Debug\net8.0\AngularESA.Server.AssemblyInfo.cs
+C:\Users\Tiago\Desktop\IPS\ESA\AngularESA\AngularESA.Server\obj\Debug\net8.0\AngularESA.Server.csproj.CoreCompileInputs.cache
+C:\Users\Tiago\Desktop\IPS\ESA\AngularESA\AngularESA.Server\obj\Debug\net8.0\AngularESA.Server.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\Tiago\Desktop\IPS\ESA\AngularESA\AngularESA.Server\obj\Debug\net8.0\AngularESA.Server.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\Tiago\Desktop\IPS\ESA\AngularESA\AngularESA.Server\obj\Debug\net8.0\AngularESA.Server.sourcelink.json
+C:\Users\Tiago\Desktop\IPS\ESA\AngularESA\AngularESA.Server\obj\Debug\net8.0\staticwebassets.build.json
+C:\Users\Tiago\Desktop\IPS\ESA\AngularESA\AngularESA.Server\obj\Debug\net8.0\staticwebassets.development.json
+C:\Users\Tiago\Desktop\IPS\ESA\AngularESA\AngularESA.Server\obj\Debug\net8.0\staticwebassets\msbuild.AngularESA.Server.Microsoft.AspNetCore.StaticWebAssets.props
+C:\Users\Tiago\Desktop\IPS\ESA\AngularESA\AngularESA.Server\obj\Debug\net8.0\staticwebassets\msbuild.build.AngularESA.Server.props
+C:\Users\Tiago\Desktop\IPS\ESA\AngularESA\AngularESA.Server\obj\Debug\net8.0\staticwebassets\msbuild.buildMultiTargeting.AngularESA.Server.props
+C:\Users\Tiago\Desktop\IPS\ESA\AngularESA\AngularESA.Server\obj\Debug\net8.0\staticwebassets\msbuild.buildTransitive.AngularESA.Server.props
+C:\Users\Tiago\Desktop\IPS\ESA\AngularESA\AngularESA.Server\obj\Debug\net8.0\staticwebassets.pack.json
+C:\Users\Tiago\Desktop\IPS\ESA\AngularESA\AngularESA.Server\obj\Debug\net8.0\scopedcss\bundle\AngularESA.Server.styles.css
+C:\Users\Tiago\Desktop\IPS\ESA\AngularESA\AngularESA.Server\obj\Debug\net8.0\AngularESA.Server.csproj.CopyComplete
+C:\Users\Tiago\Desktop\IPS\ESA\AngularESA\AngularESA.Server\obj\Debug\net8.0\AngularESA.Server.dll
+C:\Users\Tiago\Desktop\IPS\ESA\AngularESA\AngularESA.Server\obj\Debug\net8.0\refint\AngularESA.Server.dll
+C:\Users\Tiago\Desktop\IPS\ESA\AngularESA\AngularESA.Server\obj\Debug\net8.0\AngularESA.Server.pdb
+C:\Users\Tiago\Desktop\IPS\ESA\AngularESA\AngularESA.Server\obj\Debug\net8.0\AngularESA.Server.genruntimeconfig.cache
+C:\Users\Tiago\Desktop\IPS\ESA\AngularESA\AngularESA.Server\obj\Debug\net8.0\ref\AngularESA.Server.dll

@@ -1,6 +1,6 @@
 import { HttpClient, HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, Subject, catchError, map, of } from 'rxjs';
+import { BehaviorSubject, Observable, Subject, catchError, map, of, throwError } from 'rxjs';
 import { UserInfo } from './authorize.dto';
 
 
@@ -15,6 +15,7 @@ export class AuthorizeService {
   public onStateChanged() {
     return this._authStateChanged.asObservable();
   }
+
 
   // cookie-based login
   public signIn(email: string, password: string) {
@@ -45,6 +46,19 @@ export class AuthorizeService {
       .pipe<boolean>(map((res: HttpResponse<string>) => {
         return res.ok;
       }));
+  }
+
+  public changePassword(newPassword: string, email: string) {
+    return this.http.post('api/change-password', {
+        email: email,
+      password: newPassword
+      }, {
+        observe: 'response',
+        responseType: 'text'
+      })
+        .pipe<boolean>(map((res: HttpResponse<string>) => {
+          return res.ok;
+        }));
   }
 
   // register new user - não funciona para um novo tipo de IdentityUser com propriedades extra

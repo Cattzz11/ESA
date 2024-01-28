@@ -1,2 +1,3 @@
 C:\projetoESA\AngularESA\angularesa.client\obj\Debug\angularesa.client.esproj.CoreCompileInputs.cache
 C:\Users\danie\OneDrive\Documentos\Meu\UNI STUFF\EsA\Projeto\ESA\AngularESA\angularesa.client\obj\Debug\angularesa.client.esproj.CoreCompileInputs.cache
+C:\Users\Tiago\Desktop\IPS\ESA\AngularESA\angularesa.client\obj\Debug\angularesa.client.esproj.CoreCompileInputs.cache

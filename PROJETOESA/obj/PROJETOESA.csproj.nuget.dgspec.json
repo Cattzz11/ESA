@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\danie\\OneDrive\\Documentos\\Meu\\UNI STUFF\\EsA\\Projeto\\ESA\\PROJETOESA\\PROJETOESA.csproj": {}
+    "C:\\Users\\Tiago\\Desktop\\IPS\\ESA\\PROJETOESA\\PROJETOESA.csproj": {}
   },
   "projects": {
-    "C:\\Users\\danie\\OneDrive\\Documentos\\Meu\\UNI STUFF\\EsA\\Projeto\\ESA\\PROJETOESA\\PROJETOESA.csproj": {
+    "C:\\Users\\Tiago\\Desktop\\IPS\\ESA\\PROJETOESA\\PROJETOESA.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\danie\\OneDrive\\Documentos\\Meu\\UNI STUFF\\EsA\\Projeto\\ESA\\PROJETOESA\\PROJETOESA.csproj",
+        "projectUniqueName": "C:\\Users\\Tiago\\Desktop\\IPS\\ESA\\PROJETOESA\\PROJETOESA.csproj",
         "projectName": "PROJETOESA",
-        "projectPath": "C:\\Users\\danie\\OneDrive\\Documentos\\Meu\\UNI STUFF\\EsA\\Projeto\\ESA\\PROJETOESA\\PROJETOESA.csproj",
-        "packagesPath": "C:\\Users\\danie\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\danie\\OneDrive\\Documentos\\Meu\\UNI STUFF\\EsA\\Projeto\\ESA\\PROJETOESA\\obj\\",
+        "projectPath": "C:\\Users\\Tiago\\Desktop\\IPS\\ESA\\PROJETOESA\\PROJETOESA.csproj",
+        "packagesPath": "C:\\Users\\Tiago\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Tiago\\Desktop\\IPS\\ESA\\PROJETOESA\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\danie\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Tiago\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -34,9 +34,6 @@
           "warnAsError": [
             "NU1605"
           ]
-        },
-        "restoreAuditProperties": {
-          "enableAudit": "default"
         }
       },
       "frameworks": {
