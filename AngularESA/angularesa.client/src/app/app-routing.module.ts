@@ -9,12 +9,18 @@ import { PersonCreateComponent } from './person-create/person-create.component';
 import { PersonEditComponent } from './person-edit/person-edit.component';
 import { PersonDeleteComponent } from './person-delete/person-delete.component';
 import { AuthGuard } from '../api-authorization/authorize.guard';
+import { AboutComponent } from './about/about.component';
+import { RegisterComponent } from '../api-authorization/register/register.component';
+import { SignInComponent } from '../api-authorization/signin/signin.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent, pathMatch: 'full' },
   { path: 'counter', component: CounterComponent },
   { path: 'fetch-data', component: FetchDataComponent, canActivate: [AuthGuard] },
   { path: 'people', component: PeopleComponent },
+  { path: 'about', component: AboutComponent },
+  { path: 'register', component: RegisterComponent },
+  { path: 'login', component: SignInComponent },
   { path: 'person/details/:id', component: PersonDetailsComponent },
   { path: 'person/create', component: PersonCreateComponent },
   { path: 'person/edit/:id', component: PersonEditComponent },
