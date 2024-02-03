@@ -124,4 +124,26 @@ export class AuthorizeService {
         return of(false);
       }));
   }
+
+  public recoverPassword(email: string): Observable<any> {
+    // Replace 'your_server_endpoint' with the actual endpoint on your server
+    const endpoint = '/forgotPassword';
+
+    // Make the HTTP request to send the recovery email
+    return this.http.post(endpoint, { email });
+  }
+
+  public resetPassword(newPassword: string): Observable<any> {
+    // Replace 'your_server_endpoint' with the actual endpoint on your server
+    const endpoint = '/resetPassword'; // Update this to the correct endpoint
+
+    // You may need to include any necessary headers or payload based on your server requirements
+    const requestBody = {
+      newPassword: newPassword
+    };
+
+    // Make the HTTP request to reset the password
+    return this.http.post(endpoint, requestBody);
+  }
+
 }

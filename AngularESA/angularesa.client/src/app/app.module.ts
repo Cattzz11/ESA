@@ -10,7 +10,7 @@ import { CounterComponent } from './counter/counter.component';
 import { FetchDataComponent } from './fetch-data/fetch-data.component';
 import { PeopleComponent } from './People/people.component';
 import { PersonComponent } from './person/person.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ShortnamePipe } from './shortname.pipe';
 import { PersonDetailsComponent } from './person-details/person-details.component';
 import { PersonCreateComponent } from './person-create/person-create.component';
@@ -20,7 +20,9 @@ import { ApiAuthorizationModule } from '../api-authorization/api-authorization.m
 import { AuthInterceptor } from '../api-authorization/authorize.interceptor';
 import { AuthGuard } from '../api-authorization/authorize.guard';
 import { AuthorizeService } from '../api-authorization/authorize.service';
-import { ReactiveFormsModule } from '@angular/forms';
+import { PasswordRecoveryComponent } from '../api-authorization/recoverpw/recover-password';
+import { ResetPasswordComponent } from '../api-authorization/reset-password/resetpassword.component';
+
 
 @NgModule({
   declarations: [
@@ -35,7 +37,9 @@ import { ReactiveFormsModule } from '@angular/forms';
     PersonDetailsComponent,
     PersonCreateComponent,
     PersonEditComponent,
-    PersonDeleteComponent
+    PersonDeleteComponent,
+    PasswordRecoveryComponent,
+    ResetPasswordComponent
   ],
   imports: [
     BrowserModule, HttpClientModule,
