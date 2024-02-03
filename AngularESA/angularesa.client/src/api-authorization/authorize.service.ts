@@ -50,22 +50,8 @@ export class AuthorizeService {
 
   public changePassword(newPassword: string, email: string) {
     return this.http.post('api/change-password', {
-        email: email,
-      password: newPassword
-      }, {
-        observe: 'response',
-        responseType: 'text'
-      })
-        .pipe<boolean>(map((res: HttpResponse<string>) => {
-          return res.ok;
-        }));
-  }
-
-  // register new user - não funciona para um novo tipo de IdentityUser com propriedades extra
-  public register(email: string, password: string) {
-    return this.http.post('/register', {
       email: email,
-      password: password
+      password: newPassword
     }, {
       observe: 'response',
       responseType: 'text'
@@ -74,6 +60,20 @@ export class AuthorizeService {
         return res.ok;
       }));
   }
+
+  // register new user - não funciona para um novo tipo de IdentityUser com propriedades extra
+  //public register(email: string, password: string) {
+  //  return this.http.post('/register', {
+  //    email: email,
+  //    password: password
+  //  }, {
+  //    observe: 'response',
+  //    responseType: 'text'
+  //  })
+  //    .pipe<boolean>(map((res: HttpResponse<string>) => {
+  //      return res.ok;
+  //    }));
+  //}
 
   // sign out - não aparece como um serviço
   public signOut() {
@@ -125,25 +125,16 @@ export class AuthorizeService {
       }));
   }
 
-  public recoverPassword(email: string): Observable<any> {
-    // Replace 'your_server_endpoint' with the actual endpoint on your server
-    const endpoint = '/forgotPassword';
-
-    // Make the HTTP request to send the recovery email
-    return this.http.post(endpoint, { email });
+  public recoverPassword(email: string) {
+    console.log(email);
+    return this.http.post('api/send-recovery-code', {
+      email: email
+    }, {
+      observe: 'response',
+      responseType: 'text'
+    })
+      .pipe<boolean>(map((res: HttpResponse<string>) => {
+        return res.ok;
+      }));
   }
-
-  public resetPassword(newPassword: string): Observable<any> {
-    // Replace 'your_server_endpoint' with the actual endpoint on your server
-    const endpoint = '/resetPassword'; // Update this to the correct endpoint
-
-    // You may need to include any necessary headers or payload based on your server requirements
-    const requestBody = {
-      newPassword: newPassword
-    };
-
-    // Make the HTTP request to reset the password
-    return this.http.post(endpoint, requestBody);
-  }
-
 }

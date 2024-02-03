@@ -5,6 +5,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using PROJETOESA.Data;
 using PROJETOESA.Models;
+using PROJETOESA.Services;
+using System.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,15 +22,14 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddTransient<IEmailSender, EmailSender>(i =>
-  new EmailSender(
-      builder.Configuration["EmailSender:Host"],
-      builder.Configuration.GetValue<int>("EmailSender:Port"),
-      builder.Configuration.GetValue<bool>("EmailSender:EnableSSL"),
-      builder.Configuration["EmailSender:UserName"],
-      builder.Configuration["EmailSender:Password"]
-  )
-);
+// Adiciona as configurações do EmailSettings a partir do appsettings.json
+builder.Services.Configure<EmailSettings>(
+builder.Configuration.GetSection("EmailSender"));
+
+// Adiciona o serviço de envio de e-mails
+builder.Services.AddTransient<IEmailSender, EmailSender>();
+
+builder.Services.AddScoped<CodeGeneratorService>();
 
 var app = builder.Build();
 

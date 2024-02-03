@@ -12,8 +12,10 @@ import { AuthGuard } from '../api-authorization/authorize.guard';
 import { AboutComponent } from './about/about.component';
 import { RegisterComponent } from '../api-authorization/register/register.component';
 import { SignInComponent } from '../api-authorization/signin/signin.component';
-import { PasswordRecoveryComponent } from '../api-authorization/recoverpw/recover-password';
-import { ResetPasswordComponent } from '../api-authorization/reset-password/resetpassword.component';
+import { NewPasswordComponent } from "../api-authorization/new-password/new-password.component";
+import { RecoverPasswordComponent } from '../api-authorization/recover-password/recover-password.component';
+//import { PasswordRecoveryComponent } from '../api-authorization/recoverpw/recover-password';
+//import { ResetPasswordComponent } from '../api-authorization/reset-password/resetpassword.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent, pathMatch: 'full' },
@@ -27,8 +29,8 @@ const routes: Routes = [
   { path: 'person/create', component: PersonCreateComponent },
   { path: 'person/edit/:id', component: PersonEditComponent },
   { path: 'person/delete/:id', component: PersonDeleteComponent },
-  { path: 'forgotPassword', component: PasswordRecoveryComponent },
-  { path: 'resetPassword', component: ResetPasswordComponent },
+  { path: 'new-password/:email', component: NewPasswordComponent },
+  { path: 'recover-password', component: RecoverPasswordComponent },
 ];
 
 @NgModule({

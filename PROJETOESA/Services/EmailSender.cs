@@ -1,56 +1,36 @@
-﻿using MailKit.Net.Smtp;
-using Microsoft.AspNetCore.Identity.UI.Services;
-using MimeKit;
-using MimeKit.Text;
-
+﻿using Microsoft.AspNetCore.Identity.UI.Services;
+using Microsoft.Extensions.Options;
+using PROJETOESA.Models;
+using System.Net;
+using System.Net.Mail;
 
 public class EmailSender : IEmailSender
 {
-    private readonly string host;
-    private readonly int port;
-    private readonly bool enableSSL;
-    private readonly string userName;
-    private readonly string password;
-    private readonly SmtpClient smtpClient;
+    private readonly EmailSettings _emailSettings;
 
-    public EmailSender(string host, int port, bool enableSSL, string userName, string password)
+    public EmailSender(IOptions<EmailSettings> emailSettings)
     {
-        this.host = host;
-        this.port = port;
-        this.enableSSL = enableSSL;
-        this.userName = userName;
-        this.password = password;
-
-        // Create and configure SmtpClient
-        this.smtpClient = new SmtpClient();
-        this.smtpClient.ServerCertificateValidationCallback = (s, c, h, e) => true;
+        _emailSettings = emailSettings.Value;
     }
 
     public async Task SendEmailAsync(string email, string subject, string htmlMessage)
     {
-        try
+        var mailMessage = new MailMessage
         {
-            var message = new MimeMessage();
-            message.From.Add(new MailboxAddress("Aerohelper", "aerohelper2024@outlook.com"));
-            message.To.Add(new MailboxAddress(userName, email));
-            message.Subject = subject;
-            message.Body = new TextPart(TextFormat.Html)
-            {
-                Text = htmlMessage
-            };
+            From = new MailAddress(_emailSettings.Sender, _emailSettings.SenderName),
+            Subject = subject,
+            Body = htmlMessage,
+            IsBodyHtml = true
+        };
 
-            using (var cancellationTokenSource = new CancellationTokenSource(TimeSpan.FromSeconds(60))) // Set a timeout
-            {
-                await smtpClient.ConnectAsync(host, port, enableSSL, cancellationTokenSource.Token);
-                await smtpClient.AuthenticateAsync(userName, password, cancellationTokenSource.Token);
-                await smtpClient.SendAsync(message, cancellationTokenSource.Token);
-                await smtpClient.DisconnectAsync(true, cancellationTokenSource.Token);
-            }
-        }
-        catch (Exception ex)
+        mailMessage.To.Add(new MailAddress(email));
+
+        using var client = new SmtpClient(_emailSettings.MailServer, _emailSettings.MailPort)
         {
-            // Handle or log the exception
-            Console.WriteLine($"Error sending email: {ex.Message}");
-        }
+            Credentials = new NetworkCredential(_emailSettings.Sender, _emailSettings.Password),
+            EnableSsl = _emailSettings.EnableSSL
+        };
+
+        await client.SendMailAsync(mailMessage);
     }
 }

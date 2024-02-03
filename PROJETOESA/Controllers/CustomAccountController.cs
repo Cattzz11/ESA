@@ -1,18 +1,10 @@
 ﻿using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.WebUtilities;
 using PROJETOESA.Models;
-using System.Text.Encodings.Web;
-using System.Text;
 using Microsoft.AspNetCore.Identity.UI.Services;
-
-using System.ComponentModel.DataAnnotations;
-using Microsoft.AspNetCore.Identity.UI.V4.Pages.Account.Internal;
-using System.Net;
+using PROJETOESA.Services;
 
 namespace PROJETOESA.Controllers
 {
@@ -22,14 +14,15 @@ namespace PROJETOESA.Controllers
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly IEmailSender _emailSender;
         private readonly ILogger<CustomAccountController> _logger;
+        private readonly CodeGeneratorService _codeGeneratorService;
 
 
-        public CustomAccountController(UserManager<ApplicationUser> userManager, IEmailSender emailSender, ILogger<CustomAccountController> logger)
+        public CustomAccountController(UserManager<ApplicationUser> userManager, IEmailSender emailSender, ILogger<CustomAccountController> logger, CodeGeneratorService codeGeneratorService)
         {
             _userManager = userManager;
             _emailSender = emailSender;
             _logger = logger;
-
+            _codeGeneratorService = codeGeneratorService;
         }
 
         [HttpPost]
@@ -73,13 +66,13 @@ namespace PROJETOESA.Controllers
                 }
 
                 // Generate password reset token
-                var token = await _userManager.GeneratePasswordResetTokenAsync(user);
+                //var token = await _userManager.GeneratePasswordResetTokenAsync(user);
 
                 // Send recovery email
-                var emailSubject = "Password Recovery";
-                var emailBody = $"Click the following link to reset your password: {GenerateResetLink(user.Id, token)}";
+                //var emailSubject = "Password Recovery";
+                //var emailBody = $"Click the following link to reset your password: {GenerateResetLink(user.Id, token)}";
 
-                await _emailSender.SendEmailAsync(user.Email, emailSubject, emailBody);
+                //await _emailSender.SendEmailAsync(user.Email, emailSubject, emailBody);
 
                 _logger.LogInformation($"Password recovery email sent to {user.Email}.");
 
@@ -93,18 +86,26 @@ namespace PROJETOESA.Controllers
             }
         }
 
-        private string GenerateResetLink(string userId, string token)
+        [HttpPost]
+        [Route("api/send-recovery-code")]
+        public async Task<IActionResult> SendRecoveryCode([FromBody] CustomRecoverModel model)
         {
-            // Replace the following URL with the actual URL of your password reset page
-            string resetPasswordUrl = "https://localhost:4200/resetPassword";
+            var user = await _userManager.FindByEmailAsync(model.Email);
 
-            // Construct the reset link with placeholders for userId and token
-            string resetLink = $"{resetPasswordUrl}?userId={userId}&token={WebUtility.UrlEncode(token)}";
+            if (user != null)
+            {
+                var recoveryCode = this._codeGeneratorService.GenerateCode();
 
-            return resetLink;
+                // Construa a mensagem de e-mail
+                var htmlContent = $"<p>Seu código de recuperação é: {recoveryCode}</p>";
+
+                // Envie o e-mail
+                await _emailSender.SendEmailAsync(model.Email, "Recuperação de Senha", htmlContent);
+
+            }
+
+            return Ok(new { Message = "Se o e-mail estiver registrado, um e-mail de recuperação será enviado." });
         }
-
-
     }
 
     public class CustomRegisterModel
@@ -115,10 +116,8 @@ namespace PROJETOESA.Controllers
         
     }
 
-
     public class CustomRecoverModel
     { 
-    public string Email { get; set; }
-
+        public string Email { get; set; }
     }
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { Router } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
+import { AuthorizeService } from "../authorize.service";
 
 @Component({
   selector: 'app-recover-password-component',
@@ -9,23 +10,42 @@ import { Router } from "@angular/router";
 export class RecoverPasswordComponent implements OnInit {
   recoverForm!: FormGroup;
   recoverSucceeded: boolean = false;
+  userEmail: string = '';
 
-  constructor(private formBuilder: FormBuilder, private router: Router) { }
+  constructor(
+    private formBuilder: FormBuilder,
+    private router: Router,
+    private route: ActivatedRoute,
+    private authService: AuthorizeService) { }
 
   ngOnInit(): void {
+    this.route.queryParams.subscribe(params => {
+      this.userEmail = params['email'] || '';
+    });
+
     this.recoverForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
     });
   }
 
-  onSubmit() {
-    if (this.recoverForm.valid) {
-      const email = this.recoverForm.get('email')?.value;
-
-      //Enviar email
-
-      this.recoverSucceeded = true;
-      this.router.navigate(['/new-password'], { queryParams: { email: email } });
+  public recoverPassword() {
+    if (!this.recoverForm.valid) {
+      return;
     }
+
+    const email = this.recoverForm.get('email')?.value;
+
+    this.authService.recoverPassword(email).subscribe({
+      next: (response) => {
+        // Lógica de sucesso
+        console.log("Angular Sucesso");
+        //this.router.navigate(['/new-password/', { email: email }]);
+      },
+      error: (error) => {
+        // Lógica de erro
+        console.log("Angular Insucesso");
+        //this.router.navigate(['/new-password/', { email: email }]);
+      }
+    });
   }
 }
