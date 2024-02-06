@@ -4,7 +4,8 @@ import { AuthorizeService } from "../authorize.service";
 
 @Component({
   selector: 'app-register-component',
-  templateUrl: './register.component.html'
+  templateUrl: './register.component.html',
+  styleUrl: './register.component.css'
 })
 export class RegisterComponent implements OnInit {
   errors: string[] = [];
