@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\ESA\\PROJETOESA\\ESA\\PROJETOESA\\PROJETOESA.csproj": {}
+    "D:\\ESA\\PROJETOESA\\ESA\\AngularESA\\AngularESA.Server\\AngularESA.Server.csproj": {}
   },
   "projects": {
-    "D:\\ESA\\PROJETOESA\\ESA\\PROJETOESA\\PROJETOESA.csproj": {
+    "D:\\ESA\\PROJETOESA\\ESA\\AngularESA\\AngularESA.Server\\AngularESA.Server.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\ESA\\PROJETOESA\\ESA\\PROJETOESA\\PROJETOESA.csproj",
-        "projectName": "PROJETOESA",
-        "projectPath": "D:\\ESA\\PROJETOESA\\ESA\\PROJETOESA\\PROJETOESA.csproj",
+        "projectUniqueName": "D:\\ESA\\PROJETOESA\\ESA\\AngularESA\\AngularESA.Server\\AngularESA.Server.csproj",
+        "projectName": "AngularESA.Server",
+        "projectPath": "D:\\ESA\\PROJETOESA\\ESA\\AngularESA\\AngularESA.Server\\AngularESA.Server.csproj",
         "packagesPath": "C:\\Users\\catar\\.nuget\\packages\\",
-        "outputPath": "D:\\ESA\\PROJETOESA\\ESA\\PROJETOESA\\obj\\",
+        "outputPath": "D:\\ESA\\PROJETOESA\\ESA\\AngularESA\\AngularESA.Server\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\catar\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -40,36 +40,13 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "dependencies": {
-<<<<<<< Updated upstream
-=======
-            "Microsoft.AspNetCore.Authentication.Google": {
+            "Microsoft.AspNetCore.SpaProxy": {
               "target": "Package",
-              "version": "[8.0.1, )"
+              "version": "[8.*-*, )"
             },
-            "Microsoft.AspNetCore.Components.QuickGrid.EntityFrameworkAdapter": {
+            "Swashbuckle.AspNetCore": {
               "target": "Package",
-              "version": "[8.0.0, )"
-            },
->>>>>>> Stashed changes
-            "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore": {
-              "target": "Package",
-              "version": "[8.0.0, )"
-            },
-            "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
-              "target": "Package",
-              "version": "[8.0.0, )"
-            },
-            "Microsoft.AspNetCore.Identity.UI": {
-              "target": "Package",
-              "version": "[8.0.0, )"
-            },
-            "Microsoft.EntityFrameworkCore.SqlServer": {
-              "target": "Package",
-              "version": "[8.0.0, )"
-            },
-            "Microsoft.EntityFrameworkCore.Tools": {
-              "target": "Package",
-              "version": "[8.0.0, )"
+              "version": "[6.4.0, )"
             }
           },
           "imports": [

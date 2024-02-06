@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 /* _content/PROJETOESA/Views/Shared/_Layout.cshtml.rz.scp.css */
 /* Please see documentation at https://learn.microsoft.com/aspnet/core/client-side/bundling-and-minification
 for details on configuring this project to bundle and minify static web assets. */
@@ -47,3 +48,7 @@ button.accept-policy[b-z58ozmusat] {
   white-space: nowrap;
   line-height: 60px;
 }
+=======
+@import '_content/Microsoft.AspNetCore.Components.QuickGrid/Microsoft.AspNetCore.Components.QuickGrid.bundle.scp.css';
+
+>>>>>>> Stashed changes

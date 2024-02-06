@@ -1,17 +1,17 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using PROJETOESA.Models;
 
-namespace PROJETOESA.Data
+namespace PeopleAngular.Server.Data
 {
-<<<<<<< Updated upstream
-    public class ApplicationDbContext : IdentityDbContext
-=======
     public class PeopleAngularServerContext : IdentityDbContext<User>
->>>>>>> Stashed changes
     {
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
+        public PeopleAngularServerContext(DbContextOptions<PeopleAngularServerContext> options)
             : base(options)
         {
+
         }
+
+        public DbSet<Person> Person { get; set; } = default!;
     }
 }

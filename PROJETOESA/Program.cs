@@ -10,12 +10,37 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(connectionString));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
+<<<<<<< Updated upstream
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddControllersWithViews();
+=======
+builder.Services.AddAuthorization();
+builder.Services.AddIdentityApiEndpoints<User>()
+    .AddEntityFrameworkStores<PeopleAngularServerContext>();
+
+builder.Services.AddControllers();
+// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
+>>>>>>> Stashed changes
+
+builder.Services.AddAuthentication().AddGoogle("google", options =>
+{
+    options.ClientId = "712855861147-lt433p2k7stok4g5h6hvba6qmt7iktld.apps.googleusercontent.com";
+    options.ClientSecret = "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";
+});
 
 var app = builder.Build();
 
+<<<<<<< Updated upstream
+=======
+app.MapIdentityApi<User>();
+
+app.UseDefaultFiles();
+app.UseStaticFiles();
+
+>>>>>>> Stashed changes
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
