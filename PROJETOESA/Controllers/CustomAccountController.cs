@@ -57,53 +57,6 @@ namespace PROJETOESA.Controllers
             return Ok(new { message = "Logout successful" });
         }
 
-        [HttpPost]
-        [Route("api/forgotPassword")]
-        public async Task<IActionResult> RecoverPassword([FromBody] CustomRecoverModel model)
-        {
-            // Validate model, find user by email, generate token, etc.
-            try
-            {
-
-                var user = await _userManager.FindByEmailAsync(model.Email);
-                if (user == null)
-                {
-                    // User not found
-                    return NotFound();
-                }
-
-                // Generate password reset token
-                var token = await _userManager.GeneratePasswordResetTokenAsync(user);
-
-                // Send recovery email
-                var emailSubject = "Password Recovery";
-                var emailBody = $"Click the following link to reset your password: {GenerateResetLink(user.Id, token)}";
-
-                await _emailSender.SendEmailAsync(user.Email, emailSubject, emailBody);
-
-                _logger.LogInformation($"Password recovery email sent to {user.Email}.");
-
-                return Ok();
-            }
-
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "An error occurred while recovering password.");
-                return StatusCode(500, "Internal Server Error");
-            }
-        }
-
-        private string GenerateResetLink(string userId, string token)
-        {
-            // Replace the following URL with the actual URL of your password reset page
-            string resetPasswordUrl = "https://localhost:4200/resetPassword";
-
-            // Construct the reset link with placeholders for userId and token
-            string resetLink = $"{resetPasswordUrl}?userId={userId}&token={WebUtility.UrlEncode(token)}";
-
-            return resetLink;
-        }
-
 
     }
 
