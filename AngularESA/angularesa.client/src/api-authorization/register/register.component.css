@@ -1,5 +1,11 @@
+*{
+    font-family:'Roboto Slab';
+}
+
 #div_textinitial{
-    margin-top:2%;
+    margin-top:1%;
+    font-size:large;
+    text-align:center;
 }
 
 .regist-wrapper {
@@ -10,7 +16,8 @@
   width: 80vw;
   max-height: 1000px;
   max-width: 1500px;
-  padding-left: 17%;
+  padding-left: 2%;
+  padding-top:1%;
 }
 
 .regist-box {
@@ -26,7 +33,7 @@
 .regist-form {
   padding: 20px;
   background-color: #006994;
-  width: 40%;
+  width: 50%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -48,21 +55,37 @@
     display: block;
     width: 100%;
     margin-bottom: 10px;
-    padding: 10px;
+    padding: 5px;
     border: 1px solid #000000;
     border-radius: 10px;
+    color:black;
   }
 
-  .regist-form button {
-    width: 100%;
-    padding: 10px;
-    margin-top: 20px;
-    margin-bottom: 10px;
-    border: 1px solid #000000;
-    border-radius: 30px;
-    background-color: #ffffff;
-    cursor: pointer;
-    font-weight: bold;
-    font-size: large;
+  .regist-form label{
+      color:white;
   }
+
+  .button{
+     color:white;
+  }
+
+.login-branding {
+  width: 50%;
+  background-size: cover;
+  background-position: center;
+}
+
+.logo {
+  max-width: 80%;
+  height: auto;
+  display: block;
+  margin: auto;
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.h2initial{
+    margin-left:37%;
+}
 

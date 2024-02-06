@@ -5,7 +5,8 @@ import { AuthorizeService } from "../authorize.service";
 
 @Component({
   selector: 'app-signin-component',
-  templateUrl: './signin.component.html'
+  templateUrl: './signin.component.html',
+  styleUrl:'./signin.component.css'
 })
 export class SignInComponent implements OnInit {
   loginForm!: FormGroup;

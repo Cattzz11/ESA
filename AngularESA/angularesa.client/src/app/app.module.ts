@@ -22,7 +22,7 @@ import { AuthGuard } from '../api-authorization/authorize.guard';
 import { AuthorizeService } from '../api-authorization/authorize.service';
 import { PasswordRecoveryComponent } from '../api-authorization/recoverpw/recover-password';
 import { ResetPasswordComponent } from '../api-authorization/reset-password/resetpassword.component';
-
+import { ProfileComponent } from './profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +39,8 @@ import { ResetPasswordComponent } from '../api-authorization/reset-password/rese
     PersonEditComponent,
     PersonDeleteComponent,
     PasswordRecoveryComponent,
-    ResetPasswordComponent
+    ResetPasswordComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule, HttpClientModule,

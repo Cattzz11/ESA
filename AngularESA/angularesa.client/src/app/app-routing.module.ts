@@ -14,6 +14,7 @@ import { RegisterComponent } from '../api-authorization/register/register.compon
 import { SignInComponent } from '../api-authorization/signin/signin.component';
 import { PasswordRecoveryComponent } from '../api-authorization/recoverpw/recover-password';
 import { ResetPasswordComponent } from '../api-authorization/reset-password/resetpassword.component';
+import { ProfileComponent } from './profile/profile.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent, pathMatch: 'full' },
@@ -29,6 +30,7 @@ const routes: Routes = [
   { path: 'person/delete/:id', component: PersonDeleteComponent },
   { path: 'forgotPassword', component: PasswordRecoveryComponent },
   { path: 'resetPassword', component: ResetPasswordComponent },
+  { path: 'profile', component: ProfileComponent }
 ];
 
 @NgModule({

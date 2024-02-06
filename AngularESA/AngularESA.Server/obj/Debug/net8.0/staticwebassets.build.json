@@ -1,13 +1,13 @@
 {
   "Version": 1,
-  "Hash": "EV9V9NGtc1OvYbMNXjdE7Iaa5M8wx3URGRspPCqF/V4=",
+  "Hash": "D35igyTXge1UiCGDEM3jBk7gQLpEtDjsIyw7/YuGJYM=",
   "Source": "AngularESA.Server",
   "BasePath": "_content/AngularESA.Server",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [
     {
-      "Identity": "C:\\Users\\danie\\OneDrive\\Documentos\\Meu\\UNI STUFF\\EsA\\Projeto\\ESA\\AngularESA\\angularesa.client\\angularesa.client.esproj",
+      "Identity": "D:\\ESA\\PROJETOESA\\ESA\\AngularESA\\angularesa.client\\angularesa.client.esproj",
       "Version": 2,
       "Source": "angularesa.client",
       "GetPublishAssetsTargets": "GetCurrentProjectPublishStaticWebAssetItems",

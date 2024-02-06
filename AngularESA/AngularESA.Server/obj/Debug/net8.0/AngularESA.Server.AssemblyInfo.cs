@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("AngularESA.Server")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+62bf8989607d4da394b4f2bbb8e8825cb6c707cf")]
 [assembly: System.Reflection.AssemblyProductAttribute("AngularESA.Server")]
 [assembly: System.Reflection.AssemblyTitleAttribute("AngularESA.Server")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

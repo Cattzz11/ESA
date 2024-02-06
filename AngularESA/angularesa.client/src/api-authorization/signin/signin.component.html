@@ -1,24 +1,38 @@
-<div class="d-flex flex-column align-items-center justify-content-center" *ngIf="!signedIn else signedInAlready">
-  <div>Please Sign In to continue. New user? <a href="new">Register now</a>.</div>
-  <div class="m-3">
-    <p>Did you forget your password? <a routerLink="/forgotPassword">Recover it here</a>.</p>
+<link href='https://fonts.googleapis.com/css?family=Roboto Slab' rel='stylesheet'>
+<div class="signinitial d-flex flex-column align-items-center justify-content-center" *ngIf="!signedIn else signedInAlready">
+  <div>Por favor registe-se para continuar. Novo Utilizador? <a href="new">Registe-se aqui.</a>.</div>
+  <div class="passwordforgot m-3">
+    <p>Esqueceu-se da password? <a routerLink="/forgotPassword">Recupere-a aqui</a>.</p>
   </div>
-  <form class="form w-50" [formGroup]="loginForm" (submit)="signIn($event)">
-    <div class="row m-3">
-      <label for="name">Email*</label>
-      <input class="col form-field" name="email" formControlName="email" />
+  <div class="login-wrapper">
+    <div class="login-box">
+      <div class="login-form">
+        <h2 class="m-4">Login</h2>
+        <form class="form w-60" [formGroup]="loginForm" (submit)="signIn($event)">
+          <div class="row m-3">
+            <label for="name">Email<span style="color:red; padding-left:5px;">*</span></label>
+            <input class="col form-field" name="email" formControlName="email" />
+          </div>
+          <div class="row m-3">
+            <label for="password">Password<span style="color:red; padding-left:5px;">*</span></label>
+            <input class="col form-field" type="password" name="password" formControlName="password" autocomplete="on" />
+          </div>
+          <div class="btn-separator"></div>
+          <button class="login-google">Login por Google</button>
+          <button class="login-outlook">Login por Outlook</button>
+          <div class="row m-3" *ngIf="authFailed">
+            <label style="color: red">Invalid credentials</label>
+          </div>
+          <div class="row m-3">
+            <button class="button-signin col btn btn-primary text-white" [disabled]="!loginForm.valid" type="submit">Sign In</button>
+          </div>
+        </form>
+      </div>
+      <div class="login-branding" style="background-image: url('.. /../assets/Images/background.png');">
+        <img src="../../assets/Images/logo.png" alt="Logo" class="logo" />
+      </div>
     </div>
-    <div class="row m-3">
-      <label for="password">Password*</label>
-      <input class="col form-field" type="password" name="password" formControlName="password" autocomplete="on" />
-    </div>
-    <div class="row m-3" *ngIf="authFailed">
-      <label style="color: red">Invalid credentials</label>
-    </div>
-    <div class="row m-3">
-      <button class="col btn btn-primary" [disabled]="!loginForm.valid" type="submit">Sign In</button>
-    </div>
-  </form>
+  </div>
 </div>
 
 <ng-template #signedInAlready>
