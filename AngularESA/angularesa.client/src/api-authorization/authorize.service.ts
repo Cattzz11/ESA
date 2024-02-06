@@ -61,6 +61,20 @@ export class AuthorizeService {
       }));
   }
 
+  public codeValidation(code: string, email: string) {
+    return this.http.post<any>('api/validate-recovery-code', {
+      userEmail: email,
+      code: code
+    }).pipe(
+      map(res => {
+        return true;
+      }),
+      catchError(error => {
+        return of(false);
+      })
+    );
+  }
+
   // register new user - não funciona para um novo tipo de IdentityUser com propriedades extra
   //public register(email: string, password: string) {
   //  return this.http.post('/register', {
@@ -126,7 +140,6 @@ export class AuthorizeService {
   }
 
   public recoverPassword(email: string) {
-    console.log(email);
     return this.http.post('api/send-recovery-code', {
       email: email
     }, {

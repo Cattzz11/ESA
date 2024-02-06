@@ -1,0 +1,12 @@
+<div class="d-flex flex-column align-items-center justify-content-center">
+  <div>Codigo de recuperação</div>
+  <form class="form w-50" [formGroup]="recoveryForm" (submit)="recoveryCode()">
+    <div class="row m-3">
+      <label for="code">Codigo de recuperação:</label>
+      <input class="col form-field" type="text" id="code" formControlName="code" />
+    </div>
+    <div class="row m-3">
+      <button class="col btn btn-primary" [disabled]="!recoveryForm.valid" type="submit">Recuperar password</button>
+    </div>
+  </form>
+</div>

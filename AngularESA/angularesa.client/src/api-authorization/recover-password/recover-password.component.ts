@@ -37,14 +37,10 @@ export class RecoverPasswordComponent implements OnInit {
 
     this.authService.recoverPassword(email).subscribe({
       next: (response) => {
-        // Lógica de sucesso
-        console.log("Angular Sucesso");
-        //this.router.navigate(['/new-password/', { email: email }]);
+        this.router.navigate(['/recovery-code/', email]);
       },
       error: (error) => {
-        // Lógica de erro
-        console.log("Angular Insucesso");
-        //this.router.navigate(['/new-password/', { email: email }]);
+        this.router.navigate(['/recovery-code/', email]);
       }
     });
   }

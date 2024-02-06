@@ -23,7 +23,7 @@ export class NewPasswordComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
-      this.userEmail = params['email'] || '';
+      this.userEmail = this.route.snapshot.params['email'];
     });
 
     this.changePasswordForm = this.formBuilder.group({
