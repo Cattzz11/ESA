@@ -5,12 +5,14 @@ import { AuthorizeService } from "../authorize.service";
 
 @Component({
   selector: 'app-recover-password-component',
-  templateUrl: './recover-password.component.html'
+  templateUrl: './recover-password.component.html',
+  styleUrls: ['./recover-password.component.css']
 })
 export class RecoverPasswordComponent implements OnInit {
   recoverForm!: FormGroup;
   recoverSucceeded: boolean = false;
   userEmail: string = '';
+  confirmationMessage: string = '';
 
   constructor(
     private formBuilder: FormBuilder,
@@ -34,13 +36,14 @@ export class RecoverPasswordComponent implements OnInit {
     }
 
     const email = this.recoverForm.get('email')?.value;
+    this.confirmationMessage = "Se o e-mail existir, irá receber um código de recuperação de password.";
 
     this.authService.recoverPassword(email).subscribe({
       next: (response) => {
-        this.router.navigate(['/recovery-code/', email]);
+        setTimeout(() => this.router.navigate(['/recovery-code/', email]), 2000); // espera 2 segundos
       },
       error: (error) => {
-        this.router.navigate(['/recovery-code/', email]);
+        setTimeout(() => this.router.navigate(['/recovery-code/', email]), 2000); // espera 2 segundos
       }
     });
   }
