@@ -5,11 +5,13 @@ import { ActivatedRoute, Router } from "@angular/router";
 
 @Component({
   selector: 'app-new-password-component',
-  templateUrl: './new-password.component.html'
+  templateUrl: './new-password.component.html',
+  styleUrls: ['./new-password.component.css']
 })
 export class NewPasswordComponent implements OnInit {
   errors: string[] = [];
   changePasswordForm!: FormGroup;
+  confirmationMessage: string = '';
   changeFailed: boolean = false;
   changeSucceeded: boolean = false;
   userEmail: string = '';

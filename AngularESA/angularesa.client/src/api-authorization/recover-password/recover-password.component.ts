@@ -10,9 +10,9 @@ import { AuthorizeService } from "../authorize.service";
 })
 export class RecoverPasswordComponent implements OnInit {
   recoverForm!: FormGroup;
+  confirmationMessage: string = '';
   recoverSucceeded: boolean = false;
   userEmail: string = '';
-  confirmationMessage: string = '';
 
   constructor(
     private formBuilder: FormBuilder,

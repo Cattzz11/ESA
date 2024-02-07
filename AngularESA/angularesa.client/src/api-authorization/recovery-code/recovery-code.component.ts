@@ -5,13 +5,15 @@ import { AuthorizeService } from "../authorize.service";
 
 @Component({
   selector: 'app-recovery-code-component',
-  templateUrl: './recovery-code.component.html'
+  templateUrl: './recovery-code.component.html',
+  styleUrls: ['./recovery-code.component.css']
 })
+
 export class RecoveryCodeComponent implements OnInit {
   recoveryForm!: FormGroup;
   recoverSucceeded: boolean = false;
   code: string = '';
-  errors: string[] = [];
+  confirmationMessage: string = '';
   userEmail: string = '';
 
   constructor(
@@ -32,6 +34,7 @@ export class RecoveryCodeComponent implements OnInit {
 
   public recoveryCode() {
     if (!this.recoveryForm.valid) {
+      this.confirmationMessage = "PIN errado ou inválido";
       return;
     }
 
@@ -42,7 +45,7 @@ export class RecoveryCodeComponent implements OnInit {
         this.router.navigate(['/new-password/', this.userEmail]);
       },
       error: (error) => {
-        this.errors = ['Erro ao alterar a senha. Tente novamente.'];
+        this.confirmationMessage = "Tente novamente";
       }
     });
   }

@@ -1,12 +1,23 @@
-<div class="d-flex flex-column align-items-center justify-content-center">
-  <div>Codigo de recuperação</div>
-  <form class="form w-50" [formGroup]="recoveryForm" (submit)="recoveryCode()">
-    <div class="row m-3">
-      <label for="code">Codigo de recuperação:</label>
-      <input class="col form-field" type="text" id="code" formControlName="code" />
+<div class="container">
+  <div class="recover-container">
+    <div class="recover-form">
+      <div class="titulo">
+        <h2>Insira o PIN</h2>
+      </div>
+      <form [formGroup]="recoveryForm" (ngSubmit)="recoveryCode()">
+        <div class="recoverItems">
+          <input type="text" id="code" formControlName="code" placeholder="Insira o PIN que foi enviado para o E-mail">
+          <button type="submit" [disabled]="!recoveryForm.valid">Confirmar</button>
+        </div>
+
+        <div *ngIf="confirmationMessage" class="confirmation-message">
+          {{ confirmationMessage }}
+        </div>
+
+      </form>
     </div>
-    <div class="row m-3">
-      <button class="col btn btn-primary" [disabled]="!recoveryForm.valid" type="submit">Recuperar password</button>
+    <div class="login-branding" style="background-image: url('../../assets/Images/background.png');">
+      <img src="../../assets/Images/logo.png" alt="Logo" class="logo" />
     </div>
-  </form>
+  </div>
 </div>
