@@ -1,6 +1,6 @@
 <link href='https://fonts.googleapis.com/css?family=Roboto Slab' rel='stylesheet'>
 <!--<script src="https://accounts.google.com/gsi/client" async></script>-->
-<div class="signinitial d-flex flex-column align-items-center justify-content-center" *ngIf="!signedIn else signedInAlready">
+<div class="signinitial d-flex flex-column align-items-center justify-content-center" >
   <div>Por favor registe-se para continuar. Novo Utilizador? <a href="new">Registe-se aqui.</a>.</div>
   <div class="passwordforgot m-3">
     <p>Esqueceu-se da password? <a routerLink="/forgotPassword">Recupere-a aqui</a>.</p>
@@ -19,8 +19,7 @@
             <input class="col form-field" type="password" name="password" formControlName="password" autocomplete="on" />
           </div>
           <div class="btn-separator"></div>
-          <div id="login-googleBTN"></div>
-          <button class="login-google">Login por Google</button>
+          <div id="login-googleBTN" ></div>
           <button class="login-outlook">Login por Outlook</button>
           <div class="row m-3" *ngIf="authFailed">
             <label style="color: red">Invalid credentials</label>
@@ -37,9 +36,9 @@
   </div>
 </div>
 
-<ng-template #signedInAlready>
+<ng-container #signedInAlready>
   <h4>Sign In</h4>
   <div>
     You are already signed in!
   </div>
-</ng-template>
+</ng-container>

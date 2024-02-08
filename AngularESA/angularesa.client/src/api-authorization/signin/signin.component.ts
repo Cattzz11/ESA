@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
 import { AuthorizeService } from "../authorize.service";
+import { jwtDecode } from "jwt-decode";
 
 @Component({
   selector: 'app-signin-component',
@@ -19,6 +20,7 @@ export class SignInComponent implements OnInit {
     private router: Router) {
     this.authService.isSignedIn().forEach(
       isSignedIn => {
+        console.log("deu4");
         this.signedIn = isSignedIn;
       });
   }
@@ -30,9 +32,8 @@ export class SignInComponent implements OnInit {
         email: ['', [Validators.required, Validators.email]],
         password: ['', [Validators.required]]
       });
-
+    console.log("deu5");
     this.initializeGoogleOnTap();
-
 
   }
 
@@ -58,10 +59,17 @@ export class SignInComponent implements OnInit {
   }
 
   async googleResponse(response: any) {
-    if (response && response.credential)
+    if (response && response.credential) {
+      console.log("deu");
       this.isLoggedIn = true;
+      console.log("deu2");
+      this.signedIn = true;
+      //const decoded = jwtDecode(response.credential);
+      //console.log('Decoded JWT:', decoded);
+    }
 
     console.log('RESPONSE :>> ', response);
+    console.log("deu3");
   }
 
 
