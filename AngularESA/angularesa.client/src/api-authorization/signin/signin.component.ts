@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
 import { AuthorizeService } from "../authorize.service";
 import { jwtDecode } from "jwt-decode";
+import { User } from "oidc-client";
 
 @Component({
   selector: 'app-signin-component',
@@ -22,6 +23,7 @@ export class SignInComponent implements OnInit {
       isSignedIn => {
         console.log("deu4");
         this.signedIn = isSignedIn;
+        this.isLoggedIn = isSignedIn;
       });
   }
 
@@ -60,12 +62,13 @@ export class SignInComponent implements OnInit {
 
   async googleResponse(response: any) {
     if (response && response.credential) {
-      console.log("deu");
       this.isLoggedIn = true;
-      console.log("deu2");
       this.signedIn = true;
-      //const decoded = jwtDecode(response.credential);
-      //console.log('Decoded JWT:', decoded);
+      console.log("Google login successfull");
+      const decoded = jwtDecode(response.credential);
+      console.log('Decoded JWT:', decoded);
+      this.commonAuthenticationProcedure(decoded);
+      sessionStorage.setItem('user', response);
     }
 
     console.log('RESPONSE :>> ', response);
@@ -74,7 +77,7 @@ export class SignInComponent implements OnInit {
 
 
   public signIn(_: any) {
-    if (!this.loginForm.valid) {
+    if (!this.loginForm.valid || !this.isLoggedIn) {
       return;
     }
     const userName = this.loginForm.get('email')?.value;
@@ -82,11 +85,20 @@ export class SignInComponent implements OnInit {
     this.authService.signIn(userName, password).forEach(
       response => {
         if (response) {
-          this.router.navigateByUrl("/");
+          this.commonAuthenticationProcedure(response);
         }
       }).catch(
         _ => {
           this.authFailed = true;
         });
+  }
+
+  commonAuthenticationProcedure(userDetails: any) {
+    // Aqui, você configura o usuário como logado, armazena o token JWT se necessário, etc.
+    console.log('User details:', userDetails);
+    
+    this.signedIn = true; // Por exemplo, atualizando o estado de autenticação
+    // Redirecionar para a página inicial ou dashboard
+    this.router.navigateByUrl("/");
   }
 }
