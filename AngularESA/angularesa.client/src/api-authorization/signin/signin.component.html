@@ -9,7 +9,7 @@
     <div class="login-box">
       <div class="login-form">
         <h2 class="m-4">Login</h2>
-        <form class="form w-60" [formGroup]="loginForm" (submit)="authService.signIn(loginForm.email, loginForm.password)">
+        <form class="form w-60" [formGroup]="loginForm" (submit)="submitForm()">
           <div class="row m-3">
             <label for="name">Email<span style="color:red; padding-left:5px;">*</span></label>
             <input class="col form-field" name="email" formControlName="email" />

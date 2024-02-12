@@ -2,13 +2,16 @@ import { HttpClient, HttpErrorResponse, HttpResponse } from '@angular/common/htt
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, Subject, catchError, map, of } from 'rxjs';
 import { UserInfo } from './authorize.dto';
+import { jwtDecode } from 'jwt-decode';
+import { Router } from '@angular/router';
+declare const google: any;
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthorizeService {
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private router: Router) { }
 
   private _authStateChanged: Subject<boolean> = new BehaviorSubject<boolean>(false);
 
@@ -63,7 +66,7 @@ export class AuthorizeService {
 
   // sign out - não aparece como um serviço
   public signOut() {
-    return this.http.post('/logout', {}, {
+    return this.http.post('/api/logout', {}, {
       withCredentials: true,
       observe: 'response',
       responseType: 'text'
@@ -75,18 +78,59 @@ export class AuthorizeService {
     }));
   }
 
+  initializeGoogleOnTap() {
+    console.log('google.accounts.id:', google.accounts.id);
+    console.log('google.auth2:', google.auth2);
+    (window as any).onGoogleLibraryLoad = () => {
+      console.log('Google\'s One-tap sign in script loaded!');
+
+      //@ts-ignore
+      google.accounts.id.initialize({
+        // Ref: https://developers.google.com/identity/gsi/web/reference/js-reference#IdConfiguration
+        client_id: '712855861147-lt433p2k7stok4g5h6hvba6qmt7iktld.apps.googleusercontent.com',
+        callback: this.googleResponse.bind(this),
+        auto_select: true,
+        cancel_on_tap_outside: false
+      });
+
+      //@ts-ignore
+      google.accounts!.id.renderButton(document!.getElementById('login-googleBTN')!, { theme: 'outline', size: 'large', width: 200 })
+      //@ts-ignore
+      google.accounts.id.prompt();
+    };
+
+  }
+
+  async googleResponse(response: any) {
+    if (response && response.credential) {
+      //this.isLoggedIn = true;
+      this._authStateChanged.next(true);
+      console.log("Google login successfull");
+      const decoded = jwtDecode(response.credential);
+      console.log('Decoded JWT:', decoded);
+      this.commonAuthenticationProcedure(decoded);
+      sessionStorage.setItem('user', response);
+    }
+
+    console.log('RESPONSE :>> ', response);
+    console.log("deu3");
+  }
+
+  commonAuthenticationProcedure(userDetails: any) {
+    // Aqui, você configura o usuário como logado, armazena o token JWT se necessário, etc.
+    console.log('User details:', userDetails);
+
+    this._authStateChanged.next(true); // Por exemplo, atualizando o estado de autenticação
+    // Redirecionar para a página inicial ou dashboard
+    this.router.navigateByUrl("/");
+  }
+
   // logout
-  public signOutCustom() {
-    return this.http.post('/api/logout', {}, {
-      withCredentials: true,
-      observe: 'response',
-      responseType: 'text'
-    }).pipe<boolean>(map((res: HttpResponse<string>) => {
-      if (res.ok) {
-        this._authStateChanged.next(false);
-      }
-      return res.ok;
-    }));
+  public signOutGoogle() {
+    google.accounts.id.cancel();
+    sessionStorage.removeItem('user');
+    this._authStateChanged.next(false);  // Update your local signed-in state
+    console.log('User signed out successfully');
   }
 
   // check if the user is authenticated. the endpoint is protected so 401 if not.

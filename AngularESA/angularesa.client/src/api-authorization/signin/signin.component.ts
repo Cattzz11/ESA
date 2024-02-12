@@ -6,7 +6,8 @@ import { jwtDecode } from "jwt-decode";
 import { User } from "oidc-client";
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { map } from 'rxjs/operators';
-
+import { BehaviorSubject } from "rxjs/internal/BehaviorSubject";
+declare const google: any;
 
 
 @Component({
@@ -14,11 +15,15 @@ import { map } from 'rxjs/operators';
   templateUrl: './signin.component.html',
   styleUrl:'./signin.component.css'
 })
+
+
 export class SignInComponent implements OnInit {
   loginForm!: FormGroup;
   authFailed: boolean = false;
   signedIn: boolean = false;
   isLoggedIn: boolean = false;
+  private _authStateChanged: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  
 
   constructor(private http: HttpClient, public authService: AuthorizeService,
     private formBuilder: FormBuilder,
@@ -39,11 +44,11 @@ export class SignInComponent implements OnInit {
         password: ['', [Validators.required]]
       });
     console.log("deu5");
-    this.initializeGoogleOnTap();
+    this.authService.initializeGoogleOnTap();
 
   }
 
-  initializeGoogleOnTap() {
+  /*initializeGoogleOnTap() {
     (window as any).onGoogleLibraryLoad = () => {
       console.log('Google\'s One-tap sign in script loaded!');
 
@@ -77,7 +82,7 @@ export class SignInComponent implements OnInit {
 
     console.log('RESPONSE :>> ', response);
     console.log("deu3");
-  }
+  }*/
 
 
   //public signIn(_: any) {
@@ -119,5 +124,27 @@ export class SignInComponent implements OnInit {
     this.signedIn = true; // Por exemplo, atualizando o estado de autenticação
     // Redirecionar para a página inicial ou dashboard
     this.router.navigateByUrl("/");
+  }
+
+
+  submitForm() {
+    if (this.loginForm.valid) {
+      const email = this.loginForm.get('email')?.value;
+      const password = this.loginForm.get('password')?.value;
+
+      // Call your authentication service method
+      this.authService.signIn(email, password);
+    }
+
+  }
+
+  signOut() {
+    const auth2 = google.auth2.getAuthInstance();
+
+    auth2.signOut().then(() => {
+      // Perform any additional actions after successful sign-out
+      console.log('User signed out successfully');
+      this.signedIn = false;  // Update your local signed-in state
+    });
   }
 }
