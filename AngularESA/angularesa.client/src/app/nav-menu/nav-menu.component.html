@@ -22,17 +22,20 @@
           <li class="nav-item" [routerLinkActive]="['link-active']">
             <a class="nav-link text-white" [routerLink]="['/about']">About</a>
           </li>
-          <li class="nav-item" [routerLinkActive]="['link-active']" *ngIf="!isUserSignedIn">
+          <li class="nav-item" [routerLinkActive]="['link-active']" *ngIf="!isUserSignedIn && !isSignedIn">
             <a class="nav-link text-white" [routerLink]="['/register']">Registar</a>
           </li>
-          <li class="nav-item" [routerLinkActive]="['link-active']" *ngIf="!isUserSignedIn">
+          <li class="nav-item" [routerLinkActive]="['link-active']" *ngIf="!isUserSignedIn && !isSignedIn">
             <a class="nav-link text-white" [routerLink]='["/sigin"]'>Login</a>
           </li>
-          <li class="nav-item" [routerLinkActive]="['link-active']" *ngIf="isUserSignedIn">
+          <li class="nav-item" [routerLinkActive]="['link-active']" *ngIf="isUserSignedIn || isSignedIn">
             <button class="nav-link text-white" [routerLink]='["/profile"]'> Perfil </button>
           </li>
-          <li class="nav-item" [routerLinkActive]="['link-active']" *ngIf="isUserSignedIn">
+          <li class="nav-item" [routerLinkActive]="['link-active']" *ngIf="isUserSignedIn && !isSignedIn">
             <button class="nav-link text-white" [routerLink]='["/logout"]'>Logout</button>
+          </li>
+          <li class="nav-item" [routerLinkActive]="['link-active']" *ngIf="!isUserSignedIn && isSignedIn">
+            <button class="nav-link text-white" (click)="signOut()" >Logout</button>
           </li>
         </ul>
       </div>

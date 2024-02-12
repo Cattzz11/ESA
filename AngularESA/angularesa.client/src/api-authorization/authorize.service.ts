@@ -66,6 +66,7 @@ export class AuthorizeService {
 
   // sign out - não aparece como um serviço
   public signOut() {
+    console.log("gg");
     return this.http.post('/api/logout', {}, {
       withCredentials: true,
       observe: 'response',
@@ -79,8 +80,6 @@ export class AuthorizeService {
   }
 
   initializeGoogleOnTap() {
-    console.log('google.accounts.id:', google.accounts.id);
-    console.log('google.auth2:', google.auth2);
     (window as any).onGoogleLibraryLoad = () => {
       console.log('Google\'s One-tap sign in script loaded!');
 

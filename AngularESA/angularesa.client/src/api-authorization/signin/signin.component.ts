@@ -45,7 +45,6 @@ export class SignInComponent implements OnInit {
       });
     console.log("deu5");
     this.authService.initializeGoogleOnTap();
-
   }
 
   /*initializeGoogleOnTap() {
@@ -103,19 +102,7 @@ export class SignInComponent implements OnInit {
   //}
 
   // cookie-based login
-  public signIn(email: string, password: string) {
-    return this.http.post('/login?useCookies=true', {
-      email: email,
-      password: password
-    }, {
-      observe: 'response',
-      responseType: 'text'
-    })
-      .pipe<boolean>(map((res: HttpResponse<string>) => {
-        this._authStateChanged.next(res.ok);
-        return res.ok;
-      }));
-  }
+ 
 
   commonAuthenticationProcedure(userDetails: any) {
     // Aqui, você configura o usuário como logado, armazena o token JWT se necessário, etc.
@@ -129,11 +116,17 @@ export class SignInComponent implements OnInit {
 
   submitForm() {
     if (this.loginForm.valid) {
-      const email = this.loginForm.get('email')?.value;
+      const userName = this.loginForm.get('email')?.value;
       const password = this.loginForm.get('password')?.value;
-
-      // Call your authentication service method
-      this.authService.signIn(email, password);
+      this.authService.signIn(userName, password).forEach(
+        response => {
+          if (response) {
+            this.router.navigateByUrl("/");
+          }
+        }).catch(
+          _ => {
+            this.authFailed = true;
+          });
     }
 
   }

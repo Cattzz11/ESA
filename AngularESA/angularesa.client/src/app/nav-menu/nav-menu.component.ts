@@ -33,24 +33,24 @@ export class NavMenuComponent {
     });
   }
 
-  //signOut() {
-  //  if (this.isSignedIn) {
-  //    this.auth.signOutCustom().subscribe(response => {
-  //      if (response) {
-  //        sessionStorage.removeItem('user');
-  //        this.router.navigateByUrl('/');
-
-  //        console.log("logout");
-  //      }
-  //    });
-
-  //    console.log("user eliminado");
-  //  }
-  //}
-
   signOut() {
-    this.auth.signOut();
+    if (this.isSignedIn) {
+      this.auth.signOut().subscribe(response => {
+        if (response) {
+          sessionStorage.removeItem('user');
+          this.router.navigateByUrl('/');
+
+          console.log("logout");
+        }
+      });
+
+      console.log("user eliminado");
+    }
   }
+
+  //signOut() {
+  //  this.auth.signOut();
+  //}
 
   //logout() {
   //  if (this.isSignedIn) {
