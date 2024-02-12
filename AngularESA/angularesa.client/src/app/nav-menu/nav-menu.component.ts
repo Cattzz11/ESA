@@ -33,17 +33,35 @@ export class NavMenuComponent {
     });
   }
 
-  signOut() {
+  //signOut() {
+  //  if (this.isSignedIn) {
+  //    this.auth.signOutCustom().subscribe(response => {
+  //      if (response) {
+  //        sessionStorage.removeItem('user');
+  //        this.router.navigateByUrl('/');
+
+  //        console.log("logout");
+  //      }
+  //    });
+      
+  //    console.log("user eliminado");
+  //  }
+  //}
+
+  logout() {
     if (this.isSignedIn) {
       this.auth.signOutCustom().subscribe(response => {
         if (response) {
+          sessionStorage.removeItem('user');
           this.router.navigateByUrl('/');
+          this.auth.signOut();
+          console.log("logout");
         }
       });
-      sessionStorage.removeItem('user');
+
+      console.log("user eliminado");
     }
   }
-
 
 
 }

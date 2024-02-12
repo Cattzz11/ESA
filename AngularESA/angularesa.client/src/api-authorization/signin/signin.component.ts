@@ -4,6 +4,10 @@ import { Router } from "@angular/router";
 import { AuthorizeService } from "../authorize.service";
 import { jwtDecode } from "jwt-decode";
 import { User } from "oidc-client";
+import { HttpClient, HttpResponse } from '@angular/common/http';
+import { map } from 'rxjs/operators';
+
+
 
 @Component({
   selector: 'app-signin-component',
@@ -16,7 +20,7 @@ export class SignInComponent implements OnInit {
   signedIn: boolean = false;
   isLoggedIn: boolean = false;
 
-  constructor(private authService: AuthorizeService,
+  constructor(private http: HttpClient, public authService: AuthorizeService,
     private formBuilder: FormBuilder,
     private router: Router) {
     this.authService.isSignedIn().forEach(
@@ -76,21 +80,36 @@ export class SignInComponent implements OnInit {
   }
 
 
-  public signIn(_: any) {
-    if (!this.loginForm.valid || !this.isLoggedIn) {
-      return;
-    }
-    const userName = this.loginForm.get('email')?.value;
-    const password = this.loginForm.get('password')?.value;
-    this.authService.signIn(userName, password).forEach(
-      response => {
-        if (response) {
-          this.commonAuthenticationProcedure(response);
-        }
-      }).catch(
-        _ => {
-          this.authFailed = true;
-        });
+  //public signIn(_: any) {
+  //  if (!this.loginForm.valid || !this.isLoggedIn) {
+  //    return;
+  //  }
+  //  const userName = this.loginForm.get('email')?.value;
+  //  const password = this.loginForm.get('password')?.value;
+  //  this.authService.signIn(userName, password).forEach(
+  //    response => {
+  //      if (response) {
+  //        this.commonAuthenticationProcedure(response);
+  //      }
+  //    }).catch(
+  //      _ => {
+  //        this.authFailed = true;
+  //      });
+  //}
+
+  // cookie-based login
+  public signIn(email: string, password: string) {
+    return this.http.post('/login?useCookies=true', {
+      email: email,
+      password: password
+    }, {
+      observe: 'response',
+      responseType: 'text'
+    })
+      .pipe<boolean>(map((res: HttpResponse<string>) => {
+        this._authStateChanged.next(res.ok);
+        return res.ok;
+      }));
   }
 
   commonAuthenticationProcedure(userDetails: any) {
