@@ -1,0 +1,23 @@
+<div class="container">
+  <div class="confirmation-container">
+    <div class="confirmation-form">
+      <div class="titulo">
+        <h2>Insira o PIN</h2>
+      </div>
+      <form [formGroup]="confirmationForm" (ngSubmit)="confirmationCode()">
+        <div class="recoverItems">
+          <input type="text" id="code" formControlName="code" placeholder="Insira o PIN que foi enviado para o E-mail">
+          <button type="submit" [disabled]="!confirmationForm.valid">Confirmar</button>
+        </div>
+
+        <div *ngIf="confirmationMessage" class="confirmation-message">
+          {{ confirmationMessage }}
+        </div>
+
+      </form>
+    </div>
+    <div class="login-branding" style="background-image: url('../../assets/Images/background.png');">
+      <img src="../../assets/Images/logo.png" alt="Logo" class="logo" />
+    </div>
+  </div>
+</div>

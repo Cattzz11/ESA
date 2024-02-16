@@ -82,6 +82,29 @@ namespace PROJETOESA.Controllers
 
             if (user != null)
             {
+                var confirmationCode = this._codeGeneratorService.GenerateCode();
+
+                // Construção da mensagem para enviar
+                var htmlContent = $"<p>Seu código de confirmação é: {confirmationCode}</p>";
+
+                // Envio do e-mail
+                await _emailSender.SendEmailAsync(model.Email, "Confirmação da Conta", htmlContent);
+
+                // Armazenar o código de recuperação na base de dados
+                await StoreRecoveryCodeAsync(model, confirmationCode);
+            }
+
+            return Ok(new { Message = "Se o registo for bem sucedido, o código de confirmação será enviado." });
+        }
+
+        [HttpPost]
+        [Route("api/send-confirmation-code")]
+        public async Task<IActionResult> SendConfirmationCode([FromBody] CustomRecoverModel model)
+        {
+            var user = await _userManager.FindByEmailAsync(model.Email);
+
+            if (user != null)
+            {
                 var recoveryCode = this._codeGeneratorService.GenerateCode();
 
                 // Construção da mensagem para enviar

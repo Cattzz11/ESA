@@ -4,14 +4,14 @@ import { ActivatedRoute, Router } from "@angular/router";
 import { AuthorizeService } from "../authorize.service";
 
 @Component({
-  selector: 'app-recovery-code-component',
-  templateUrl: './recovery-code.component.html',
-  styleUrls: ['./recovery-code.component.css']
+  selector: 'app-confirmation-account-component',
+  templateUrl: './confirmation-account.component.html',
+  styleUrls: ['./confirmation-account.component.css']
 })
 
-export class RecoveryCodeComponent implements OnInit {
-  recoveryForm!: FormGroup;
-  recoverSucceeded: boolean = false;
+export class ConfirmationAccountComponent implements OnInit {
+  confirmationForm!: FormGroup;
+  confirmationSucceeded: boolean = false;
   code: string = '';
   confirmationMessage: string = '';
   userEmail: string = '';
@@ -27,28 +27,26 @@ export class RecoveryCodeComponent implements OnInit {
       this.userEmail = this.route.snapshot.params['email'];
     });
 
-    this.recoveryForm = this.formBuilder.group({
+    this.confirmationForm = this.formBuilder.group({
       code: ['', [Validators.required, Validators.minLength(6)]]
     });
   }
 
-  public recoveryCode() {
-    if (!this.recoveryForm.valid) {
+  public confirmationCode() {
+    if (!this.confirmationForm.valid) {
       this.confirmationMessage = "PIN errado ou inválido";
       return;
     }
 
-    const code = this.recoveryForm.get('code')?.value;
+    const code = this.confirmationForm.get('code')?.value;
 
     this.authService.codeValidation(code, this.userEmail).subscribe({
       next: (response) => {
-        this.router.navigate(['/new-password/', this.userEmail]);
+        this.router.navigate(['/success']);
       },
       error: (error) => {
         this.confirmationMessage = "Tente novamente";
       }
     });
   }
-
-  
 }

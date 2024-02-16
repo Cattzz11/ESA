@@ -22,6 +22,8 @@ import { AuthorizeService } from '../api-authorization/authorize.service';
 import { PremiumProfilePageComponent } from './users/premium-profile-page/premium-profile-page.component';
 import { ProfileComponent } from './profile/profile.component';
 import { LogoutComponent } from '../api-authorization/logout/logout.component';
+import { ConfirmationAccountComponent } from '../api-authorization/confirmation-account/confirmation-account.component'
+import { SuccessComponent } from '../api-authorization/success/success.component'
 
 @NgModule({
   declarations: [
@@ -39,7 +41,9 @@ import { LogoutComponent } from '../api-authorization/logout/logout.component';
     CounterComponent,
     FetchDataComponent,
     PeopleComponent,
-    PersonComponent
+    PersonComponent,
+    ConfirmationAccountComponent,
+    SuccessComponent
   ],
   imports: [
     BrowserModule, HttpClientModule,

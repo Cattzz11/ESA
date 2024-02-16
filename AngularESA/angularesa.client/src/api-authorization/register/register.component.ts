@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { ActivatedRoute, Router } from "@angular/router";
 import { AuthorizeService } from "../authorize.service";
 
 @Component({
@@ -10,11 +11,12 @@ import { AuthorizeService } from "../authorize.service";
 export class RegisterComponent implements OnInit {
   errors: string[] = [];
   registerForm!: FormGroup;
+  confirmationMessage: string = '';
   registerFailed: boolean = false;
   registerSucceeded: boolean = false;
   signedIn: boolean = false;
 
-  constructor(private authService: AuthorizeService,
+  constructor(private authService: AuthorizeService, private router : Router,
     private formBuilder: FormBuilder) {
     this.authService.isSignedIn().forEach(
       isSignedIn => {
@@ -54,6 +56,7 @@ export class RegisterComponent implements OnInit {
       response => {
         if (response) {
           this.registerSucceeded = true;
+          this.confirmationEmail();
         }
       }).catch(
         error => {
@@ -76,6 +79,19 @@ export class RegisterComponent implements OnInit {
         });
   }
 
+  public confirmationEmail() {
+    const email = this.registerForm.get('email')?.value;
+    this.confirmationMessage = "Se o e-mail existir, irá receber um código de recuperação de password.";
+
+    this.authService.confirmAccount(email).subscribe({
+      next: (response) => {
+        setTimeout(() => this.router.navigate(['/confirmation-account/', email]), 2000); // espera 2 segundos
+      },
+      error: (error) => {
+        setTimeout(() => this.router.navigate(['/confirmation-account/', email]), 2000); // espera 2 segundos
+      }
+    });
+  }
   
 
 

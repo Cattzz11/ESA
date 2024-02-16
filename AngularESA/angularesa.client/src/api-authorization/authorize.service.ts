@@ -193,4 +193,16 @@ export class AuthorizeService {
         return res.ok;
       }));
   }
+
+  public confirmAccount(email: string) {
+    return this.http.post('api/send-confirmation-code', {
+      email: email
+    }, {
+      observe: 'response',
+      responseType: 'text'
+    })
+      .pipe<boolean>(map((res: HttpResponse<string>) => {
+        return res.ok;
+      }));
+  }
 }
