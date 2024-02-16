@@ -5,8 +5,10 @@ import { AuthorizeService } from "../authorize.service";
 
 @Component({
   selector: 'app-signin-component',
-  templateUrl: './signin.component.html'
+  templateUrl: './signin.component.html',
+  styleUrls: ['./signin.component.css']
 })
+
 export class SignInComponent implements OnInit {
   loginForm!: FormGroup;
   authFailed: boolean = false;

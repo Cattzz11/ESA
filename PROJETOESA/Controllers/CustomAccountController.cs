@@ -1,18 +1,12 @@
 ﻿using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.WebUtilities;
 using PROJETOESA.Models;
-using System.Text.Encodings.Web;
-using System.Text;
 using Microsoft.AspNetCore.Identity.UI.Services;
-
-using System.ComponentModel.DataAnnotations;
-using Microsoft.AspNetCore.Identity.UI.V4.Pages.Account.Internal;
-using System.Net;
+using PROJETOESA.Services;
+using Microsoft.EntityFrameworkCore;
+using PROJETOESA.Data;
 
 namespace PROJETOESA.Controllers
 {
@@ -22,14 +16,17 @@ namespace PROJETOESA.Controllers
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly IEmailSender _emailSender;
         private readonly ILogger<CustomAccountController> _logger;
+        private readonly CodeGeneratorService _codeGeneratorService;
+        private readonly AeroHelperContext _context;
 
 
-        public CustomAccountController(UserManager<ApplicationUser> userManager, IEmailSender emailSender, ILogger<CustomAccountController> logger)
+        public CustomAccountController(UserManager<ApplicationUser> userManager, IEmailSender emailSender, ILogger<CustomAccountController> logger, CodeGeneratorService codeGeneratorService, AeroHelperContext context)
         {
             _userManager = userManager;
             _emailSender = emailSender;
             _logger = logger;
-
+            _codeGeneratorService = codeGeneratorService;
+            _context = context;
         }
 
         [HttpPost]
@@ -53,58 +50,97 @@ namespace PROJETOESA.Controllers
         {
             await HttpContext.SignOutAsync(IdentityConstants.ApplicationScheme);
 
-            // Retorna uma resposta apropriada, como um status 200 OK
             return Ok(new { message = "Logout successful" });
         }
 
         [HttpPost]
-        [Route("api/forgotPassword")]
-        public async Task<IActionResult> RecoverPassword([FromBody] CustomRecoverModel model)
+        [Route("api/change-password")]
+        public async Task<IActionResult> RecoverPassword([FromBody] CustomRecoverPasswordModel model)
         {
-            // Validate model, find user by email, generate token, etc.
-            try
+            var user = await _userManager.FindByEmailAsync(model.Email);
+            if (user == null)
             {
+                return BadRequest("Utilizador não encontrado.");
+            }
 
-                var user = await _userManager.FindByEmailAsync(model.Email);
-                if (user == null)
-                {
-                    // User not found
-                    return NotFound();
-                }
+            var token = await _userManager.GeneratePasswordResetTokenAsync(user);
+            var result = await _userManager.ResetPasswordAsync(user, token, model.Password);
 
-                // Generate password reset token
-                var token = await _userManager.GeneratePasswordResetTokenAsync(user);
-
-                // Send recovery email
-                var emailSubject = "Password Recovery";
-                var emailBody = $"Click the following link to reset your password: {GenerateResetLink(user.Id, token)}";
-
-                await _emailSender.SendEmailAsync(user.Email, emailSubject, emailBody);
-
-                _logger.LogInformation($"Password recovery email sent to {user.Email}.");
-
+            if (result.Succeeded)
+            {
                 return Ok();
             }
 
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "An error occurred while recovering password.");
-                return StatusCode(500, "Internal Server Error");
-            }
+            return BadRequest(result.Errors);
         }
 
-        private string GenerateResetLink(string userId, string token)
+        [HttpPost]
+        [Route("api/send-recovery-code")]
+        public async Task<IActionResult> SendRecoveryCode([FromBody] CustomRecoverModel model)
         {
-            // Replace the following URL with the actual URL of your password reset page
-            string resetPasswordUrl = "https://localhost:4200/resetPassword";
+            var user = await _userManager.FindByEmailAsync(model.Email);
 
-            // Construct the reset link with placeholders for userId and token
-            string resetLink = $"{resetPasswordUrl}?userId={userId}&token={WebUtility.UrlEncode(token)}";
+            if (user != null)
+            {
+                var recoveryCode = this._codeGeneratorService.GenerateCode();
 
-            return resetLink;
+                // Construção da mensagem para enviar
+                var htmlContent = $"<p>Seu código de recuperação é: {recoveryCode}</p>";
+
+                // Envio do e-mail
+                await _emailSender.SendEmailAsync(model.Email, "Recuperação de Senha", htmlContent);
+
+                // Armazenar o código de recuperação na base de dados
+                await StoreRecoveryCodeAsync(model, recoveryCode);
+            }
+
+            return Ok(new { Message = "Se o e-mail estiver registrado, um e-mail de recuperação será enviado." });
         }
 
+        private async Task StoreRecoveryCodeAsync(CustomRecoverModel user, string recoveryCode)
+        {
+            // Defenição do tempo de validade do código de recuperação, tempo = 5 Minutos.
+            var expirationTime = DateTime.UtcNow.AddMinutes(5);
 
+            var passwordRecoveryCode = new PasswordRecoveryCode
+            {
+                UserEmail = user.Email,
+                Code = recoveryCode,
+                ExpirationTime = expirationTime
+            };
+
+            _context.PasswordRecoveryCodes.Add(passwordRecoveryCode);
+            await _context.SaveChangesAsync();
+        }
+
+        [HttpPost]
+        [Route ("api/validate-recovery-code")]
+        public async Task<IActionResult> ValidateRecoveryCodeAsync(string userEmail, string code)
+        {
+            var recoveryCode = await _context.PasswordRecoveryCodes
+                .FirstOrDefaultAsync(c => c.UserEmail == userEmail && c.Code == code);
+
+            if (recoveryCode != null)
+            {
+                if (recoveryCode.ExpirationTime > DateTime.UtcNow)
+                {
+                    // O código é válido.
+                    _context.PasswordRecoveryCodes.Remove(recoveryCode);
+                    await _context.SaveChangesAsync();
+                    return Ok(new { Message = "Código válido." });
+                }
+                else
+                {
+                    // O código expirou.
+                    _context.PasswordRecoveryCodes.Remove(recoveryCode);
+                    await _context.SaveChangesAsync();
+                    return BadRequest(new { Message = "Código expirado." });
+                }
+            }
+
+            // O código é inválido.
+            return BadRequest(new { Message = "Código inválido." });
+        }
     }
 
     public class CustomRegisterModel
@@ -115,10 +151,15 @@ namespace PROJETOESA.Controllers
         
     }
 
-
     public class CustomRecoverModel
     { 
-    public string Email { get; set; }
+        public string Email { get; set; }
+    }
+
+    public class CustomRecoverPasswordModel
+    {
+        public string Email { get; set; }
+        public string Password { get; set; }
 
     }
 }

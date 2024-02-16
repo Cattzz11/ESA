@@ -1,29 +1,43 @@
-<div class="d-flex flex-column align-items-center justify-content-center" *ngIf="!signedIn else signedInAlready">
-  <div>Please Sign In to continue. New user? <a href="new">Register now</a>.</div>
-  <div class="m-3">
-    <p>Did you forget your password? <a routerLink="/forgotPassword">Recover it here</a>.</p>
+<div class="login-wrapper">
+  <div class="login-box">
+    <div class="login-form" *ngIf="!signedIn else signedInAlready">
+      <div class="titulo">
+        <h2>Login</h2>
+      </div>
+      <form [formGroup]="loginForm" (submit)="signIn($event)">
+        <input type="text" id="email" placeholder="E-Mail" formControlName="email" />
+        <input type="password" id="password" placeholder="Password" formControlName="password" />
+        <div *ngIf="authFailed" style="color: red">
+          Invalid credentials
+        </div>
+        <button type="submit" [disabled]="!loginForm.valid">Sign in</button>
+
+        <div class="separator"></div>
+
+        <div class="additional-options">
+          <a routerLink="/recover-password">Perdeu a password?</a>
+          <a routerLink="/new">Criar nova conta</a>
+        </div>
+
+        <div class="btn-separator"></div>
+        <!-- Botões de login social ou outros podem requerer métodos específicos -->
+        <button class="login-google">Login por Google</button>
+        <button class="login-outlook">Login por Outlook</button>
+        <!-- <button (click)="" class="login-google">Login por Google</button> -->
+        <!-- <button (click)="" class="login-outlook">Login por Outlook</button> -->
+      </form>
+    </div>
+    <div class="login-branding" style="background-image: url('../assets/Images/background.png');">
+      <img src="../assets/Images/logo.png" alt="Logo" class="logo" />
+    </div>
   </div>
-  <form class="form w-50" [formGroup]="loginForm" (submit)="signIn($event)">
-    <div class="row m-3">
-      <label for="name">Email*</label>
-      <input class="col form-field" name="email" formControlName="email" />
-    </div>
-    <div class="row m-3">
-      <label for="password">Password*</label>
-      <input class="col form-field" type="password" name="password" formControlName="password" autocomplete="on" />
-    </div>
-    <div class="row m-3" *ngIf="authFailed">
-      <label style="color: red">Invalid credentials</label>
-    </div>
-    <div class="row m-3">
-      <button class="col btn btn-primary" [disabled]="!loginForm.valid" type="submit">Sign In</button>
-    </div>
-  </form>
 </div>
 
 <ng-template #signedInAlready>
-  <h4>Sign In</h4>
-  <div>
-    You are already signed in!
+  <div class="login-form">
+    <h2>Login</h2>
+    <div>
+      You are already signed in!
+    </div>
   </div>
 </ng-template>

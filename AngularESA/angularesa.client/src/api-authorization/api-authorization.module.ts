@@ -6,6 +6,9 @@ import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { RegisterComponent } from './register/register.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { RecoverPasswordComponent } from './recover-password/recover-password.component';
+import { NewPasswordComponent } from "./new-password/new-password.component";
+import { RecoveryCodeComponent } from "./recovery-code/recovery-code.component";
 
 @NgModule({
   imports: [
@@ -16,10 +19,15 @@ import { ReactiveFormsModule } from '@angular/forms';
       [
         { path: 'sigin', component: SignInComponent },
         { path: 'new', component: RegisterComponent },
+        { path: 'new-password', component: NewPasswordComponent },
+        { path: 'recover-password', component: RecoverPasswordComponent },
+        { path: 'recovery-code', component: RecoveryCodeComponent },
       ]
     )
   ],
-  declarations: [LoginMenuComponent, SignInComponent, RegisterComponent],
-  exports: [LoginMenuComponent, SignInComponent, RegisterComponent]
+  declarations: [LoginMenuComponent, SignInComponent, RegisterComponent, RecoverPasswordComponent, NewPasswordComponent, RecoveryCodeComponent],
+  exports: [LoginMenuComponent, SignInComponent, RegisterComponent, RecoverPasswordComponent, NewPasswordComponent, RecoveryCodeComponent]
 })
 export class ApiAuthorizationModule { }
+
+

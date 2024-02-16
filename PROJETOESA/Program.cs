@@ -5,30 +5,31 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using PROJETOESA.Data;
 using PROJETOESA.Models;
+using PROJETOESA.Services;
+using System.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddDbContext<PeopleAngularServerContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("PeopleAngularServerContext") ?? throw new InvalidOperationException("Connection string 'PeopleAngularServerContext' not found.")));
+builder.Services.AddDbContext<AeroHelperContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("AeroHelperContext") ?? throw new InvalidOperationException("Connection string 'AeroHelperContext' not found.")));
 
 builder.Services.AddAuthorization();
 builder.Services.AddIdentityApiEndpoints<ApplicationUser>()
-    .AddEntityFrameworkStores<PeopleAngularServerContext>();
+    .AddEntityFrameworkStores<AeroHelperContext>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddTransient<IEmailSender, EmailSender>(i =>
-  new EmailSender(
-      builder.Configuration["EmailSender:Host"],
-      builder.Configuration.GetValue<int>("EmailSender:Port"),
-      builder.Configuration.GetValue<bool>("EmailSender:EnableSSL"),
-      builder.Configuration["EmailSender:UserName"],
-      builder.Configuration["EmailSender:Password"]
-  )
-);
+// Adiciona as configurações do EmailSettings a partir do appsettings.json
+builder.Services.Configure<EmailSettings>(
+builder.Configuration.GetSection("EmailSender"));
+
+// Adiciona o serviço de envio de e-mails
+builder.Services.AddTransient<IEmailSender, EmailSender>();
+
+builder.Services.AddScoped<CodeGeneratorService>();
 
 var app = builder.Build();
 
@@ -44,14 +45,11 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
 app.MapControllers();
-
-
 
 app.MapFallbackToFile("/index.html");
 
