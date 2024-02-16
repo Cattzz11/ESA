@@ -150,4 +150,8 @@ export class AuthorizeService {
         return res.ok;
       }));
   }
+
+  public getUserInfo(): Observable<any> {
+    return this.http.get<any>('api/userInfo');
+  }
 }

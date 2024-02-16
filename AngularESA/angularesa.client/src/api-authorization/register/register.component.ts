@@ -38,17 +38,24 @@ export class RegisterComponent implements OnInit {
     if (!this.registerForm.valid) {
       return;
     }
+
+    console.log("Aqui! Passou validação");
+
     this.registerFailed = false;
     this.errors = [];
     const name = this.registerForm.get('name')?.value;
     const userName = this.registerForm.get('email')?.value;
     const password = this.registerForm.get('password')?.value;
     const confirmPassword = this.registerForm.get('confirmPassword')?.value;
+
     if (password !== confirmPassword) {
       this.registerFailed = true;
       this.errors.push('Passwords do not match.');
       return;
     }
+
+    console.log("Aqui! Validação da pass");
+
     this.authService.registerCustom(name, userName, password).forEach(
       response => {
         if (response) {
