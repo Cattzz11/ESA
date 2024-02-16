@@ -21,22 +21,51 @@ export class NavMenuComponent {
 
   constructor(private auth: AuthorizeService, private router: Router) { }
 
+  get isUserSignedIn() {
+    return !!sessionStorage.getItem('user');
+  }
+
   ngOnInit() {
-    this.auth.onStateChanged().forEach((state: any) => {
-      this.auth.isSignedIn().forEach((signedIn: boolean) => this.isSignedIn = signedIn);
+    this.auth.onStateChanged().subscribe((state: any) => {
+      this.auth.isSignedIn().subscribe((signedIn: boolean) => {
+        this.isSignedIn = signedIn;
+      });
     });
   }
 
   signOut() {
     if (this.isSignedIn) {
-      this.auth.signOutCustom().forEach(response => {
+      this.auth.signOut().subscribe(response => {
         if (response) {
-          this.router.navigateByUrl('');
+          sessionStorage.removeItem('user');
+          this.router.navigateByUrl('/');
+
+          console.log("logout");
         }
       });
+
+      console.log("user eliminado");
     }
   }
 
+  //signOut() {
+  //  this.auth.signOut();
+  //}
+
+  //logout() {
+  //  if (this.isSignedIn) {
+  //    this.auth.signOutCustom().subscribe(response => {
+  //      if (response) {
+  //        sessionStorage.removeItem('user');
+  //        this.router.navigateByUrl('/');
+  //        this.auth.signOut();
+  //        console.log("logout");
+  //      }
+  //    });
+
+  //    console.log("user eliminado");
+  //  }
+  //}
 
 
 }

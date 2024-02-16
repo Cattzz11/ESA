@@ -3,7 +3,7 @@
 "ServerUrl": "https://localhost:4200",
 "RedirectUrl": "",
 "LaunchCommand": "npm start",
-"WorkingDirectory": "D:\\ESA\\PROJETOESA\\ESA\\AngularESA\\AngularESA.Server\\..\\angularesa.client",
+"WorkingDirectory": "C:\\Users\\danie\\OneDrive\\Documentos\\Meu\\UNI STUFF\\EsA\\Projeto\\ESA\\AngularESA\\AngularESA.Server\\..\\angularesa.client",
 "MaxTimeoutInSeconds": "120",
 "KeepRunning": "false"
 }

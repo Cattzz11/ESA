@@ -20,7 +20,7 @@ export class LoginMenuComponent implements OnInit {
 
   signOut() {
     if (this.isSignedIn) {
-      this.auth.signOutCustom().forEach(response => {
+      this.auth.signOut().forEach(response => {
         if (response) {
           this.router.navigateByUrl('');
         }

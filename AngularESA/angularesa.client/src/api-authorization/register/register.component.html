@@ -1,49 +1,54 @@
+<link href='https://fonts.googleapis.com/css?family=Roboto Slab' rel='stylesheet'>
 <div class="d-flex flex-column align-items-center justify-content-center" *ngIf="!signedIn && !registerSucceeded">
-  <div id="div_textinitial">Please create your user account to continue.</div>
+  <div id="div_textinitial">Por favor crie a sua conta de utilizador para continuar.</div>
   <div class="regist-wrapper">
     <div class="regist-box">
       <div class="regist-form">
-      <form class="form w-50" [formGroup]="registerForm" (submit)="register($event)">
-        <h2>Registo</h2>
+      <form class="form w-60" [formGroup]="registerForm" (submit)="register($event)">
+        <h2 class="h2initial">Registo</h2>
         <div class="row m-3">
-          <label for="name">Name*</label>
+          <label for="name">Nome<span style="color:red; padding-left:5px;">*</span></label>
               <input class="col form-field" name="name" formControlName="name" />
             </div>
             <div class="row m-3">
-              <label for="email">Email*</label>
+              <label for="email">Email<span style="color:red; padding-left:5px;">*</span></label>
               <input class="col form-field" name="email" formControlName="email" />
             </div>
             <div class="row m-3">
-              <label for="password">Password*</label>
+              <label for="password">Password<span style="color:red; padding-left:5px;">*</span></label>
               <input class="col form-field" type="password" name="password" formControlName="password" autocomplete="on" />
             </div>
             <div class="row m-3">
-              <label for="confirmPassword">Confirm password*</label>
+              <label for="confirmPassword">Confirmar password<span style="color:red; padding-left:5px;">*</span></label>
               <input class="col form-field" type="password" name="confirmPassword" formControlName="confirmPassword" autocomplete="on" />
             </div>
             <div class="row m-3" *ngIf="registerFailed">
-              <label style="color: red">Registration failed.</label>
+              <label style="color: red">Falha no registo.</label>
             </div>
             <div class="row m-3" *ngFor="let error of errors">
               <label style="color: red">{{error}}</label>
             </div>
             <div class="row m-3">
-              <button class="col btn btn-primary" [disabled]="!registerForm.valid" type="submit">Register</button>
+              <button class="col btn btn-primary" [disabled]="!registerForm.valid" type="submit">Registar</button>
             </div>
           </form>
         </div>
 
+      <div class="login-branding" style="background-image: url('.. /../assets/Images/background.png');">
+        <img src="../../assets/Images/logo.png" alt="Logo" class="logo" />
+      </div>
+
         <div *ngIf="registerSucceeded">
-          <h4>Registration succeeded</h4>
+          <h4>Registo efetuado com sucesso!</h4>
           <div>
-            Please <a href="signin">sign in</a> to continue.
+            Por favor faça <a href="signin">login</a> para continuar.
           </div>
         </div>
 
         <div *ngIf="signedIn">
-          <h4>Signed in</h4>
+          <h4>Login efetuado</h4>
           <div>
-            Please log out of your current session to create a new user account.
+            Por favor dê logout da sua conta para criar uma nova conta de utilizador.
           </div>
         </div>
       </div>

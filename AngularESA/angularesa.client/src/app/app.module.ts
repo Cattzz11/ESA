@@ -1,7 +1,6 @@
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
@@ -13,7 +12,8 @@ import { AuthInterceptor } from '../api-authorization/authorize.interceptor';
 import { AuthGuard } from '../api-authorization/authorize.guard';
 import { AuthorizeService } from '../api-authorization/authorize.service';
 import { PremiumProfilePageComponent } from './users/premium-profile-page/premium-profile-page.component';
-
+import { ProfileComponent } from './profile/profile.component';
+import { LogoutComponent } from '../api-authorization/logout/logout.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +22,12 @@ import { PremiumProfilePageComponent } from './users/premium-profile-page/premiu
     HomeComponent,
     ShortnamePipe,
     PremiumProfilePageComponent,
+    PersonDetailsComponent,
+    PersonCreateComponent,
+    PersonEditComponent,
+    PersonDeleteComponent,
+    ProfileComponent,
+    LogoutComponent
   ],
   imports: [
     BrowserModule, HttpClientModule,
