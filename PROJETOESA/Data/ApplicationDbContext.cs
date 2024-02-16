@@ -4,15 +4,15 @@ using PROJETOESA.Models;
 
 namespace PROJETOESA.Data
 {
-    public class PeopleAngularServerContext : IdentityDbContext<ApplicationUser>
+    public class AeroHelperContext : IdentityDbContext<ApplicationUser>
     {
-        public PeopleAngularServerContext(DbContextOptions<PeopleAngularServerContext> options)
+        public AeroHelperContext(DbContextOptions<AeroHelperContext> options)
             : base(options)
         {
 
         }
 
-        public DbSet<Person> Person { get; set; } = default!;
+        //public DbSet<Person> Person { get; set; } = default!;
 
         public DbSet<PasswordRecoveryCode> PasswordRecoveryCodes { get; set; }
     }

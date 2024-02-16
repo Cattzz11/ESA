@@ -17,10 +17,10 @@ namespace PROJETOESA.Controllers
         private readonly IEmailSender _emailSender;
         private readonly ILogger<CustomAccountController> _logger;
         private readonly CodeGeneratorService _codeGeneratorService;
-        private readonly PeopleAngularServerContext _context;
+        private readonly AeroHelperContext _context;
 
 
-        public CustomAccountController(UserManager<ApplicationUser> userManager, IEmailSender emailSender, ILogger<CustomAccountController> logger, CodeGeneratorService codeGeneratorService, PeopleAngularServerContext context)
+        public CustomAccountController(UserManager<ApplicationUser> userManager, IEmailSender emailSender, ILogger<CustomAccountController> logger, CodeGeneratorService codeGeneratorService, AeroHelperContext context)
         {
             _userManager = userManager;
             _emailSender = emailSender;

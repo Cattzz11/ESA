@@ -10,12 +10,12 @@ using System.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddDbContext<PeopleAngularServerContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("PeopleAngularServerContext") ?? throw new InvalidOperationException("Connection string 'PeopleAngularServerContext' not found.")));
+builder.Services.AddDbContext<AeroHelperContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("AeroHelperContext") ?? throw new InvalidOperationException("Connection string 'AeroHelperContext' not found.")));
 
 builder.Services.AddAuthorization();
 builder.Services.AddIdentityApiEndpoints<ApplicationUser>()
-    .AddEntityFrameworkStores<PeopleAngularServerContext>();
+    .AddEntityFrameworkStores<AeroHelperContext>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -45,14 +45,11 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
 app.MapControllers();
-
-
 
 app.MapFallbackToFile("/index.html");
 
