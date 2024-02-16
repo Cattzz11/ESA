@@ -12,8 +12,6 @@ import { AuthGuard } from '../api-authorization/authorize.guard';
 import { AboutComponent } from './about/about.component';
 import { RegisterComponent } from '../api-authorization/register/register.component';
 import { SignInComponent } from '../api-authorization/signin/signin.component';
-import { PasswordRecoveryComponent } from '../api-authorization/recoverpw/recover-password';
-import { ResetPasswordComponent } from '../api-authorization/reset-password/resetpassword.component';
 import { ProfileComponent } from './profile/profile.component';
 import { LogoutComponent } from '../api-authorization/logout/logout.component';
 
@@ -29,8 +27,6 @@ const routes: Routes = [
   { path: 'person/create', component: PersonCreateComponent },
   { path: 'person/edit/:id', component: PersonEditComponent },
   { path: 'person/delete/:id', component: PersonDeleteComponent },
-  { path: 'forgotPassword', component: PasswordRecoveryComponent },
-  { path: 'resetPassword', component: ResetPasswordComponent },
   { path: 'profile', component: ProfileComponent },
   { path: 'logout', component: LogoutComponent }
 ];
