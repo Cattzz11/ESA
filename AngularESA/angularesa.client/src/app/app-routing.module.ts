@@ -32,11 +32,11 @@ const routes: Routes = [
   { path: 'person/edit/:id', component: PersonEditComponent },
   { path: 'person/delete/:id', component: PersonDeleteComponent },
   { path: 'profile', component: ProfileComponent },
-  { path: 'logout', component: LogoutComponent }
+  { path: 'logout', component: LogoutComponent },
   { path: 'new-password/:email', component: NewPasswordComponent },
   { path: 'recover-password', component: RecoverPasswordComponent },
   { path: 'recovery-code/:email', component: RecoveryCodeComponent },
-  { path: 'premium-profile-page', component: PremiumProfilePageComponent },
+  { path: 'premium-profile-page', component: PremiumProfilePageComponent }
 ];
 
 @NgModule({

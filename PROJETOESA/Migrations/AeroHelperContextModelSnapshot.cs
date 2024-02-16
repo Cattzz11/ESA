@@ -10,8 +10,8 @@ using PROJETOESA.Data;
 
 namespace PROJETOESA.Migrations
 {
-    [DbContext(typeof(PeopleAngularServerContext))]
-    partial class PeopleAngularServerContextModelSnapshot : ModelSnapshot
+    [DbContext(typeof(AeroHelperContext))]
+    partial class AeroHelperContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
@@ -224,24 +224,28 @@ namespace PROJETOESA.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
-            modelBuilder.Entity("PROJETOESA.Models.Person", b =>
+            modelBuilder.Entity("PROJETOESA.Models.PasswordRecoveryCode", b =>
                 {
-                    b.Property<int>("PersonId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PersonId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("Age")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Name")
+                    b.Property<string>("Code")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("PersonId");
+                    b.Property<DateTime>("ExpirationTime")
+                        .HasColumnType("datetime2");
 
-                    b.ToTable("Person");
+                    b.Property<string>("UserEmail")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("PasswordRecoveryCodes");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

@@ -1,0 +1,10 @@
+<div *ngIf="person">
+  <h2>Are you sure you want to delete this person?</h2>
+  <p>
+    <strong>Name:</strong> {{ person.name }}<br>
+    <strong>Age:</strong> {{ person.age }}
+  </p>
+  <button (click)="onDelete()" class="btn btn-danger spaced-button">Delete</button>
+  <button (click)="onCancel()" class="btn btn-secondary">Cancel</button>
+</div>
+

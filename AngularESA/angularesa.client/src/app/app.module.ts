@@ -5,6 +5,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { HomeComponent } from './home/home.component';
+import { CounterComponent } from './counter/counter.component';
+import { FetchDataComponent } from './fetch-data/fetch-data.component';
+import { PeopleComponent } from './People/people.component';
+import { PersonComponent } from './person/person.component';
+import { PersonDetailsComponent } from './person-details/person-details.component';
+import { PersonCreateComponent } from './person-create/person-create.component';
+import { PersonEditComponent } from './person-edit/person-edit.component';
+import { PersonDeleteComponent } from './person-delete/person-delete.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ShortnamePipe } from './shortname.pipe';
 import { ApiAuthorizationModule } from '../api-authorization/api-authorization.module';
@@ -27,7 +35,11 @@ import { LogoutComponent } from '../api-authorization/logout/logout.component';
     PersonEditComponent,
     PersonDeleteComponent,
     ProfileComponent,
-    LogoutComponent
+    LogoutComponent,
+    CounterComponent,
+    FetchDataComponent,
+    PeopleComponent,
+    PersonComponent
   ],
   imports: [
     BrowserModule, HttpClientModule,
