@@ -12,6 +12,7 @@ import { ApiAuthorizationModule } from '../api-authorization/api-authorization.m
 import { AuthInterceptor } from '../api-authorization/authorize.interceptor';
 import { AuthGuard } from '../api-authorization/authorize.guard';
 import { AuthorizeService } from '../api-authorization/authorize.service';
+import { PremiumProfilePageComponent } from './users/premium-profile-page/premium-profile-page.component';
 
 
 @NgModule({
@@ -20,6 +21,7 @@ import { AuthorizeService } from '../api-authorization/authorize.service';
     NavMenuComponent,
     HomeComponent,
     ShortnamePipe,
+    PremiumProfilePageComponent,
   ],
   imports: [
     BrowserModule, HttpClientModule,
