@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { AuthorizeService } from '../../../api-authorization/authorize.service';
-import { User } from '../IUsers';
+import { User } from '../../Models/users';
 
 @Component({
   selector: 'app-premium-profile-page',

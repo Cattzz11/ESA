@@ -13,6 +13,7 @@ import { AuthInterceptor } from '../api-authorization/authorize.interceptor';
 import { AuthGuard } from '../api-authorization/authorize.guard';
 import { AuthorizeService } from '../api-authorization/authorize.service';
 import { PremiumProfilePageComponent } from './users/premium-profile-page/premium-profile-page.component';
+import { SearchFlightsComponent } from './flights/search-flights/search-flights.component';
 
 
 @NgModule({
@@ -22,6 +23,7 @@ import { PremiumProfilePageComponent } from './users/premium-profile-page/premiu
     HomeComponent,
     ShortnamePipe,
     PremiumProfilePageComponent,
+    SearchFlightsComponent,
   ],
   imports: [
     BrowserModule, HttpClientModule,

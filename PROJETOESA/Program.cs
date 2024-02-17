@@ -13,6 +13,17 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<AeroHelperContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("AeroHelperContext") ?? throw new InvalidOperationException("Connection string 'AeroHelperContext' not found.")));
 
+builder.Services.AddHttpClient("SkyscannerAPI", client =>
+{
+    client.BaseAddress = new Uri("https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/");
+    client.DefaultRequestHeaders.Add("X-RapidAPI-Key", "5c6088f603mshf148a968cc580a1p17939cjsn59350a505393");
+    client.DefaultRequestHeaders.Add("X-RapidAPI-Host", "skyscanner-skyscanner-flight-search-v1.p.rapidapi.com");
+});
+
+builder.Services.AddControllersWithViews();
+
+builder.Services.AddScoped<SkyscannerService>();
+
 builder.Services.AddAuthorization();
 builder.Services.AddIdentityApiEndpoints<ApplicationUser>()
     .AddEntityFrameworkStores<AeroHelperContext>();

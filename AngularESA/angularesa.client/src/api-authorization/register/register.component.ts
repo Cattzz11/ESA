@@ -39,8 +39,6 @@ export class RegisterComponent implements OnInit {
       return;
     }
 
-    console.log("Aqui! Passou validação");
-
     this.registerFailed = false;
     this.errors = [];
     const name = this.registerForm.get('name')?.value;
@@ -53,8 +51,6 @@ export class RegisterComponent implements OnInit {
       this.errors.push('Passwords do not match.');
       return;
     }
-
-    console.log("Aqui! Validação da pass");
 
     this.authService.registerCustom(name, userName, password).forEach(
       response => {
