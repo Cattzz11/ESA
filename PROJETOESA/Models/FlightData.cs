@@ -3,8 +3,8 @@
     public class FlightData
     {
         public string fromEntityId { get; set; }
-        public string toEntityId { get; set; }
-        public string departDate { get; set; }
+        public string? toEntityId { get; set; }
+        public string? departDate { get; set; }
         public string? returnDate { get; set; }
         public string? market { get; set; }
         public string? locale { get; set; }

@@ -27,6 +27,6 @@ export class SkyscannerService {
     if (data.infants) params = params.set('infants', data.infants);
     if (data.cabinClass) params = params.set('cabinClass', data.cabinClass);
 
-    return this.http.get('api/getFlights', { params: params });
+    return this.http.get('api/search-roundtrip', { params: params });
   }
 }

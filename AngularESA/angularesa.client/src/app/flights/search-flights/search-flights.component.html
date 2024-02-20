@@ -1,52 +1,90 @@
 <h1>Flight Search</h1>
-
-<form id="flightSearchForm">
+<form [formGroup]="flightSearchForm" (ngSubmit)="searchFlight()">
   <label for="fromEntityId">From Entity ID:</label>
-  <input type="text" id="fromEntityId" name="fromEntityId" required>
+  <input type="text" id="fromEntityId" formControlName="fromEntityId" required>
 
   <label for="toEntityId">To Entity ID:</label>
-  <input type="text" id="toEntityId" name="toEntityId" required>
+  <input type="text" id="toEntityId" formControlName="toEntityId" required>
 
   <label for="departDate">Departure Date:</label>
-  <input type="date" id="departDate" name="departDate" required>
+  <input type="date" id="departDate" formControlName="departDate" required>
 
   <label for="returnDate">Return Date:</label>
-  <input type="date" id="returnDate" name="returnDate">
+  <input type="date" id="returnDate" formControlName="returnDate">
 
   <label for="market">Market:</label>
-  <input type="text" id="market" name="market">
+  <input type="text" id="market" formControlName="market">
 
   <label for="locale">Locale:</label>
-  <input type="text" id="locale" name="locale">
+  <input type="text" id="locale" formControlName="locale">
 
   <label for="currency">Currency:</label>
-  <input type="text" id="currency" name="currency">
+  <input type="text" id="currency" formControlName="currency">
 
   <label for="adults">Adults:</label>
-  <input type="number" id="adults" name="adults">
+  <input type="number" id="adults" formControlName="adults">
 
   <label for="children">Children:</label>
-  <input type="number" id="children" name="children">
+  <input type="number" id="children" formControlName="children">
 
   <label for="infants">Infants:</label>
-  <input type="number" id="infants" name="infants">
+  <input type="number" id="infants" formControlName="infants">
 
   <label for="cabinClass">Cabin Class:</label>
-  <input type="text" id="cabinClass" name="cabinClass">
+  <input type="text" id="cabinClass" formControlName="cabinClass">
 
   <button type="submit">Search Flights</button>
 </form>
 
+<button (click)="printData()" class="login-outlook">Print</button>
+
 <div id="flightResults">
   <div *ngIf="flightResults.length > 0; else noResults">
     <h2>Flight Results</h2>
-    <div *ngFor="let flight of flightResults">
-      <p>{{ flight.airline }}: {{ flight.departure }} -> {{ flight.arrival }}</p>
-      <!-- Outros detalhes do vôo -->
+    <div *ngFor="let itinerary of flightResults; let i = index">
+      <h3>Itinerary #{{ i + 1 }}</h3>
+      <table>
+        <thead>
+          <tr>
+            <th colspan="5">
+              {{ itinerary.legs[0].origin.city }} ({{ itinerary.legs[0].origin.displayCode }})
+              to {{ itinerary.legs[itinerary.legs.length - 1].destination.city }} ({{ itinerary.legs[itinerary.legs.length - 1].destination.displayCode }})
+              - {{ itinerary.price.formatted }}, Stops: {{ itinerary.legs[0].stopCount }}, Total Duration: {{ itinerary.legs[0].durationInMinutes }} minutes
+            </th>
+          </tr>
+          <tr>
+            <th>Flight Number</th>
+            <th>Departure</th>
+            <th>Arrival</th>
+            <th>Carrier</th>
+            <th>Duration</th>
+          </tr>
+        </thead>
+        <tbody>
+          <ng-container *ngFor="let leg of itinerary.legs">
+            <tr>
+              <td colspan="5">Leg from {{ leg.origin.city }} to {{ leg.destination.city }}</td>
+            </tr>
+            <!-- Iteração correta sobre os 'segments' dentro do 'leg' -->
+            <tr *ngFor="let segment of leg.segments">
+              <td>{{ segment.flightNumber }}</td>
+              <td>{{ segment.departure }} ({{ segment.origin.displayCode }})</td>
+              <td>{{ segment.arrival }} ({{ segment.destination.displayCode }})</td>
+              <td>
+                <img [src]="segment.marketingCarrier.logoUrl" [alt]="segment.marketingCarrier.name" style="width: 50px; height: auto;">
+                {{ segment.marketingCarrier.name }}
+              </td>
+              <td>{{ segment.durationInMinutes }} minutes</td>
+            </tr>
+          </ng-container>
+        </tbody>
+      </table>
     </div>
+
   </div>
   <ng-template #noResults>
     <p>No flights found.</p>
   </ng-template>
 </div>
+
 
