@@ -1,0 +1,52 @@
+<h1>Flight Search</h1>
+
+<form id="flightSearchForm">
+  <label for="fromEntityId">From Entity ID:</label>
+  <input type="text" id="fromEntityId" name="fromEntityId" required>
+
+  <label for="toEntityId">To Entity ID:</label>
+  <input type="text" id="toEntityId" name="toEntityId" required>
+
+  <label for="departDate">Departure Date:</label>
+  <input type="date" id="departDate" name="departDate" required>
+
+  <label for="returnDate">Return Date:</label>
+  <input type="date" id="returnDate" name="returnDate">
+
+  <label for="market">Market:</label>
+  <input type="text" id="market" name="market">
+
+  <label for="locale">Locale:</label>
+  <input type="text" id="locale" name="locale">
+
+  <label for="currency">Currency:</label>
+  <input type="text" id="currency" name="currency">
+
+  <label for="adults">Adults:</label>
+  <input type="number" id="adults" name="adults">
+
+  <label for="children">Children:</label>
+  <input type="number" id="children" name="children">
+
+  <label for="infants">Infants:</label>
+  <input type="number" id="infants" name="infants">
+
+  <label for="cabinClass">Cabin Class:</label>
+  <input type="text" id="cabinClass" name="cabinClass">
+
+  <button type="submit">Search Flights</button>
+</form>
+
+<div id="flightResults">
+  <div *ngIf="flightResults.length > 0; else noResults">
+    <h2>Flight Results</h2>
+    <div *ngFor="let flight of flightResults">
+      <p>{{ flight.airline }}: {{ flight.departure }} -> {{ flight.arrival }}</p>
+      <!-- Outros detalhes do vôo -->
+    </div>
+  </div>
+  <ng-template #noResults>
+    <p>No flights found.</p>
+  </ng-template>
+</div>
+

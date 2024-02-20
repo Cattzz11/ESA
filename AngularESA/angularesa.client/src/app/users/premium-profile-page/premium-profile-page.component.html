@@ -2,7 +2,7 @@
   <div class="top">
     <h1 id="title">Perfil do Utilizador</h1>
     <div class="topButtons">
-      <button class="edit">Editar</button>
+      <button (click)="edit()" class="edit">Editar</button>
       <button class="payments">Pagamentos</button>
       <button class="premium">Premium</button>
     </div>
@@ -12,14 +12,14 @@
     <div class="userPage">
       <img src="../../../assets/Images/imagemInicial.png" alt="Profile Picture" class="profile-picture">
       <div class="profile-info">
-        <h1>João Silva</h1>
-        <p>E-mail: joaosilva_gmail.com</p>
-        <p>Idade: 31 anos</p>
-        <p>Ocupação: Empresário</p>
-        <p>Nacionalidade: Portugal</p>
+        <h1>{{ user?.name }}</h1>
+        <p>E-mail: {{ user?.email }}</p>
+        <p *ngIf="user && user.age !== undefined">Idade: {{ user.age }} anos</p>
+        <p *ngIf="user && user.occupation !== undefined">Ocupação: {{ user.occupation }}</p>
+        <p *ngIf="user && user.nationality !== undefined">Nacionalidade: {{ user.nationality }}</p>
       </div>
     </div>
-    <div class="history">
+    <div *ngIf="user?.role === 'ClientePremium'" class="history">
       <h3 id="historyTitle">Histórico</h3>
       <div class="travelHistory">
         <div class="travel">

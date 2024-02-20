@@ -22,6 +22,8 @@ import { AuthorizeService } from '../api-authorization/authorize.service';
 import { PremiumProfilePageComponent } from './users/premium-profile-page/premium-profile-page.component';
 import { ProfileComponent } from './profile/profile.component';
 import { LogoutComponent } from '../api-authorization/logout/logout.component';
+import { SearchFlightsComponent } from './flights/search-flights/search-flights.component';
+
 
 @NgModule({
   declarations: [
@@ -40,6 +42,7 @@ import { LogoutComponent } from '../api-authorization/logout/logout.component';
     FetchDataComponent,
     PeopleComponent,
     PersonComponent
+    SearchFlightsComponent,
   ],
   imports: [
     BrowserModule, HttpClientModule,
