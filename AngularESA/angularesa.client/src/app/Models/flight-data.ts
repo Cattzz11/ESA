@@ -1,7 +1,7 @@
 export interface FlightData {
   fromEntityId: string;
-  toEntityId: string;
-  departDate: string;
+  toEntityId?: string;
+  departDate?: string;
   returnDate?: string;
   market?: string;
   locale?: string;
@@ -10,4 +10,6 @@ export interface FlightData {
   children?: number;
   infants?: number;
   cabinClass?: string;
+  year?: number;
+  month?: number;
 }

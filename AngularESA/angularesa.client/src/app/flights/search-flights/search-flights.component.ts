@@ -44,7 +44,7 @@ export class SearchFlightsComponent implements OnInit {
       console.log(flightData.returnDate);
 
 
-      this.skyscannerService.getFlights(flightData).subscribe({
+      this.skyscannerService.getRoundtripFlights(flightData).subscribe({
         next: (response) => {
           // Assumindo que os dados de interesse estão em `response.data.itineraries`
           this.flightResults = response.data.itineraries;

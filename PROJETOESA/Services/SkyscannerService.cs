@@ -38,8 +38,21 @@ namespace PROJETOESA.Services
         
         public async Task<string> GetEverywhereAsync(FlightData data)
         {
-            var queryString = $"fromEntityId={data.fromEntityId}";
+            var queryParams = new List<string>();
 
+            queryParams.Add($"fromEntityId={data.fromEntityId}");
+            if (!string.IsNullOrEmpty(data.toEntityId)) queryParams.Add($"toEntityId={data.toEntityId}");
+            if (data.year.HasValue) queryParams.Add($"year={data.year}");
+            if (data.month.HasValue) queryParams.Add($"month={data.month}");
+            if (!string.IsNullOrEmpty(data.market)) queryParams.Add($"market={data.market}");
+            if (!string.IsNullOrEmpty(data.locale)) queryParams.Add($"locale={data.locale}");
+            if (!string.IsNullOrEmpty(data.currency)) queryParams.Add($"currency={data.currency}");
+            if (data.Adults.HasValue) queryParams.Add($"adults={data.Adults}");
+            if (data.Children.HasValue) queryParams.Add($"children={data.Children}");
+            if (data.Infants.HasValue) queryParams.Add($"infants={data.Infants}");
+            if (!string.IsNullOrEmpty(data.cabinClass)) queryParams.Add($"cabinClass={data.cabinClass}");
+
+            var queryString = string.Join("&", queryParams);
             var response = await _httpClient.GetAsync($"flights/search-everywhere?{queryString}");
             response.EnsureSuccessStatusCode();
 
