@@ -41,8 +41,8 @@ import { SearchFlightsComponent } from './flights/search-flights/search-flights.
     CounterComponent,
     FetchDataComponent,
     PeopleComponent,
-    PersonComponent
-    SearchFlightsComponent,
+    PersonComponent,
+    SearchFlightsComponent
   ],
   imports: [
     BrowserModule, HttpClientModule,

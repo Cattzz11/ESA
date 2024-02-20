@@ -15,11 +15,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("PROJETOESA")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-<<<<<<< HEAD
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+76858dc2cec116352e378add09ca4d86b5d62ede")]
-=======
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0d7f29fdc280123b1a2c2e9c50d4afb266e07445")]
->>>>>>> Tiago
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a1eda9dd361b50bbdf774b5061ec27dccaaaa09f")]
 [assembly: System.Reflection.AssemblyProductAttribute("PROJETOESA")]
 [assembly: System.Reflection.AssemblyTitleAttribute("PROJETOESA")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
