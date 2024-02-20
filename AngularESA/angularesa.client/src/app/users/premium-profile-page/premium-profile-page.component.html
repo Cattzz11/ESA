@@ -2,15 +2,16 @@
   <div class="top">
     <h1 id="title">Perfil do Utilizador</h1>
     <div class="topButtons">
-      <button (click)="edit()" class="edit">Editar</button>
-      <button class="payments">Pagamentos</button>
-      <button class="premium">Premium</button>
+      <a routerLink="/edit-profile">Editar Perfil</a>
+        <button class="edit">Editar</button>
+        <button class="payments">Pagamentos</button>
+        <button class="premium">Premium</button>
     </div>
   </div>
   <div class="separator"></div>
   <div class="userContent">
     <div class="userPage">
-      <img src="../../../assets/Images/imagemInicial.png" alt="Profile Picture" class="profile-picture">
+      <img src="../../../assets/Images/user.png" alt="Profile Picture" class="profile-picture">
       <div class="profile-info">
         <h1>{{ user?.name }}</h1>
         <p>E-mail: {{ user?.email }}</p>

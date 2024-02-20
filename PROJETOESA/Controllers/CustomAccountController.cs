@@ -8,6 +8,7 @@ using PROJETOESA.Services;
 using Microsoft.EntityFrameworkCore;
 using PROJETOESA.Data;
 using System.Diagnostics;
+using Microsoft.DotNet.Scaffolding.Shared.Messaging;
 
 namespace PROJETOESA.Controllers
 {
@@ -168,6 +169,32 @@ namespace PROJETOESA.Controllers
             // O código é inválido.
             return BadRequest(new { Message = "Código inválido." });
         }
+
+        //GET:
+        [HttpPut("api/edit-profile")]
+        [Authorize]
+        public async Task<IActionResult> UpdateUserInfo([FromBody] EditUserModel model)
+        {
+            var user = await _userManager.GetUserAsync(User);
+            if (user == null)
+            {
+                return NotFound("User not found");
+            }
+
+            //atualizar os dados do user
+            user.Name = model.Name;
+            user.BirthDate = model.BirthDate;
+            user.Nationality = model.Nationality;
+            user.Occupation = model.Occupation;
+
+            var result = await _userManager.UpdateAsync(user);
+
+            if (result.Succeeded)
+            {
+                return Ok(new { Message = "Perfil atualizado com sucesso." });
+            }
+            return BadRequest(result.Errors);
+        }
     }
 
     public class CustomRegisterModel
@@ -188,5 +215,17 @@ namespace PROJETOESA.Controllers
         public string Email { get; set; }
         public string Password { get; set; }
 
+    }
+
+    public class EditUserModel
+    {
+        public string Name { get; set; }
+        public string Email { get; set; }
+        public DateTime? BirthDate { get; set; }
+        public int Age { get; set; } 
+
+        public string? Nationality { get; set; }
+
+        public string? Occupation { get; set; }
     }
 }

@@ -197,4 +197,9 @@ export class AuthorizeService {
   public getUserInfo(): Observable<any> {
     return this.http.get<any>('api/userInfo');
   }
+
+
+  public updateUserInfo(updatedData: any): Observable<any> {
+    return this.http.put('api/edit-profile', updatedData);
+  }
 }

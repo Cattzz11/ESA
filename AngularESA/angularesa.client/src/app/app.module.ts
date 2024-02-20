@@ -23,6 +23,7 @@ import { PremiumProfilePageComponent } from './users/premium-profile-page/premiu
 import { ProfileComponent } from './profile/profile.component';
 import { LogoutComponent } from '../api-authorization/logout/logout.component';
 import { SearchFlightsComponent } from './flights/search-flights/search-flights.component';
+import { EditProfileComponent } from './users/edit-profile/edit-profile.component';
 
 
 @NgModule({
@@ -42,7 +43,8 @@ import { SearchFlightsComponent } from './flights/search-flights/search-flights.
     FetchDataComponent,
     PeopleComponent,
     PersonComponent,
-    SearchFlightsComponent
+    SearchFlightsComponent,
+    EditProfileComponent
   ],
   imports: [
     BrowserModule, HttpClientModule,

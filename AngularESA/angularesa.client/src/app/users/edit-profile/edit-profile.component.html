@@ -1,0 +1,30 @@
+<div *ngIf="user">
+  <form [formGroup]="editForm">
+    <h2>Editar Perfil</h2>
+    <ul>
+      <li>
+        <label for="name">Nome:</label>
+        <input type="text" formControlName="name" />
+      </li>
+      <li>
+        <label for="birthDate">Data de Nascimento:</label>
+        <input type="date" formControlName="birthDate" />
+      </li>
+      <li>
+        <label for="age">Idade:</label>
+        <input type="text" formControlName="age" readonly />
+      </li>
+      <li>
+        <label for="nationality">Nacionalidade:</label>
+        <input type="text" id="nationality" formControlName="nationality" />
+      </li>
+      <li>
+        <label for="occupation">Ocupação:</label>
+        <input type="text" id="occupation" formControlName="occupation" />
+      </li>
+    </ul>
+
+    <!-- Adicione botão de envio ou outras ações necessárias -->
+    <button type="submit" (click)="edit()">Salvar</button>
+  </form>
+</div>
