@@ -6,4 +6,6 @@ export interface User {
   age?: number; 
   nationality?: string; 
   occupation?: string;
+  profilePicture?: string;
+  //profilePictureBinary?: Uint8Array;
 }

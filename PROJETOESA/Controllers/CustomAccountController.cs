@@ -13,6 +13,7 @@ using Microsoft.DotNet.Scaffolding.Shared.Messaging;
 namespace PROJETOESA.Controllers
 {
     [ApiController]
+    [Produces("application/json")]
     public class CustomAccountController : ControllerBase
     {
         private readonly UserManager<ApplicationUser> _userManager;
@@ -91,7 +92,7 @@ namespace PROJETOESA.Controllers
 
                 if (user.BirthDate.Value > today.AddYears(-age)) age--;
 
-                userInfo = new { UserName = user.UserName, Email = user.Email, Role = user.Role.ToString(), Name = user.Name, Age = age };
+                userInfo = new { UserName = user.UserName, Email = user.Email, Role = user.Role.ToString(), Name = user.Name, Age = age, Nationality = user.Nationality, Occupation = user.Occupation };
             }
             else
             {
@@ -172,9 +173,9 @@ namespace PROJETOESA.Controllers
 
         //GET:
         [HttpPut("api/edit-profile")]
-        [Authorize]
         public async Task<IActionResult> UpdateUserInfo([FromBody] EditUserModel model)
         {
+            Debug.WriteLine("SERVIDOR");
             var user = await _userManager.GetUserAsync(User);
             if (user == null)
             {
@@ -183,18 +184,50 @@ namespace PROJETOESA.Controllers
 
             //atualizar os dados do user
             user.Name = model.Name;
+            user.Email = model.Email;
             user.BirthDate = model.BirthDate;
-            user.Nationality = model.Nationality;
             user.Occupation = model.Occupation;
+            user.Nationality = model.Nationality;
+            user.ProfilePicture = model.ProfilePicture;
+            
+            Debug.WriteLine("DADOS ATUALIZADOS ZÉ");
 
             var result = await _userManager.UpdateAsync(user);
 
             if (result.Succeeded)
             {
+                await _context.SaveChangesAsync();
+                Debug.WriteLine("SALVAR ALTERAÇÕES");
                 return Ok(new { Message = "Perfil atualizado com sucesso." });
             }
             return BadRequest(result.Errors);
         }
+
+        //[HttpPost("api/upload-photo")]
+        //public async Task<IActionResult> UploadPhoto(IFormFile file)
+        //{
+        //    if (file == null || file.Length == 0)
+        //    {
+        //        return BadRequest("Nenhum arquivo enviado.");
+        //    }
+
+        //    using (var memoryStream = new MemoryStream())
+        //    {
+        //        await file.CopyToAsync(memoryStream);
+
+        //        // Obtenha o usuário atual (você precisará do UserManager configurado em seu controleador)
+        //        var user = await _userManager.GetUserAsync(User);
+
+        //        // Atualize o campo ProfilePictureBinary do usuário com os dados da imagem
+        //        user.ProfilePictureBinary = memoryStream.ToArray();
+
+        //        // Atualize o usuário no banco de dados
+        //        await _userManager.UpdateAsync(user);
+        //    }
+
+        //    return Ok(new { message = "Upload de foto para a base de dados bem-sucedido." });
+        //}
+
     }
 
     public class CustomRegisterModel
@@ -222,10 +255,13 @@ namespace PROJETOESA.Controllers
         public string Name { get; set; }
         public string Email { get; set; }
         public DateTime? BirthDate { get; set; }
-        public int Age { get; set; } 
+        public int? Age { get; set; }
+        public string? Occupation { get; set; }
 
         public string? Nationality { get; set; }
 
-        public string? Occupation { get; set; }
+        public string? ProfilePicture { get; set; }
+
+        //public byte[]? ProfilePictureBinary { get; set; }
     }
 }

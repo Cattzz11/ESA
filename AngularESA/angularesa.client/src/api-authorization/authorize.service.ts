@@ -1,4 +1,4 @@
-import { HttpClient, HttpErrorResponse, HttpResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, Subject, catchError, map, of, throwError } from 'rxjs';
 import { UserInfo } from './authorize.dto';
@@ -14,6 +14,7 @@ export class AuthorizeService {
   constructor(private http: HttpClient, private router: Router) { }
 
   private _authStateChanged: Subject<boolean> = new BehaviorSubject<boolean>(false);
+
 
   public onStateChanged() {
     return this._authStateChanged.asObservable();
@@ -199,7 +200,17 @@ export class AuthorizeService {
   }
 
 
+  //public updateUserInfo(updatedData: any): Observable<any> {
+  //  return this.http.put('api/edit-profile', updatedData);
+  //}
+
   public updateUserInfo(updatedData: any): Observable<any> {
-    return this.http.put('api/edit-profile', updatedData);
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    };
+
+    return this.http.put('api/upload-photo-to-database', updatedData, httpOptions);
   }
 }

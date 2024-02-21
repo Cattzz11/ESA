@@ -2,9 +2,24 @@
   <form [formGroup]="editForm">
     <h2>Editar Perfil</h2>
     <ul>
+      <form [formGroup]="editForm" enctype="multipart/form-data">
+        <!-- ... outros campos do formulário ... -->
+
+        <div>
+          <label for="profilePicture">Foto de Perfil</label>
+          <input type="file" id="profilePicture" (change)="onFileSelected($event)" accept="image/*" />
+          <img [src]="photoPreview" *ngIf="photoPreview" alt="Preview" />
+        </div>
+
+        <!-- ... botão de envio ... -->
+      </form>
       <li>
         <label for="name">Nome:</label>
         <input type="text" formControlName="name" />
+      </li>
+      <li>
+        <label for="email">Email:</label>
+        <input type="text" formControlName="email" readonly />
       </li>
       <li>
         <label for="birthDate">Data de Nascimento:</label>
@@ -15,13 +30,14 @@
         <input type="text" formControlName="age" readonly />
       </li>
       <li>
-        <label for="nationality">Nacionalidade:</label>
-        <input type="text" id="nationality" formControlName="nationality" />
-      </li>
-      <li>
         <label for="occupation">Ocupação:</label>
         <input type="text" id="occupation" formControlName="occupation" />
       </li>
+      <li>
+        <label for="nationality">Nacionalidade:</label>
+        <input type="text" id="nationality" formControlName="nationality" />
+      </li>
+
     </ul>
 
     <!-- Adicione botão de envio ou outras ações necessárias -->

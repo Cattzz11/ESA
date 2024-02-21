@@ -2,8 +2,7 @@
   <div class="top">
     <h1 id="title">Perfil do Utilizador</h1>
     <div class="topButtons">
-      <a routerLink="/edit-profile">Editar Perfil</a>
-        <button class="edit">Editar</button>
+        <button class="edit"><a routerLink="/edit-profile">Editar Perfil</a></button>
         <button class="payments">Pagamentos</button>
         <button class="premium">Premium</button>
     </div>
@@ -12,6 +11,11 @@
   <div class="userContent">
     <div class="userPage">
       <img src="../../../assets/Images/user.png" alt="Profile Picture" class="profile-picture">
+      <!--<form (submit)="uploadPhoto()">
+        <input type="file" (change)="onFileSelected($event)" accept="image/*" />
+        <button type="submit">Upload Photo</button>
+      </form>
+      <img [src]="photoPreview" *ngIf="photoPreview" /-->
       <div class="profile-info">
         <h1>{{ user?.name }}</h1>
         <p>E-mail: {{ user?.email }}</p>

@@ -3,6 +3,7 @@ import { AuthorizeService } from '../../../api-authorization/authorize.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { User } from '../../Models/users';
 import { Router } from '@angular/router';
+import { PhotoUploadService } from '../../services/photoUploadService.service';
 
 @Component({
   selector: 'app-edit-profile',
@@ -12,14 +13,20 @@ import { Router } from '@angular/router';
 export class EditProfileComponent implements OnInit {
   public user: User | null = null;
   public editForm!: FormGroup;
+  photoPreview: string | ArrayBuffer | null = null;
+  selectedFile: File | null = null;
+  private photoUploadService!: PhotoUploadService;
 
-  constructor(private auth: AuthorizeService, private formBuilder: FormBuilder, private router: Router) {
+  constructor(private auth: AuthorizeService, private formBuilder: FormBuilder, private router: Router, private _photoUploadService: PhotoUploadService) {
+    this.photoUploadService = _photoUploadService;
     this.editForm = this.formBuilder.group({
       name: ['', Validators.required],
+      email: ['', Validators.required],
       birthDate: [''],
       age: [''],
+      occupation: [''],
       nationality: [''],
-      occupation: ['']
+      profilePicture: [''],
     });
 
     this.editForm.get('birthDate')?.valueChanges.subscribe(() => {
@@ -32,10 +39,16 @@ export class EditProfileComponent implements OnInit {
           this.user = userInfo;
           this.editForm.patchValue({
             name: userInfo.name,
+            email: userInfo.email,
             birthDate: userInfo.age,
+            occupation: userInfo.occupation,
             nationality: userInfo.nationality,
-            occupation: userInfo.occupation
+            profilePicture: userInfo.profilePicture,
           });
+          console.log("idade", userInfo.age);
+          this.photoPreview = userInfo.profilePicture
+            ? `assets/Images/${userInfo.profilePicture}`
+            : 'assets/Images/user.png';
         },
         error: (error) => {
           console.error('Error fetching user info', error);
@@ -45,18 +58,28 @@ export class EditProfileComponent implements OnInit {
 
   edit() {
     if (this.editForm.valid) {
-      const editedData = this.editForm.value;
-      console.log('Dados Editados:', editedData);
-      this.auth.updateUserInfo(editedData).subscribe(
-        () => {
-          console.log('Perfil atualizado com sucesso.');
-          this.router.navigate(['/premium-profile-page']);
-        },
-        error => {
-          console.error('Erro ao atualizar o perfil:', error);
-        }
-      );
+      this.updateUserInformation();
+
+      //if (this.selectedFile) {
+      //  this.uploadPhotoAndEdit();
+      //} else {
+      //  this.updateUserInformation();
+      //}
     }
+  }
+
+  updateUserInformation() {
+    const editedData = this.editForm.value;
+    console.log('Dados Editados:', editedData);
+    this.auth.updateUserInfo(editedData).subscribe(
+      () => {
+        console.log('Perfil atualizado com sucesso.');
+        this.router.navigate(['/premium-profile-page']);
+      },
+      error => {
+        console.error('Erro ao atualizar o perfil:', error);
+      }
+    );
   }
 
   calcularIdade() {
@@ -81,6 +104,6 @@ export class EditProfileComponent implements OnInit {
     }
   }
 
-
-
 }
+
+

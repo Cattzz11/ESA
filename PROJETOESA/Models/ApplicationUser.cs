@@ -15,5 +15,9 @@ namespace PROJETOESA.Models
         public string? Nationality { get; set; }
 
         public string? Occupation { get; set; }
+
+        public string? ProfilePicture { get; set; }
+
+        //public byte[]? ProfilePictureBinary{ get; set; }
     }
 }

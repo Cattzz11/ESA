@@ -24,6 +24,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { LogoutComponent } from '../api-authorization/logout/logout.component';
 import { SearchFlightsComponent } from './flights/search-flights/search-flights.component';
 import { EditProfileComponent } from './users/edit-profile/edit-profile.component';
+import { PhotoUploadService } from './services/photoUploadService.service';
 
 
 @NgModule({
@@ -54,7 +55,7 @@ import { EditProfileComponent } from './users/edit-profile/edit-profile.componen
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
     AuthGuard,
-    AuthorizeService
+    AuthorizeService, PhotoUploadService
   ],
   bootstrap: [AppComponent]
 })
