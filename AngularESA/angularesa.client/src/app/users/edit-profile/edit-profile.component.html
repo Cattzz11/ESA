@@ -1,46 +1,56 @@
-<div *ngIf="user">
-  <form [formGroup]="editForm">
-    <h2>Editar Perfil</h2>
-    <ul>
-      <form [formGroup]="editForm" enctype="multipart/form-data">
-        <!-- ... outros campos do formulário ... -->
+<div class="text-initial" style="text-align:center; padding-top:10px;">Bem Vindo à edição de perfil, por favor faça as suas alterações.</div>
+<div class="edit-wrapper">
+  <div class="edit-box">
+    <div *ngIf="user">
+      <form class="form-edit" [formGroup]="editForm">
+        <h2 style="color:white">Editar Perfil</h2>
+        <ul>
+          <div class="form-photo-div">
+            <form class="profpic w-60" [formGroup]="editForm" enctype="multipart/form-data">
+              <!-- ... outros campos do formulário ... -->
 
-        <div>
-          <label for="profilePicture">Foto de Perfil</label>
-          <input type="file" id="profilePicture" (change)="onFileSelected($event)" accept="image/*" />
-          <img [src]="photoPreview" *ngIf="photoPreview" alt="Preview" />
-        </div>
+              <div class="edit-profile-class">
+                <label id="title-pic" for="profilePicture">Foto de Perfil</label><br />
+                <img [src]="photoPreview" *ngIf="photoPreview" alt="Preview" />
+                <!--(change)="onFileSelected($event)"-->
+                <input type="file" id="profilePicture" accept="image/*" /> <br />
 
-        <!-- ... botão de envio ... -->
+              </div>
+
+              <!-- ... botão de envio ... -->
+            </form>
+            <!-- Adicione botão de envio ou outras ações necessárias -->
+          </div>
+          <li>
+            <label for="name">Nome:<span style="color:red; padding-left:5px;">*</span></label><br />
+            <input type="text" formControlName="name" />
+          </li>
+          <li>
+            <label for="email">Email:</label><br />
+            <input type="text" formControlName="email" readonly />
+          </li>
+          <li>
+            <label for="birthDate">Data de Nascimento:</label><br />
+            <input type="date" formControlName="birthDate" />
+          </li>
+          <li>
+            <label for="age">Idade:</label><br />
+            <input type="text" formControlName="age" readonly />
+          </li>
+          <li>
+            <label for="occupation">Ocupação:</label><br />
+            <input type="text" id="occupation" formControlName="occupation" />
+          </li>
+          <li>
+            <label for="nationality">Nacionalidade:</label><br />
+            <input type="text" id="nationality" formControlName="nationality" />
+          </li>
+        </ul>
+        <button class="button-save" type="submit" (click)="edit()">Salvar</button>
       </form>
-      <li>
-        <label for="name">Nome:</label>
-        <input type="text" formControlName="name" />
-      </li>
-      <li>
-        <label for="email">Email:</label>
-        <input type="text" formControlName="email" readonly />
-      </li>
-      <li>
-        <label for="birthDate">Data de Nascimento:</label>
-        <input type="date" formControlName="birthDate" />
-      </li>
-      <li>
-        <label for="age">Idade:</label>
-        <input type="text" formControlName="age" readonly />
-      </li>
-      <li>
-        <label for="occupation">Ocupação:</label>
-        <input type="text" id="occupation" formControlName="occupation" />
-      </li>
-      <li>
-        <label for="nationality">Nacionalidade:</label>
-        <input type="text" id="nationality" formControlName="nationality" />
-      </li>
-
-    </ul>
-
-    <!-- Adicione botão de envio ou outras ações necessárias -->
-    <button type="submit" (click)="edit()">Salvar</button>
-  </form>
+    </div>
+    <div class="login-branding" style="background-image: url('.. /../assets/Images/background.png');">
+      <img src="../../assets/Images/logo.png" alt="Logo" class="logo" />
+    </div>
+  </div>
 </div>
