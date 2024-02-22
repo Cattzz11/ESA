@@ -15,6 +15,7 @@ export class AuthorizeService {
 
   private _authStateChanged: Subject<boolean> = new BehaviorSubject<boolean>(false);
 
+  
 
   public onStateChanged() {
     return this._authStateChanged.asObservable();
@@ -129,15 +130,25 @@ export class AuthorizeService {
 
   }
 
+  
+
   async googleResponse(response: any) {
+
     if (response && response.credential) {
       //this.isLoggedIn = true;
       this._authStateChanged.next(true);
       console.log("Google login successfull");
       const decoded = jwtDecode(response.credential);
+      console.log(response.credential);
       console.log('Decoded JWT:', decoded);
+
+      const user = {
+        email: jwtDecode<User>(response.credential)?.email,
+        name: jwtDecode<User>(response.credential)?.name,
+      };
+
       this.commonAuthenticationProcedure(decoded);
-      sessionStorage.setItem('user', response);
+      sessionStorage.setItem('user', JSON.stringify(user));
     }
 
     console.log('RESPONSE :>> ', response);
@@ -213,4 +224,9 @@ export class AuthorizeService {
 
     return this.http.put('api/upload-photo-to-database', updatedData, httpOptions);
   }
+}
+
+export interface User {
+  email: string;
+  name: string;
 }

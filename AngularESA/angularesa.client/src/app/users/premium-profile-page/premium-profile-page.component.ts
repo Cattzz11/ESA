@@ -11,25 +11,38 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class PremiumProfilePageComponent {
   public user: User | null = null;
 
+  public isLoggedInWGoogle: boolean = false;
+
   constructor(private auth: AuthorizeService, private formBuilder: FormBuilder)
   {
     
   }
 
   ngOnInit() {
-    this.auth.getUserInfo().subscribe({
-      next: (userInfo: User) => { 
-        this.user = userInfo;
-        //this.editForm.patchValue({
-        //  name: userInfo.name,
-        //  birthDate: userInfo.age,
-        //  nationality: userInfo.nationality,
-        //  occupation: userInfo.occupation
-        //});
-      },
-      error: (error) => {
-        console.error('Error fetching user info', error);
-      }
-    });
+    const storedUser = sessionStorage.getItem('user');
+    if (storedUser) {
+      this.user = JSON.parse(storedUser);
+    }
+    else {
+      this.auth.getUserInfo().subscribe({
+        next: (userInfo: User) => {
+          this.user = userInfo;
+          //this.editForm.patchValue({
+          //  name: userInfo.name,
+          //  birthDate: userInfo.age,
+          //  nationality: userInfo.nationality,
+          //  occupation: userInfo.occupation
+          //});
+        },
+        error: (error) => {
+          console.error('Error fetching user info', error);
+        }
+      });
+    }
+
+    if (this.isLoggedInWGoogle) {
+      this.isLoggedInWGoogle = true;
+    }
+    
   }
 }
