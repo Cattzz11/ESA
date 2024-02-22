@@ -2,6 +2,10 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { FlightData } from '../Models/flight-data';
+import { Country } from '../Models/country';
+import { map } from 'rxjs/operators';
+import { Airport } from '../Models/Airport';
+import { Itinerary } from '../Models/tripData';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +13,7 @@ import { FlightData } from '../Models/flight-data';
 export class SkyscannerService {
   constructor(private http: HttpClient) { }
 
-  public getRoundtripFlights(data: FlightData): Observable<any> {
+  public getRoundtripFlights(data: FlightData): Observable<Itinerary[]> {
     let params = new HttpParams();
 
     // Campos obrigatórios
@@ -27,7 +31,7 @@ export class SkyscannerService {
     if (data.infants) params = params.set('infants', data.infants);
     if (data.cabinClass) params = params.set('cabinClass', data.cabinClass);
 
-    return this.http.get('api/search-roundtrip', { params: params });
+    return this.http.get<Itinerary[]>('api/search-roundtrip', { params: params });
   }
 
   public getEverywhereFlights(data: FlightData): Observable<any> {
@@ -86,4 +90,18 @@ export class SkyscannerService {
 
     return this.http.get('api/price-calendar', { params: params });
   }
+
+  public getAirportList(data: Country): Observable<Airport[]> {
+    let params = new HttpParams()
+      .set('id', data.id)
+      .set('name', data.name);
+
+    return this.http.get<Airport[]>('api/airport-list', { params: params });
+  }
+
+  public getSugestionsCompany(): Observable<any> {
+
+    return this.http.get('api/sugestions-company');
+  }
+  
 }

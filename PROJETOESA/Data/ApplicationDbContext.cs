@@ -15,5 +15,8 @@ namespace PROJETOESA.Data
         //public DbSet<Person> Person { get; set; } = default!;
 
         public DbSet<PasswordRecoveryCode> PasswordRecoveryCodes { get; set; }
+        public DbSet<Country> Countries { get; set; }
+        public DbSet<Airport> Airport { get; set; }
+        public DbSet<Carrier> Carrier { get; set; }
     }
 }

@@ -56,6 +56,33 @@ namespace PROJETOESA.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Carrier",
+                columns: table => new
+                {
+                    id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    logoUrl = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    searchTimes = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Carrier", x => x.id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Countries",
+                columns: table => new
+                {
+                    id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    name = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Countries", x => x.id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "PasswordRecoveryCodes",
                 columns: table => new
                 {
@@ -176,6 +203,31 @@ namespace PROJETOESA.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Airport",
+                columns: table => new
+                {
+                    id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    apiKey = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    countryId = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Airport", x => x.id);
+                    table.ForeignKey(
+                        name: "FK_Airport_Countries_countryId",
+                        column: x => x.countryId,
+                        principalTable: "Countries",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Airport_countryId",
+                table: "Airport",
+                column: "countryId");
+
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -220,6 +272,9 @@ namespace PROJETOESA.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
+                name: "Airport");
+
+            migrationBuilder.DropTable(
                 name: "AspNetRoleClaims");
 
             migrationBuilder.DropTable(
@@ -235,7 +290,13 @@ namespace PROJETOESA.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
+                name: "Carrier");
+
+            migrationBuilder.DropTable(
                 name: "PasswordRecoveryCodes");
+
+            migrationBuilder.DropTable(
+                name: "Countries");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

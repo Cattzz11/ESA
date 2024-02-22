@@ -155,6 +155,30 @@ namespace PROJETOESA.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("PROJETOESA.Models.Airport", b =>
+                {
+                    b.Property<string>("id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("apiKey")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("countryId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("id");
+
+                    b.HasIndex("countryId");
+
+                    b.ToTable("Airport");
+                });
+
             modelBuilder.Entity("PROJETOESA.Models.ApplicationUser", b =>
                 {
                     b.Property<string>("Id")
@@ -236,6 +260,43 @@ namespace PROJETOESA.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
+            modelBuilder.Entity("PROJETOESA.Models.Carrier", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"));
+
+                    b.Property<string>("logoUrl")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("searchTimes")
+                        .HasColumnType("int");
+
+                    b.HasKey("id");
+
+                    b.ToTable("Carrier");
+                });
+
+            modelBuilder.Entity("PROJETOESA.Models.Country", b =>
+                {
+                    b.Property<string>("id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("id");
+
+                    b.ToTable("Countries");
+                });
+
             modelBuilder.Entity("PROJETOESA.Models.PasswordRecoveryCode", b =>
                 {
                     b.Property<int>("Id")
@@ -309,6 +370,22 @@ namespace PROJETOESA.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("PROJETOESA.Models.Airport", b =>
+                {
+                    b.HasOne("PROJETOESA.Models.Country", "country")
+                        .WithMany("airports")
+                        .HasForeignKey("countryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("country");
+                });
+
+            modelBuilder.Entity("PROJETOESA.Models.Country", b =>
+                {
+                    b.Navigation("airports");
                 });
 #pragma warning restore 612, 618
         }
