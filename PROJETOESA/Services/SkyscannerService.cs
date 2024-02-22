@@ -362,7 +362,7 @@ namespace PROJETOESA.Services
             }
         }
 
-        public async Task<List<Itinerary>> GetSugestionsCompanyAsync()
+        public async Task<List<Itinerary>> GetSugestionsCompanyAsync(string carrier)
         {
             string tomorrow = DateTime.Now.AddDays(1).ToString("yyyy-MM-dd");
             string nextWeek = DateTime.Now.AddDays(8).ToString("yyyy-MM-dd");
@@ -379,10 +379,6 @@ namespace PROJETOESA.Services
                 .Distinct()
                 .ToList();
 
-            // Ir buscar a informação de companhias aereas
-            List<Carrier> carrierList = await _context.Carrier.OrderByDescending(e => e.searchTimes).Take(3).ToListAsync();
-            List<string> allowedCarrierNames = carrierList.Select(c => c.name).ToList();
-
             List<Itinerary> finalItineraries = new List<Itinerary>();
             while (finalItineraries.Count < 1)
             {
@@ -397,8 +393,7 @@ namespace PROJETOESA.Services
                 var foundItineraries = itineraries
                     .Where(itinerary => itinerary.trip
                     .All(trip => trip.carriers
-                    .All(carrier => allowedCarrierNames
-                    .Contains(carrier.name))))
+                    .All(c => c.name == carrier)))
                     .Take(2);
 
                 finalItineraries.AddRange(foundItineraries);
@@ -406,6 +401,14 @@ namespace PROJETOESA.Services
 
             return finalItineraries;
         }
+
+        public async Task<List<Carrier>> GetFavoriteAirlineAsync()
+        {
+            List<Carrier> carrierList = await _context.Carrier.OrderByDescending(e => e.searchTimes).Take(5).ToListAsync();
+            
+            return carrierList;
+        }
+
         private string ConvertMinutesToTimeString(int durationInMinutes)
         {
             int hours = durationInMinutes / 60;

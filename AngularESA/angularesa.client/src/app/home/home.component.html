@@ -5,29 +5,17 @@
     <p class="slogan text-black">Connosco Viajar Tornou-se Mais Simples e Fácil</p>
   </div>
 
-  <div class="recomendacoes-container">
-    <h2>Recomendações</h2>
-    <div class="viagens-list">
-      <div *ngFor="let viagem of flightResults" class="viagem-card">
-        <img [src]="viagem.trip[0].carriers[0].logoUrl" alt="Logo" *ngIf="viagem.trip[0].carriers[0].logoUrl">
-        <div class="departure">
-          <p>{{ viagem.trip[0].departure | date: 'HH:mm' }} h</p>
-          <p>{{ viagem.trip[0].origin.name }}</p>
+  <div class="airline-recommendations">
+    <h2>Companhias Aéreas Mais Procuradas</h2>
+    <div class="airlines-container">
+      <div *ngFor="let airline of airLineResults; let i = index" class="airline-card">
+        <div class="ranking">{{i + 1}}º</div>
+        <div class="logo-container">
+          <img *ngIf="airline.logoUrl" [src]="airline.logoUrl" alt="Logo">
         </div>
-        <div class="duration">
-          <p>{{ viagem.trip[0].durationInMinutes }} h</p>
-        </div>
-        <div class="destination">
-          <p>{{ viagem.trip[0].arrival | date: 'HH:mm' }} h</p>
-          <p>{{ viagem.trip[0].destination.name }}</p>
-        </div>
-        <div class="price">
-          <p>{{ viagem.price }} €</p>
-          <a href="your-target-url" class="button-link">Mais opções</a>
-        </div>
+        <button class="search-flight-btn" (click)="searchFlights(airline)">Procurar Voo</button>
       </div>
     </div>
   </div>
-
 
 </body>

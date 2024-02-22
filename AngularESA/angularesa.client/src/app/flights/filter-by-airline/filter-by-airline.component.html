@@ -1,0 +1,28 @@
+<div class="recomendacoes-container">
+  <h2>Recomendações</h2>
+
+  <div *ngIf="isLoading" class="loading-indicator">
+    <img src="../../assets/Images/Fading circles.gif" alt="Carregando...">
+  </div>
+
+  <div *ngIf="!isLoading" class="viagens-list">
+    <div *ngFor="let viagem of flightResults" class="viagem-card">
+      <img [src]="viagem.trip[0].carriers[0].logoUrl" alt="Logo" *ngIf="viagem.trip[0].carriers[0].logoUrl">
+      <div class="departure">
+        <p>{{ viagem.trip[0].departure | date: 'HH:mm' }} h</p>
+        <p>{{ viagem.trip[0].origin.name }}</p>
+      </div>
+      <div class="duration">
+        <p>{{ viagem.trip[0].durationInMinutes }} h</p>
+      </div>
+      <div class="destination">
+        <p>{{ viagem.trip[0].arrival | date: 'HH:mm' }} h</p>
+        <p>{{ viagem.trip[0].destination.name }}</p>
+      </div>
+      <div class="price">
+        <p>{{ viagem.price }} €</p>
+        <a href="your-target-url" class="button-link">Mais opções</a>
+      </div>
+    </div>
+  </div>
+</div>

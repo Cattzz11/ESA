@@ -6,6 +6,7 @@ import { Country } from '../Models/country';
 import { map } from 'rxjs/operators';
 import { Airport } from '../Models/Airport';
 import { Itinerary } from '../Models/tripData';
+import { AirLine } from '../Models/AirLine';
 
 @Injectable({
   providedIn: 'root'
@@ -99,9 +100,13 @@ export class SkyscannerService {
     return this.http.get<Airport[]>('api/airport-list', { params: params });
   }
 
-  public getSugestionsCompany(): Observable<any> {
+  public getSugestionsCompany(carrierName: string): Observable<Itinerary[]> {
+    let params = new HttpParams().set('carrierName', carrierName);
+    return this.http.get<Itinerary[]>('api/sugestions-company', { params: params });
+  }
 
-    return this.http.get('api/sugestions-company');
+  public getFavoriteAirline(): Observable<AirLine[]> {
+    return this.http.get<AirLine[]>('api/favorite-airline');
   }
   
 }

@@ -77,9 +77,18 @@ namespace PROJETOESA.Controllers
 
         [HttpGet]
         [Route("api/sugestions-company")]
-        public async Task<IActionResult> getSugestionsCompany()
+        public async Task<IActionResult> getSugestionsCompany([FromQuery] string carrierName)
         {
-            List<Itinerary> result = await _skyscannerService.GetSugestionsCompanyAsync();
+            List<Itinerary> result = await _skyscannerService.GetSugestionsCompanyAsync(carrierName);
+
+            return Ok(result);
+        }
+
+        [HttpGet]
+        [Route("api/favorite-airline")]
+        public async Task<IActionResult> getFavoriteAirline()
+        {
+            List<Carrier> result = await _skyscannerService.GetFavoriteAirlineAsync();
 
             return Ok(result);
         }
