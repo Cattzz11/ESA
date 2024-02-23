@@ -2,9 +2,9 @@
   <div class="top">
     <h1 id="title">Perfil do Utilizador</h1>
     <div class="topButtons">
-        <button class="edit" *ngIf="isLoggedInWGoogle"><a routerLink="/edit-profile">Editar Perfil</a></button>
+        <button class="edit" *ngIf="!isLoggedInWGoogle"><a routerLink="/edit-profile">Editar Perfil</a></button>
         <button class="payments">Pagamentos</button>
-        <button class="premium">Premium</button>
+        <button class="premium"><a routerLink="/premium-component" style="text-decoration:none; color:black;">Premium</a></button>
     </div>
   </div>
   <div class="separator"></div>

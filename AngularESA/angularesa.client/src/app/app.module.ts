@@ -25,6 +25,7 @@ import { LogoutComponent } from '../api-authorization/logout/logout.component';
 import { SearchFlightsComponent } from './flights/search-flights/search-flights.component';
 import { EditProfileComponent } from './users/edit-profile/edit-profile.component';
 import { PhotoUploadService } from './services/photoUploadService.service';
+import { PremiumComponent } from './users/premium/premium.component';
 
 
 @NgModule({
@@ -45,7 +46,8 @@ import { PhotoUploadService } from './services/photoUploadService.service';
     PeopleComponent,
     PersonComponent,
     SearchFlightsComponent,
-    EditProfileComponent
+    EditProfileComponent,
+    PremiumComponent
   ],
   imports: [
     BrowserModule, HttpClientModule,
