@@ -7,17 +7,17 @@
 
   <div *ngIf="!isLoading" class="viagens-list">
     <div *ngFor="let viagem of flightResults" class="viagem-card">
-      <img [src]="viagem.trip[0].carriers[0].logoUrl" alt="Logo" *ngIf="viagem.trip[0].carriers[0].logoUrl">
+      <img [src]="airlineLogo" alt="Logo">
       <div class="departure">
-        <p>{{ viagem.trip[0].departure | date: 'HH:mm' }} h</p>
-        <p>{{ viagem.trip[0].origin.name }}</p>
+        <p>{{ viagem.departure | date: 'HH:mm' }} h</p>
+        <p>{{ viagem.originCity.name }}</p>
       </div>
       <div class="duration">
-        <p>{{ viagem.trip[0].durationInMinutes }} h</p>
+        <p>{{ viagem.duration }} h</p>
       </div>
       <div class="destination">
-        <p>{{ viagem.trip[0].arrival | date: 'HH:mm' }} h</p>
-        <p>{{ viagem.trip[0].destination.name }}</p>
+        <p>{{ viagem.arrival | date: 'HH:mm' }} h</p>
+        <p>{{ viagem.destinationCity.name }}</p>
       </div>
       <div class="price">
         <p>{{ viagem.price }} €</p>

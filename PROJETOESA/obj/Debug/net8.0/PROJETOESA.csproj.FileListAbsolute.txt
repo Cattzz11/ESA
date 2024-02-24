@@ -600,9 +600,9 @@ C:\Users\Tiago\Desktop\IPS\ESA\PROJETOESA\obj\Debug\net8.0\staticwebassets\msbui
 C:\Users\Tiago\Desktop\IPS\ESA\PROJETOESA\obj\Debug\net8.0\staticwebassets\msbuild.buildTransitive.PROJETOESA.props
 C:\Users\Tiago\Desktop\IPS\ESA\PROJETOESA\obj\Debug\net8.0\staticwebassets.pack.json
 C:\Users\Tiago\Desktop\IPS\ESA\PROJETOESA\obj\Debug\net8.0\scopedcss\bundle\PROJETOESA.styles.css
-C:\Users\Tiago\Desktop\IPS\ESA\PROJETOESA\obj\Debug\net8.0\PROJETOESA.csproj.CopyComplete
 C:\Users\Tiago\Desktop\IPS\ESA\PROJETOESA\obj\Debug\net8.0\PROJETOESA.dll
 C:\Users\Tiago\Desktop\IPS\ESA\PROJETOESA\obj\Debug\net8.0\refint\PROJETOESA.dll
 C:\Users\Tiago\Desktop\IPS\ESA\PROJETOESA\obj\Debug\net8.0\PROJETOESA.pdb
 C:\Users\Tiago\Desktop\IPS\ESA\PROJETOESA\obj\Debug\net8.0\PROJETOESA.genruntimeconfig.cache
 C:\Users\Tiago\Desktop\IPS\ESA\PROJETOESA\obj\Debug\net8.0\ref\PROJETOESA.dll
+C:\Users\Tiago\Desktop\IPS\ESA\PROJETOESA\obj\Debug\net8.0\PROJETOESA.csproj.Up2Date

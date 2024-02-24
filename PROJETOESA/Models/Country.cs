@@ -1,10 +1,13 @@
-﻿namespace PROJETOESA.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace PROJETOESA.Models
 {
     public class Country
     {
-        public string id { get; set; }
-        public string name { get; set; }
+        [Key]
+        public string Id { get; set; }
+        public string Name { get; set; }
 
-        public List<Airport>? airports { get; set; }
+        public List<City>? Cities { get; set; }
     }
 }

@@ -22,7 +22,7 @@ namespace PROJETOESA.Controllers
         public async Task<IActionResult> SearchRoundtrip([FromQuery] FlightData data)
         {
             var result = await _skyscannerService.GetRoundtripAsync(data);
-            
+
             return Ok(result);
         }
 
@@ -79,7 +79,7 @@ namespace PROJETOESA.Controllers
         [Route("api/sugestions-company")]
         public async Task<IActionResult> getSugestionsCompany([FromQuery] string carrierName)
         {
-            List<Itinerary> result = await _skyscannerService.GetSugestionsCompanyAsync(carrierName);
+            List<Flight> result = await _skyscannerService.GetSugestionsCompanyAsync(carrierName);
 
             return Ok(result);
         }

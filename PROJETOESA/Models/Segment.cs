@@ -1,13 +1,20 @@
-﻿namespace PROJETOESA.Models
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
+
+namespace PROJETOESA.Models
 {
     public class Segment
     {
-        public Place origin { get; set; }
-        public Place destination { get; set; }
-        public DateTime departure { get; set; }
-        public DateTime arrival { get; set; }
-        public int durationInMinutes { get; set; }
-        public string flightNumber { get; set; }
-        public Carrier carrier { get; set; }
+        [Key]
+        public string FlightNumber { get; set; }
+        public DateTime Departure { get; set; }
+        public DateTime Arrival { get; set; }
+        public string Duration { get; set; }
+
+        public string FlightId { get; set; }
+
+        [ForeignKey("FlightId")]
+        public virtual Flight Flight { get; set; }
+        public string CarrierId { get; set; }
     }
 }

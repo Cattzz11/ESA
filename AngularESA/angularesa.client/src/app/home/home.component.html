@@ -11,7 +11,7 @@
       <div *ngFor="let airline of airLineResults; let i = index" class="airline-card">
         <div class="ranking">{{i + 1}}º</div>
         <div class="logo-container">
-          <img *ngIf="airline.logoUrl" [src]="airline.logoUrl" alt="Logo">
+          <img *ngIf="airline.logoURL" [src]="airline.logoURL" alt="Logo">
         </div>
         <button class="search-flight-btn" (click)="searchFlights(airline)">Procurar Voo</button>
       </div>

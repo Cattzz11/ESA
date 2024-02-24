@@ -8,6 +8,10 @@ using PROJETOESA.Data;
 using Microsoft.EntityFrameworkCore;
 using System.Diagnostics.Metrics;
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading;
+using Mono.TextTemplating;
 
 namespace PROJETOESA.Services
 {
@@ -23,7 +27,7 @@ namespace PROJETOESA.Services
             _context = context;
         }
 
-        public async Task<List<Itinerary>> GetRoundtripAsync(FlightData data)
+        public async Task<List<Flight>> GetRoundtripAsync(FlightData data)
         {
             var queryParams = new List<string>();
 
@@ -50,111 +54,98 @@ namespace PROJETOESA.Services
             var jsonObject = JObject.Parse(content);
             var itinerariesData = jsonObject["data"]["itineraries"] as JArray;
 
-            List<Itinerary> itineraries = new List<Itinerary>();
+            List<Flight> flights = new List<Flight>();
 
             if (itinerariesData != null)
             {
-                foreach (var item in itinerariesData)
+                foreach (var itinerary in itinerariesData)
                 {
-                    var itinerary = new Itinerary
+                    var legs = itinerary["legs"] as JArray;
+                    if (legs != null)
                     {
-                        id = item["id"]?.ToString(),
-                        price = (double)item["price"]["raw"],
-                        isSelfTransfer = (bool)item["isSelfTransfer"],
-                        isProtectedSelfTransfer = (bool)item["isProtectedSelfTransfer"],
-                        isChangeAllowed = (bool)item["farePolicy"]["isChangeAllowed"],
-                        isPartiallyChangeable = (bool)item["farePolicy"]["isPartiallyChangeable"],
-                        isCancellationAllowed = (bool)item["farePolicy"]["isCancellationAllowed"],
-                        isPartiallyRefundable = (bool)item["farePolicy"]["isPartiallyRefundable"],
-                        score = (int)item["score"],
-                        trip = new List<Trip>()
-                    };
-
-                    var legsData = item["legs"] as JArray;
-                    foreach (var legItem in legsData)
-                    {
-                        var duration = (int)legItem["durationInMinutes"];
-                        var trip = new Trip
+                        foreach (var leg in legs)
                         {
-                            id = legItem["id"]?.ToString(),
-                            durationInMinutes = ConvertMinutesToTimeString(duration),
-                            stopCount = (int)legItem["stopCount"],
-                            departure = DateTime.Parse(legItem["departure"]?.ToString()),
-                            arrival = DateTime.Parse(legItem["arrival"]?.ToString()),
-                            timeDeltaInDays = (int)legItem["timeDeltaInDays"],
-                            origin = new Place
-                            {
-                                id = legItem["origin"]["id"]?.ToString(),
-                                name = legItem["origin"]["name"]?.ToString(),
-                                city = legItem["origin"]["city"]?.ToString(),
-                                country = legItem["origin"]["country"]?.ToString()
-                            },
-                            destination = new Place
-                            {
-                                id = legItem["destination"]["id"]?.ToString(),
-                                name = legItem["destination"]["name"]?.ToString(),
-                                city = legItem["destination"]["city"]?.ToString(),
-                                country = legItem["destination"]["country"]?.ToString()
-                            },
-                            carriers = new List<Carrier>(),
-                            segments = new List<Segment>()
-                        };
+                            City originCity = await GetCityAsync(leg["origin"]["id"]?.ToString());
+                            City destinationCity = await GetCityAsync(leg["destination"]["id"]?.ToString());
 
-                        var marketingCarriers = legItem["carriers"]?["marketing"] as JArray;
-                        if (marketingCarriers != null)
-                        {
-                            foreach (var carrier in marketingCarriers)
+                            var flight = new Flight
                             {
-                                var carrierObj = new Carrier
+                                Id = itinerary["id"]?.ToString(),
+                                Price = (double?)itinerary["price"]?["raw"] ?? 0.0,
+                                Departure = DateTime.Parse(leg["departure"]?.ToString()),
+                                Arrival = DateTime.Parse(leg["arrival"]?.ToString()),
+                                Duration = ConvertMinutesToTimeString(leg["durationInMinutes"].ToObject<int>()),
+                                OriginCityId = leg["origin"]["id"]?.ToString(),
+                                DestinationCityId = leg["destination"]["id"]?.ToString(),
+                                OriginCity = originCity,
+                                DestinationCity = destinationCity,
+                                isSelfTransfer = itinerary["isSelfTransfer"]?.ToObject<bool>() ?? false,
+                                isProtectedSelfTransfer = itinerary["isProtectedSelfTransfer"]?.ToObject<bool>() ?? false,
+                                isChangeAllowed = itinerary["farePolicy"]?["isChangeAllowed"]?.ToObject<bool>() ?? false,
+                                isPartiallyChangeable = itinerary["farePolicy"]?["isPartiallyChangeable"]?.ToObject<bool>() ?? false,
+                                isCancellationAllowed = itinerary["farePolicy"]?["isCancellationAllowed"]?.ToObject<bool>() ?? false,
+                                isPartiallyRefundable = itinerary["farePolicy"]?["isPartiallyRefundable"]?.ToObject<bool>() ?? false,
+                                Score = itinerary["score"]?.ToObject<double>() ?? 0,
+                                Segments = new List<Segment>()
+                            };
+
+                            var carriersObj = leg["carriers"] as JObject;
+                            var marketingCarriers = carriersObj?["marketing"] as JArray;
+
+                            if (marketingCarriers != null)
+                            {
+                                foreach (var car in marketingCarriers)
                                 {
-                                    id = (int)(carrier["id"] ?? 0),
-                                    name = (string)(carrier["name"] ?? string.Empty),
-                                    logoUrl = (string)(carrier["logoUrl"] ?? string.Empty)
-                                };
-                                trip.carriers.Add(carrierObj);
-                            }
-                        }
+                                    var carId = car["id"]?.ToString();
 
-                        var segmentsData = legItem["segments"] as JArray;
-                        if (segmentsData != null)
-                        {
-                            foreach (var segment in segmentsData)
-                            {
-                                var segmentObj = new Segment
-                                {
-                                    origin = new Place
+                                    if (!await _context.Carrier.AnyAsync(c => c.Id == carId))
                                     {
-                                        id = segment["origin"]["flightPlaceId"]?.ToString(),
-                                        name = segment["origin"]["name"]?.ToString(),
-                                    },
-                                    destination = new Place
-                                    {
-                                        id = segment["destination"]["flightPlaceId"]?.ToString(),
-                                        name = segment["destination"]["name"]?.ToString(),
-                                    },
-                                    departure = DateTime.Parse(segment["departure"]?.ToString() ?? string.Empty),
-                                    arrival = DateTime.Parse(segment["arrival"]?.ToString() ?? string.Empty),
-                                    durationInMinutes = segment["durationInMinutes"]?.ToObject<int>() ?? 0,
-                                    flightNumber = segment["flightNumber"]?.ToString(),
-                                    carrier = new Carrier
-                                    {
-                                        id = segment["marketingCarrier"]["id"]?.ToObject<int>() ?? 0,
-                                        name = segment["marketingCarrier"]["name"]?.ToString(),
+                                        var newCarrier = new Carrier
+                                        {
+                                            Id = carId,
+                                            Name = car["name"]?.ToString(),
+                                            LogoURL = car["logoUrl"]?.ToString()
+                                        };
+
+                                        await _context.Carrier.AddAsync(newCarrier);
+                                        await _context.SaveChangesAsync();
                                     }
-                                };
-                                trip.segments.Add(segmentObj);
+                                }
                             }
+
+                            var segments = leg["segments"] as JArray;
+                            if (segments != null)
+                            {
+                                foreach (var segment in segments)
+                                {
+                                    var item = new Segment
+                                    {
+                                        FlightNumber = segment["flightNumber"]?.ToString(),
+                                        Departure = DateTime.Parse(segment["departure"]?.ToString()),
+                                        Arrival = DateTime.Parse(segment["arrival"]?.ToString()),
+                                        Duration = ConvertMinutesToTimeString(segment["durationInMinutes"].ToObject<int>()),
+                                        FlightId = itinerary["id"]?.ToString(),
+                                        CarrierId = segment["marketingCarrier"]["id"]?.ToString(),
+                                    };
+
+                                    flight.Segments.Add(item);
+                                }
+                            }
+
+                            flights.Add(flight);
                         }
-                        itinerary.trip.Add(trip);
                     }
-                    itineraries.Add(itinerary);
                 }
             }
-
-            return itineraries;
+            return flights;
         }
-        
-        public async Task<EverywhereDestination> GetEverywhereAsync(FlightData data)
+
+        private async Task<City> GetCityAsync(string cityId)
+        {
+            return await _context.City.FirstOrDefaultAsync(c => c.Id == cityId);
+        }
+
+        public async Task<List<Country>> GetEverywhereAsync(FlightData data)
         {
             var queryParams = new List<string>();
 
@@ -178,76 +169,37 @@ namespace PROJETOESA.Services
 
             // Organizar os dados
             var jsonObject = JObject.Parse(content);
-            var bucketsArray = jsonObject["data"]["everywhereDestination"]["buckets"] as JArray;
             var resultsArray = jsonObject["data"]["everywhereDestination"]["results"] as JArray;
 
-            EverywhereDestination everywhereDestination = new EverywhereDestination
+            var countriesDict = new Dictionary<string, Country>();
+
+            foreach (var result in resultsArray)
             {
-                Cheapest = new List<Result>(),
-                Direct = new List<Result>(),
-                Popular = new List<Result>()
-            };
+                var codeLocation = (string)result["content"]["location"]["skyCode"];
+                var location = (string)result["content"]["location"]["name"];
 
-            var resultsById = resultsArray.Where(r => r["content"]?["location"]?["id"] != null).ToDictionary(
-                r => (string)r["content"]["location"]["id"],
-                r => new Result
+                if (!countriesDict.ContainsKey(codeLocation))
                 {
-                    Id = (string)r["content"]["location"]["id"],
-                    CodeLocation = (string)r["content"]["location"]["skyCode"],
-                    Location = (string)r["content"]["location"]["name"],
-                    FlightQuotes = new List<FlightQuotes>
-                    {
-                        new FlightQuotes
-                        {
-                            Type = "Cheapest",
-                            Price = (string)r["content"]["flightQuotes"]?["cheapest"]?["price"] ?? "Unknown",
-                            Direct = (bool?)r["content"]["flightQuotes"]?["cheapest"]?["direct"] ?? false
-                        },
-                        new FlightQuotes
-                        {
-                            Type = "Direct",
-                            Price = (string)r["content"]["flightQuotes"]?["direct"]?["price"] ?? "Unknown",
-                            Direct = (bool?)r["content"]["flightQuotes"]?["direct"]?["direct"] ?? false
-                        }
-                    },
-                    ImageUrl = (string)r["content"]["image"]?["url"] ?? "Unknown"
-                }
-            );
 
-            foreach (var bucket in bucketsArray)
-            {
-                var label = (string)bucket["label"];
-                var resultIds = bucket["resultIds"].Select(id => ((string)id).Replace("location-", "")).ToList();
+                    var country = await _context.Country.Include(c => c.Cities).FirstOrDefaultAsync(c => c.Id == codeLocation);
 
-                foreach (var resultId in resultIds)
-                {
-                    if (resultsById.TryGetValue(resultId, out var foundResult))
+                    if (country == null)
                     {
-                        switch (label)
+                        country = new Country
                         {
-                            case "Cheapest flights":
-                                everywhereDestination.Cheapest.Add(foundResult);
-                                break;
-                            case "Direct flights":
-                                everywhereDestination.Direct.Add(foundResult);
-                                break;
-                            case "Suggested for you":
-                                everywhereDestination.Popular.Add(foundResult);
-                                break;
-                            default:
-                                Debug.WriteLine("Label desconhecido: " + label);
-                                break;
-                        }
+                            Id = codeLocation,
+                            Name = location
+                        };
                     }
-                    else
-                    {
-                        Debug.WriteLine("Resultado para o ID não encontrado: " + resultId);
-                    }
+
+                    countriesDict[codeLocation] = country;
                 }
             }
-            return everywhereDestination;
+
+            return countriesDict.Values.ToList();
         }
 
+        // Falta depois Organizar como se recebe os dados
         public async Task<string> GetOneWayAsync(FlightData data)
         {
             var queryParams = new List<string>();
@@ -271,6 +223,7 @@ namespace PROJETOESA.Services
             return content;
         }
 
+        // Falta depois Organizar como se recebe os dados
         public async Task<string> GetCalendarAsync(FlightData data)
         {
             var queryParams = new List<string>();
@@ -290,64 +243,78 @@ namespace PROJETOESA.Services
             return content;
         }
 
-        public async Task<string> GetDataAsync(Country data)
+        public async Task<List<CustomGetDataModel>> GetDataAsync(Country data)
         {
-            var response = await _httpClient.GetAsync($"flights/auto-complete?query={data.name}");
+            var response = await _httpClient.GetAsync($"flights/auto-complete?query={data.Name}");
             response.EnsureSuccessStatusCode();
 
             var content = await response.Content.ReadAsStringAsync();
 
-            return content;
+            var jsonObject = JObject.Parse(content);
+            var datajson = jsonObject["data"] as JArray;
+
+            List<CustomGetDataModel> customData = new List<CustomGetDataModel>();
+
+            if (datajson != null)
+            {
+                foreach (var item in datajson)
+                {                  
+                    var airport = new CustomGetDataModel
+                    {
+                        id = item["presentation"]["id"]?.ToString(),
+                        skyId = item["navigation"]["relevantFlightParams"]["skyId"]?.ToString(),
+                        localizedName = item["navigation"]["localizedName"]?.ToString(),
+                        flightPlaceType = item["navigation"]["relevantFlightParams"]["flightPlaceType"]?.ToString(),
+                        subtitle = item["presentation"]["subtitle"]?.ToString(),
+                    };
+                    
+                    customData.Add(airport);
+                }
+                
+            }
+
+            return customData;
         }
 
-        public async Task<List<Airport>> GetAirportListAsync(Country country)
+        public async Task<List<City>> GetAirportListAsync(Country country)
         {
-            bool countryExists = await _context.Countries.AnyAsync(c => c.id == country.id);
+            bool countryExists = await _context.Country.AnyAsync(c => c.Id == country.Id);
 
             if (countryExists)
             {
-                List<Airport> airportList = await _context.Airport.Where(c => c.countryId == country.id).ToListAsync();
-                return airportList;
+                return await _context.City.Where(c => c.CountryId == country.Id).ToListAsync();
             }
             else
             {
                 var result = await GetDataAsync(country);
 
-                var jsonObject = JObject.Parse(result);
-                var data = jsonObject["data"] as JArray;
+                List<City> cities = new List<City>();
 
-                List<Airport> airports = new List<Airport>();
-
-                if (data != null)
+                foreach (var item in result)
                 {
-                    foreach (var item in data)
+                    if(item.flightPlaceType != "COUNTRY")
                     {
-                        var entityType = item["navigation"]["entityType"]?.ToString();
-                        if (entityType == "AIRPORT")
-                        {
-                            var airport = new Airport
-                            {
-                                id = item["navigation"]["relevantFlightParams"]["skyId"]?.ToString(),
-                                name = item["presentation"]["title"]?.ToString(),
-                                apiKey = item["presentation"]["id"]?.ToString(),
-                                countryId = country.id
-                            };
 
-                            airports.Add(airport);
-                        }
+                        var airport = new City
+                        {
+                            Id = item.skyId,
+                            Name = item.localizedName,
+                            ApiKey = item.id,
+                            CountryId = country.Id,
+                        };
                     }
                 }
 
                 using var transaction = await _context.Database.BeginTransactionAsync();
                 try
                 {
-                    var newCountry = new Country { id = country.id, name = country.name };
-                    await _context.Countries.AddAsync(newCountry);
+                    var newCountry = new Country { Id = country.Id, Name = country.Name };
+                    await _context.Country.AddAsync(newCountry);
 
-                    foreach (var item in airports)
+                    foreach (var item in cities)
                     {
-                        var newAirport = new Airport { id = item.id, name = item.name, apiKey = item.apiKey, countryId = item.countryId };
-                        await _context.Airport.AddAsync(newAirport);
+                        var newCity = new City { Id = item.Id, Name = item.Name, ApiKey = item.ApiKey, CountryId = item.CountryId };
+                        await _context.City.AddAsync(newCity);
                     }
 
                     await _context.SaveChangesAsync();
@@ -358,43 +325,44 @@ namespace PROJETOESA.Services
                     await transaction.RollbackAsync();
                 }
 
-                return airports;
+                return cities;
             }
         }
 
-        public async Task<List<Itinerary>> GetSugestionsCompanyAsync(string carrier)
+        public async Task<List<Flight>> GetSugestionsCompanyAsync(string carrier)
         {
             string tomorrow = DateTime.Now.AddDays(1).ToString("yyyy-MM-dd");
             string nextWeek = DateTime.Now.AddDays(8).ToString("yyyy-MM-dd");
             FlightData origin = new FlightData { fromEntityId = "eyJlIjoiOTU1NjUwNTUiLCJzIjoiTElTIiwiaCI6IjI3NTQ0MDcyIn0=" };
 
-            // Lista de possiveis viagens
-            EverywhereDestination possibleDestinations = await GetEverywhereAsync(origin);
-
-            // Lista de paises possiveis
-            List<Country> paises = possibleDestinations.Cheapest
-                .Concat(possibleDestinations.Direct)
-                .Concat(possibleDestinations.Popular)
-                .Select(destination => new Country { id = destination.CodeLocation, name = destination.Location })
-                .Distinct()
-                .ToList();
-
-            List<Itinerary> finalItineraries = new List<Itinerary>();
+            List<Country> possibleDestinations = await GetEverywhereAsync(origin);
+            
+            List<Flight> finalItineraries = new List<Flight>();
             while (finalItineraries.Count < 1)
             {
-                Country countrySelected = SelectRandomCountry(paises);
-                List<Airport> airports = await GetAirportListAsync(countrySelected);
-                Airport selectedAirport = SelectRandomAirport(airports);
+                Country countrySelected = SelectRandomCountry(possibleDestinations);
 
-                FlightData data = new FlightData { fromEntityId = origin.fromEntityId, toEntityId = selectedAirport.apiKey, departDate = tomorrow, returnDate = nextWeek };
+                List<City> airports;
+                if(!countrySelected.Cities.Any())
+                {
+                    airports = await GetAirportListAsync(countrySelected);
+                }
+                else
+                {
+                    airports = countrySelected.Cities;
+                }
 
-                List<Itinerary> itineraries = await GetRoundtripAsync(data);
+                City selectedAirport = SelectRandomAirport(airports);
 
-                var foundItineraries = itineraries
-                    .Where(itinerary => itinerary.trip
-                    .All(trip => trip.carriers
-                    .All(c => c.name == carrier)))
-                    .Take(2);
+                FlightData data = new FlightData { fromEntityId = origin.fromEntityId, toEntityId = selectedAirport.ApiKey, departDate = tomorrow, returnDate = nextWeek };
+
+                List<Flight> itineraries = await GetRoundtripAsync(data);
+
+                List<Flight> foundItineraries = itineraries
+                    .Where(itinerary => itinerary.Segments
+                    .All(segment => segment.CarrierId == carrier))
+                    .Take(2)
+                    .ToList();
 
                 finalItineraries.AddRange(foundItineraries);
             }
@@ -404,8 +372,8 @@ namespace PROJETOESA.Services
 
         public async Task<List<Carrier>> GetFavoriteAirlineAsync()
         {
-            List<Carrier> carrierList = await _context.Carrier.OrderByDescending(e => e.searchTimes).Take(5).ToListAsync();
-            
+            List<Carrier> carrierList = await _context.Carrier.OrderByDescending(e => e.SearchTimes).Take(5).ToListAsync();
+
             return carrierList;
         }
 
@@ -424,12 +392,21 @@ namespace PROJETOESA.Services
             return selectedCountry;
         }
 
-        private Airport SelectRandomAirport(List<Airport> airports)
+        private City SelectRandomAirport(List<City> cities)
         {
-            var randomIndex = _random.Next(airports.Count);
-            return airports[randomIndex];
+            var randomIndex = _random.Next(cities.Count);
+            return cities[randomIndex];
         }
     }
 
+    public class CustomGetDataModel
+    {
+        public string id { get; set; }
+        public string localizedName { get; set; }
+        public string flightPlaceType { get; set; }
+        public string subtitle { get; set; }
+        public string skyId { get; set; }
+  
 
+    }
 }

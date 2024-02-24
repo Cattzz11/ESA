@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Itinerary } from '../Models/tripData';
 import { SkyscannerService } from '../services/skyscannerService';
-import { AirLine } from '../Models/AirLine';
 import { Router } from '@angular/router';
+import { Carrier } from '../Models/Carrier';
 
 @Component({
   selector: 'app-home',
@@ -10,7 +9,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  airLineResults: AirLine[] = [];
+  airLineResults: Carrier[] = [];
 
   constructor(private skyscannerService: SkyscannerService, private router: Router) { }
 
@@ -29,7 +28,7 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  searchFlights(data: AirLine) {
-    this.router.navigate(['/filter-by-airline/', data.name]);
+  searchFlights(data: Carrier) {
+    this.router.navigate(['/filter-by-airline/', data.id, data.logoURL]);
   }
 }

@@ -6,4 +6,5 @@ export interface User {
   age?: number; 
   nationality?: string; 
   occupation?: string;
+  gender?: string
 }

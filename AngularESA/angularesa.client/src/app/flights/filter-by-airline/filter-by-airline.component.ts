@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { SkyscannerService } from '../../services/skyscannerService';
-import { Itinerary } from '../../Models/tripData';
 import { ActivatedRoute } from '@angular/router';
+import { Flight } from '../../Models/Flight';
+import { Carrier } from '../../Models/Carrier';
 
 @Component({
   selector: 'app-filter-by-airline',
@@ -9,18 +10,21 @@ import { ActivatedRoute } from '@angular/router';
   styleUrl: './filter-by-airline.component.css'
 })
 export class FilterByAirlineComponent implements OnInit {
-  flightResults: Itinerary[] = [];
-  airline: string = "";
+  flightResults: Flight[] = [];
+  airlineId: string = "";
+  airlineLogo: string = "";
   isLoading: boolean = true;
 
-  constructor(private skyscannerService: SkyscannerService, private route: ActivatedRoute,) { }
+  constructor(private skyscannerService: SkyscannerService, private route: ActivatedRoute,) {}
 
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
-      this.airline = this.route.snapshot.params['airline'];
+      this.airlineId = this.route.snapshot.params['id'];
+      this.airlineLogo = this.route.snapshot.params['logoURL'];
     });
+    console.log(this.airlineLogo);
 
-    this.skyscannerService.getSugestionsCompany(this.airline).subscribe({
+    this.skyscannerService.getSugestionsCompany(this.airlineId).subscribe({
         next: (response) => {
           this.flightResults = response;
           this.isLoading = false;
@@ -31,6 +35,6 @@ export class FilterByAirlineComponent implements OnInit {
           this.isLoading = false;
         }
       });
-    }
-
+    
+  }
 }

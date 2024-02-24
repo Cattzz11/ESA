@@ -4,9 +4,9 @@ import { Observable } from 'rxjs';
 import { FlightData } from '../Models/flight-data';
 import { Country } from '../Models/country';
 import { map } from 'rxjs/operators';
-import { Airport } from '../Models/Airport';
-import { Itinerary } from '../Models/tripData';
-import { AirLine } from '../Models/AirLine';
+import { City } from '../Models/City';
+import { Flight } from '../Models/Flight';
+import { Carrier } from '../Models/Carrier';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +14,7 @@ import { AirLine } from '../Models/AirLine';
 export class SkyscannerService {
   constructor(private http: HttpClient) { }
 
-  public getRoundtripFlights(data: FlightData): Observable<Itinerary[]> {
+  public getRoundtripFlights(data: FlightData): Observable<Flight[]> {
     let params = new HttpParams();
 
     // Campos obrigatórios
@@ -32,7 +32,7 @@ export class SkyscannerService {
     if (data.infants) params = params.set('infants', data.infants);
     if (data.cabinClass) params = params.set('cabinClass', data.cabinClass);
 
-    return this.http.get<Itinerary[]>('api/search-roundtrip', { params: params });
+    return this.http.get<Flight[]>('api/search-roundtrip', { params: params });
   }
 
   public getEverywhereFlights(data: FlightData): Observable<any> {
@@ -92,21 +92,21 @@ export class SkyscannerService {
     return this.http.get('api/price-calendar', { params: params });
   }
 
-  public getAirportList(data: Country): Observable<Airport[]> {
+  public getAirportList(data: Country): Observable<City[]> {
     let params = new HttpParams()
       .set('id', data.id)
       .set('name', data.name);
 
-    return this.http.get<Airport[]>('api/airport-list', { params: params });
+    return this.http.get<City[]>('api/airport-list', { params: params });
   }
 
-  public getSugestionsCompany(carrierName: string): Observable<Itinerary[]> {
+  public getSugestionsCompany(carrierName: string): Observable<Flight[]> {
     let params = new HttpParams().set('carrierName', carrierName);
-    return this.http.get<Itinerary[]>('api/sugestions-company', { params: params });
+    return this.http.get<Flight[]>('api/sugestions-company', { params: params });
   }
 
-  public getFavoriteAirline(): Observable<AirLine[]> {
-    return this.http.get<AirLine[]>('api/favorite-airline');
+  public getFavoriteAirline(): Observable<Carrier[]> {
+    return this.http.get<Carrier[]>('api/favorite-airline');
   }
   
 }

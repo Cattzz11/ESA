@@ -1,10 +1,16 @@
-﻿namespace PROJETOESA.Models
+﻿using Mono.TextTemplating;
+using System.ComponentModel.DataAnnotations;
+
+namespace PROJETOESA.Models
 {
     public class Carrier
     {
-        public int id {  get; set; }
-        public string? logoUrl { get; set; }
-        public string name { get; set; }
-        public int searchTimes { get; set; } = 0;
+        [Key]
+        public string Id { get; set; }
+        public string Name { get; set; }
+        public string LogoURL { get; set; }
+        public int SearchTimes { get; set; }
+
+        public List<Segment>? Segments { get; set; }
     }
 }
