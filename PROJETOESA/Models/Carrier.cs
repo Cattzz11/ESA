@@ -10,7 +10,5 @@ namespace PROJETOESA.Models
         public string Name { get; set; }
         public string LogoURL { get; set; }
         public int SearchTimes { get; set; }
-
-        public List<Segment>? Segments { get; set; }
     }
 }

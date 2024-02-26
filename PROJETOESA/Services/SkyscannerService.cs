@@ -1,17 +1,9 @@
 ﻿using Newtonsoft.Json.Linq;
-using PROJETOESA.Controllers;
 using PROJETOESA.Models;
 using System.Diagnostics;
-using Newtonsoft.Json.Linq;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 using PROJETOESA.Data;
 using Microsoft.EntityFrameworkCore;
-using System.Diagnostics.Metrics;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading;
-using Mono.TextTemplating;
 
 namespace PROJETOESA.Services
 {
@@ -27,7 +19,7 @@ namespace PROJETOESA.Services
             _context = context;
         }
 
-        public async Task<List<Flight>> GetRoundtripAsync(FlightData data)
+        public async Task<List<Trip>> GetRoundtripAsync(FlightData data)
         {
             var queryParams = new List<string>();
 
@@ -54,12 +46,26 @@ namespace PROJETOESA.Services
             var jsonObject = JObject.Parse(content);
             var itinerariesData = jsonObject["data"]["itineraries"] as JArray;
 
-            List<Flight> flights = new List<Flight>();
+            List<Trip> trips = new List<Trip>();
 
             if (itinerariesData != null)
             {
                 foreach (var itinerary in itinerariesData)
                 {
+                    Trip trip = new Trip
+                    {
+                        Id = itinerary["id"]?.ToString(),
+                        Price = (double?)itinerary["price"]?["raw"] ?? 0.0,
+                        isSelfTransfer = itinerary["isSelfTransfer"]?.ToObject<bool>() ?? false,
+                        isProtectedSelfTransfer = itinerary["isProtectedSelfTransfer"]?.ToObject<bool>() ?? false,
+                        isChangeAllowed = itinerary["farePolicy"]?["isChangeAllowed"]?.ToObject<bool>() ?? false,
+                        isPartiallyChangeable = itinerary["farePolicy"]?["isPartiallyChangeable"]?.ToObject<bool>() ?? false,
+                        isCancellationAllowed = itinerary["farePolicy"]?["isCancellationAllowed"]?.ToObject<bool>() ?? false,
+                        isPartiallyRefundable = itinerary["farePolicy"]?["isPartiallyRefundable"]?.ToObject<bool>() ?? false,
+                        Score = itinerary["score"]?.ToObject<double>() ?? 0,
+                        Flights = new List<Flight>()
+                    };
+
                     var legs = itinerary["legs"] as JArray;
                     if (legs != null)
                     {
@@ -70,22 +76,14 @@ namespace PROJETOESA.Services
 
                             var flight = new Flight
                             {
-                                Id = itinerary["id"]?.ToString(),
-                                Price = (double?)itinerary["price"]?["raw"] ?? 0.0,
+                                Id = leg["id"]?.ToString(),
+                                Duration = ConvertMinutesToTimeString(leg["durationInMinutes"].ToObject<int>()),
                                 Departure = DateTime.Parse(leg["departure"]?.ToString()),
                                 Arrival = DateTime.Parse(leg["arrival"]?.ToString()),
-                                Duration = ConvertMinutesToTimeString(leg["durationInMinutes"].ToObject<int>()),
                                 OriginCityId = leg["origin"]["id"]?.ToString(),
                                 DestinationCityId = leg["destination"]["id"]?.ToString(),
                                 OriginCity = originCity,
                                 DestinationCity = destinationCity,
-                                isSelfTransfer = itinerary["isSelfTransfer"]?.ToObject<bool>() ?? false,
-                                isProtectedSelfTransfer = itinerary["isProtectedSelfTransfer"]?.ToObject<bool>() ?? false,
-                                isChangeAllowed = itinerary["farePolicy"]?["isChangeAllowed"]?.ToObject<bool>() ?? false,
-                                isPartiallyChangeable = itinerary["farePolicy"]?["isPartiallyChangeable"]?.ToObject<bool>() ?? false,
-                                isCancellationAllowed = itinerary["farePolicy"]?["isCancellationAllowed"]?.ToObject<bool>() ?? false,
-                                isPartiallyRefundable = itinerary["farePolicy"]?["isPartiallyRefundable"]?.ToObject<bool>() ?? false,
-                                Score = itinerary["score"]?.ToObject<double>() ?? 0,
                                 Segments = new List<Segment>()
                             };
 
@@ -118,31 +116,47 @@ namespace PROJETOESA.Services
                             {
                                 foreach (var segment in segments)
                                 {
+                                    City originCitySegment = await GetCityAsync(segment["origin"]["flightPlaceId"]?.ToString());
+                                    City destinationCitySegment = await GetCityAsync(segment["destination"]["flightPlaceId"]?.ToString());
+                                    Carrier carrierSegment = await GetCarrierAsync(segment["marketingCarrier"]["id"]?.ToString());
+
                                     var item = new Segment
                                     {
                                         FlightNumber = segment["flightNumber"]?.ToString(),
                                         Departure = DateTime.Parse(segment["departure"]?.ToString()),
                                         Arrival = DateTime.Parse(segment["arrival"]?.ToString()),
                                         Duration = ConvertMinutesToTimeString(segment["durationInMinutes"].ToObject<int>()),
-                                        FlightId = itinerary["id"]?.ToString(),
+                                        FlightId = leg["id"]?.ToString(),
                                         CarrierId = segment["marketingCarrier"]["id"]?.ToString(),
+                                        OriginCityId = segment["origin"]["flightPlaceId"]?.ToString(),
+                                        DestinationCityId = segment["destination"]["flightPlaceId"]?.ToString(),
+                                        OriginCity = originCitySegment,
+                                        DestinationCity = destinationCitySegment,
+                                        Carrier = carrierSegment,
                                     };
 
                                     flight.Segments.Add(item);
                                 }
                             }
 
-                            flights.Add(flight);
+                            trip.Flights.Add(flight);
                         }
                     }
+
+                    trips.Add(trip);
                 }
             }
-            return flights;
+            return trips;
         }
 
         private async Task<City> GetCityAsync(string cityId)
         {
             return await _context.City.FirstOrDefaultAsync(c => c.Id == cityId);
+        }
+
+        private async Task<Carrier> GetCarrierAsync(string carrierId)
+        {
+            return await _context.Carrier.FirstOrDefaultAsync(c => c.Id == carrierId);
         }
 
         public async Task<List<Country>> GetEverywhereAsync(FlightData data)
@@ -181,7 +195,7 @@ namespace PROJETOESA.Services
                 if (!countriesDict.ContainsKey(codeLocation))
                 {
 
-                    var country = await _context.Country.Include(c => c.Cities).FirstOrDefaultAsync(c => c.Id == codeLocation);
+                    var country = await _context.Country.FirstOrDefaultAsync(c => c.Id == codeLocation);
 
                     if (country == null)
                     {
@@ -329,7 +343,94 @@ namespace PROJETOESA.Services
             }
         }
 
-        public async Task<List<Flight>> GetSugestionsCompanyAsync(string carrier)
+        public async Task<List<Trip>> GetSugestionsCompanyAsyncTest()
+        {
+            List<Trip> trips = new List<Trip>();
+
+            Trip trip = new Trip
+            {
+                Id = "13577-2402250945--31781-0-11469-2402251030|11469-2403051635--31781-0-13577-2403051725",
+                Price = 84.99,
+                isSelfTransfer = false,
+                isProtectedSelfTransfer = false,
+                isChangeAllowed = false,
+                isPartiallyChangeable = false,
+                isCancellationAllowed = false,
+                isPartiallyRefundable = false,
+                Score = 0.999,
+                Flights = new List<Flight>()
+            };
+
+            var flight1 = new Flight
+            {
+                Id = "13577-2402250945--31781-0-11469-2402251030",
+                Duration = "00:45",
+                Departure = new DateTime(2024, 02, 25, 09,45,00),
+                Arrival = new DateTime(2024, 02, 25, 10, 30, 00),
+                OriginCityId = "LIS",
+                DestinationCityId = "FAO",
+                OriginCity = await GetCityAsync("LIS"),
+                DestinationCity = await GetCityAsync("FAO"),
+                Segments = new List<Segment>()
+            };
+
+            var flight1Segment1 = new Segment
+            {
+                FlightNumber = "1901",
+                Departure = new DateTime(2024, 02, 25, 09, 45, 00),
+                Arrival = new DateTime(2024, 02, 25, 10, 30, 00),
+                Duration = "00:45",
+                FlightId = flight1.Id,
+                CarrierId = "-31781",
+                OriginCityId = "LIS",
+                DestinationCityId = "FAO",
+                OriginCity = await GetCityAsync("LIS"),
+                DestinationCity = await GetCityAsync("FAO"),
+                Carrier = await GetCarrierAsync("-31781"),
+            };
+
+            flight1.Segments.Add(flight1Segment1);
+
+            var flight2 = new Flight
+            {
+                Id = "11469-2403051635--31781-0-13577-2403051725",
+                Duration = "00:50",
+                Departure = new DateTime(2024, 03, 05, 16, 35, 00),
+                Arrival = new DateTime(2024, 03, 05, 17, 25, 00),
+                OriginCityId = "FAO",
+                DestinationCityId = "LIS",
+                OriginCity = await GetCityAsync("FAO"),
+                DestinationCity = await GetCityAsync("LIS"),
+                Segments = new List<Segment>()
+            };
+
+            var flight2Segment1 = new Segment
+            {
+                FlightNumber = "1904",
+                Duration = "00:50",
+                Departure = new DateTime(2024, 03, 05, 16, 35, 00),
+                Arrival = new DateTime(2024, 03, 05, 17, 25, 00),
+                OriginCityId = "FAO",
+                DestinationCityId = "LIS",
+                OriginCity = await GetCityAsync("FAO"),
+                DestinationCity = await GetCityAsync("LIS"),
+                FlightId = flight2.Id,
+                CarrierId = "-31781",
+                Carrier = await GetCarrierAsync("-31781"),
+            };
+
+            flight2.Segments.Add(flight2Segment1);
+
+            trip.Flights.Add(flight1);
+            trip.Flights.Add(flight2);
+
+            trips.Add(trip);
+
+            return trips;
+        }
+
+
+        public async Task<List<Trip>> GetSugestionsCompanyAsync(string carrierId)
         {
             string tomorrow = DateTime.Now.AddDays(1).ToString("yyyy-MM-dd");
             string nextWeek = DateTime.Now.AddDays(8).ToString("yyyy-MM-dd");
@@ -337,30 +438,28 @@ namespace PROJETOESA.Services
 
             List<Country> possibleDestinations = await GetEverywhereAsync(origin);
             
-            List<Flight> finalItineraries = new List<Flight>();
+            List<Trip> finalItineraries = new List<Trip>();
             while (finalItineraries.Count < 1)
             {
                 Country countrySelected = SelectRandomCountry(possibleDestinations);
 
-                List<City> airports;
-                if(!countrySelected.Cities.Any())
+                List<City> cities = await _context.City.Where(c => c.CountryId == countrySelected.Id).ToListAsync();
+
+                if(!cities.Any())
                 {
-                    airports = await GetAirportListAsync(countrySelected);
-                }
-                else
-                {
-                    airports = countrySelected.Cities;
+                    cities = await GetAirportListAsync(countrySelected);
                 }
 
-                City selectedAirport = SelectRandomAirport(airports);
+                City selectedAirport = SelectRandomAirport(cities);
 
                 FlightData data = new FlightData { fromEntityId = origin.fromEntityId, toEntityId = selectedAirport.ApiKey, departDate = tomorrow, returnDate = nextWeek };
 
-                List<Flight> itineraries = await GetRoundtripAsync(data);
+                List<Trip> itineraries = await GetRoundtripAsync(data);
 
-                List<Flight> foundItineraries = itineraries
-                    .Where(itinerary => itinerary.Segments
-                    .All(segment => segment.CarrierId == carrier))
+                List<Trip> foundItineraries = itineraries
+                    .Where(trip => trip.Flights
+                    .SelectMany(flight => flight.Segments)
+                    .All(segment => segment.CarrierId == carrierId))
                     .Take(2)
                     .ToList();
 
@@ -377,6 +476,57 @@ namespace PROJETOESA.Services
             return carrierList;
         }
 
+        public async Task<List<TripDto>> GetFlightsByUserAsync(string userId)
+        {
+            var tripIds = await _context.UserFlight
+                                .Where(uf => uf.UserId == userId)
+                                .Select(uf => uf.TripId)
+                                .ToListAsync();
+
+            var trips = await _context.Trip
+                                .Where(t => tripIds.Contains(t.Id))
+                                .Include(t => t.Flights)
+                                    .ThenInclude(f => f.Segments)
+                                        .ThenInclude(s => s.OriginCity)
+                                .Include(t => t.Flights)
+                                    .ThenInclude(f => f.Segments)
+                                        .ThenInclude(s => s.DestinationCity)
+                                .Include(t => t.Flights)
+                                    .ThenInclude(f => f.Segments)
+                                        .ThenInclude(s => s.Carrier)
+                                .ToListAsync();
+
+            var tripDtos = trips.Select(t => new TripDto
+            {
+                Id = t.Id,
+                Price = t.Price,
+                Flights = t.Flights.Select(f => new FlightDto
+                {
+                    Id = f.Id,
+                    Duration = f.Duration,
+                    Segments = f.Segments.Select(s => new SegmentDto
+                    {
+                        FlightNumber = s.FlightNumber,
+                        Departure = s.Departure,
+                        Arrival = s.Arrival,
+                        Duration = s.Duration,
+                        OriginCityId = s.OriginCityId,
+                        DestinationCityId = s.DestinationCityId,
+                        Carrier = s.Carrier != null ? new CarrierDto
+                        {
+                            Id = s.Carrier.Id,
+                            Name = s.Carrier.Name,
+                            LogoURL = s.Carrier.LogoURL,
+                            SearchTimes = s.Carrier.SearchTimes,
+                        } : null // Aqui está certo, já que Carrier pode ser null
+                    }).ToList()
+                }).ToList()
+            }).ToList();
+
+            return tripDtos;
+        }
+
+
         private string ConvertMinutesToTimeString(int durationInMinutes)
         {
             int hours = durationInMinutes / 60;
@@ -386,6 +536,10 @@ namespace PROJETOESA.Services
 
         private Country SelectRandomCountry(List<Country> countries)
         {
+            if (countries.Count == 1)
+            {
+                return countries[0];
+            }
             var randomIndex = _random.Next(countries.Count);
             Country selectedCountry = countries[randomIndex];
             countries.RemoveAt(randomIndex);
@@ -394,6 +548,10 @@ namespace PROJETOESA.Services
 
         private City SelectRandomAirport(List<City> cities)
         {
+            if(cities.Count == 1)
+            {
+                return cities[0];
+            }
             var randomIndex = _random.Next(cities.Count);
             return cities[randomIndex];
         }

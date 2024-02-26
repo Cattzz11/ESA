@@ -29,6 +29,7 @@ export class HomeComponent implements OnInit {
   }
 
   searchFlights(data: Carrier) {
-    this.router.navigate(['/filter-by-airline/', data.id, data.logoURL]);
+    this.router.navigate(['/filter-by-airline'], { state: { data: data } });
   }
+
 }

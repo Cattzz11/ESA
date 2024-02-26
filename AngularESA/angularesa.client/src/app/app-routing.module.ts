@@ -21,7 +21,7 @@ const routes: Routes = [
   { path: 'recover-password', component: RecoverPasswordComponent },
   { path: 'recovery-code/:email', component: RecoveryCodeComponent },
   { path: 'premium-profile-page', component: PremiumProfilePageComponent },
-  { path: 'filter-by-airline/:id/:logoURL', component: FilterByAirlineComponent },
+  { path: 'filter-by-airline', component: FilterByAirlineComponent },
 ];
 
 @NgModule({

@@ -8,6 +8,7 @@ using PROJETOESA.Services;
 using Microsoft.EntityFrameworkCore;
 using PROJETOESA.Data;
 using System.Diagnostics;
+using Microsoft.IdentityModel.Tokens;
 
 namespace PROJETOESA.Controllers
 {
@@ -81,23 +82,7 @@ namespace PROJETOESA.Controllers
             var user = await _userManager.GetUserAsync(User);
             if (user == null) return NotFound();
 
-            object userInfo;
-
-            if (user.BirthDate.HasValue)
-            {
-                var today = DateTime.Today;
-                var age = today.Year - user.BirthDate.Value.Year;
-
-                if (user.BirthDate.Value > today.AddYears(-age)) age--;
-
-                userInfo = new { UserName = user.UserName, Email = user.Email, Role = user.Role.ToString(), Name = user.Name, Age = age };
-            }
-            else
-            {
-                userInfo = new { UserName = user.UserName, Email = user.Email, Role = user.Role.ToString(), Name = user.Name };
-            }
-
-            return Ok(userInfo);
+            return Ok(user);
         }
 
 

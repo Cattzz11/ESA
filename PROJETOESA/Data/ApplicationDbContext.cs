@@ -15,6 +15,7 @@ namespace PROJETOESA.Data
         //public DbSet<Person> Person { get; set; } = default!;
 
         public DbSet<PasswordRecoveryCode> PasswordRecoveryCodes { get; set; }
+        public DbSet<Trip> Trip { get; set; }
         public DbSet<Flight> Flights { get; set; }
         public DbSet<City> City { get; set; }
         public DbSet<Country> Country { get; set; }
@@ -28,40 +29,43 @@ namespace PROJETOESA.Data
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.Entity<UserFlight>()
-                .HasKey(uf => new { uf.UserId, uf.FlightId });
+                .HasKey(uf => new { uf.UserId, uf.TripId });
 
-            modelBuilder.Entity<City>()
-                .HasMany(a => a.Flights)
-                .WithOne()
-                .HasForeignKey(f => f.OriginCityId)
-                .OnDelete(DeleteBehavior.Restrict);
+            modelBuilder.Entity<Flight>(entity =>
+            {
+                entity.HasOne(f => f.OriginCity)
+                    .WithMany()
+                    .HasForeignKey(f => f.OriginCityId)
+                    .OnDelete(DeleteBehavior.Restrict);
 
-            modelBuilder.Entity<City>()
-                .HasMany(a => a.Flights)
-                .WithOne()
-                .HasForeignKey(f => f.DestinationCityId)
-                .OnDelete(DeleteBehavior.Restrict);
+                entity.HasOne(f => f.DestinationCity)
+                    .WithMany()
+                    .HasForeignKey(f => f.DestinationCityId)
+                    .OnDelete(DeleteBehavior.Restrict);
+            });
 
-            modelBuilder.Entity<Flight>()
-                .HasOne(f => f.DestinationCity)
-                .WithMany(a => a.Flights)
-                .HasForeignKey(f => f.DestinationCityId)
-                .OnDelete(DeleteBehavior.Restrict);
+            modelBuilder.Entity<Segment>(entity =>
+            {
+                entity.HasOne(s => s.OriginCity)
+                    .WithMany()
+                    .HasForeignKey(s => s.OriginCityId)
+                    .OnDelete(DeleteBehavior.Restrict);
 
-            modelBuilder.Entity<Segment>()
-                .HasOne(s => s.Flight)
-                .WithMany(f => f.Segments)
-                .HasForeignKey(s => s.FlightId);
+                entity.HasOne(s => s.DestinationCity)
+                    .WithMany()
+                    .HasForeignKey(s => s.DestinationCityId)
+                    .OnDelete(DeleteBehavior.Restrict);
 
-            modelBuilder.Entity<AccompanyingPassenger>()
-                .HasKey(ap => ap.Id);
+                entity.HasOne(s => s.Carrier)
+                    .WithMany()
+                    .HasForeignKey(s => s.CarrierId)
+                    .OnDelete(DeleteBehavior.Restrict);
 
-            modelBuilder.Entity<AccompanyingPassenger>()
-                .HasOne(ap => ap.UserFlight)
-                .WithMany(uf => uf.AccompanyingPassengers)
-                .HasForeignKey(ap => new { ap.UserId, ap.FlightId })
-                .OnDelete(DeleteBehavior.NoAction);
-
+                entity.HasOne(s => s.Flight)
+                    .WithMany(f => f.Segments)
+                    .HasForeignKey(s => s.FlightId)
+                    .OnDelete(DeleteBehavior.Restrict);
+            });
         }
     }
 }

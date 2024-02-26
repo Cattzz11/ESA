@@ -2,11 +2,12 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { FlightData } from '../Models/flight-data';
-import { Country } from '../Models/country';
 import { map } from 'rxjs/operators';
 import { City } from '../Models/City';
 import { Flight } from '../Models/Flight';
 import { Carrier } from '../Models/Carrier';
+import { Trip } from '../Models/Trip';
+import { Country } from '../Models/Country';
 
 @Injectable({
   providedIn: 'root'
@@ -100,13 +101,17 @@ export class SkyscannerService {
     return this.http.get<City[]>('api/airport-list', { params: params });
   }
 
-  public getSugestionsCompany(carrierName: string): Observable<Flight[]> {
-    let params = new HttpParams().set('carrierName', carrierName);
-    return this.http.get<Flight[]>('api/sugestions-company', { params: params });
+  public getSugestionsCompany(carrierId: string): Observable<Trip[]> {
+    let params = new HttpParams().set('carrierId', carrierId);
+    return this.http.get<Trip[]>('api/sugestions-company', { params: params });
   }
 
   public getFavoriteAirline(): Observable<Carrier[]> {
     return this.http.get<Carrier[]>('api/favorite-airline');
   }
-  
+
+  public getFlightsByUser(userId: string): Observable<Trip[]> {
+    let params = new HttpParams().set('userId', userId);
+    return this.http.get<Trip[]>('api/flight-by-user', { params: params });
+  }
 }

@@ -6,23 +6,33 @@
   </div>
 
   <div *ngIf="!isLoading" class="viagens-list">
-    <div *ngFor="let viagem of flightResults" class="viagem-card">
-      <img [src]="airlineLogo" alt="Logo">
+    <div *ngFor="let trip of flightResults" class="viagem-card">
+
+      <img *ngIf="trip.flights[0].segments?.[0]?.carrier?.logoURL" [src]="trip.flights[0].segments[0].carrier.logoURL" alt="Logo da Companhia Aérea">
+
       <div class="departure">
-        <p>{{ viagem.departure | date: 'HH:mm' }} h</p>
-        <p>{{ viagem.originCity.name }}</p>
+        <p>{{ trip.flights[0].segments[0].departure | date: 'dd/MM/YYYY' }}</p>
+        <p>{{ trip.flights[0].segments[0].departure | date: 'HH:mm' }} h</p>
+        <p>{{ trip.flights[0].segments[0].originCity.name }}</p>
       </div>
+
       <div class="duration">
-        <p>{{ viagem.duration }} h</p>
+        <p>{{ trip.flights[0].duration }} h</p>
       </div>
+
       <div class="destination">
-        <p>{{ viagem.arrival | date: 'HH:mm' }} h</p>
-        <p>{{ viagem.destinationCity.name }}</p>
+        <p>{{ trip.flights[0].segments[trip.flights[0].segments.length - 1].arrival | date: 'dd/MM/YYYY' }}</p>
+        <p>{{ trip.flights[0].segments[trip.flights[0].segments.length - 1].arrival | date: 'HH:mm' }} h</p>
+        <p>{{ trip.flights[0].segments[trip.flights[0].segments.length - 1].destinationCity.name }}</p>
       </div>
+
       <div class="price">
-        <p>{{ viagem.price }} €</p>
+        <p>{{ trip.price }} €</p>
         <a href="your-target-url" class="button-link">Mais opções</a>
       </div>
+
     </div>
   </div>
 </div>
+
+

@@ -11,11 +11,5 @@ namespace PROJETOESA.Models
         public string Gender { get; set; }
         public string Nationality { get; set; }
         public DateTime BirthDate { get; set; }
-
-        public string UserId { get; set; }
-        public string FlightId { get; set; }
-
-        [ForeignKey("UserId, FlightId")]
-        public virtual UserFlight UserFlight { get; set; }
     }
 }

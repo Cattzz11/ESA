@@ -13,6 +13,5 @@ namespace PROJETOESA.Models
         public string? Gender { get; set; }
 
         public List<UserFlight>? UserFlights { get; set; }
-        public List<AccompanyingPassenger>? AccompanyingPassengers { get; set; }
     }
 }

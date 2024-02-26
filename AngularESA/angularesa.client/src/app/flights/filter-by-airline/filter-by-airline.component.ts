@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { SkyscannerService } from '../../services/skyscannerService';
 import { ActivatedRoute } from '@angular/router';
-import { Flight } from '../../Models/Flight';
 import { Carrier } from '../../Models/Carrier';
+import { Trip } from '../../Models/Trip';
 
 @Component({
   selector: 'app-filter-by-airline',
@@ -10,21 +10,18 @@ import { Carrier } from '../../Models/Carrier';
   styleUrl: './filter-by-airline.component.css'
 })
 export class FilterByAirlineComponent implements OnInit {
-  flightResults: Flight[] = [];
-  airlineId: string = "";
-  airlineLogo: string = "";
+  flightResults: Trip[] = [];
   isLoading: boolean = true;
+  carrier: Carrier | undefined;
 
   constructor(private skyscannerService: SkyscannerService, private route: ActivatedRoute,) {}
 
   ngOnInit(): void {
-    this.route.queryParams.subscribe(params => {
-      this.airlineId = this.route.snapshot.params['id'];
-      this.airlineLogo = this.route.snapshot.params['logoURL'];
-    });
-    console.log(this.airlineLogo);
-
-    this.skyscannerService.getSugestionsCompany(this.airlineId).subscribe({
+    const routerState = history.state.data;
+    if (routerState) {
+      this.carrier = routerState;
+    
+      this.skyscannerService.getSugestionsCompany(routerState.id).subscribe({
         next: (response) => {
           this.flightResults = response;
           this.isLoading = false;
@@ -35,6 +32,6 @@ export class FilterByAirlineComponent implements OnInit {
           this.isLoading = false;
         }
       });
-    
+    }
   }
 }

@@ -12,7 +12,7 @@ using PROJETOESA.Data;
 namespace PROJETOESA.Migrations
 {
     [DbContext(typeof(AeroHelperContext))]
-    [Migration("20240224170858_initial")]
+    [Migration("20240226200148_initial")]
     partial class initial
     {
         /// <inheritdoc />
@@ -166,15 +166,8 @@ namespace PROJETOESA.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("ApplicationUserId")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<DateTime>("BirthDate")
                         .HasColumnType("datetime2");
-
-                    b.Property<string>("FlightId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Gender")
                         .IsRequired()
@@ -188,15 +181,15 @@ namespace PROJETOESA.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("UserId")
-                        .IsRequired()
+                    b.Property<string>("UserFlightTripId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("UserFlightUserId")
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ApplicationUserId");
-
-                    b.HasIndex("UserId", "FlightId");
+                    b.HasIndex("UserFlightUserId", "UserFlightTripId");
 
                     b.ToTable("AccompanyingPassenger");
                 });
@@ -367,32 +360,16 @@ namespace PROJETOESA.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<double>("Score")
-                        .HasColumnType("float");
-
-                    b.Property<bool>("isCancellationAllowed")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("isChangeAllowed")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("isPartiallyChangeable")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("isPartiallyRefundable")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("isProtectedSelfTransfer")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("isSelfTransfer")
-                        .HasColumnType("bit");
+                    b.Property<string>("TripId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("DestinationCityId");
 
                     b.HasIndex("OriginCityId");
+
+                    b.HasIndex("TripId");
 
                     b.ToTable("Flights");
                 });
@@ -436,6 +413,10 @@ namespace PROJETOESA.Migrations
                     b.Property<DateTime>("Departure")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("DestinationCityId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<string>("Duration")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -444,13 +425,55 @@ namespace PROJETOESA.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<string>("OriginCityId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
                     b.HasKey("FlightNumber");
 
                     b.HasIndex("CarrierId");
 
+                    b.HasIndex("DestinationCityId");
+
                     b.HasIndex("FlightId");
 
+                    b.HasIndex("OriginCityId");
+
                     b.ToTable("Segments");
+                });
+
+            modelBuilder.Entity("PROJETOESA.Models.Trip", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<double>("Price")
+                        .HasColumnType("float");
+
+                    b.Property<double>("Score")
+                        .HasColumnType("float");
+
+                    b.Property<bool>("isCancellationAllowed")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("isChangeAllowed")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("isPartiallyChangeable")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("isPartiallyRefundable")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("isProtectedSelfTransfer")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("isSelfTransfer")
+                        .HasColumnType("bit");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Trip");
                 });
 
             modelBuilder.Entity("PROJETOESA.Models.UserFlight", b =>
@@ -458,12 +481,12 @@ namespace PROJETOESA.Migrations
                     b.Property<string>("UserId")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("FlightId")
+                    b.Property<string>("TripId")
                         .HasColumnType("nvarchar(450)");
 
-                    b.HasKey("UserId", "FlightId");
+                    b.HasKey("UserId", "TripId");
 
-                    b.HasIndex("FlightId");
+                    b.HasIndex("TripId");
 
                     b.ToTable("UserFlight");
                 });
@@ -521,32 +544,26 @@ namespace PROJETOESA.Migrations
 
             modelBuilder.Entity("PROJETOESA.Models.AccompanyingPassenger", b =>
                 {
-                    b.HasOne("PROJETOESA.Models.ApplicationUser", null)
+                    b.HasOne("PROJETOESA.Models.UserFlight", null)
                         .WithMany("AccompanyingPassengers")
-                        .HasForeignKey("ApplicationUserId");
-
-                    b.HasOne("PROJETOESA.Models.UserFlight", "UserFlight")
-                        .WithMany("AccompanyingPassengers")
-                        .HasForeignKey("UserId", "FlightId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
-                    b.Navigation("UserFlight");
+                        .HasForeignKey("UserFlightUserId", "UserFlightTripId");
                 });
 
             modelBuilder.Entity("PROJETOESA.Models.City", b =>
                 {
-                    b.HasOne("PROJETOESA.Models.Country", null)
-                        .WithMany("Cities")
+                    b.HasOne("PROJETOESA.Models.Country", "Country")
+                        .WithMany()
                         .HasForeignKey("CountryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Country");
                 });
 
             modelBuilder.Entity("PROJETOESA.Models.Flight", b =>
                 {
                     b.HasOne("PROJETOESA.Models.City", "DestinationCity")
-                        .WithMany("Flights")
+                        .WithMany()
                         .HasForeignKey("DestinationCityId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
@@ -554,8 +571,12 @@ namespace PROJETOESA.Migrations
                     b.HasOne("PROJETOESA.Models.City", "OriginCity")
                         .WithMany()
                         .HasForeignKey("OriginCityId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
+
+                    b.HasOne("PROJETOESA.Models.Trip", null)
+                        .WithMany("Flights")
+                        .HasForeignKey("TripId");
 
                     b.Navigation("DestinationCity");
 
@@ -564,26 +585,44 @@ namespace PROJETOESA.Migrations
 
             modelBuilder.Entity("PROJETOESA.Models.Segment", b =>
                 {
-                    b.HasOne("PROJETOESA.Models.Carrier", null)
-                        .WithMany("Segments")
+                    b.HasOne("PROJETOESA.Models.Carrier", "Carrier")
+                        .WithMany()
                         .HasForeignKey("CarrierId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("PROJETOESA.Models.City", "DestinationCity")
+                        .WithMany()
+                        .HasForeignKey("DestinationCityId")
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("PROJETOESA.Models.Flight", "Flight")
                         .WithMany("Segments")
                         .HasForeignKey("FlightId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
+                    b.HasOne("PROJETOESA.Models.City", "OriginCity")
+                        .WithMany()
+                        .HasForeignKey("OriginCityId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Carrier");
+
+                    b.Navigation("DestinationCity");
+
                     b.Navigation("Flight");
+
+                    b.Navigation("OriginCity");
                 });
 
             modelBuilder.Entity("PROJETOESA.Models.UserFlight", b =>
                 {
-                    b.HasOne("PROJETOESA.Models.Flight", "Flight")
-                        .WithMany("UserFlights")
-                        .HasForeignKey("FlightId")
+                    b.HasOne("PROJETOESA.Models.Trip", "Trip")
+                        .WithMany()
+                        .HasForeignKey("TripId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -593,38 +632,24 @@ namespace PROJETOESA.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Flight");
+                    b.Navigation("Trip");
 
                     b.Navigation("User");
                 });
 
             modelBuilder.Entity("PROJETOESA.Models.ApplicationUser", b =>
                 {
-                    b.Navigation("AccompanyingPassengers");
-
                     b.Navigation("UserFlights");
-                });
-
-            modelBuilder.Entity("PROJETOESA.Models.Carrier", b =>
-                {
-                    b.Navigation("Segments");
-                });
-
-            modelBuilder.Entity("PROJETOESA.Models.City", b =>
-                {
-                    b.Navigation("Flights");
-                });
-
-            modelBuilder.Entity("PROJETOESA.Models.Country", b =>
-                {
-                    b.Navigation("Cities");
                 });
 
             modelBuilder.Entity("PROJETOESA.Models.Flight", b =>
                 {
                     b.Navigation("Segments");
+                });
 
-                    b.Navigation("UserFlights");
+            modelBuilder.Entity("PROJETOESA.Models.Trip", b =>
+                {
+                    b.Navigation("Flights");
                 });
 
             modelBuilder.Entity("PROJETOESA.Models.UserFlight", b =>

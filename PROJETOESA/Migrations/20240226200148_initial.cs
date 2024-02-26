@@ -98,6 +98,25 @@ namespace PROJETOESA.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Trip",
+                columns: table => new
+                {
+                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Price = table.Column<double>(type: "float", nullable: false),
+                    isSelfTransfer = table.Column<bool>(type: "bit", nullable: false),
+                    isProtectedSelfTransfer = table.Column<bool>(type: "bit", nullable: false),
+                    isChangeAllowed = table.Column<bool>(type: "bit", nullable: false),
+                    isPartiallyChangeable = table.Column<bool>(type: "bit", nullable: false),
+                    isCancellationAllowed = table.Column<bool>(type: "bit", nullable: false),
+                    isPartiallyRefundable = table.Column<bool>(type: "bit", nullable: false),
+                    Score = table.Column<double>(type: "float", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Trip", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "AspNetRoleClaims",
                 columns: table => new
                 {
@@ -224,6 +243,30 @@ namespace PROJETOESA.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "UserFlight",
+                columns: table => new
+                {
+                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    TripId = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_UserFlight", x => new { x.UserId, x.TripId });
+                    table.ForeignKey(
+                        name: "FK_UserFlight_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_UserFlight_Trip_TripId",
+                        column: x => x.TripId,
+                        principalTable: "Trip",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Flights",
                 columns: table => new
                 {
@@ -231,15 +274,9 @@ namespace PROJETOESA.Migrations
                     Duration = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Departure = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Arrival = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    isSelfTransfer = table.Column<bool>(type: "bit", nullable: false),
-                    isProtectedSelfTransfer = table.Column<bool>(type: "bit", nullable: false),
-                    isChangeAllowed = table.Column<bool>(type: "bit", nullable: false),
-                    isPartiallyChangeable = table.Column<bool>(type: "bit", nullable: false),
-                    isCancellationAllowed = table.Column<bool>(type: "bit", nullable: false),
-                    isPartiallyRefundable = table.Column<bool>(type: "bit", nullable: false),
-                    Score = table.Column<double>(type: "float", nullable: false),
                     OriginCityId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    DestinationCityId = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                    DestinationCityId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    TripId = table.Column<string>(type: "nvarchar(450)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -255,59 +292,12 @@ namespace PROJETOESA.Migrations
                         column: x => x.OriginCityId,
                         principalTable: "City",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Segments",
-                columns: table => new
-                {
-                    FlightNumber = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    Departure = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Arrival = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Duration = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    FlightId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    CarrierId = table.Column<string>(type: "nvarchar(450)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Segments", x => x.FlightNumber);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Segments_Carrier_CarrierId",
-                        column: x => x.CarrierId,
-                        principalTable: "Carrier",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Segments_Flights_FlightId",
-                        column: x => x.FlightId,
-                        principalTable: "Flights",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "UserFlight",
-                columns: table => new
-                {
-                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    FlightId = table.Column<string>(type: "nvarchar(450)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_UserFlight", x => new { x.UserId, x.FlightId });
-                    table.ForeignKey(
-                        name: "FK_UserFlight_AspNetUsers_UserId",
-                        column: x => x.UserId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_UserFlight_Flights_FlightId",
-                        column: x => x.FlightId,
-                        principalTable: "Flights",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        name: "FK_Flights_Trip_TripId",
+                        column: x => x.TripId,
+                        principalTable: "Trip",
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -320,34 +310,65 @@ namespace PROJETOESA.Migrations
                     Gender = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Nationality = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     BirthDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    FlightId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    ApplicationUserId = table.Column<string>(type: "nvarchar(450)", nullable: true)
+                    UserFlightTripId = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    UserFlightUserId = table.Column<string>(type: "nvarchar(450)", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AccompanyingPassenger", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_AccompanyingPassenger_AspNetUsers_ApplicationUserId",
-                        column: x => x.ApplicationUserId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_AccompanyingPassenger_UserFlight_UserId_FlightId",
-                        columns: x => new { x.UserId, x.FlightId },
+                        name: "FK_AccompanyingPassenger_UserFlight_UserFlightUserId_UserFlightTripId",
+                        columns: x => new { x.UserFlightUserId, x.UserFlightTripId },
                         principalTable: "UserFlight",
-                        principalColumns: new[] { "UserId", "FlightId" });
+                        principalColumns: new[] { "UserId", "TripId" });
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Segments",
+                columns: table => new
+                {
+                    FlightNumber = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Departure = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Arrival = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Duration = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    OriginCityId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    DestinationCityId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    CarrierId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    FlightId = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Segments", x => x.FlightNumber);
+                    table.ForeignKey(
+                        name: "FK_Segments_Carrier_CarrierId",
+                        column: x => x.CarrierId,
+                        principalTable: "Carrier",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Segments_City_DestinationCityId",
+                        column: x => x.DestinationCityId,
+                        principalTable: "City",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Segments_City_OriginCityId",
+                        column: x => x.OriginCityId,
+                        principalTable: "City",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Segments_Flights_FlightId",
+                        column: x => x.FlightId,
+                        principalTable: "Flights",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_AccompanyingPassenger_ApplicationUserId",
+                name: "IX_AccompanyingPassenger_UserFlightUserId_UserFlightTripId",
                 table: "AccompanyingPassenger",
-                column: "ApplicationUserId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_AccompanyingPassenger_UserId_FlightId",
-                table: "AccompanyingPassenger",
-                columns: new[] { "UserId", "FlightId" });
+                columns: new[] { "UserFlightUserId", "UserFlightTripId" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -404,9 +425,19 @@ namespace PROJETOESA.Migrations
                 column: "OriginCityId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Flights_TripId",
+                table: "Flights",
+                column: "TripId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Segments_CarrierId",
                 table: "Segments",
                 column: "CarrierId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Segments_DestinationCityId",
+                table: "Segments",
+                column: "DestinationCityId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Segments_FlightId",
@@ -414,9 +445,14 @@ namespace PROJETOESA.Migrations
                 column: "FlightId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_UserFlight_FlightId",
+                name: "IX_Segments_OriginCityId",
+                table: "Segments",
+                column: "OriginCityId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UserFlight_TripId",
                 table: "UserFlight",
-                column: "FlightId");
+                column: "TripId");
         }
 
         /// <inheritdoc />
@@ -456,13 +492,16 @@ namespace PROJETOESA.Migrations
                 name: "Carrier");
 
             migrationBuilder.DropTable(
-                name: "AspNetUsers");
-
-            migrationBuilder.DropTable(
                 name: "Flights");
 
             migrationBuilder.DropTable(
+                name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
                 name: "City");
+
+            migrationBuilder.DropTable(
+                name: "Trip");
 
             migrationBuilder.DropTable(
                 name: "Country");
