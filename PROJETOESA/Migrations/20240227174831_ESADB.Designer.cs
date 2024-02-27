@@ -12,8 +12,8 @@ using PROJETOESA.Data;
 namespace PROJETOESA.Migrations
 {
     [DbContext(typeof(AeroHelperContext))]
-    [Migration("20240216163411_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20240227174831_ESADB")]
+    partial class ESADB
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -225,6 +225,30 @@ namespace PROJETOESA.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
+                });
+
+            modelBuilder.Entity("PROJETOESA.Models.ConfirmationCode", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Code")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("ExpirationTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("UserEmail")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ConfirmationCodes");
                 });
 
             modelBuilder.Entity("PROJETOESA.Models.PasswordRecoveryCode", b =>

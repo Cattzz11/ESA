@@ -92,3 +92,13 @@ h2 {
 .login-branding {
   width: 60%;
 }
+
+.resend-link {
+  color: blue;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+  .resend-link:hover {
+    color: darkblue;
+  }

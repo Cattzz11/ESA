@@ -85,10 +85,10 @@ export class RegisterComponent implements OnInit {
 
     this.authService.confirmAccount(email).subscribe({
       next: (response) => {
-        setTimeout(() => this.router.navigate(['/confirmation-account/', email]), 2000); // espera 2 segundos
+        setTimeout(() => this.router.navigate(['/confirmation-account/', email]), 1000); // espera 1 segundos
       },
       error: (error) => {
-        setTimeout(() => this.router.navigate(['/confirmation-account/', email]), 2000); // espera 2 segundos
+        setTimeout(() => this.router.navigate(['/confirmation-account/', email]), 1000); // espera 1 segundos
       }
     });
   }
