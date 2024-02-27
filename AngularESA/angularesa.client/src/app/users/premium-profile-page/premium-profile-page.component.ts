@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { AuthorizeService } from '../../../api-authorization/authorize.service';
 import { User } from '../../Models/users';
 import { Trip } from '../../Models/Trip';
@@ -14,15 +14,19 @@ export class PremiumProfilePageComponent {
   public history: Trip[] = [];
   public historyLoading: boolean = true;
 
-  constructor(private auth: AuthorizeService, private skyscannerService: SkyscannerService) { }
+  constructor(
+    private auth: AuthorizeService,
+    private skyscannerService: SkyscannerService,
+    private cdr: ChangeDetectorRef
+  ) { }
 
   ngOnInit() {
     this.auth.getUserInfo().subscribe({
-      next: (userInfo: User) => { 
+      next: (userInfo: User) => {
         this.user = userInfo;
+        this.cdr.detectChanges();
 
         if (this.user && this.user.role === 1) {
-          console.log('É premium');
           this.loadHistory();
         }
       },
@@ -52,6 +56,16 @@ export class PremiumProfilePageComponent {
           if (flight.segments && flight.segments.length > 0) {
             flight.segments.forEach((segment, segmentIndex) => {
               console.log(`    Segmento ${segmentIndex + 1}:`, segment);
+
+              if (segment.originCity) {
+                console.log(`      Id da Cidade ${segmentIndex + 1}:`, segment.originCity);
+                console.log(`        Nome da cidade origem: ${segment.originCity.name}`);
+              }
+
+              if (segment.destinationCity) {
+                console.log(`      Id da Cidade ${segmentIndex + 1}:`, segment.destinationCity);
+                console.log(`        Nome da cidade destino: ${segment.destinationCity.name}`);
+              }
 
               if (segment.carrier) {
                 console.log(`      Carrier do Segmento ${segmentIndex + 1}:`, segment.carrier);

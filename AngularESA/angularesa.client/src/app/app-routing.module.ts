@@ -10,6 +10,7 @@ import { RecoverPasswordComponent } from '../api-authorization/recover-password/
 import { RecoveryCodeComponent } from '../api-authorization/recovery-code/recovery-code.component';
 import { PremiumProfilePageComponent } from './users/premium-profile-page/premium-profile-page.component';
 import { FilterByAirlineComponent } from './flights/filter-by-airline/filter-by-airline.component';
+import { SearchFlightsComponent } from './flights/search-flights/search-flights.component';
 
 
 const routes: Routes = [
@@ -22,6 +23,7 @@ const routes: Routes = [
   { path: 'recovery-code/:email', component: RecoveryCodeComponent },
   { path: 'premium-profile-page', component: PremiumProfilePageComponent },
   { path: 'filter-by-airline', component: FilterByAirlineComponent },
+  { path: 'search-flights', component: SearchFlightsComponent },
 ];
 
 @NgModule({

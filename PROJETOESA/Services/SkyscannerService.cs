@@ -272,7 +272,7 @@ namespace PROJETOESA.Services
             if (datajson != null)
             {
                 foreach (var item in datajson)
-                {                  
+                {
                     var airport = new CustomGetDataModel
                     {
                         id = item["presentation"]["id"]?.ToString(),
@@ -281,10 +281,10 @@ namespace PROJETOESA.Services
                         flightPlaceType = item["navigation"]["relevantFlightParams"]["flightPlaceType"]?.ToString(),
                         subtitle = item["presentation"]["subtitle"]?.ToString(),
                     };
-                    
+
                     customData.Add(airport);
                 }
-                
+
             }
 
             return customData;
@@ -306,7 +306,7 @@ namespace PROJETOESA.Services
 
                 foreach (var item in result)
                 {
-                    if(item.flightPlaceType != "COUNTRY")
+                    if (item.flightPlaceType != "COUNTRY")
                     {
 
                         var airport = new City
@@ -365,7 +365,7 @@ namespace PROJETOESA.Services
             {
                 Id = "13577-2402250945--31781-0-11469-2402251030",
                 Duration = "00:45",
-                Departure = new DateTime(2024, 02, 25, 09,45,00),
+                Departure = new DateTime(2024, 02, 25, 09, 45, 00),
                 Arrival = new DateTime(2024, 02, 25, 10, 30, 00),
                 OriginCityId = "LIS",
                 DestinationCityId = "FAO",
@@ -437,7 +437,7 @@ namespace PROJETOESA.Services
             FlightData origin = new FlightData { fromEntityId = "eyJlIjoiOTU1NjUwNTUiLCJzIjoiTElTIiwiaCI6IjI3NTQ0MDcyIn0=" };
 
             List<Country> possibleDestinations = await GetEverywhereAsync(origin);
-            
+
             List<Trip> finalItineraries = new List<Trip>();
             while (finalItineraries.Count < 1)
             {
@@ -445,7 +445,7 @@ namespace PROJETOESA.Services
 
                 List<City> cities = await _context.City.Where(c => c.CountryId == countrySelected.Id).ToListAsync();
 
-                if(!cities.Any())
+                if (!cities.Any())
                 {
                     cities = await GetAirportListAsync(countrySelected);
                 }
@@ -488,9 +488,11 @@ namespace PROJETOESA.Services
                                 .Include(t => t.Flights)
                                     .ThenInclude(f => f.Segments)
                                         .ThenInclude(s => s.OriginCity)
+                                            .ThenInclude(city => city.Country)
                                 .Include(t => t.Flights)
                                     .ThenInclude(f => f.Segments)
                                         .ThenInclude(s => s.DestinationCity)
+                                            .ThenInclude(city => city.Country)
                                 .Include(t => t.Flights)
                                     .ThenInclude(f => f.Segments)
                                         .ThenInclude(s => s.Carrier)
@@ -510,15 +512,33 @@ namespace PROJETOESA.Services
                         Departure = s.Departure,
                         Arrival = s.Arrival,
                         Duration = s.Duration,
-                        OriginCityId = s.OriginCityId,
-                        DestinationCityId = s.DestinationCityId,
+                        OriginCity = new CityDto
+                        {
+                            Id = s.OriginCity.Id,
+                            Name = s.OriginCity.Name,
+                            Country = new CountryDto
+                            {
+                                Id = s.OriginCity.Country.Id,
+                                Name = s.OriginCity.Country.Name,
+                            }
+                        },
+                        DestinationCity = new CityDto
+                        {
+                            Id = s.DestinationCity.Id,
+                            Name = s.DestinationCity.Name,
+                            Country = new CountryDto
+                            {
+                                Id = s.DestinationCity.Country.Id,
+                                Name = s.DestinationCity.Country.Name,
+                            }
+                        },
                         Carrier = s.Carrier != null ? new CarrierDto
                         {
                             Id = s.Carrier.Id,
                             Name = s.Carrier.Name,
                             LogoURL = s.Carrier.LogoURL,
                             SearchTimes = s.Carrier.SearchTimes,
-                        } : null // Aqui está certo, já que Carrier pode ser null
+                        } : null
                     }).ToList()
                 }).ToList()
             }).ToList();
@@ -548,7 +568,7 @@ namespace PROJETOESA.Services
 
         private City SelectRandomAirport(List<City> cities)
         {
-            if(cities.Count == 1)
+            if (cities.Count == 1)
             {
                 return cities[0];
             }
@@ -564,7 +584,7 @@ namespace PROJETOESA.Services
         public string flightPlaceType { get; set; }
         public string subtitle { get; set; }
         public string skyId { get; set; }
-  
+
 
     }
 }
