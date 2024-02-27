@@ -54,7 +54,7 @@ export class SkyscannerService {
     if (data.infants) params = params.set('infants', data.infants);
     if (data.cabinClass) params = params.set('cabinClass', data.cabinClass);
 
-    return this.http.get('api/search-everywhere', { params: params });
+    return this.http.get('api/flight/search-everywhere', { params: params });
   }
 
   public getOneWayFlights(data: FlightData): Observable<any> {
@@ -74,7 +74,7 @@ export class SkyscannerService {
     if (data.infants) params = params.set('infants', data.infants);
     if (data.cabinClass) params = params.set('cabinClass', data.cabinClass);
 
-    return this.http.get('api/search-one-way', { params: params });
+    return this.http.get('api/flight/search-one-way', { params: params });
   }
 
   public getCalendarFlights(data: FlightData): Observable<any> {
@@ -90,7 +90,7 @@ export class SkyscannerService {
     if (data.locale) params = params.set('locale', data.locale);
     if (data.currency) params = params.set('currency', data.currency);
 
-    return this.http.get('api/price-calendar', { params: params });
+    return this.http.get('api/flight/price-calendar', { params: params });
   }
 
   public getAirportList(data: Country): Observable<City[]> {
@@ -98,20 +98,15 @@ export class SkyscannerService {
       .set('id', data.id)
       .set('name', data.name);
 
-    return this.http.get<City[]>('api/airport-list', { params: params });
+    return this.http.get<City[]>('api/flight/airport-list', { params: params });
   }
 
   public getSugestionsCompany(carrierId: string): Observable<Trip[]> {
     let params = new HttpParams().set('carrierId', carrierId);
-    return this.http.get<Trip[]>('api/sugestions-company', { params: params });
+    return this.http.get<Trip[]>('api/flight/sugestions-company', { params: params });
   }
 
   public getFavoriteAirline(): Observable<Carrier[]> {
-    return this.http.get<Carrier[]>('api/favorite-airline');
-  }
-
-  public getFlightsByUser(userId: string): Observable<Trip[]> {
-    let params = new HttpParams().set('userId', userId);
-    return this.http.get<Trip[]>('api/flight-by-user', { params: params });
+    return this.http.get<Carrier[]>('api/flight/favorite-airline');
   }
 }

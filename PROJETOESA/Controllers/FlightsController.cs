@@ -18,7 +18,7 @@ namespace PROJETOESA.Controllers
 
         // Viagens de ida e volta
         [HttpGet]
-        [Route("api/search-roundtrip")]
+        [Route("api/flight/search-roundtrip")]
         public async Task<IActionResult> SearchRoundtrip([FromQuery] FlightData data)
         {
             var result = await _skyscannerService.GetRoundtripAsync(data);
@@ -28,7 +28,7 @@ namespace PROJETOESA.Controllers
 
         // Pesquisa todas as viagens
         [HttpGet]
-        [Route("api/search-everywhere")]
+        [Route("api/flight/search-everywhere")]
         public async Task<IActionResult> SearchEverywhere([FromQuery] FlightData data)
         {
             var result = await _skyscannerService.GetEverywhereAsync(data);
@@ -39,7 +39,7 @@ namespace PROJETOESA.Controllers
 
         // Viagem apenas de ida
         [HttpGet]
-        [Route("api/search-one-way")]
+        [Route("api/flight/search-one-way")]
         public async Task<IActionResult> searchOneWayTrip([FromQuery] FlightData data)
         {
             var result = await _skyscannerService.GetOneWayAsync(data);
@@ -49,7 +49,7 @@ namespace PROJETOESA.Controllers
 
         // Calendário com os preços
         [HttpGet]
-        [Route("api/price-calendar")]
+        [Route("api/flight/price-calendar")]
         public async Task<IActionResult> searchPriceCalendar([FromQuery] FlightData data)
         {
             var result = await _skyscannerService.GetCalendarAsync(data);
@@ -58,7 +58,7 @@ namespace PROJETOESA.Controllers
         }
 
         [HttpGet]
-        [Route("api/auto-complete")]
+        [Route("api/flight/auto-complete")]
         public async Task<IActionResult> searchData([FromQuery] Country data)
         {
             var result = await _skyscannerService.GetDataAsync(data);
@@ -67,7 +67,7 @@ namespace PROJETOESA.Controllers
         }
 
         [HttpGet]
-        [Route("api/airport-list")]
+        [Route("api/flight/airport-list")]
         public async Task<IActionResult> getAirportList([FromQuery] Country data)
         {
             var result = await _skyscannerService.GetAirportListAsync(data);
@@ -76,7 +76,7 @@ namespace PROJETOESA.Controllers
         }
 
         [HttpGet]
-        [Route("api/sugestions-company")]
+        [Route("api/flight/sugestions-company")]
         public async Task<IActionResult> getSugestionsCompany([FromQuery] string carrierId)
         {
             List<Trip> result = await _skyscannerService.GetSugestionsCompanyAsyncTest();
@@ -88,19 +88,10 @@ namespace PROJETOESA.Controllers
         }
 
         [HttpGet]
-        [Route("api/favorite-airline")]
+        [Route("api/flight/favorite-airline")]
         public async Task<IActionResult> getFavoriteAirline()
         {
             List<Carrier> result = await _skyscannerService.GetFavoriteAirlineAsync();
-
-            return Ok(result);
-        }
-
-        [HttpGet]
-        [Route("api/flight-by-user")]
-        public async Task<IActionResult> getFlightsByUser([FromQuery] string userId)
-        {
-            List<TripDto> result = await _skyscannerService.GetFlightsByUserAsync(userId);
 
             return Ok(result);
         }

@@ -2,7 +2,7 @@ import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { AuthorizeService } from '../../../api-authorization/authorize.service';
 import { User } from '../../Models/users';
 import { Trip } from '../../Models/Trip';
-import { SkyscannerService } from '../../services/skyscannerService';
+import { DataService } from '../../services/DataService';
 
 @Component({
   selector: 'app-premium-profile-page',
@@ -16,7 +16,7 @@ export class PremiumProfilePageComponent {
 
   constructor(
     private auth: AuthorizeService,
-    private skyscannerService: SkyscannerService,
+    private dataService: DataService,
     private cdr: ChangeDetectorRef
   ) { }
 
@@ -88,7 +88,7 @@ export class PremiumProfilePageComponent {
 
   loadHistory() {
     if (this.user) {
-      this.skyscannerService.getFlightsByUser(this.user.id).subscribe({
+      this.dataService.getFlightsByUser(this.user.id).subscribe({
         next: (response) => {
           this.history = response;
           this.historyLoading = false;

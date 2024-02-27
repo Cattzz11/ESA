@@ -4,6 +4,8 @@ using System.Diagnostics;
 using PROJETOESA.Data;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
+using System.Text.Json;
+using System.Diagnostics.Metrics;
 
 namespace PROJETOESA.Services
 {
@@ -13,7 +15,7 @@ namespace PROJETOESA.Services
         private readonly AeroHelperContext _context;
         private readonly Random _random = new Random();
 
-        public SkyscannerService(IHttpClientFactory httpClientFactory, AeroHelperContext context)
+        public SkyscannerService(IHttpClientFactory httpClientFactory, AeroHelperContext context, IHttpClientFactory clientFactory)
         {
             _httpClient = httpClientFactory.CreateClient("SkyscannerAPI");
             _context = context;
@@ -315,7 +317,9 @@ namespace PROJETOESA.Services
                             Name = item.localizedName,
                             ApiKey = item.id,
                             CountryId = country.Id,
+                            Country = country
                         };
+                        cities.Add(airport);
                     }
                 }
 
@@ -323,7 +327,12 @@ namespace PROJETOESA.Services
                 try
                 {
                     var newCountry = new Country { Id = country.Id, Name = country.Name };
-                    await _context.Country.AddAsync(newCountry);
+                    var countryLocal = await _context.Country.FirstOrDefaultAsync(c => c.Id == newCountry.Id);
+                    
+                    if (countryLocal == null)
+                    {
+                        await _context.Country.AddAsync(newCountry);
+                    }
 
                     foreach (var item in cities)
                     {
@@ -476,77 +485,6 @@ namespace PROJETOESA.Services
             return carrierList;
         }
 
-        public async Task<List<TripDto>> GetFlightsByUserAsync(string userId)
-        {
-            var tripIds = await _context.UserFlight
-                                .Where(uf => uf.UserId == userId)
-                                .Select(uf => uf.TripId)
-                                .ToListAsync();
-
-            var trips = await _context.Trip
-                                .Where(t => tripIds.Contains(t.Id))
-                                .Include(t => t.Flights)
-                                    .ThenInclude(f => f.Segments)
-                                        .ThenInclude(s => s.OriginCity)
-                                            .ThenInclude(city => city.Country)
-                                .Include(t => t.Flights)
-                                    .ThenInclude(f => f.Segments)
-                                        .ThenInclude(s => s.DestinationCity)
-                                            .ThenInclude(city => city.Country)
-                                .Include(t => t.Flights)
-                                    .ThenInclude(f => f.Segments)
-                                        .ThenInclude(s => s.Carrier)
-                                .ToListAsync();
-
-            var tripDtos = trips.Select(t => new TripDto
-            {
-                Id = t.Id,
-                Price = t.Price,
-                Flights = t.Flights.Select(f => new FlightDto
-                {
-                    Id = f.Id,
-                    Duration = f.Duration,
-                    Segments = f.Segments.Select(s => new SegmentDto
-                    {
-                        FlightNumber = s.FlightNumber,
-                        Departure = s.Departure,
-                        Arrival = s.Arrival,
-                        Duration = s.Duration,
-                        OriginCity = new CityDto
-                        {
-                            Id = s.OriginCity.Id,
-                            Name = s.OriginCity.Name,
-                            Country = new CountryDto
-                            {
-                                Id = s.OriginCity.Country.Id,
-                                Name = s.OriginCity.Country.Name,
-                            }
-                        },
-                        DestinationCity = new CityDto
-                        {
-                            Id = s.DestinationCity.Id,
-                            Name = s.DestinationCity.Name,
-                            Country = new CountryDto
-                            {
-                                Id = s.DestinationCity.Country.Id,
-                                Name = s.DestinationCity.Country.Name,
-                            }
-                        },
-                        Carrier = s.Carrier != null ? new CarrierDto
-                        {
-                            Id = s.Carrier.Id,
-                            Name = s.Carrier.Name,
-                            LogoURL = s.Carrier.LogoURL,
-                            SearchTimes = s.Carrier.SearchTimes,
-                        } : null
-                    }).ToList()
-                }).ToList()
-            }).ToList();
-
-            return tripDtos;
-        }
-
-
         private string ConvertMinutesToTimeString(int durationInMinutes)
         {
             int hours = durationInMinutes / 60;
@@ -584,7 +522,5 @@ namespace PROJETOESA.Services
         public string flightPlaceType { get; set; }
         public string subtitle { get; set; }
         public string skyId { get; set; }
-
-
     }
 }
