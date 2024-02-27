@@ -211,19 +211,19 @@ export class AuthorizeService {
   }
 
 
-  //public updateUserInfo(updatedData: any): Observable<any> {
-  //  return this.http.put('api/edit-profile', updatedData);
-  //}
-
   public updateUserInfo(updatedData: any): Observable<any> {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json'
-      })
-    };
-
-    return this.http.put('api/upload-photo-to-database', updatedData, httpOptions);
+    return this.http.put('api/edit-profile', updatedData);
   }
+
+  //public updateUserInfo(updatedData: any): Observable<any> {
+  //  const httpOptions = {
+  //    headers: new HttpHeaders({
+  //      'Content-Type': 'application/json'
+  //    })
+  //  };
+
+  //  return this.http.put('api/upload-photo-to-database', updatedData, httpOptions);
+  //}
 }
 
 export interface User {

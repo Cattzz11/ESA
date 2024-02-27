@@ -27,11 +27,16 @@ export class EditProfileComponent implements OnInit {
       occupation: [''],
       nationality: [''],
       profilePicture: [''],
+      gender:[''],
     });
 
     this.editForm.get('birthDate')?.valueChanges.subscribe(() => {
       this.calcularIdade();
     });
+
+    this.editForm.get('gender')?.valueChanges.subscribe(() => {
+      this.user?.gender;
+    })
   }
     ngOnInit(): void {
       this.auth.getUserInfo().subscribe({
@@ -44,6 +49,7 @@ export class EditProfileComponent implements OnInit {
             occupation: userInfo.occupation,
             nationality: userInfo.nationality,
             profilePicture: userInfo.profilePicture,
+            gender: userInfo.gender,
           });
           console.log("idade", userInfo.age);
           this.photoPreview = userInfo.profilePicture

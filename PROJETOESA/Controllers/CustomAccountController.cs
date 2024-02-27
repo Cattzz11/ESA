@@ -9,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using PROJETOESA.Data;
 using System.Diagnostics;
 using Microsoft.DotNet.Scaffolding.Shared.Messaging;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace PROJETOESA.Controllers
 {
@@ -92,7 +93,7 @@ namespace PROJETOESA.Controllers
 
                 if (user.BirthDate.Value > today.AddYears(-age)) age--;
 
-                userInfo = new { UserName = user.UserName, Email = user.Email, Role = user.Role.ToString(), Name = user.Name, Age = age, Nationality = user.Nationality, Occupation = user.Occupation };
+                userInfo = new { UserName = user.UserName, Email = user.Email, Role = user.Role.ToString(), Name = user.Name, Age = age, Nationality = user.Nationality, Occupation = user.Occupation, Gender = user.Gender };
             }
             else
             {
@@ -189,6 +190,7 @@ namespace PROJETOESA.Controllers
             user.Occupation = model.Occupation;
             user.Nationality = model.Nationality;
             user.ProfilePicture = model.ProfilePicture;
+            user.Gender = model.Gender;
             
             Debug.WriteLine("DADOS ATUALIZADOS ZÉ");
 
@@ -201,6 +203,35 @@ namespace PROJETOESA.Controllers
                 return Ok(new { Message = "Perfil atualizado com sucesso." });
             }
             return BadRequest(result.Errors);
+        }
+
+        [HttpGet("api/users")]
+        public async Task<IActionResult> GetUsers()
+        {
+            var users = await _context.Users.ToListAsync();
+            return Ok(users);
+        }
+
+        [HttpDelete("api/users/{email}")]
+        public async Task<IActionResult> DeleteUser(string email)
+        {
+            var user = await _userManager.FindByEmailAsync(email);
+
+            if (user == null)
+            {
+                return NotFound(); // User not found
+            }
+
+            var result = await _userManager.DeleteAsync(user);
+
+            if (result.Succeeded)
+            {
+                return NoContent(); // User deleted successfully
+            }
+            else
+            {
+                return BadRequest(result.Errors); // Error deleting user
+            }
         }
 
         //[HttpPost("api/upload-photo")]
@@ -261,6 +292,8 @@ namespace PROJETOESA.Controllers
         public string? Nationality { get; set; }
 
         public string? ProfilePicture { get; set; }
+
+        public string? Gender { get; set; }
 
         //public byte[]? ProfilePictureBinary { get; set; }
     }

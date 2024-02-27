@@ -18,6 +18,8 @@ namespace PROJETOESA.Models
 
         public string? ProfilePicture { get; set; }
 
+        public string? Gender { get; set; }
+
         //public byte[]? ProfilePictureBinary{ get; set; }
     }
 }

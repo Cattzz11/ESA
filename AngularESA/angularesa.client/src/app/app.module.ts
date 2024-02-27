@@ -26,6 +26,7 @@ import { SearchFlightsComponent } from './flights/search-flights/search-flights.
 import { EditProfileComponent } from './users/edit-profile/edit-profile.component';
 import { PhotoUploadService } from './services/photoUploadService.service';
 import { PremiumComponent } from './users/premium/premium.component';
+import { SubscriptionPageComponent } from './users/subscription-page/subscription-page.component';
 
 
 @NgModule({
@@ -47,7 +48,8 @@ import { PremiumComponent } from './users/premium/premium.component';
     PersonComponent,
     SearchFlightsComponent,
     EditProfileComponent,
-    PremiumComponent
+    PremiumComponent,
+    SubscriptionPageComponent
   ],
   imports: [
     BrowserModule, HttpClientModule,

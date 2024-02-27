@@ -38,6 +38,21 @@
             <input type="text" formControlName="age" readonly />
           </li>
           <li>
+            <label for="gender"> Género: </label>
+          </li>
+          <li>
+            <label for="genderMale">Masculino</label>
+            <input type="radio" id="genderMale" formControlName="gender" value="Masculino" >
+          </li>
+          <li>
+            <label for="genderFemale">Feminino</label>
+            <input type="radio" id="genderFemale" formControlName="gender" value="Feminino" >
+          </li>
+          <li>
+            <label for="genderOther">Outro</label>
+            <input type="radio" id="genderOther" formControlName="gender" value="Outro">
+          </li>
+          <li>
             <label for="occupation">Ocupação:</label><br />
             <input type="text" id="occupation" formControlName="occupation" />
           </li>
