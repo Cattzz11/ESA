@@ -1,11 +1,11 @@
 import { AccompanyingPassenger } from "./AccompanyingPassenger";
-import { Flight } from "./Flight";
+import { Trip } from "./Trip";
 import { User } from "./users";
 
 export interface UserFlight {
   userId: string;
-  flightId: string;
+  tripId: string;
   user: User;
-  flight: Flight;
-  accompanyingPassengers?: AccompanyingPassenger;
+  trip: Trip;
+  accompanyingPassengers?: AccompanyingPassenger[];
 }

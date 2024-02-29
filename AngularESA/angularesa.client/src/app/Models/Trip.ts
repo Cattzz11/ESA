@@ -12,5 +12,4 @@ export interface Trip {
   isPartiallyRefundable: boolean;
   score: number;
   flights: Flight[];
-  userFlights?: UserFlight[];
 }

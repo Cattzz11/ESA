@@ -4,6 +4,4 @@ export interface AccompanyingPassenger {
   gender: string;
   nationality: string;
   birthDate: Date;
-  userId: string;
-  flightId: string;
 }

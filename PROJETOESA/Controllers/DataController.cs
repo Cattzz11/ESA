@@ -19,26 +19,34 @@ namespace PROJETOESA.Controllers
         [Route("api/data/flight-by-user")]
         public async Task<IActionResult> getFlightsByUser([FromQuery] string userId)
         {
-            Debug.WriteLine("AQUI");
             List<TripDto> result = await _dataService.GetFlightsByUserAsync(userId);
 
             return Ok(result);
         }
 
         [HttpGet]
-        [Route("api/data/GetAllCountries")]
-        public async Task<IActionResult> GetCountries()
+        [Route("api/data/all-cities-and-countries")]
+        public async Task<IActionResult> getAllCities()
         {
-            List<Country> result = await _dataService.GetAllCountriesAsync();
+            List<CityDto> result = await _dataService.GetAllCitiesAsync();
 
             return Ok(result);
         }
 
         [HttpGet]
-        [Route("api/data/GetAllCities")]
-        public async Task<IActionResult> GetCities()
+        [Route("api/data/PopulateBDCountries")]
+        public async Task<IActionResult> PopulateBDCountries()
         {
-            List<City> result = await _dataService.GetAllCitiesAsync();
+            List<Country> result = await _dataService.PopulateBDCountries();
+
+            return Ok(result);
+        }
+
+        [HttpGet]
+        [Route("api/data/PopulateBDCity")]
+        public async Task<IActionResult> PopulateBDCity()
+        {
+            List<City> result = await _dataService.PopulateBDCity();
 
             return Ok(result);
         }

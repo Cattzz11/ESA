@@ -1,7 +1,17 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "C:\\Users\\Tiago\\Desktop\\IPS\\ESA\\PROJETOESA\\",
-  "Documents": [],
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{FFDC8847-A03D-4B34-BF6B-037A713978B8}|..\\AngularESA\\angularesa.client\\angularesa.client.esproj|c:\\users\\tiago\\desktop\\ips\\esa\\angularesa\\angularesa.client\\src\\app\\models\\calendar.ts||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FFDC8847-A03D-4B34-BF6B-037A713978B8}|..\\AngularESA\\angularesa.client\\angularesa.client.esproj|c:\\users\\tiago\\desktop\\ips\\esa\\angularesa\\angularesa.client\\src\\app\\flights\\search-flights\\search-flights.component.ts||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FFDC8847-A03D-4B34-BF6B-037A713978B8}|..\\AngularESA\\angularesa.client\\angularesa.client.esproj|c:\\users\\tiago\\desktop\\ips\\esa\\angularesa\\angularesa.client\\src\\app\\flights\\search-flights\\search-flights.component.html||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
@@ -9,11 +19,50 @@
       "DocumentGroups": [
         {
           "DockedWidth": 207,
-          "SelectedChildIndex": -1,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Calendar.ts",
+              "DocumentMoniker": "C:\\Users\\Tiago\\Desktop\\IPS\\ESA\\AngularESA\\angularesa.client\\src\\app\\Models\\Calendar.ts",
+              "RelativeDocumentMoniker": "..\\AngularESA\\angularesa.client\\src\\app\\Models\\Calendar.ts",
+              "ToolTip": "C:\\Users\\Tiago\\Desktop\\IPS\\ESA\\AngularESA\\angularesa.client\\src\\app\\Models\\Calendar.ts",
+              "RelativeToolTip": "..\\AngularESA\\angularesa.client\\src\\app\\Models\\Calendar.ts",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAUAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003213|",
+              "WhenOpened": "2024-02-29T17:20:59.208Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "search-flights.component.ts",
+              "DocumentMoniker": "C:\\Users\\Tiago\\Desktop\\IPS\\ESA\\AngularESA\\angularesa.client\\src\\app\\flights\\search-flights\\search-flights.component.ts",
+              "RelativeDocumentMoniker": "..\\AngularESA\\angularesa.client\\src\\app\\flights\\search-flights\\search-flights.component.ts",
+              "ToolTip": "C:\\Users\\Tiago\\Desktop\\IPS\\ESA\\AngularESA\\angularesa.client\\src\\app\\flights\\search-flights\\search-flights.component.ts",
+              "RelativeToolTip": "..\\AngularESA\\angularesa.client\\src\\app\\flights\\search-flights\\search-flights.component.ts",
+              "ViewState": "AQIAABEAAAAAAAAAAAAwwBUAAAAUAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003213|",
+              "WhenOpened": "2024-02-29T12:45:05.777Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "search-flights.component.html",
+              "DocumentMoniker": "C:\\Users\\Tiago\\Desktop\\IPS\\ESA\\AngularESA\\angularesa.client\\src\\app\\flights\\search-flights\\search-flights.component.html",
+              "RelativeDocumentMoniker": "..\\AngularESA\\angularesa.client\\src\\app\\flights\\search-flights\\search-flights.component.html",
+              "ToolTip": "C:\\Users\\Tiago\\Desktop\\IPS\\ESA\\AngularESA\\angularesa.client\\src\\app\\flights\\search-flights\\search-flights.component.html",
+              "RelativeToolTip": "..\\AngularESA\\angularesa.client\\src\\app\\flights\\search-flights\\search-flights.component.html",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABIAAAAIAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
+              "WhenOpened": "2024-02-29T12:44:44.848Z",
+              "EditorCaption": ""
             }
           ]
         }

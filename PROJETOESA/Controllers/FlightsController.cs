@@ -52,7 +52,7 @@ namespace PROJETOESA.Controllers
         [Route("api/flight/price-calendar")]
         public async Task<IActionResult> searchPriceCalendar([FromQuery] FlightData data)
         {
-            var result = await _skyscannerService.GetCalendarAsync(data);
+            List<Calendar> result = await _skyscannerService.GetCalendarAsync(data);
 
             return Ok(result);
         }

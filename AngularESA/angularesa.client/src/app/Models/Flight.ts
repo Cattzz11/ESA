@@ -6,10 +6,9 @@ export interface Flight {
   duration: string;
   departure: Date;
   arrival: Date;
-  originCityId: string;
+  originCityId?: string;
   originCity: City;
-  destinationCityId: string;
+  destinationCityId?: string;
   destinationCity: City;
   segments: Segment[];
-  tripId: string;
 }

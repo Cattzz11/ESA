@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Text.Json;
 using System.Diagnostics.Metrics;
+using Newtonsoft.Json;
 
 namespace PROJETOESA.Services
 {
@@ -31,7 +32,14 @@ namespace PROJETOESA.Services
             queryParams.Add($"returnDate={data.returnDate}");
             if (!string.IsNullOrEmpty(data.market)) queryParams.Add($"market={data.market}");
             if (!string.IsNullOrEmpty(data.locale)) queryParams.Add($"locale={data.locale}");
-            if (!string.IsNullOrEmpty(data.currency)) queryParams.Add($"currency={data.currency}");
+            if (!string.IsNullOrEmpty(data.currency))
+            {
+                queryParams.Add($"currency={data.currency}");
+            }
+            else
+            {
+                queryParams.Add($"currency=EUR");
+            }
             if (data.Adults.HasValue) queryParams.Add($"adults={data.Adults}");
             if (data.Children.HasValue) queryParams.Add($"children={data.Children}");
             if (data.Infants.HasValue) queryParams.Add($"infants={data.Infants}");
@@ -171,7 +179,14 @@ namespace PROJETOESA.Services
             if (data.month.HasValue) queryParams.Add($"month={data.month}");
             if (!string.IsNullOrEmpty(data.market)) queryParams.Add($"market={data.market}");
             if (!string.IsNullOrEmpty(data.locale)) queryParams.Add($"locale={data.locale}");
-            if (!string.IsNullOrEmpty(data.currency)) queryParams.Add($"currency={data.currency}");
+            if (!string.IsNullOrEmpty(data.currency))
+            {
+                queryParams.Add($"currency={data.currency}");
+            }
+            else
+            {
+                queryParams.Add($"currency=EUR");
+            }
             if (data.Adults.HasValue) queryParams.Add($"adults={data.Adults}");
             if (data.Children.HasValue) queryParams.Add($"children={data.Children}");
             if (data.Infants.HasValue) queryParams.Add($"infants={data.Infants}");
@@ -225,7 +240,14 @@ namespace PROJETOESA.Services
             queryParams.Add($"departDate={data.departDate}");
             if (!string.IsNullOrEmpty(data.market)) queryParams.Add($"market={data.market}");
             if (!string.IsNullOrEmpty(data.locale)) queryParams.Add($"locale={data.locale}");
-            if (!string.IsNullOrEmpty(data.currency)) queryParams.Add($"currency={data.currency}");
+            if (!string.IsNullOrEmpty(data.currency))
+            {
+                queryParams.Add($"currency={data.currency}");
+            }
+            else
+            {
+                queryParams.Add($"currency=EUR");
+            }
             if (data.Adults.HasValue) queryParams.Add($"adults={data.Adults}");
             if (data.Children.HasValue) queryParams.Add($"children={data.Children}");
             if (data.Infants.HasValue) queryParams.Add($"infants={data.Infants}");
@@ -240,23 +262,48 @@ namespace PROJETOESA.Services
         }
 
         // Falta depois Organizar como se recebe os dados
-        public async Task<string> GetCalendarAsync(FlightData data)
+        public async Task<List<Calendar>> GetCalendarAsync(FlightData data)
         {
             var queryParams = new List<string>();
 
+            string today = DateTime.Now.ToString("yyyy-MM-dd");
+
             queryParams.Add($"fromEntityId={data.fromEntityId}");
-            queryParams.Add($"departDate={data.departDate}");
+            queryParams.Add($"departDate={today}");
             if (!string.IsNullOrEmpty(data.toEntityId)) queryParams.Add($"toEntityId={data.toEntityId}");
             if (!string.IsNullOrEmpty(data.market)) queryParams.Add($"market={data.market}");
             if (!string.IsNullOrEmpty(data.locale)) queryParams.Add($"locale={data.locale}");
-            if (!string.IsNullOrEmpty(data.currency)) queryParams.Add($"currency={data.currency}");
+            if (!string.IsNullOrEmpty(data.currency))
+            {
+                queryParams.Add($"currency={data.currency}");
+            }
+            else
+            {
+                queryParams.Add($"currency=EUR");
+            }
 
             var queryString = string.Join("&", queryParams);
             var response = await _httpClient.GetAsync($"flights/price-calendar?{queryString}");
             response.EnsureSuccessStatusCode();
 
             var content = await response.Content.ReadAsStringAsync();
-            return content;
+
+            var rootObject = JObject.Parse(content);
+
+            var days = rootObject["data"]["flights"]["days"].ToObject<List<JObject>>();
+
+            List<Calendar> calendars = new List<Calendar>();
+            foreach (var day in days)
+            {
+                calendars.Add(new Calendar
+                {
+                    Date = DateTime.Parse(day["day"].ToString()),
+                    Category = day["group"].ToString(),
+                    Price = (double)day["price"]
+                });
+            }
+
+            return calendars;
         }
 
         public async Task<List<CustomGetDataModel>> GetDataAsync(Country data)

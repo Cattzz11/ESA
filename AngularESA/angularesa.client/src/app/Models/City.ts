@@ -1,5 +1,4 @@
 import { Country } from "./Country";
-import { Flight } from "./Flight";
 
 export interface City {
   id: string;
@@ -7,5 +6,5 @@ export interface City {
   apiKey?: string;
   countryId?: string;
   country: Country;
-  flights?: Flight[];
+  displayName?: string;
 }

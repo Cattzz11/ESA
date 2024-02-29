@@ -98,23 +98,38 @@ namespace PROJETOESA.Services
             return tripDtos;
         }
 
+        public async Task<List<CityDto>> GetAllCitiesAsync()
+        {
+            var citiesWithCountries = await _context.City
+            .Include(c => c.Country)
+            .Select(c => new CityDto
+            {
+                Id = c.Id,
+                Name = c.Name,
+                Country = new CountryDto
+                {
+                    Id = c.Country.Id,
+                    Name = c.Country.Name
+                }
+            }).ToListAsync();
+
+            return citiesWithCountries;
+        }
+
         // Função apenas com o objetivo de preencher a tabela de Países
-        public async Task<List<Country>> GetAllCountriesAsync()
+        public async Task<List<Country>> PopulateBDCountries()
         {
             _httpClient2.Timeout = TimeSpan.FromMinutes(2);
             var response = await _httpClient2.GetAsync("v3.1/all");
             response.EnsureSuccessStatusCode();
 
-            Debug.WriteLine(response);
-
             var content = await response.Content.ReadAsStringAsync();
-            // Ajuste a deserialização com base na estrutura real do JSON
             var countryJsonModels = JsonSerializer.Deserialize<List<CountryJsonModel>>(content);
 
             var countries = countryJsonModels.Select(c => new Country
             {
-                Id = c.cca2, // Ajuste para corresponder ao campo correto no JSON
-                Name = c.name.common // Ajuste para corresponder ao campo correto no JSON
+                Id = c.cca2,
+                Name = c.name.common
             }).ToList();
             bool insert = false;
 
@@ -138,21 +153,21 @@ namespace PROJETOESA.Services
         }
 
         // Função apenas para preencher a tabela de Cidades
-        public async Task<List<City>> GetAllCitiesAsync()
+        public async Task<List<City>> PopulateBDCity()
         {
             List<Country> countries = await _context.Country.ToListAsync();
             List<City> cities = new List<City>();
             int count = 0;
             foreach (var country in countries)
             {
-                cities.AddRange(await PopulateAirportListAsync(country));
+                cities.AddRange(await PopulateBDCityAux(country));
                 count++;
             }
             return cities;
         }
 
         // Função apenas para preencher a tabela de Cidades
-        private async Task<List<City>> PopulateAirportListAsync(Country country)
+        private async Task<List<City>> PopulateBDCityAux(Country country)
         {
             var existingCities = await _context.City.Where(c => c.CountryId == country.Id).ToListAsync();
             if (existingCities.Any())

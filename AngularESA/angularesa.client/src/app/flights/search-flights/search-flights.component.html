@@ -1,19 +1,29 @@
 <div class="search-bar">
-  <div class="input-group">
-    <label for="from">De:</label>
-    <input type="text" id="from" placeholder="Cidade">
+  <div class="input-group custom-select">
+    <label for="from">Para:</label>
+    <input type="text" id="from" [(ngModel)]="selectedCity" (input)="filterCitiesByText('from')" (focus)="showAllCities('from')" (blur)="hideDropdown('from')" autocomplete="off">
+    <div class="dropdown" *ngIf="showDropdown">
+      <div class="dropdown-item" *ngFor="let city of filteredCities" (mousedown)="selectCity(city, 'from')">
+        {{ city.country.name }} -> {{ city.name }}
+      </div>
+    </div>
   </div>
-  <div class="input-group">
+  <div class="input-group custom-select">
     <label for="to">Para:</label>
-    <input type="text" id="to" placeholder="País, Cidade">
+    <input type="text" id="to" [(ngModel)]="selectedCityTo" (input)="filterCitiesByText('to')" (focus)="showAllCities('to')" (blur)="hideDropdown('to')" autocomplete="off" [disabled]="!fromValid">
+    <div class="dropdown" *ngIf="showDropdownTo">
+      <div class="dropdown-item" *ngFor="let city of filteredCitiesTo" (mousedown)="selectCity(city, 'to')">
+        {{ city.country.name }} -> {{ city.name }}
+      </div>
+    </div>
   </div>
   <div class="input-group">
     <label for="departure">Partida:</label>
-    <input type="date" id="departure">
+    <input type="date" id="departure" [(ngModel)]="departureDate" [disabled]="!departureEnabled" (ngModelChange)="arrivalEnabled = !!departureDate">
   </div>
   <div class="input-group">
     <label for="arrival">Chegada:</label>
-    <input type="date" id="arrival">
+    <input type="date" id="arrival" [(ngModel)]="arrivalDate" [disabled]="!arrivalEnabled" (ngModelChange)="validateForm()">
   </div>
   <div class="input-group number-group">
     <label for="adults">Nº Adultos:</label>
@@ -25,6 +35,6 @@
   </div>
 
   <div class="input-group button-group">
-    <button id="search">Procurar</button>
+    <button id="search" [disabled]="!canSearch">Procurar</button>
   </div>
 </div>

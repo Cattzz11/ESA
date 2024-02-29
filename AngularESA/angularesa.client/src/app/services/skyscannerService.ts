@@ -8,6 +8,7 @@ import { Flight } from '../Models/Flight';
 import { Carrier } from '../Models/Carrier';
 import { Trip } from '../Models/Trip';
 import { Country } from '../Models/Country';
+import { Calendar } from '../Models/Calendar';
 
 @Injectable({
   providedIn: 'root'
@@ -77,20 +78,20 @@ export class SkyscannerService {
     return this.http.get('api/flight/search-one-way', { params: params });
   }
 
-  public getCalendarFlights(data: FlightData): Observable<any> {
+  public getCalendarFlights(data: FlightData): Observable<Calendar[]> {
     let params = new HttpParams();
 
     // Campos obrigatórios
     params = params.set('fromEntityId', data.fromEntityId);
-    if (data.departDate) params = params.set('departDate', data.departDate);
+    if (data.toEntityId) params = params.set('toEntityId', data.toEntityId);
 
     // Campos opcionais
-    if (data.toEntityId) params = params.set('toEntityId', data.toEntityId);
+    if (data.departDate) params = params.set('departDate', data.departDate);
     if (data.market) params = params.set('market', data.market);
     if (data.locale) params = params.set('locale', data.locale);
     if (data.currency) params = params.set('currency', data.currency);
 
-    return this.http.get('api/flight/price-calendar', { params: params });
+    return this.http.get<Calendar[]>('api/flight/price-calendar', { params: params });
   }
 
   public getAirportList(data: Country): Observable<City[]> {
