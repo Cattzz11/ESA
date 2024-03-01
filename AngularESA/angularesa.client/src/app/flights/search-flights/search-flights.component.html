@@ -1,8 +1,8 @@
 <div class="search-bar">
   <div class="input-group custom-select">
     <label for="from">Para:</label>
-    <input type="text" id="from" [(ngModel)]="selectedCity" (input)="filterCitiesByText('from')" (focus)="showAllCities('from')" (blur)="hideDropdown('from')" autocomplete="off">
-    <div class="dropdown" *ngIf="showDropdown">
+    <input type="text" id="from" [(ngModel)]="selectedCityFrom" (input)="filterCitiesByText('from')" (focus)="filterCitiesByText('from')" (blur)="hideDropdown('from')" autocomplete="off">
+    <div class="dropdown" *ngIf="showDropdownFrom">
       <div class="dropdown-item" *ngFor="let city of filteredCities" (mousedown)="selectCity(city, 'from')">
         {{ city.country.name }} -> {{ city.name }}
       </div>
@@ -10,9 +10,9 @@
   </div>
   <div class="input-group custom-select">
     <label for="to">Para:</label>
-    <input type="text" id="to" [(ngModel)]="selectedCityTo" (input)="filterCitiesByText('to')" (focus)="showAllCities('to')" (blur)="hideDropdown('to')" autocomplete="off" [disabled]="!fromValid">
+    <input type="text" id="to" [(ngModel)]="selectedCityTo" (input)="filterCitiesByText('to')" (focus)="filterCitiesByText('to')" (blur)="hideDropdown('to')" autocomplete="off" [disabled]="!fromValid">
     <div class="dropdown" *ngIf="showDropdownTo">
-      <div class="dropdown-item" *ngFor="let city of filteredCitiesTo" (mousedown)="selectCity(city, 'to')">
+      <div class="dropdown-item" *ngFor="let city of filteredCities" (mousedown)="selectCity(city, 'to')">
         {{ city.country.name }} -> {{ city.name }}
       </div>
     </div>

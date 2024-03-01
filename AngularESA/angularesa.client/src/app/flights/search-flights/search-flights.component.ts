@@ -12,21 +12,23 @@ import { FlightData } from '../../Models/flight-data';
 })
 export class SearchFlightsComponent implements OnInit {
   cities: City[] = [];
-  filteredCities: City[] = [];
-  showDropdown = false;
-  selectedCity = '';
-  interactingWithDropdown = false;
-  selectedCityTo = '';
-  showDropdownTo = false;
-  filteredCitiesTo: City[] = [];
   calendar: Calendar[] | undefined;
+  filteredCities: City[] = [];
+
+  selectedCityFrom = '';
+  selectedCityTo = '';
+  departureDate = '';
+  arrivalDate = '';
+
+  showDropdownFrom = false;
+  showDropdownTo = false;
+  interactingWithDropdownFrom = false;
   fromValid = false;
   toValid = false;
   canSearch = false;
   departureEnabled = false;
   arrivalEnabled = false;
-  departureDate: string = '';
-  arrivalDate: string = '';
+  
 
   constructor(private dataService: DataService, private skyscannerService: SkyscannerService) { }
 
@@ -57,45 +59,44 @@ export class SearchFlightsComponent implements OnInit {
     });
   }
 
-  findCityApiKeyByName(cityName: string): string | undefined {
-    const city = this.cities.find(c => c.name.toLowerCase() === cityName.toLowerCase());
-    return city?.apiKey;
+  findCityApiKeyByName(cityName: string) {
+    return this.cities.find(c => c.name.toLowerCase() === cityName.toLowerCase())?.apiKey;
   }
 
   showAllCities(inputField: 'from' | 'to') {
+    this.filteredCities = this.cities;
+
     if (inputField === 'from') {
-      this.filteredCities = this.cities;
-      this.showDropdown = true;
+      this.showDropdownFrom = true;
     } else {
-      this.filteredCitiesTo = this.cities;
       this.showDropdownTo = true;
     }
   }
 
   filterCitiesByText(inputField: 'from' | 'to') {
-    const searchText = inputField === 'from' ? this.selectedCity.toLowerCase() : this.selectedCityTo.toLowerCase();
+    const searchText = inputField === 'from' ? this.selectedCityFrom.toLowerCase() : this.selectedCityTo.toLowerCase();
     const filteredCities = this.cities.filter(city =>
       city.name.toLowerCase().includes(searchText) ||
       city.country.name.toLowerCase().includes(searchText)
     );
 
+    this.filteredCities = filteredCities;
+
     if (inputField === 'from') {
-      this.filteredCities = filteredCities;
-      this.showDropdown = this.filteredCities.length > 0;
+      this.showDropdownFrom = this.filteredCities.length > 0;
     } else {
-      this.filteredCitiesTo = filteredCities;
-      this.showDropdownTo = this.filteredCitiesTo.length > 0;
+      this.showDropdownTo = this.filteredCities.length > 0;
     }
   }
 
   selectCity(city: City, inputField: 'from' | 'to') {
     if (inputField === 'from') {
-      this.selectedCity = city.country.name + ' -> ' + city.name;
-      this.showDropdown = false;
-      this.fromValid = this.isCityValid(this.selectedCity);
+      this.selectedCityFrom = city.name;
+      this.showDropdownFrom = false;
+      this.fromValid = this.isCityValid(this.selectedCityFrom);
       this.toValid = false;
     } else {
-      this.selectedCityTo = city.country.name + ' -> ' + city.name;
+      this.selectedCityTo = city.name;
       this.showDropdownTo = false;
       this.toValid = this.isCityValid(this.selectedCityTo);
       this.departureEnabled = this.toValid;
@@ -108,11 +109,11 @@ export class SearchFlightsComponent implements OnInit {
   }
 
   validateForm() {
-    this.fromValid = this.isCityValid(this.selectedCity);
+    this.fromValid = this.isCityValid(this.selectedCityFrom);
     this.toValid = this.isCityValid(this.selectedCityTo);
 
-    if (this.fromValid && this.toValid && this.calendar === undefined) {
-      this.loadCalendar(this.selectedCity, this.selectedCityTo);
+    if (this.fromValid && this.toValid) {
+      this.loadCalendar(this.selectedCityFrom, this.selectedCityTo);
     }
 
     this.canSearch = this.fromValid && this.toValid && !!this.departureDate && !!this.arrivalDate;
@@ -120,11 +121,11 @@ export class SearchFlightsComponent implements OnInit {
 
   hideDropdown(inputField: 'from' | 'to') {
     if (inputField === 'from') {
-      if (!this.interactingWithDropdown) {
-        this.showDropdown = false;
+      if (!this.interactingWithDropdownFrom) {
+        this.showDropdownFrom = false;
       }
     } else {
-      if (!this.interactingWithDropdown) {
+      if (!this.interactingWithDropdownFrom) {
         this.showDropdownTo = false;
       }
     }
