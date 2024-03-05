@@ -47,4 +47,22 @@ export class RecoverPasswordComponent implements OnInit {
       }
     });
   }
+
+  public confirmationAccount() {
+    if (!this.recoverForm.valid) {
+      return;
+    }
+
+    const email = this.recoverForm.get('email')?.value;
+    this.confirmationMessage = "Se o e-mail existir, irá receber um código para o confirmar.";
+
+    this.authService.recoverPassword(email).subscribe({
+      next: (response) => {
+        setTimeout(() => this.router.navigate(['/confirmation-code/', email]), 2000); // espera 2 segundos
+      },
+      error: (error) => {
+        setTimeout(() => this.router.navigate(['/confirmation-code/', email]), 2000); // espera 2 segundos
+      }
+    });
+  }
 }

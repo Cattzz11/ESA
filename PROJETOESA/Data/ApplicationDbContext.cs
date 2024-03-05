@@ -15,5 +15,7 @@ namespace PROJETOESA.Data
         //public DbSet<Person> Person { get; set; } = default!;
 
         public DbSet<PasswordRecoveryCode> PasswordRecoveryCodes { get; set; }
+
+        public DbSet<ConfirmationCode> ConfirmationCodes { get; set; }
     }
 }

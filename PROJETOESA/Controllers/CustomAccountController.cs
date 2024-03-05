@@ -109,6 +109,29 @@ namespace PROJETOESA.Controllers
 
             if (user != null)
             {
+                var confirmationCode = this._codeGeneratorService.GenerateCode();
+
+                // Construção da mensagem para enviar
+                var htmlContent = $"<p>Seu código de confirmação é: {confirmationCode}</p>";
+
+                // Envio do e-mail
+                await _emailSender.SendEmailAsync(model.Email, "Confirmação da Conta", htmlContent);
+
+                // Armazenar o código de recuperação na base de dados
+                await StoreRecoveryCodeAsync(model, confirmationCode);
+            }
+
+            return Ok(new { Message = "Se o registo for bem sucedido, o código de confirmação será enviado." });
+        }
+
+        [HttpPost]
+        [Route("api/send-confirmation-code")]
+        public async Task<IActionResult> SendConfirmationCode([FromBody] CustomRecoverModel model)
+        {
+            var user = await _userManager.FindByEmailAsync(model.Email);
+
+            if (user != null)
+            {
                 var recoveryCode = this._codeGeneratorService.GenerateCode();
 
                 // Construção da mensagem para enviar
@@ -118,7 +141,7 @@ namespace PROJETOESA.Controllers
                 await _emailSender.SendEmailAsync(model.Email, "Recuperação de Senha", htmlContent);
 
                 // Armazenar o código de recuperação na base de dados
-                await StoreRecoveryCodeAsync(model, recoveryCode);
+                await StoreConfirmationCodeAsync(model, recoveryCode);
             }
 
             return Ok(new { Message = "Se o e-mail estiver registrado, um e-mail de recuperação será enviado." });
@@ -137,6 +160,36 @@ namespace PROJETOESA.Controllers
             };
 
             _context.PasswordRecoveryCodes.Add(passwordRecoveryCode);
+            await _context.SaveChangesAsync();
+        }
+
+        private async Task StoreConfirmationCodeAsync(CustomRecoverModel user, string code)
+        {
+            // Find the existing confirmation code for the user
+            var existingCode = await _context.ConfirmationCodes
+                .FirstOrDefaultAsync(c => c.UserEmail == user.Email);
+
+            if (existingCode != null)
+            {
+                // Update the existing code with the new one
+                existingCode.Code = code;
+                existingCode.ExpirationTime = DateTime.UtcNow.AddMinutes(5);
+            }
+            else
+            {
+                // If no existing code, create a new one
+                var expirationTime = DateTime.UtcNow.AddMinutes(5);
+
+                var confirmationCode = new ConfirmationCode
+                {
+                    UserEmail = user.Email,
+                    Code = code,
+                    ExpirationTime = expirationTime
+                };
+
+                _context.ConfirmationCodes.Add(confirmationCode);
+            }
+
             await _context.SaveChangesAsync();
         }
 
@@ -168,6 +221,89 @@ namespace PROJETOESA.Controllers
             // O código é inválido.
             return BadRequest(new { Message = "Código inválido." });
         }
+
+        [HttpPost]
+        [Route("api/validate-confirmation-code")]
+        public async Task<IActionResult> ValidateConfirmationCodeAsync(string userEmail, string code)
+        {
+            var confirmationCode = await _context.ConfirmationCodes
+                .FirstOrDefaultAsync(c => c.UserEmail == userEmail && c.Code == code);
+
+            if (confirmationCode != null)
+            {
+                if (confirmationCode.ExpirationTime > DateTime.UtcNow)
+                {
+                    // O código é válido.
+                    _context.ConfirmationCodes.Remove(confirmationCode);
+                    await _context.SaveChangesAsync();
+                    return Ok(new { Message = "Código válido." });
+                }
+                else
+                {
+                    // O código expirou.
+                    _context.ConfirmationCodes.Remove(confirmationCode);
+                    await _context.SaveChangesAsync();
+                    return BadRequest(new { Message = "Código expirado." });
+                }
+            }
+
+            // O código é inválido.
+            return BadRequest(new { Message = "Código inválido." });
+        }
+
+        [HttpGet]
+        [Route("api/check-email-confirmation-status")]
+        [AllowAnonymous]
+        public async Task<IActionResult> CheckEmailConfirmationStatus([FromQuery] string email)
+        {
+            var user = await _userManager.FindByEmailAsync(email);
+
+            if (user != null)
+            {
+                var emailConfirmed = await _userManager.IsEmailConfirmedAsync(user);
+                return Ok(emailConfirmed);
+            }
+
+            return BadRequest(new { Message = "User not found." });
+        }
+
+        [HttpGet]
+        [Route("api/check-email-exists")]
+        [AllowAnonymous]
+        public async Task<IActionResult> CheckEmailExistsInDB([FromQuery] string email)
+        {
+            var user = await _userManager.FindByEmailAsync(email);
+
+            if (user != null)
+            {
+                return Ok();
+            }
+
+            return BadRequest(new { Message = "User not found." });
+        }
+
+        [HttpPost]
+        [Route("api/update-confirmed-email")]
+        public async Task<IActionResult> UpdateConfirmedEmail([FromBody] UpdateConfirmedEmailModel model)
+        {
+            // Find the user in the database based on the email
+            var user = await _userManager.FindByEmailAsync(model.Email);
+
+            if (user != null)
+            {
+                // Update the confirmedEmail status
+                user.EmailConfirmed = true;
+                var result = await _userManager.UpdateAsync(user);
+
+                if (result.Succeeded)
+                {
+                    return Ok(new { Message = "Email confirmed successfully." });
+                }
+            }
+
+            return BadRequest(new { Message = "Failed to confirm email." });
+        }
+
     }
 
     public class CustomRegisterModel
@@ -188,5 +324,9 @@ namespace PROJETOESA.Controllers
         public string Email { get; set; }
         public string Password { get; set; }
 
+    }
+    public class UpdateConfirmedEmailModel
+    {
+        public string Email { get; set; }
     }
 }

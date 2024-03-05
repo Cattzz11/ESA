@@ -1,6 +1,6 @@
 import { HttpClient, HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, Subject, catchError, map, of, throwError } from 'rxjs';
+import { BehaviorSubject, Observable, Subject, catchError, delay, map, mergeMap, of, switchMap, throwError } from 'rxjs';
 import { UserInfo } from './authorize.dto';
 import { jwtDecode } from 'jwt-decode';
 import { Router } from '@angular/router';
@@ -22,19 +22,46 @@ export class AuthorizeService {
 
   // cookie-based login
   public signIn(email: string, password: string) {
-    return this.http.post('/login?useCookies=true', {
-      email: email,
-      password: password
-    }, {
-      observe: 'response',
-      responseType: 'text'
-    })
-      .pipe<boolean>(map((res: HttpResponse<string>) => {
-        this._authStateChanged.next(res.ok);
-        return res.ok;
-      }));
+    // First, check email confirmation status
+    return this.checkEmailConfirmationStatus(email).pipe(
+      switchMap((isEmailConfirmed: boolean) => {
+        if (isEmailConfirmed) {
+          // If email is confirmed, proceed with login
+          return this.http.post('/login?useCookies=true', {
+            email: email,
+            password: password
+          }, {
+            observe: 'response',
+            responseType: 'text'
+          })
+            .pipe<boolean>(map((res: HttpResponse<string>) => {
+              this._authStateChanged.next(res.ok);
+              return res.ok;
+            }));
+        } else {
+          const emailExists = this.checkEmailExistsInDB(email);
+
+          if (emailExists) {
+            // Redirect to a specific page for unconfirmed emails
+            setTimeout(() => this.router.navigate(['/confirmation-account/', email]), 1000);
+          } else {
+            // Handle other scenarios (e.g., show a message, throw an error)
+            console.error('Email not confirmed, and email does not exist in the DB');
+          }
+          return of(false).pipe(delay(2000));
+        }
+      })
+    );
   }
 
+  public checkEmailExistsInDB(email: string): Observable<boolean> {
+    return this.http.get<boolean>(`/api/check-email-exists?email=${email}`);
+  }
+
+  private checkEmailConfirmationStatus(email: string): Observable<boolean> {
+    // Assuming you have an API endpoint to check email confirmation status
+    return this.http.get<boolean>(`/api/check-email-confirmation-status?email=${email}`);
+  }
 
   // register new user
   public registerCustom(name: string, email: string, password: string) {
@@ -66,6 +93,20 @@ export class AuthorizeService {
 
   public codeValidation(code: string, email: string) {
     return this.http.post<any>('api/validate-recovery-code', {
+      userEmail: email,
+      code: code
+    }).pipe(
+      map(res => {
+        return true;
+      }),
+      catchError(error => {
+        return of(false);
+      })
+    );
+  }
+
+  public codeValidationEmail(code: string, email: string) {
+    return this.http.post<any>('api/validate-confirmation-code', {
       userEmail: email,
       code: code
     }).pipe(
@@ -196,5 +237,26 @@ export class AuthorizeService {
 
   public getUserInfo(): Observable<any> {
     return this.http.get<any>('api/userInfo');
+  }
+  
+  public confirmAccount(email: string) {
+    return this.http.post('api/send-confirmation-code', {
+      email: email
+    }, {
+      observe: 'response',
+      responseType: 'text'
+    })
+      .pipe<boolean>(map((res: HttpResponse<string>) => {
+        return res.ok;
+      }));
+  }
+
+  public updateConfirmedEmail(email: string): Observable<any> {
+    return this.http.post(`/api/update-confirmed-email`, { email });
+  }
+
+  public resendConfirmationCode(email: string): Observable<any> {
+    // Reused API endpoint to send the confirmation code
+    return this.http.post(`/api/send-confirmation-code`, { email });
   }
 }

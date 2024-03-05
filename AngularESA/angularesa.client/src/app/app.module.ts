@@ -24,6 +24,8 @@ import { ProfileComponent } from './profile/profile.component';
 import { LogoutComponent } from '../api-authorization/logout/logout.component';
 import { SearchFlightsComponent } from './flights/search-flights/search-flights.component';
 
+import { ConfirmationAccountComponent } from '../api-authorization/confirmation-account/confirmation-account.component'
+import { SuccessComponent } from '../api-authorization/success/success.component'
 
 @NgModule({
   declarations: [
@@ -43,6 +45,8 @@ import { SearchFlightsComponent } from './flights/search-flights/search-flights.
     PeopleComponent,
     PersonComponent,
     SearchFlightsComponent
+    ConfirmationAccountComponent,
+    SuccessComponent
   ],
   imports: [
     BrowserModule, HttpClientModule,
