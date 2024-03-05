@@ -1,4 +1,4 @@
-import { HttpClient, HttpErrorResponse, HttpResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, Subject, catchError, delay, map, mergeMap, of, switchMap, throwError } from 'rxjs';
 import { UserInfo } from './authorize.dto';
@@ -170,14 +170,22 @@ export class AuthorizeService {
   }
 
   async googleResponse(response: any) {
+
     if (response && response.credential) {
       //this.isLoggedIn = true;
       this._authStateChanged.next(true);
       console.log("Google login successfull");
       const decoded = jwtDecode(response.credential);
+      console.log(response.credential);
       console.log('Decoded JWT:', decoded);
+
+      const user = {
+        email: jwtDecode<User>(response.credential)?.email,
+        name: jwtDecode<User>(response.credential)?.name,
+      };
+
       this.commonAuthenticationProcedure(decoded);
-      sessionStorage.setItem('user', response);
+      sessionStorage.setItem('user', JSON.stringify(user));
     }
 
     console.log('RESPONSE :>> ', response);
@@ -259,4 +267,14 @@ export class AuthorizeService {
     // Reused API endpoint to send the confirmation code
     return this.http.post(`/api/send-confirmation-code`, { email });
   }
+
+  public updateUserInfo(updatedData: any): Observable<any> {
+    return this.http.put('api/edit-profile', updatedData);
+  }
+
 }
+export interface User {
+  email: string;
+  name: string;
+}
+

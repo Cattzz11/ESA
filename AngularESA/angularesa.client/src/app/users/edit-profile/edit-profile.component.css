@@ -1,0 +1,116 @@
+*{
+    font-family:'Roboto Slab';
+}
+
+ul{
+    list-style:none;
+    padding: 10px;
+}
+
+li{
+    text-align:justify;
+    padding:7px;
+}
+
+
+
+.edit-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80vh;
+  width: 80vw;
+  max-height: 1500px;
+  max-width: 1500px;
+  margin-left:10%;
+  padding-right:10px;
+  margin-top:23%;
+}
+
+.edit-box {
+  display: flex;
+  width: 120%;
+  height: 210%;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 40px;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.form-edit {
+  padding: 20px;
+  background-color: #006994;
+  width: 500px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  padding-left:10%;
+}
+
+label{
+    color:white;
+}
+
+.form-photo-div img {
+  width: 100px;
+  height: 100px;
+  margin-left:150px;
+  padding-bottom:10px;
+}
+
+.profpic label{
+    
+}
+
+h2{
+    padding-right:3%;
+}
+
+.login-branding {
+  width: 70%;
+  background-size: cover;
+  background-position: center;
+}
+
+.logo {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: auto;
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.form-edit input {
+  display: block;
+  width: 100%;
+  margin-bottom: 10px;
+  padding: 10px;
+  border: 1px solid #000000;
+  border-radius: 10px;
+}
+
+
+#title-pic{
+    padding-bottom:5px;
+}
+
+label:last-child{
+    padding-bottom:0px;
+}
+
+button {
+  width: 80%;
+  padding: 10px;
+  margin-top: 7px;
+  margin-bottom: 10px;
+  border: 1px solid #000000;
+  border-radius: 30px;
+  background-color: #ffffff;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: large;
+  padding-right:3%;
+}

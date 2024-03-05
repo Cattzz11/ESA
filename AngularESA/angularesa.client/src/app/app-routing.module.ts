@@ -21,6 +21,9 @@ import { PremiumProfilePageComponent } from './users/premium-profile-page/premiu
 import { SearchFlightsComponent } from './flights/search-flights/search-flights.component';
 import { ConfirmationAccountComponent } from '../api-authorization/confirmation-account/confirmation-account.component';
 import { SuccessComponent } from '../api-authorization/success/success.component';
+import { PremiumComponent } from './users/premium/premium.component';
+import { SubscriptionPageComponent } from './users/subscription-page/subscription-page.component';
+import { EditProfileComponent } from './users/edit-profile/edit-profile.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent, pathMatch: 'full' },
@@ -42,7 +45,11 @@ const routes: Routes = [
   { path: 'premium-profile-page', component: PremiumProfilePageComponent },
   { path: 'search-flights-page', component: SearchFlightsComponent },
   { path: 'confirmation-account/:email', component: ConfirmationAccountComponent },
-  { path: 'success', component: SuccessComponent }
+  { path: 'success', component: SuccessComponent },
+  { path: 'edit-profile', component: EditProfileComponent },
+  { path: 'premium-component', component: PremiumComponent },
+  { path: 'subscription-component', component: SubscriptionPageComponent },
+  
 ];
 
 @NgModule({
