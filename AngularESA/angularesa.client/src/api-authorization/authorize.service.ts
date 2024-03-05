@@ -155,6 +155,7 @@ export class AuthorizeService {
     console.log("deu3");
   }
 
+
   commonAuthenticationProcedure(userDetails: any) {
     // Aqui, você configura o usuário como logado, armazena o token JWT se necessário, etc.
     console.log('User details:', userDetails);
