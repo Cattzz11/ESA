@@ -2,6 +2,7 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  font-family:'Roboto Slab';
 }
 
 .profile {
@@ -54,7 +55,7 @@
 .userPage {
   display: flex;
   flex-direction: column;
-  width: 25%;
+  width: 30%;
 }
 
 .profile-picture {
@@ -168,4 +169,13 @@
     border-bottom: 6px solid transparent;
     border-left: 12px solid white;
     transform: translateX(135%) translateY(-50%);
+  }
+
+  img{
+      margin-left:60px;
+  }
+
+  .edit a{
+      text-decoration:none;
+      color:black;
   }
