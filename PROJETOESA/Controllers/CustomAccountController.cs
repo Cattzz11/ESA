@@ -135,16 +135,16 @@ namespace PROJETOESA.Controllers
                 var recoveryCode = this._codeGeneratorService.GenerateCode();
 
                 // Construção da mensagem para enviar
-                var htmlContent = $"<p>Seu código de recuperação é: {recoveryCode}</p>";
+                var htmlContent = $"<p>Seu código de confirmação é: {recoveryCode}</p>";
 
                 // Envio do e-mail
-                await _emailSender.SendEmailAsync(model.Email, "Recuperação de Senha", htmlContent);
+                await _emailSender.SendEmailAsync(model.Email, "Confirmação da Conta", htmlContent);
 
                 // Armazenar o código de recuperação na base de dados
                 await StoreConfirmationCodeAsync(model, recoveryCode);
             }
 
-            return Ok(new { Message = "Se o e-mail estiver registrado, um e-mail de recuperação será enviado." });
+            return Ok(new { Message = "Se o e-mail existir, um e-mail de confirmação será enviado." });
         }
 
         private async Task StoreRecoveryCodeAsync(CustomRecoverModel user, string recoveryCode)

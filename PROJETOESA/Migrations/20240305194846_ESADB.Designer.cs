@@ -12,13 +12,8 @@ using PROJETOESA.Data;
 namespace PROJETOESA.Migrations
 {
     [DbContext(typeof(AeroHelperContext))]
-<<<<<<<< HEAD:PROJETOESA/Migrations/20240220152516_InitialCreate.Designer.cs
-    [Migration("20240220152516_InitialCreate")]
-    partial class InitialCreate
-========
-    [Migration("20240227174831_ESADB")]
+    [Migration("20240305194846_ESADB")]
     partial class ESADB
->>>>>>>> Dani-ConfirmationCode:PROJETOESA/Migrations/20240227174831_ESADB.Designer.cs
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
