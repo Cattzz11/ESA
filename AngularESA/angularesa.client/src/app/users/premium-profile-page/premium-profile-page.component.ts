@@ -3,6 +3,7 @@ import { AuthorizeService } from '../../../api-authorization/authorize.service';
 import { User } from '../../Models/users';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UsersService } from '../../../app/services/UsersService';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-premium-profile-page',
@@ -15,8 +16,9 @@ export class PremiumProfilePageComponent {
   public isLoggedInWGoogle: boolean = false;
   public searchTerm: string = '';
   filteredUsers: User[] = [];
+  allUsers: User[] = [];
 
-  constructor(private auth: AuthorizeService, private formBuilder: FormBuilder, private userService: UsersService) {
+  constructor(private auth: AuthorizeService, private formBuilder: FormBuilder, private userService: UsersService, private router: Router) {
 
   }
 
@@ -53,12 +55,16 @@ export class PremiumProfilePageComponent {
   private loadUsers(): void {
     this.userService.getUsers().subscribe(
       (users) => {
+        this.allUsers = users;
         console.log('Users:', users);
-        this.users = this.filteredUsers;
-        if (this.filteredUsers.length == 0) {
-
+        console.log('filtered users', this.filteredUsers.length);
+        if (this.filteredUsers.length !== 0) {
+          this.users = this.filteredUsers;
         }
-        
+        else {
+          this.users = users;
+        }
+
       },
       (error) => {
         console.error('Error fetching users:', error);
@@ -81,13 +87,36 @@ export class PremiumProfilePageComponent {
     );
   }
 
-  applyFilter(): void {
-    console.log("apply");
-    this.filteredUsers = this.users.filter(user =>
-      user.name.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
-      user.email.toLowerCase().includes(this.searchTerm.toLowerCase())
+  deleteUserProfile(email: string): void {
+    console.log(email);
+    this.userService.deleteUser(email).subscribe(
+      () => {
+        // Success
+        console.log('User deleted successfully', email);
+        // Optionally, you can reload the user list after deletion
+        this.router.navigateByUrl("/");
+      },
+      (error) => {
+        // Handle error
+        console.error('Error deleting user:', error);
+      }
     );
+  }
+
+  async applyFilter(): Promise<void> {
+    if (this.searchTerm !== '') {
+      this.filteredUsers = [];
+      this.filteredUsers = await this.allUsers.filter(user =>
+        user.name.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
+        user.email.toLowerCase().includes(this.searchTerm.toLowerCase())
+      );
+      console.log("filtered users", this.filteredUsers);
+    }
+    else {
+      this.filteredUsers = [];
+    }
+
     this.loadUsers();
-    console.log("filtered users", this.filteredUsers);
+
   }
 }

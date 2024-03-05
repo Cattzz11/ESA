@@ -12,10 +12,10 @@
     <div class="userPage">
       <img src="../../../assets/Images/user.png" alt="Profile Picture" class="profile-picture">
       <!--<form (submit)="uploadPhoto()">
-      <input type="file" (change)="onFileSelected($event)" accept="image/*" />
-      <button type="submit">Upload Photo</button>
-    </form>
-    <img [src]="photoPreview" *ngIf="photoPreview" /-->
+    <input type="file" (change)="onFileSelected($event)" accept="image/*" />
+    <button type="submit">Upload Photo</button>
+  </form>
+  <img [src]="photoPreview" *ngIf="photoPreview" /-->
       <div class="profile-info">
         <h1>{{ user?.name }}</h1>
         <p>E-mail: {{ user?.email }}</p>
@@ -24,7 +24,11 @@
         <p *ngIf="user && user.nationality !== undefined">Nacionalidade: {{ user.nationality }}</p>
         <p *ngIf="user && user.gender !== undefined"> Género: {{user.gender}}</p>
       </div>
+      <div class="delete" *ngIf="user && user.email !== undefined">
+        <button id="delete_button" (click)="deleteUserProfile(user.email)"> Apagar Conta</button>
+      </div>
     </div>
+    
     <!--USER PREMIUM-->
     <div *ngIf="user?.role === 'ClientePremium'" class="history">
       <h3 id="historyTitle">Histórico</h3>
