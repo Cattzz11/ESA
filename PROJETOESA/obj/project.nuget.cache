@@ -1,9 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "Xslp418mQB9Y3S1G6f0fGfuGFbUJD35N3o1ZnkFPFr7/4sTl3E8JjrV7PYW3MyIR2khPVUG7sqjG2j8Db/B1cw==",
+  "dgSpecHash": "pAzAsv+5sbuOqBMKRFqYIpTrAPgAtF3Ysw4qmofYy/NFV43kZlNdgvaSA5ug/9QjZ3dNEx5nvLMZ1Xh6sP2VXQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\danie\\OneDrive\\Documentos\\Meu\\UNI STUFF\\EsA\\Projeto\\ESA\\PROJETOESA\\PROJETOESA.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\danie\\.nuget\\packages\\awssdk.core\\3.7.302.15\\awssdk.core.3.7.302.15.nupkg.sha512",
+    "C:\\Users\\danie\\.nuget\\packages\\awssdk.dynamodbv2\\3.7.301.17\\awssdk.dynamodbv2.3.7.301.17.nupkg.sha512",
     "C:\\Users\\danie\\.nuget\\packages\\azure.core\\1.25.0\\azure.core.1.25.0.nupkg.sha512",
     "C:\\Users\\danie\\.nuget\\packages\\azure.identity\\1.7.0\\azure.identity.1.7.0.nupkg.sha512",
     "C:\\Users\\danie\\.nuget\\packages\\bouncycastle.cryptography\\2.2.1\\bouncycastle.cryptography.2.2.1.nupkg.sha512",

@@ -43,6 +43,10 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "dependencies": {
+            "AWSSDK.DynamoDBv2": {
+              "target": "Package",
+              "version": "[3.7.301.17, )"
+            },
             "MailKit": {
               "target": "Package",
               "version": "[4.3.0, )"

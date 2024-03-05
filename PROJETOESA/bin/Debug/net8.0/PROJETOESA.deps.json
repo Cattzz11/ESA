@@ -8,6 +8,7 @@
     ".NETCoreApp,Version=v8.0": {
       "PROJETOESA/1.0.0": {
         "dependencies": {
+          "AWSSDK.DynamoDBv2": "3.7.301.17",
           "MailKit": "4.3.0",
           "Microsoft.AspNetCore.Components.QuickGrid.EntityFrameworkAdapter": "8.0.1",
           "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore": "8.0.1",
@@ -22,6 +23,25 @@
         },
         "runtime": {
           "PROJETOESA.dll": {}
+        }
+      },
+      "AWSSDK.Core/3.7.302.15": {
+        "runtime": {
+          "lib/net8.0/AWSSDK.Core.dll": {
+            "assemblyVersion": "3.3.0.0",
+            "fileVersion": "3.7.302.15"
+          }
+        }
+      },
+      "AWSSDK.DynamoDBv2/3.7.301.17": {
+        "dependencies": {
+          "AWSSDK.Core": "3.7.302.15"
+        },
+        "runtime": {
+          "lib/net8.0/AWSSDK.DynamoDBv2.dll": {
+            "assemblyVersion": "3.3.0.0",
+            "fileVersion": "3.7.301.17"
+          }
         }
       },
       "Azure.Core/1.25.0": {
@@ -2318,6 +2338,20 @@
       "type": "project",
       "serviceable": false,
       "sha512": ""
+    },
+    "AWSSDK.Core/3.7.302.15": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-DgSlbR4JIthe+iYl4qVfz3Lkh59th/gNPYloxf9iU0pIx3hHYqJ0UJRg9mwBcmpeyBccRSwdNoo9yF9X3tb/rg==",
+      "path": "awssdk.core/3.7.302.15",
+      "hashPath": "awssdk.core.3.7.302.15.nupkg.sha512"
+    },
+    "AWSSDK.DynamoDBv2/3.7.301.17": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-j2yDFYWA67c0GVZMaYnTwnoA1RGGzQM2Bcrbsj7bZKA5+2/LjeYxEJsJrMbi60wBb40c8DD4x6K8tkMzzBfuDA==",
+      "path": "awssdk.dynamodbv2/3.7.301.17",
+      "hashPath": "awssdk.dynamodbv2.3.7.301.17.nupkg.sha512"
     },
     "Azure.Core/1.25.0": {
       "type": "package",
