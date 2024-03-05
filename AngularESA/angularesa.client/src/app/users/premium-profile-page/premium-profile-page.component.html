@@ -2,34 +2,23 @@
   <div class="top">
     <h1 id="title">Perfil do Utilizador</h1>
     <div class="topButtons">
-        <button class="edit" *ngIf="!isLoggedInWGoogle"><a routerLink="/edit-profile">Editar Perfil</a></button>
-        <button class="payments">Pagamentos</button>
-        <button class="premium"><a routerLink="/premium-component" style="text-decoration:none; color:black;">Premium</a></button>
+      <button (click)="edit()" class="edit">Editar</button>
+      <button class="payments">Pagamentos</button>
+      <button class="premium">Premium</button>
     </div>
   </div>
   <div class="separator"></div>
   <div class="userContent">
     <div class="userPage">
-      <img src="../../../assets/Images/user.png" alt="Profile Picture" class="profile-picture">
-      <!--<form (submit)="uploadPhoto()">
-    <input type="file" (change)="onFileSelected($event)" accept="image/*" />
-    <button type="submit">Upload Photo</button>
-  </form>
-  <img [src]="photoPreview" *ngIf="photoPreview" /-->
+      <img src="../../../assets/Images/imagemInicial.png" alt="Profile Picture" class="profile-picture">
       <div class="profile-info">
         <h1>{{ user?.name }}</h1>
         <p>E-mail: {{ user?.email }}</p>
         <p *ngIf="user && user.age !== undefined">Idade: {{ user.age }} anos</p>
         <p *ngIf="user && user.occupation !== undefined">Ocupação: {{ user.occupation }}</p>
         <p *ngIf="user && user.nationality !== undefined">Nacionalidade: {{ user.nationality }}</p>
-        <p *ngIf="user && user.gender !== undefined"> Género: {{user.gender}}</p>
-      </div>
-      <div class="delete" *ngIf="user && user.email !== undefined">
-        <button id="delete_button" (click)="deleteUserProfile(user.email)"> Apagar Conta</button>
       </div>
     </div>
-    
-    <!--USER PREMIUM-->
     <div *ngIf="user?.role === 'ClientePremium'" class="history">
       <h3 id="historyTitle">Histórico</h3>
       <div class="travelHistory">
@@ -76,16 +65,5 @@
         </div>
       </div>
     </div>
-
-    <!--ADMINISTRADOR-->
-    <div *ngIf="user?.role === 'Administrador'" class="list-users">
-      <h3 id="lista-utilizadores-site">Lista de Utilizadores</h3>
-      <input type="text" [(ngModel)]="searchTerm" (keyup.enter)="applyFilter()" placeholder="Search users">
-      <ul>
-        <li *ngFor="let u of users">
-          {{u.name}} - {{u.email}}
-          <button (click)="deleteUser(u.email)">Delete</button>
-        </li>
-      </ul>
-    </div>
   </div>
+</div>
