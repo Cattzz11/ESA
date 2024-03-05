@@ -1,0 +1,101 @@
+{
+  "format": 1,
+  "restore": {
+    "C:\\Users\\danie\\OneDrive\\Documentos\\Meu\\UNI STUFF\\EsA\\HelperLOGIN\\PeopleAngular\\PeopleAngular.Server\\PeopleAngular.Server.csproj": {}
+  },
+  "projects": {
+    "C:\\Users\\danie\\OneDrive\\Documentos\\Meu\\UNI STUFF\\EsA\\HelperLOGIN\\PeopleAngular\\PeopleAngular.Server\\PeopleAngular.Server.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\danie\\OneDrive\\Documentos\\Meu\\UNI STUFF\\EsA\\HelperLOGIN\\PeopleAngular\\PeopleAngular.Server\\PeopleAngular.Server.csproj",
+        "projectName": "PeopleAngular.Server",
+        "projectPath": "C:\\Users\\danie\\OneDrive\\Documentos\\Meu\\UNI STUFF\\EsA\\HelperLOGIN\\PeopleAngular\\PeopleAngular.Server\\PeopleAngular.Server.csproj",
+        "packagesPath": "C:\\Users\\danie\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\danie\\OneDrive\\Documentos\\Meu\\UNI STUFF\\EsA\\HelperLOGIN\\PeopleAngular\\PeopleAngular.Server\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\danie\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "default"
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "dependencies": {
+            "microsoft.aspnetcore.components.quickgrid.entityframeworkadapter": {
+              "target": "Package",
+              "version": "[8.0.1, )"
+            },
+            "microsoft.aspnetcore.identity.entityframeworkcore": {
+              "target": "Package",
+              "version": "[8.0.1, )"
+            },
+            "microsoft.aspnetcore.spaproxy": {
+              "target": "Package",
+              "version": "[8.0.1, )"
+            },
+            "microsoft.entityframeworkcore.sqlserver": {
+              "target": "Package",
+              "version": "[8.0.1, )"
+            },
+            "microsoft.entityframeworkcore.tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[8.0.1, )"
+            },
+            "microsoft.visualstudio.web.codegeneration.design": {
+              "target": "Package",
+              "version": "[8.0.0, )"
+            },
+            "swashbuckle.aspnetcore": {
+              "target": "Package",
+              "version": "[6.5.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.101/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}
