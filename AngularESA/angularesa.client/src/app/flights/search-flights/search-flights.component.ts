@@ -105,7 +105,7 @@ export class SearchFlightsComponent implements OnInit {
   }
 
   isCityValid(cityName: string): boolean {
-    return this.cities.some(city => cityName.includes(city.name) && cityName.includes(city.country.name));
+    return this.cities.some(city => cityName.includes(city.name));
   }
 
   validateForm() {
