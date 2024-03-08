@@ -13,7 +13,7 @@ builder.Services.AddDbContext<AeroHelperContext>(options =>
 builder.Services.AddHttpClient("SkyscannerAPI", client =>
 {
     client.BaseAddress = new Uri("https://sky-scanner3.p.rapidapi.com/get-config");
-    client.DefaultRequestHeaders.Add("X-RapidAPI-Key", "4beef29efdmshcaf7d7db7c061a7p14d35bjsna36a2627a624");
+    client.DefaultRequestHeaders.Add("X-RapidAPI-Key", "e1615ff456msh56f2dd1e1017e8dp1527a2jsn8e9f84f026aa");
     client.DefaultRequestHeaders.Add("X-RapidAPI-Host", "sky-scanner3.p.rapidapi.com");
 });
 

@@ -15,6 +15,7 @@ import { AuthorizeService } from '../api-authorization/authorize.service';
 import { PremiumProfilePageComponent } from './users/premium-profile-page/premium-profile-page.component';
 import { FilterByAirlineComponent } from './flights/filter-by-airline/filter-by-airline.component';
 import { SearchFlightsComponent } from './flights/search-flights/search-flights.component';
+import { FlightDataComponent } from './flights/flight-data/flight-data.component';
 
 
 @NgModule({
@@ -26,6 +27,7 @@ import { SearchFlightsComponent } from './flights/search-flights/search-flights.
     PremiumProfilePageComponent,
     FilterByAirlineComponent,
     SearchFlightsComponent,
+    FlightDataComponent,
   ],
   imports: [
     BrowserModule, HttpClientModule,

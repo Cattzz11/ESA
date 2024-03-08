@@ -15,7 +15,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("PROJETOESA")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+792ed2aaf1d6083da12148414cb211e09a71eba0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+4c4098cbe4ba3d341cb9ab147e06502d6a6d3e9c")]
 [assembly: System.Reflection.AssemblyProductAttribute("PROJETOESA")]
 [assembly: System.Reflection.AssemblyTitleAttribute("PROJETOESA")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

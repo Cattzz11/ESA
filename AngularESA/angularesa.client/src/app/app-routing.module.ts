@@ -11,6 +11,7 @@ import { RecoveryCodeComponent } from '../api-authorization/recovery-code/recove
 import { PremiumProfilePageComponent } from './users/premium-profile-page/premium-profile-page.component';
 import { FilterByAirlineComponent } from './flights/filter-by-airline/filter-by-airline.component';
 import { SearchFlightsComponent } from './flights/search-flights/search-flights.component';
+import { FlightDataComponent } from './flights/flight-data/flight-data.component';
 
 
 const routes: Routes = [
@@ -24,6 +25,7 @@ const routes: Routes = [
   { path: 'premium-profile-page', component: PremiumProfilePageComponent },
   { path: 'filter-by-airline', component: FilterByAirlineComponent },
   { path: 'search-flights', component: SearchFlightsComponent },
+  { path: 'flight-data', component: FlightDataComponent },
 ];
 
 @NgModule({

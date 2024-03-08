@@ -1,0 +1,37 @@
+<!-- Container Principal -->
+<div *ngIf="trip" class="flight-data-container">
+  <h2>Detalhes da viagem</h2>
+  <div class="details-list">
+    <p>Preço: {{ trip.price }} €</p>
+    <p>É Auto-transferência: {{ trip.isSelfTransfer ? 'Sim' : 'Não' }}</p>
+    <p>Auto-transferência Protegida: {{ trip.isProtectedSelfTransfer ? 'Sim' : 'Não' }}</p>
+    <p>Permite Alterações: {{ trip.isChangeAllowed ? 'Sim' : 'Não' }}</p>
+    <p>Parcialmente Alterável: {{ trip.isPartiallyChangeable ? 'Sim' : 'Não' }}</p>
+    <p>Permite Cancelamento: {{ trip.isCancellationAllowed ? 'Sim' : 'Não' }}</p>
+    <p>Parcialmente Reembolsável: {{ trip.isPartiallyRefundable ? 'Sim' : 'Não' }}</p>
+  </div>
+
+  <h2>Voo</h2>
+  <div *ngFor="let flight of trip.flights" class="flight-section">
+    <div class="flight-details">
+      <p>Duração: {{ flight.duration }} H</p>
+      <p>Partida: {{ flight.departure }}</p>
+      <p>Chegada: {{ flight.arrival }}</p>
+      <p>Origem: {{ flight.originCity.name }}</p>
+      <p>Destino: {{ flight.destinationCity.name }}</p>
+    </div>
+
+    <h4>Escala</h4>
+    <div *ngFor="let segment of flight.segments" class="segment-section">
+      <h5>Número do voo {{ segment.flightNumber }}</h5>
+      <div class="segment-details">
+        <p>Duração: {{ segment.duration }}</p>
+        <p>Data de partida: {{ segment.departure }}</p>
+        <p>Data de chegada: {{ segment.arrival }}</p>
+        <p>Origem: {{ segment.originCity.name }}</p>
+        <p>Destino: {{ segment.destinationCity.name }}</p>
+        <p>Companhia aérea: {{ segment.carrier.name }}</p>
+      </div>
+    </div>
+  </div>
+</div>
