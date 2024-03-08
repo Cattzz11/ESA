@@ -106,6 +106,7 @@ namespace PROJETOESA.Services
             {
                 Id = c.Id,
                 Name = c.Name,
+                ApiKey = c.ApiKey,
                 Country = new CountryDto
                 {
                     Id = c.Country.Id,

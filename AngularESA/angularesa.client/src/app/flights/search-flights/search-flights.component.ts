@@ -4,6 +4,9 @@ import { DataService } from '../../services/DataService';
 import { Calendar } from '../../Models/Calendar';
 import { SkyscannerService } from '../../services/skyscannerService';
 import { FlightData } from '../../Models/flight-data';
+import dayGridPlugin from '@fullcalendar/daygrid';
+import { CalendarOptions } from '@fullcalendar/core';
+import { Flight } from '../../Models/Flight';
 
 @Component({
   selector: 'app-search-flights',
@@ -14,6 +17,7 @@ export class SearchFlightsComponent implements OnInit {
   cities: City[] = [];
   calendar: Calendar[] | undefined;
   filteredCities: City[] = [];
+  flights: Flight[] = [];
 
   selectedCityFrom = '';
   selectedCityTo = '';
@@ -28,7 +32,6 @@ export class SearchFlightsComponent implements OnInit {
   canSearch = false;
   departureEnabled = false;
   arrivalEnabled = false;
-  
 
   constructor(private dataService: DataService, private skyscannerService: SkyscannerService) { }
 
@@ -44,10 +47,16 @@ export class SearchFlightsComponent implements OnInit {
   }
 
   loadCalendar(from: string, to: string) {
+    console.log(from);
+    console.log(to);
+
     let data: FlightData = {
       fromEntityId: this.findCityApiKeyByName(from)!,
       toEntityId: this.findCityApiKeyByName(to)
     }
+
+    console.log(data.fromEntityId);
+    console.log(data.toEntityId);
 
     this.skyscannerService.getCalendarFlights(data).subscribe({
       next: (response) => {
@@ -59,9 +68,7 @@ export class SearchFlightsComponent implements OnInit {
     });
   }
 
-  findCityApiKeyByName(cityName: string) {
-    return this.cities.find(c => c.name.toLowerCase() === cityName.toLowerCase())?.apiKey;
-  }
+  
 
   showAllCities(inputField: 'from' | 'to') {
     this.filteredCities = this.cities;
@@ -105,7 +112,7 @@ export class SearchFlightsComponent implements OnInit {
   }
 
   isCityValid(cityName: string): boolean {
-    return this.cities.some(city => cityName.includes(city.name) && cityName.includes(city.country.name));
+    return this.cities.some(city => cityName.includes(city.name));
   }
 
   validateForm() {
@@ -119,6 +126,18 @@ export class SearchFlightsComponent implements OnInit {
     this.canSearch = this.fromValid && this.toValid && !!this.departureDate && !!this.arrivalDate;
   }
 
+  printData() {
+    console.log(this.selectedCityFrom);
+    console.log(this.selectedCityTo);
+    console.log(this.departureDate);
+    console.log(this.arrivalDate);
+    console.log(this.fromValid);
+    console.log(this.toValid);
+    console.log(this.canSearch);
+    console.log(this.departureEnabled);
+    console.log(this.arrivalEnabled);
+  }
+
   hideDropdown(inputField: 'from' | 'to') {
     if (inputField === 'from') {
       if (!this.interactingWithDropdownFrom) {
@@ -130,4 +149,36 @@ export class SearchFlightsComponent implements OnInit {
       }
     }
   }
+
+  searchFlights() {
+    let data: FlightData = {
+      fromEntityId: this.findCityApiKeyByName(this.selectedCityFrom)!,
+      toEntityId: this.findCityApiKeyByName(this.selectedCityTo),
+      departDate: this.departureDate,
+      returnDate: this.arrivalDate
+    }
+
+    console.log(data.fromEntityId);
+    console.log(data.toEntityId);
+    console.log(data.departDate);
+    console.log(data.returnDate);
+
+    this.skyscannerService.getRoundtripFlights(data).subscribe({
+      next: (response) => {
+        this.flights = response;
+      },
+      error: (error) => {
+        console.error('Error fetching flights:', error);
+      }
+    });
+  }
+
+  private findCityApiKeyByName(cityName: string) {
+    console.log(cityName);
+    var city = this.cities.find(c => c.name.toLowerCase() === cityName.toLowerCase());
+    console.log(city);
+    return city?.apiKey;
+  }
+
+  
 }

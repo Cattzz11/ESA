@@ -35,6 +35,8 @@
   </div>
 
   <div class="input-group button-group">
-    <button id="search" [disabled]="!canSearch">Procurar</button>
+    <button id="search" [disabled]="!canSearch" (click)="searchFlights()">Procurar</button>
+    
   </div>
 </div>
+<button id="search" (click)="printData()">Print</button>

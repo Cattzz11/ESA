@@ -3,13 +3,25 @@
   "WorkspaceRootPath": "C:\\Users\\Tiago\\Desktop\\IPS\\ESA\\PROJETOESA\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{FFDC8847-A03D-4B34-BF6B-037A713978B8}|..\\AngularESA\\angularesa.client\\angularesa.client.esproj|c:\\users\\tiago\\desktop\\ips\\esa\\angularesa\\angularesa.client\\src\\app\\models\\calendar.ts||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}"
+      "AbsoluteMoniker": "D:0:0:{FFDC8847-A03D-4B34-BF6B-037A713978B8}|..\\AngularESA\\angularesa.client\\angularesa.client.esproj|c:\\users\\tiago\\desktop\\ips\\esa\\angularesa\\angularesa.client\\src\\app\\flights\\search-flights\\search-flights.component.html||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{FFDC8847-A03D-4B34-BF6B-037A713978B8}|..\\AngularESA\\angularesa.client\\angularesa.client.esproj|c:\\users\\tiago\\desktop\\ips\\esa\\angularesa\\angularesa.client\\src\\app\\flights\\search-flights\\search-flights.component.ts||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{FFDC8847-A03D-4B34-BF6B-037A713978B8}|..\\AngularESA\\angularesa.client\\angularesa.client.esproj|c:\\users\\tiago\\desktop\\ips\\esa\\angularesa\\angularesa.client\\src\\app\\flights\\search-flights\\search-flights.component.html||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{18DC2C31-CB3E-4B76-9D23-EDE9B7C6818B}|PROJETOESA.csproj|c:\\users\\tiago\\desktop\\ips\\esa\\projetoesa\\services\\skyscannerservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{18DC2C31-CB3E-4B76-9D23-EDE9B7C6818B}|PROJETOESA.csproj|solutionrelative:services\\skyscannerservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{18DC2C31-CB3E-4B76-9D23-EDE9B7C6818B}|PROJETOESA.csproj|c:\\users\\tiago\\desktop\\ips\\esa\\projetoesa\\services\\dataservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{18DC2C31-CB3E-4B76-9D23-EDE9B7C6818B}|PROJETOESA.csproj|solutionrelative:services\\dataservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{18DC2C31-CB3E-4B76-9D23-EDE9B7C6818B}|PROJETOESA.csproj|c:\\users\\tiago\\desktop\\ips\\esa\\projetoesa\\models\\dto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{18DC2C31-CB3E-4B76-9D23-EDE9B7C6818B}|PROJETOESA.csproj|solutionrelative:models\\dto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FFDC8847-A03D-4B34-BF6B-037A713978B8}|..\\AngularESA\\angularesa.client\\angularesa.client.esproj|c:\\users\\tiago\\desktop\\ips\\esa\\angularesa\\angularesa.client\\src\\app\\models\\calendar.ts||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}"
     }
   ],
   "DocumentGroupContainers": [
@@ -19,7 +31,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 207,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 6,
           "Children": [
             {
               "$type": "Bookmark",
@@ -27,7 +39,46 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 3,
+              "Title": "DataService.cs",
+              "DocumentMoniker": "C:\\Users\\Tiago\\Desktop\\IPS\\ESA\\PROJETOESA\\Services\\DataService.cs",
+              "RelativeDocumentMoniker": "Services\\DataService.cs",
+              "ToolTip": "C:\\Users\\Tiago\\Desktop\\IPS\\ESA\\PROJETOESA\\Services\\DataService.cs",
+              "RelativeToolTip": "Services\\DataService.cs",
+              "ViewState": "AQIAAD8AAAAAAAAAAAAYwHMAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-08T15:00:43.102Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "SkyscannerService.cs",
+              "DocumentMoniker": "C:\\Users\\Tiago\\Desktop\\IPS\\ESA\\PROJETOESA\\Services\\SkyscannerService.cs",
+              "RelativeDocumentMoniker": "Services\\SkyscannerService.cs",
+              "ToolTip": "C:\\Users\\Tiago\\Desktop\\IPS\\ESA\\PROJETOESA\\Services\\SkyscannerService.cs",
+              "RelativeToolTip": "Services\\SkyscannerService.cs",
+              "ViewState": "AQIAABACAAAAAAAAAAAiwAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-08T15:00:08.969Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "DTO.cs",
+              "DocumentMoniker": "C:\\Users\\Tiago\\Desktop\\IPS\\ESA\\PROJETOESA\\Models\\DTO.cs",
+              "RelativeDocumentMoniker": "Models\\DTO.cs",
+              "ToolTip": "C:\\Users\\Tiago\\Desktop\\IPS\\ESA\\PROJETOESA\\Models\\DTO.cs",
+              "RelativeToolTip": "Models\\DTO.cs",
+              "ViewState": "AQIAAA4AAAAAAAAAAAA9wCkAAAAqAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-08T14:59:37.414Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
               "Title": "Calendar.ts",
               "DocumentMoniker": "C:\\Users\\Tiago\\Desktop\\IPS\\ESA\\AngularESA\\angularesa.client\\src\\app\\Models\\Calendar.ts",
               "RelativeDocumentMoniker": "..\\AngularESA\\angularesa.client\\src\\app\\Models\\Calendar.ts",
@@ -46,20 +97,20 @@
               "RelativeDocumentMoniker": "..\\AngularESA\\angularesa.client\\src\\app\\flights\\search-flights\\search-flights.component.ts",
               "ToolTip": "C:\\Users\\Tiago\\Desktop\\IPS\\ESA\\AngularESA\\angularesa.client\\src\\app\\flights\\search-flights\\search-flights.component.ts",
               "RelativeToolTip": "..\\AngularESA\\angularesa.client\\src\\app\\flights\\search-flights\\search-flights.component.ts",
-              "ViewState": "AQIAAAIAAAAAAAAAAAAYwG0AAAAAAAAA",
+              "ViewState": "AQIAAI4AAAAAAAAAAAAQwIoAAAADAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003213|",
               "WhenOpened": "2024-02-29T12:45:05.777Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 0,
               "Title": "search-flights.component.html",
               "DocumentMoniker": "C:\\Users\\Tiago\\Desktop\\IPS\\ESA\\AngularESA\\angularesa.client\\src\\app\\flights\\search-flights\\search-flights.component.html",
               "RelativeDocumentMoniker": "..\\AngularESA\\angularesa.client\\src\\app\\flights\\search-flights\\search-flights.component.html",
               "ToolTip": "C:\\Users\\Tiago\\Desktop\\IPS\\ESA\\AngularESA\\angularesa.client\\src\\app\\flights\\search-flights\\search-flights.component.html",
               "RelativeToolTip": "..\\AngularESA\\angularesa.client\\src\\app\\flights\\search-flights\\search-flights.component.html",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA8AAAAnAAAA",
+              "ViewState": "AQIAAAMAAAAAAAAAAAAAACgAAAAGAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
               "WhenOpened": "2024-02-29T12:44:44.848Z",
               "EditorCaption": ""

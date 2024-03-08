@@ -39,6 +39,7 @@ namespace PROJETOESA.Models
     {
         public string Id { get; set; }
         public string Name { get; set; }
+        public string ApiKey { get; set; }
         public CountryDto Country { get; set; }
     }
 
