@@ -22,6 +22,7 @@ import { AuthorizeService } from '../api-authorization/authorize.service';
 import { PremiumProfilePageComponent } from './users/premium-profile-page/premium-profile-page.component';
 import { ProfileComponent } from './profile/profile.component';
 import { LogoutComponent } from '../api-authorization/logout/logout.component';
+import { FilterByAirlineComponent } from './flights/filter-by-airline/filter-by-airline.component';
 import { SearchFlightsComponent } from './flights/search-flights/search-flights.component';
 import { ConfirmationAccountComponent } from '../api-authorization/confirmation-account/confirmation-account.component';
 import { SuccessComponent } from '../api-authorization/success/success.component';
@@ -47,6 +48,7 @@ import { SubscriptionPageComponent } from './users/subscription-page/subscriptio
     FetchDataComponent,
     PeopleComponent,
     PersonComponent,
+    FilterByAirlineComponent,
     SearchFlightsComponent,
     ConfirmationAccountComponent,
     SuccessComponent,

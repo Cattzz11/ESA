@@ -1,7 +1,11 @@
+import { AccompanyingPassenger } from "./AccompanyingPassenger";
+import { UserFlight } from "./UserFlight";
+
 export interface User {
+  id: string;
   userName: string;
   email: string;
-  role: string;
+  role: number;
   name: string;
   age?: number; 
   nationality?: string; 
@@ -9,4 +13,5 @@ export interface User {
   profilePicture?: string;
   gender?: string;
   //profilePictureBinary?: Uint8Array;
+  userFlights?: UserFlight[];
 }

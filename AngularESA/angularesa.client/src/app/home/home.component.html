@@ -4,4 +4,18 @@
     <img id="plane" src="../../assets/Images/plane.png" />
     <p class="slogan text-black">Connosco Viajar Tornou-se Mais Simples e Fácil</p>
   </div>
+
+  <div class="airline-recommendations">
+    <h2>Companhias Aéreas Mais Procuradas</h2>
+    <div class="airlines-container">
+      <div *ngFor="let airline of airLineResults; let i = index" class="airline-card">
+        <div class="ranking">{{i + 1}}º</div>
+        <div class="logo-container">
+          <img *ngIf="airline.logoURL" [src]="airline.logoURL" alt="Logo">
+        </div>
+        <button class="search-flight-btn" (click)="searchFlights(airline)">Procurar Voo</button>
+      </div>
+    </div>
+  </div>
+
 </body>

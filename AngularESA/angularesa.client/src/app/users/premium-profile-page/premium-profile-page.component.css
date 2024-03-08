@@ -95,6 +95,7 @@
 .travel {
   display: flex;
   width: 95%;
+  flex-direction: row;
   align-items: center;
   justify-content: space-between;
   background-color: #006994;
@@ -106,15 +107,34 @@
   color: white;
 }
 
+.flight {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.ida, .volta {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #006994;
+  font-weight: bold;
+  color: white;
+}
+
+.more {
+}
+
 .airlineLogo {
-  width: 150px;
+  width: 90px;
   height: auto;
   margin-right: 20px;
 }
 
-  .travel:last-child {
-    margin-bottom: 0;
-  }
+.travel:last-child {
+  margin-bottom: 0;
+}
 
 .more a.button-link, .more a.button-link:visited {
   color: white;

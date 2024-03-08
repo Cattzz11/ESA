@@ -1,9 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { AuthorizeService } from '../../../api-authorization/authorize.service';
 import { User } from '../../Models/users';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UsersService } from '../../../app/services/UsersService';
 import { Router } from '@angular/router';
+import { Trip } from '../../Models/Trip';
+import { DataService } from '../../services/DataService';
 
 @Component({
   selector: 'app-premium-profile-page',
@@ -17,8 +19,10 @@ export class PremiumProfilePageComponent {
   public searchTerm: string = '';
   filteredUsers: User[] = [];
   allUsers: User[] = [];
-
-  constructor(private auth: AuthorizeService, private formBuilder: FormBuilder, private userService: UsersService, private router: Router) {
+  public history: Trip[] = [];
+  public historyLoading: boolean = true;
+  
+  constructor(private auth: AuthorizeService, private formBuilder: FormBuilder, private userService: UsersService, private router: Router, private dataService: DataService, private cdr: ChangeDetectorRef) {
 
   }
 
@@ -37,6 +41,10 @@ export class PremiumProfilePageComponent {
           //  nationality: userInfo.nationality,
           //  occupation: userInfo.occupation
           //});
+          this.cdr.detectChanges();
+          if (this.user && this.user.role === 1) {
+            this.loadHistory();
+          }
         },
         error: (error) => {
           console.error('Error fetching user info', error);
@@ -117,6 +125,74 @@ export class PremiumProfilePageComponent {
     }
 
     this.loadUsers();
+  }
+  
+  edit() {
+    console.log(this.user?.name);
+    console.log(this.user?.email);
+    console.log(this.user?.role);
+    console.log(this.user?.occupation);
+    console.log(this.user?.nationality);
+    console.log(this.user?.age);
+
+    this.history.forEach((trip, index) => {
+      console.log(`Viagem ${index + 1}:`, trip);
+      console.log('Voos da viagem:');
+
+      if (trip.flights && trip.flights.length > 0) {
+        trip.flights.forEach((flight, flightIndex) => {
+          console.log(`  Voo ${flightIndex + 1}:`, flight);
+          console.log('  Segmentos do voo:');
+
+          if (flight.segments && flight.segments.length > 0) {
+            flight.segments.forEach((segment, segmentIndex) => {
+              console.log(`    Segmento ${segmentIndex + 1}:`, segment);
+
+              if (segment.originCity) {
+                console.log(`      Id da Cidade ${segmentIndex + 1}:`, segment.originCity);
+                console.log(`        Nome da cidade origem: ${segment.originCity.name}`);
+              }
+
+              if (segment.destinationCity) {
+                console.log(`      Id da Cidade ${segmentIndex + 1}:`, segment.destinationCity);
+                console.log(`        Nome da cidade destino: ${segment.destinationCity.name}`);
+              }
+
+              if (segment.carrier) {
+                console.log(`      Carrier do Segmento ${segmentIndex + 1}:`, segment.carrier);
+                console.log(`        Nome do Carrier: ${segment.carrier.name}`);
+                console.log(`        LogoUrl do Carrier: ${segment.carrier.logoURL}`);
+              } else {
+                console.log(`      O Segmento ${segmentIndex + 1} não possui dados de carrier.`);
+              }
+            });
+          } else {
+            console.log('      Este voo não possui segmentos.');
+          }
+        });
+      } else {
+        console.log('    Esta viagem não possui voos.');
+      }
+    });
 
   }
+
+  loadHistory() {
+    if (this.user) {
+      this.dataService.getFlightsByUser(this.user.id).subscribe({
+        next: (response) => {
+          this.history = response;
+          this.historyLoading = false;
+        },
+        error: (error) => {
+          console.error('Error fetching flights:', error);
+          this.historyLoading = false;
+        }
+      });
+    } else {
+      console.error('User ID is undefined');
+      this.historyLoading = false;
+    }
+  }
+
 }

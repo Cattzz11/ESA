@@ -6,14 +6,11 @@ namespace PROJETOESA.Models
     {
         [PersonalData]
         public string Name { get; set; }
-
         public TipoConta Role { get; set; }
-
         public DateTime? BirthDate { get; set; }
         public int Age { get; set; }
 
         public string? Nationality { get; set; }
-
         public string? Occupation { get; set; }
 
         public string? ProfilePicture { get; set; }
@@ -21,5 +18,7 @@ namespace PROJETOESA.Models
         public string? Gender { get; set; }
 
         //public byte[]? ProfilePictureBinary{ get; set; }
+
+        public List<UserFlight>? UserFlights { get; set; }
     }
 }

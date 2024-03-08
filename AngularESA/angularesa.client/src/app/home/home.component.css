@@ -21,9 +21,84 @@
 
 .home-component {
   background-image: url(../../assets/Images/background.png);
-  background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
   height: 100vh;
   width: 100vw;
+  font-family: Arial, sans-serif;
 }
+
+.airline-recommendations {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.airlines-container {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.airline-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 180px;
+  padding: 20px;
+  margin: 10px;
+  border-radius: 10px;
+  background-color: #f7f7f7;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.ranking {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  font-size: 18px;
+  color: #333;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo-container img {
+  width: 100px;
+  height: auto;
+  margin: 20px 0;
+}
+
+.search-flight-btn {
+  background-color: #009fdb;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 8px 12px;
+  cursor: pointer;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 14px;
+  transition: background-color 0.3s;
+  margin-top: auto;
+}
+
+  .search-flight-btn:hover {
+    background-color: #007faa;
+  }
+
+@media (max-width: 600px) {
+  .airlines-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .airline-card {
+    width: 200px;
+  }
+}
+

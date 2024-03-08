@@ -18,6 +18,7 @@ import { NewPasswordComponent } from "../api-authorization/new-password/new-pass
 import { RecoverPasswordComponent } from '../api-authorization/recover-password/recover-password.component';
 import { RecoveryCodeComponent } from '../api-authorization/recovery-code/recovery-code.component';
 import { PremiumProfilePageComponent } from './users/premium-profile-page/premium-profile-page.component';
+import { FilterByAirlineComponent } from './flights/filter-by-airline/filter-by-airline.component';
 import { SearchFlightsComponent } from './flights/search-flights/search-flights.component';
 import { ConfirmationAccountComponent } from '../api-authorization/confirmation-account/confirmation-account.component';
 import { SuccessComponent } from '../api-authorization/success/success.component';
@@ -50,6 +51,8 @@ const routes: Routes = [
   { path: 'premium-component', component: PremiumComponent },
   { path: 'subscription-component', component: SubscriptionPageComponent },
   
+  { path: 'filter-by-airline', component: FilterByAirlineComponent },
+  { path: 'search-flights', component: SearchFlightsComponent },
 ];
 
 @NgModule({
