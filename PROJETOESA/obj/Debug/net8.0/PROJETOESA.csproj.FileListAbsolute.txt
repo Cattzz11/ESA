@@ -608,3 +608,5 @@ D:\ESA\PROJETOESA\ESA\PROJETOESA\obj\Debug\net8.0\PROJETOESA.genruntimeconfig.ca
 D:\ESA\PROJETOESA\ESA\PROJETOESA\obj\Debug\net8.0\ref\PROJETOESA.dll
 C:\Users\danie\OneDrive\Documentos\Meu\UNI STUFF\EsA\Projeto\ESA\PROJETOESA\bin\Debug\net8.0\AWSSDK.Core.dll
 C:\Users\danie\OneDrive\Documentos\Meu\UNI STUFF\EsA\Projeto\ESA\PROJETOESA\bin\Debug\net8.0\AWSSDK.DynamoDBv2.dll
+D:\ESA\PROJETOESA\ESA\PROJETOESA\bin\Debug\net8.0\AWSSDK.Core.dll
+D:\ESA\PROJETOESA\ESA\PROJETOESA\bin\Debug\net8.0\AWSSDK.DynamoDBv2.dll

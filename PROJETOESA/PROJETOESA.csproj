@@ -11,6 +11,24 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="wwwroot\assets\Images\background.png" />
+    <Content Remove="wwwroot\assets\Images\Fading circles.gif" />
+    <Content Remove="wwwroot\assets\Images\imagemInicial.png" />
+    <Content Remove="wwwroot\assets\Images\logo.png" />
+    <Content Remove="wwwroot\assets\Images\plane.png" />
+    <Content Remove="wwwroot\media\background-FNBXJMC5.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\assets\Images\background.png" />
+    <None Include="wwwroot\assets\Images\Fading circles.gif" />
+    <None Include="wwwroot\assets\Images\imagemInicial.png" />
+    <None Include="wwwroot\assets\Images\logo.png" />
+    <None Include="wwwroot\assets\Images\plane.png" />
+    <None Include="wwwroot\media\background-FNBXJMC5.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="AWSSDK.DynamoDBv2" Version="3.7.301.17" />
     <PackageReference Include="MailKit" Version="4.3.0" />
     <PackageReference Include="Microsoft.AspNetCore.Components.QuickGrid.EntityFrameworkAdapter" Version="8.0.1" />
