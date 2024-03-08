@@ -155,6 +155,42 @@ namespace PROJETOESA.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("PROJETOESA.Models.AccompanyingPassenger", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("BirthDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Gender")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Nationality")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserFlightTripId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("UserFlightUserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserFlightUserId", "UserFlightTripId");
+
+                    b.ToTable("AccompanyingPassenger");
+                });
+
             modelBuilder.Entity("PROJETOESA.Models.ApplicationUser", b =>
                 {
                     b.Property<string>("Id")
@@ -245,6 +281,51 @@ namespace PROJETOESA.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
+            modelBuilder.Entity("PROJETOESA.Models.Carrier", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("LogoURL")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("SearchTimes")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Carrier");
+                });
+
+            modelBuilder.Entity("PROJETOESA.Models.City", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("ApiKey")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CountryId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CountryId");
+
+                    b.ToTable("City");
+                });
+
             modelBuilder.Entity("PROJETOESA.Models.ConfirmationCode", b =>
                 {
                     b.Property<int>("Id")
@@ -269,6 +350,57 @@ namespace PROJETOESA.Migrations
                     b.ToTable("ConfirmationCodes");
                 });
 
+            modelBuilder.Entity("PROJETOESA.Models.Country", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Country");
+                });
+
+            modelBuilder.Entity("PROJETOESA.Models.Flight", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("Arrival")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("Departure")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("DestinationCityId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Duration")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("OriginCityId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("TripId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DestinationCityId");
+
+                    b.HasIndex("OriginCityId");
+
+                    b.HasIndex("TripId");
+
+                    b.ToTable("Flights");
+                });
+
             modelBuilder.Entity("PROJETOESA.Models.PasswordRecoveryCode", b =>
                 {
                     b.Property<int>("Id")
@@ -291,6 +423,99 @@ namespace PROJETOESA.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("PasswordRecoveryCodes");
+                });
+
+            modelBuilder.Entity("PROJETOESA.Models.Segment", b =>
+                {
+                    b.Property<string>("FlightNumber")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("Arrival")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("CarrierId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("Departure")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("DestinationCityId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Duration")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FlightId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("OriginCityId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("FlightNumber");
+
+                    b.HasIndex("CarrierId");
+
+                    b.HasIndex("DestinationCityId");
+
+                    b.HasIndex("FlightId");
+
+                    b.HasIndex("OriginCityId");
+
+                    b.ToTable("Segments");
+                });
+
+            modelBuilder.Entity("PROJETOESA.Models.Trip", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<double>("Price")
+                        .HasColumnType("float");
+
+                    b.Property<double>("Score")
+                        .HasColumnType("float");
+
+                    b.Property<bool>("isCancellationAllowed")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("isChangeAllowed")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("isPartiallyChangeable")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("isPartiallyRefundable")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("isProtectedSelfTransfer")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("isSelfTransfer")
+                        .HasColumnType("bit");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Trip");
+                });
+
+            modelBuilder.Entity("PROJETOESA.Models.UserFlight", b =>
+                {
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("TripId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("UserId", "TripId");
+
+                    b.HasIndex("TripId");
+
+                    b.ToTable("UserFlight");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -342,6 +567,121 @@ namespace PROJETOESA.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("PROJETOESA.Models.AccompanyingPassenger", b =>
+                {
+                    b.HasOne("PROJETOESA.Models.UserFlight", null)
+                        .WithMany("AccompanyingPassengers")
+                        .HasForeignKey("UserFlightUserId", "UserFlightTripId");
+                });
+
+            modelBuilder.Entity("PROJETOESA.Models.City", b =>
+                {
+                    b.HasOne("PROJETOESA.Models.Country", "Country")
+                        .WithMany()
+                        .HasForeignKey("CountryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Country");
+                });
+
+            modelBuilder.Entity("PROJETOESA.Models.Flight", b =>
+                {
+                    b.HasOne("PROJETOESA.Models.City", "DestinationCity")
+                        .WithMany()
+                        .HasForeignKey("DestinationCityId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("PROJETOESA.Models.City", "OriginCity")
+                        .WithMany()
+                        .HasForeignKey("OriginCityId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("PROJETOESA.Models.Trip", null)
+                        .WithMany("Flights")
+                        .HasForeignKey("TripId");
+
+                    b.Navigation("DestinationCity");
+
+                    b.Navigation("OriginCity");
+                });
+
+            modelBuilder.Entity("PROJETOESA.Models.Segment", b =>
+                {
+                    b.HasOne("PROJETOESA.Models.Carrier", "Carrier")
+                        .WithMany()
+                        .HasForeignKey("CarrierId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("PROJETOESA.Models.City", "DestinationCity")
+                        .WithMany()
+                        .HasForeignKey("DestinationCityId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("PROJETOESA.Models.Flight", "Flight")
+                        .WithMany("Segments")
+                        .HasForeignKey("FlightId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("PROJETOESA.Models.City", "OriginCity")
+                        .WithMany()
+                        .HasForeignKey("OriginCityId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Carrier");
+
+                    b.Navigation("DestinationCity");
+
+                    b.Navigation("Flight");
+
+                    b.Navigation("OriginCity");
+                });
+
+            modelBuilder.Entity("PROJETOESA.Models.UserFlight", b =>
+                {
+                    b.HasOne("PROJETOESA.Models.Trip", "Trip")
+                        .WithMany()
+                        .HasForeignKey("TripId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("PROJETOESA.Models.ApplicationUser", "User")
+                        .WithMany("UserFlights")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Trip");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("PROJETOESA.Models.ApplicationUser", b =>
+                {
+                    b.Navigation("UserFlights");
+                });
+
+            modelBuilder.Entity("PROJETOESA.Models.Flight", b =>
+                {
+                    b.Navigation("Segments");
+                });
+
+            modelBuilder.Entity("PROJETOESA.Models.Trip", b =>
+                {
+                    b.Navigation("Flights");
+                });
+
+            modelBuilder.Entity("PROJETOESA.Models.UserFlight", b =>
+                {
+                    b.Navigation("AccompanyingPassengers");
                 });
 #pragma warning restore 612, 618
         }

@@ -89,7 +89,7 @@
     </div>
 
     <!--ADMINISTRADOR-->
-    <div *ngIf="user?.role === 'Administrador'" class="list-users">
+    <div *ngIf="user?.role === 2" class="list-users">
       <h3 id="lista-utilizadores-site">Lista de Utilizadores</h3>
       <input type="text" [(ngModel)]="searchTerm" (keyup.enter)="applyFilter()" placeholder="Search users">
       <ul>
