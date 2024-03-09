@@ -7,6 +7,8 @@ import { FlightData } from '../../Models/flight-data';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import { CalendarOptions } from '@fullcalendar/core';
 import { Flight } from '../../Models/Flight';
+import { Trip } from '../../Models/Trip';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-search-flights',
@@ -17,7 +19,7 @@ export class SearchFlightsComponent implements OnInit {
   cities: City[] = [];
   calendar: Calendar[] | undefined;
   filteredCities: City[] = [];
-  flights: Flight[] = [];
+  flights: Trip[] = [];
 
   selectedCityFrom = '';
   selectedCityTo = '';
@@ -32,8 +34,9 @@ export class SearchFlightsComponent implements OnInit {
   canSearch = false;
   departureEnabled = false;
   arrivalEnabled = false;
+  isLoading = false;
 
-  constructor(private dataService: DataService, private skyscannerService: SkyscannerService) { }
+  constructor(private dataService: DataService, private skyscannerService: SkyscannerService, private router: Router) { }
 
   ngOnInit(): void {
     this.dataService.getAllCities().subscribe({
@@ -47,16 +50,10 @@ export class SearchFlightsComponent implements OnInit {
   }
 
   loadCalendar(from: string, to: string) {
-    console.log(from);
-    console.log(to);
-
     let data: FlightData = {
       fromEntityId: this.findCityApiKeyByName(from)!,
       toEntityId: this.findCityApiKeyByName(to)
     }
-
-    console.log(data.fromEntityId);
-    console.log(data.toEntityId);
 
     this.skyscannerService.getCalendarFlights(data).subscribe({
       next: (response) => {
@@ -67,8 +64,6 @@ export class SearchFlightsComponent implements OnInit {
       }
     });
   }
-
-  
 
   showAllCities(inputField: 'from' | 'to') {
     this.filteredCities = this.cities;
@@ -119,23 +114,11 @@ export class SearchFlightsComponent implements OnInit {
     this.fromValid = this.isCityValid(this.selectedCityFrom);
     this.toValid = this.isCityValid(this.selectedCityTo);
 
-    if (this.fromValid && this.toValid) {
+    if (this.fromValid && this.toValid && this.calendar === undefined) {
       this.loadCalendar(this.selectedCityFrom, this.selectedCityTo);
     }
 
     this.canSearch = this.fromValid && this.toValid && !!this.departureDate && !!this.arrivalDate;
-  }
-
-  printData() {
-    console.log(this.selectedCityFrom);
-    console.log(this.selectedCityTo);
-    console.log(this.departureDate);
-    console.log(this.arrivalDate);
-    console.log(this.fromValid);
-    console.log(this.toValid);
-    console.log(this.canSearch);
-    console.log(this.departureEnabled);
-    console.log(this.arrivalEnabled);
   }
 
   hideDropdown(inputField: 'from' | 'to') {
@@ -151,6 +134,8 @@ export class SearchFlightsComponent implements OnInit {
   }
 
   searchFlights() {
+    this.isLoading = true;
+
     let data: FlightData = {
       fromEntityId: this.findCityApiKeyByName(this.selectedCityFrom)!,
       toEntityId: this.findCityApiKeyByName(this.selectedCityTo),
@@ -158,25 +143,31 @@ export class SearchFlightsComponent implements OnInit {
       returnDate: this.arrivalDate
     }
 
-    console.log(data.fromEntityId);
-    console.log(data.toEntityId);
-    console.log(data.departDate);
-    console.log(data.returnDate);
-
     this.skyscannerService.getRoundtripFlights(data).subscribe({
       next: (response) => {
         this.flights = response;
+        this.isLoading = false;
       },
       error: (error) => {
+        this.isLoading = false;
         console.error('Error fetching flights:', error);
       }
     });
   }
 
+  printData() {
+    console.log(this.selectedCityFrom);
+    console.log(this.selectedCityTo);
+    console.log(this.departureDate);
+    console.log(this.arrivalDate);
+  }
+
+  selectTrip(trip: Trip) {
+    this.router.navigate(['/flight-data'], { state: { data: trip } });
+  }
+
   private findCityApiKeyByName(cityName: string) {
-    console.log(cityName);
     var city = this.cities.find(c => c.name.toLowerCase() === cityName.toLowerCase());
-    console.log(city);
     return city?.apiKey;
   }
 
