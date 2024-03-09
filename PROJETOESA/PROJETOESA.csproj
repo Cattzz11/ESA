@@ -9,7 +9,7 @@
     <SpaProxyLaunchCommand>npm start</SpaProxyLaunchCommand>
     <SpaProxyServerUrl>https://localhost:4200</SpaProxyServerUrl>
   </PropertyGroup>
-
+	
   <ItemGroup>
     <Content Remove="wwwroot\assets\Images\background.png" />
     <Content Remove="wwwroot\assets\Images\Fading circles.gif" />

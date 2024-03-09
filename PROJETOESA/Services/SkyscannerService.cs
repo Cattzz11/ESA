@@ -532,6 +532,16 @@ namespace PROJETOESA.Services
             return carrierList;
         }
 
+        /// <summary>
+        /// Method to get popular destinination async
+        /// </summary>
+        /// <returns> A list of destinations</returns>
+        public async Task<List<City>> GetPopularDestinationsAsync()
+        {
+            List<City> destinationList = await _context.City.OrderByDescending(e => e.ApiKey).Take(5).ToListAsync();
+            return destinationList;
+        }
+
         private string ConvertMinutesToTimeString(int durationInMinutes)
         {
             int hours = durationInMinutes / 60;
@@ -551,6 +561,7 @@ namespace PROJETOESA.Services
             return selectedCountry;
         }
 
+        //funciona para aeroportos e cidades
         private City SelectRandomAirport(List<City> cities)
         {
             if (cities.Count == 1)
@@ -560,6 +571,7 @@ namespace PROJETOESA.Services
             var randomIndex = _random.Next(cities.Count);
             return cities[randomIndex];
         }
+
     }
 
     public class CustomGetDataModel

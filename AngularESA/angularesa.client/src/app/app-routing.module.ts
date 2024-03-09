@@ -25,6 +25,7 @@ import { SuccessComponent } from '../api-authorization/success/success.component
 import { PremiumComponent } from './users/premium/premium.component';
 import { SubscriptionPageComponent } from './users/subscription-page/subscription-page.component';
 import { EditProfileComponent } from './users/edit-profile/edit-profile.component';
+import { PaymentComponentComponent } from './users/payment-component/payment-component.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent, pathMatch: 'full' },
@@ -53,6 +54,7 @@ const routes: Routes = [
   
   { path: 'filter-by-airline', component: FilterByAirlineComponent },
   { path: 'search-flights', component: SearchFlightsComponent },
+  { path: 'payment-component', component: PaymentComponentComponent },
 ];
 
 @NgModule({

@@ -17,6 +17,13 @@ builder.Services.AddHttpClient("SkyscannerAPI", client =>
     client.DefaultRequestHeaders.Add("X-RapidAPI-Host", "sky-scanner3.p.rapidapi.com");
 });
 
+builder.Services.AddHttpClient("EasyPayAPI", async client =>
+{
+    client.BaseAddress = Uri("https://api.test.easypay.pt/2.0");
+    client.DefaultRequestHeaders.Add("AccountId", "0507c24e-1222-433a-9c2c-ae578391eca7");
+    client.DefaultRequestHeaders.Add("ApiKey", "05d2b60e-ee43-46b4-bbf7-7046064af99b");
+});
+
 builder.Services.AddHttpClient("CountriesAPI", client =>
 {
     client.BaseAddress = new Uri("https://restcountries.com/");
