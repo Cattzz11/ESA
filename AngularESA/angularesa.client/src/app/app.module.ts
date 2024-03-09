@@ -22,6 +22,26 @@ import { EditProfileComponent } from './users/edit-profile/edit-profile.componen
 import { PremiumComponent } from './users/premium/premium.component';
 import { SubscriptionPageComponent } from './users/subscription-page/subscription-page.component';
 import { FlightDataComponent } from './flights/flight-data/flight-data.component';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { MatCalendarCellClassFunction, MatDatepickerModule } from '@angular/material/datepicker';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { provideNativeDateAdapter } from '@angular/material/core';
+import { MAT_DATE_LOCALE, MAT_DATE_FORMATS } from '@angular/material/core';
+import { DateAdapter } from '@angular/material/core';
+import { DatePipe } from '@angular/common';
+
+export const MY_FORMATS = {
+  parse: {
+    dateInput: 'LL',
+  },
+  display: {
+    dateInput: 'YYYY-MM-DD',
+    monthYearLabel: 'MMM YYYY',
+    dateA11yLabel: 'LL',
+    monthYearA11yLabel: 'MMMM YYYY',
+  },
+};
 
 @NgModule({
   declarations: [
@@ -46,12 +66,21 @@ import { FlightDataComponent } from './flights/flight-data/flight-data.component
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    ApiAuthorizationModule
+    ApiAuthorizationModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatDatepickerModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
     AuthGuard,
-    AuthorizeService, PhotoUploadService
+    AuthorizeService,
+    PhotoUploadService,
+    provideAnimationsAsync(),
+    provideNativeDateAdapter(),
+    { provide: MAT_DATE_LOCALE, useValue: 'pt-PT' },
+    { provide: MAT_DATE_FORMATS, useValue: MY_FORMATS },
+    DatePipe
   ],
   bootstrap: [AppComponent]
 })

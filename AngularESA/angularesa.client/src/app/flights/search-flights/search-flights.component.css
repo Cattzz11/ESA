@@ -1,3 +1,18 @@
+button.date-high {
+  background: red;
+  border-radius: 100%;
+}
+
+button.date-medium {
+  background: orange;
+  border-radius: 100%;
+}
+
+button.date-low {
+  background: green;
+  border-radius: 100%;
+}
+
 .search-bar {
   display: flex;
   flex-direction: row;
