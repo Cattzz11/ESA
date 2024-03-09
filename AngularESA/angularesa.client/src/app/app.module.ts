@@ -30,6 +30,7 @@ import { PhotoUploadService } from './services/photoUploadService.service';
 import { EditProfileComponent } from './users/edit-profile/edit-profile.component';
 import { PremiumComponent } from './users/premium/premium.component';
 import { SubscriptionPageComponent } from './users/subscription-page/subscription-page.component';
+import { TripDetailsComponent } from './flights/trip-details/trip-details.component';
 
 @NgModule({
   declarations: [
@@ -55,6 +56,7 @@ import { SubscriptionPageComponent } from './users/subscription-page/subscriptio
     EditProfileComponent,
     PremiumComponent,
     SubscriptionPageComponent,
+    TripDetailsComponent,
   ],
   imports: [
     BrowserModule, HttpClientModule,

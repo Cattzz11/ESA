@@ -272,6 +272,14 @@ export class AuthorizeService {
     return this.http.put('api/edit-profile', updatedData);
   }
 
+
+
+  // TRIPS - DETAILS
+  public getTripDetails(tripId: string): Observable<any> {
+    //console.log(tripId);
+    return this.http.get<any>(`/api/trip-details/${tripId}`);
+  }
+
 }
 export interface User {
   email: string;

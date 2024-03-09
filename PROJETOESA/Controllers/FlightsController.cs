@@ -1,4 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using PROJETOESA.Data;
 using PROJETOESA.Models;
 using PROJETOESA.Services;
 using System.Diagnostics;
@@ -10,10 +13,12 @@ namespace PROJETOESA.Controllers
     public class FlightsController : Controller
     {
         private readonly SkyscannerService _skyscannerService;
+        private readonly AeroHelperContext _context;
 
-        public FlightsController(SkyscannerService skyscannerService)
+        public FlightsController(SkyscannerService skyscannerService, AeroHelperContext context)
         {
             _skyscannerService = skyscannerService;
+            _context = context;
         }
 
         // Viagens de ida e volta
@@ -94,6 +99,45 @@ namespace PROJETOESA.Controllers
             List<Carrier> result = await _skyscannerService.GetFavoriteAirlineAsync();
 
             return Ok(result);
+        }
+
+
+        [HttpGet]
+        [Route("api/trip-details/{tripId}")]
+        public async Task<IActionResult> GetTripDetails(string flightId)
+        {
+            Console.WriteLine($"Mimimimi");
+            var flightDetail = await _context.Flights.FirstOrDefaultAsync(c => c.Id == flightId);
+            Console.WriteLine($"Detail: {flightDetail}");
+            var tripId = flightDetail;
+            /*var tripDetail = await _context.Trip.
+                FirstOrDefaultAsync(c => c.Id == tripId);*/
+
+            
+
+            var price = 0 ;
+
+            Console.WriteLine($"Preço: {price}");
+
+            try
+            {
+                // Retrieve trip details from the database based on tripId
+                // Example: var tripDetails = await _context.TripDetails.FindAsync(tripId);
+
+                // If tripDetails is null, return NotFound
+                if (tripId == null)
+                {
+                    return NotFound(new { Message = "Trip details not found" });
+                }
+
+                // Optionally, you can perform additional processing or validation here
+
+                return Ok(new { Message = $"Preço: {price}" });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { Message = "Failed to retrieve trip details" });
+            }
         }
     }
 }
