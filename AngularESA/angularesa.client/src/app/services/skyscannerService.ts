@@ -107,6 +107,10 @@ export class SkyscannerService {
     return this.http.get<Trip[]>('api/flight/sugestions-company', { params: params });
   }
 
+  public getSugestionsDestinations(): Observable<Trip[]> {
+    return this.http.get<Trip[]>('api/flight/sugestions-destinations');
+  }
+
   public getFavoriteAirline(): Observable<Carrier[]> {
     return this.http.get<Carrier[]>('api/flight/favorite-airline');
   }
