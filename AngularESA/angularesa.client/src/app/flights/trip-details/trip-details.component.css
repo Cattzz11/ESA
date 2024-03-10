@@ -1,0 +1,38 @@
+.trip-details-container {
+  max-width: 400px;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  text-align: left;
+}
+
+.details-item {
+  margin-bottom: 10px;
+}
+
+.buy-ticket-button {
+  background-color: #4caf50;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: block;
+  font-size: 16px;
+  margin-top: 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+  .buy-ticket-button:hover {
+    background-color: #45a049;
+  }
+
+.not-found-container {
+  text-align: center;
+  margin-top: 20px;
+  color: #999;
+}

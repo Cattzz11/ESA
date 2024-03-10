@@ -16,5 +16,7 @@ namespace PROJETOESA.Models
         public virtual City OriginCity { get; set; }
         public virtual City DestinationCity { get; set; }
         public virtual ICollection<Segment> Segments { get; set; }
+
+        public string TripId { get; set; }
     }
 }

@@ -276,7 +276,7 @@ export class AuthorizeService {
 
   // TRIPS - DETAILS
   public getTripDetails(tripId: string): Observable<any> {
-    //console.log(tripId);
+    console.log(tripId);
     return this.http.get<any>(`/api/trip-details/${tripId}`);
   }
 

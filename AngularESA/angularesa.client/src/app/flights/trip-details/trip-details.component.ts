@@ -22,14 +22,15 @@ export class TripDetailsComponent implements OnInit {
     const tripId = this.route.snapshot.paramMap.get('id');
 
     if (tripId) {
-      console.log(tripId);
 
       this.authorizeService.getTripDetails(tripId).subscribe({
         next: (response) => {
+          
           this.tripDetails = response;
+          console.log(this.tripDetails);
         },
         error: (error) => {
-          console.error('Error fetching flights: ', error);
+          console.error('Error fetching trip details: ', error);
         }
       });
     }

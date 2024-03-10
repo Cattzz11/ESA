@@ -104,40 +104,66 @@ namespace PROJETOESA.Controllers
 
         [HttpGet]
         [Route("api/trip-details/{tripId}")]
-        public async Task<IActionResult> GetTripDetails(string flightId)
+        public async Task<IActionResult> GetTripDetails(string tripId)
         {
-            Console.WriteLine($"Mimimimi");
-            var flightDetail = await _context.Flights.FirstOrDefaultAsync(c => c.Id == flightId);
-            Console.WriteLine($"Detail: {flightDetail}");
-            var tripId = flightDetail;
-            /*var tripDetail = await _context.Trip.
-                FirstOrDefaultAsync(c => c.Id == tripId);*/
-
-            
-
-            var price = 0 ;
-
-            Console.WriteLine($"Preço: {price}");
-
             try
             {
-                // Retrieve trip details from the database based on tripId
-                // Example: var tripDetails = await _context.TripDetails.FindAsync(tripId);
+                var flightDetail = await _context.Flights.FirstOrDefaultAsync(c => c.Id == tripId);
+                var dbTripId = flightDetail?.TripId;
+                var originCityDetail = await _context.City.FirstOrDefaultAsync(city => city.Id == flightDetail.OriginCityId);
+                var destinationCityDetail = await _context.City.FirstOrDefaultAsync(city => city.Id == flightDetail.DestinationCityId);
+                var tripDetail = await _context.Trip.FirstOrDefaultAsync(c => c.Id == dbTripId);
+                var price = tripDetail.Price;
 
-                // If tripDetails is null, return NotFound
-                if (tripId == null)
+
+                if (flightDetail == null)
                 {
-                    return NotFound(new { Message = "Trip details not found" });
+                    // Return a NotFound response with details
+                    return NotFound(new { Message = "Flight details not found", TripId = tripId });
                 }
+
+                // Create an instance of TripDetailsModel with the desired properties
+                var tripDetailsModel = new TripDetailsModel
+                {
+                    Id = dbTripId,
+                    DepartureDate = flightDetail.Departure.Date,
+                    DepartureTime = flightDetail.Departure.Hour + ":" + flightDetail.Departure.Minute,
+                    OriginCity = originCityDetail.Name,
+                    Duration = flightDetail.Duration,
+                    ArrivalDate = flightDetail.Arrival.Date,
+                    ArrivalTime = flightDetail.Arrival.Hour + ":" + flightDetail.Arrival.Minute,
+                    DestinationCity = destinationCityDetail.Name,
+                    Price = price
+                };
 
                 // Optionally, you can perform additional processing or validation here
 
-                return Ok(new { Message = $"Preço: {price}" });
+                // Return an Ok response with the TripDetailsModel
+                return Ok(tripDetailsModel);
             }
             catch (Exception ex)
             {
-                return BadRequest(new { Message = "Failed to retrieve trip details" });
+
+                // Return a BadRequest response with details
+                return BadRequest(new { Message = "Failed to retrieve trip details", Error = ex.Message });
             }
         }
+
+
     }
+
+    public class TripDetailsModel
+    {
+        public string Id { get; set; }
+        public DateTime DepartureDate { get; set; }
+        public string DepartureTime { get; set; }
+        public string OriginCity { get; set; }
+        public string Duration { get; set; }
+        public DateTime ArrivalDate { get; set; }
+        public string ArrivalTime { get; set; }
+        public string DestinationCity { get; set; }
+        public double Price { get; set; }
+        // Add other properties as needed
+    }
+
 }
