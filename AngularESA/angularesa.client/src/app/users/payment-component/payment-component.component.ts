@@ -10,4 +10,6 @@ import { AccompanyingPassenger } from '../../Models/AccompanyingPassenger';
 export class PaymentComponentComponent {
   public user: User | null = null;
   public acomp: AccompanyingPassenger | null = null;
+  
+
 }

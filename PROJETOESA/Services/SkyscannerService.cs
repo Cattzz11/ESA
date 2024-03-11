@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Text.Json;
 using System.Diagnostics.Metrics;
 using Newtonsoft.Json;
+using Microsoft.AspNetCore.Mvc;
 
 namespace PROJETOESA.Services
 {
@@ -158,6 +159,150 @@ namespace PROJETOESA.Services
             }
             return trips;
         }
+
+        public async Task<double[]> GetRoundtripPricesAsync(FlightData data)
+        {
+            var queryParams = new List<string>();
+
+            queryParams.Add($"fromEntityId={data.fromEntityId}");
+            queryParams.Add($"toEntityId={data.toEntityId}");
+            queryParams.Add($"departDate={data.departDate}");
+            queryParams.Add($"returnDate={data.returnDate}");
+            if (!string.IsNullOrEmpty(data.market)) queryParams.Add($"market={data.market}");
+            if (!string.IsNullOrEmpty(data.locale)) queryParams.Add($"locale={data.locale}");
+            if (!string.IsNullOrEmpty(data.currency))
+            {
+                queryParams.Add($"currency={data.currency}");
+            }
+            else
+            {
+                queryParams.Add($"currency=EUR");
+            }
+            if (data.Adults.HasValue) queryParams.Add($"adults={data.Adults}");
+            if (data.Children.HasValue) queryParams.Add($"children={data.Children}");
+            if (data.Infants.HasValue) queryParams.Add($"infants={data.Infants}");
+            if (!string.IsNullOrEmpty(data.cabinClass)) queryParams.Add($"cabinClass={data.cabinClass}");
+
+            var queryString = string.Join("&", queryParams);
+
+            var response = await _httpClient.GetAsync($"flights/search-roundtrip?{queryString}");
+            response.EnsureSuccessStatusCode();
+
+            var content = await response.Content.ReadAsStringAsync();
+
+            // Organizar os dados
+            var jsonObject = JObject.Parse(content);
+            var itinerariesData = jsonObject["data"]["itineraries"] as JArray;
+
+            List<Trip> trips = new List<Trip>();
+
+            List<double> prices = new List<double>();
+
+            if (itinerariesData != null)
+            {
+                foreach (var itinerary in itinerariesData)
+                {
+                    double price = (double?)itinerary["price"]?["raw"] ?? 0.0;
+                    prices.Add(price);
+
+                    Trip trip = new Trip
+                    {
+                        Id = itinerary["id"]?.ToString(),
+                        Price = (double?)itinerary["price"]?["raw"] ?? 0.0,
+                        isSelfTransfer = itinerary["isSelfTransfer"]?.ToObject<bool>() ?? false,
+                        isProtectedSelfTransfer = itinerary["isProtectedSelfTransfer"]?.ToObject<bool>() ?? false,
+                        isChangeAllowed = itinerary["farePolicy"]?["isChangeAllowed"]?.ToObject<bool>() ?? false,
+                        isPartiallyChangeable = itinerary["farePolicy"]?["isPartiallyChangeable"]?.ToObject<bool>() ?? false,
+                        isCancellationAllowed = itinerary["farePolicy"]?["isCancellationAllowed"]?.ToObject<bool>() ?? false,
+                        isPartiallyRefundable = itinerary["farePolicy"]?["isPartiallyRefundable"]?.ToObject<bool>() ?? false,
+                        Score = itinerary["score"]?.ToObject<double>() ?? 0,
+                        Flights = new List<Flight>()
+                    };
+
+                    var legs = itinerary["legs"] as JArray;
+                    if (legs != null)
+                    {
+                        foreach (var leg in legs)
+                        {
+                            City originCity = await GetCityAsync(leg["origin"]["id"]?.ToString());
+                            City destinationCity = await GetCityAsync(leg["destination"]["id"]?.ToString());
+
+                            var flight = new Flight
+                            {
+                                Id = leg["id"]?.ToString(),
+                                Duration = ConvertMinutesToTimeString(leg["durationInMinutes"].ToObject<int>()),
+                                Departure = DateTime.Parse(leg["departure"]?.ToString()),
+                                Arrival = DateTime.Parse(leg["arrival"]?.ToString()),
+                                OriginCityId = leg["origin"]["id"]?.ToString(),
+                                DestinationCityId = leg["destination"]["id"]?.ToString(),
+                                OriginCity = originCity,
+                                DestinationCity = destinationCity,
+                                Segments = new List<Segment>()
+                            };
+
+                            var carriersObj = leg["carriers"] as JObject;
+                            var marketingCarriers = carriersObj?["marketing"] as JArray;
+
+                            if (marketingCarriers != null)
+                            {
+                                foreach (var car in marketingCarriers)
+                                {
+                                    var carId = car["id"]?.ToString();
+
+                                    if (!await _context.Carrier.AnyAsync(c => c.Id == carId))
+                                    {
+                                        var newCarrier = new Carrier
+                                        {
+                                            Id = carId,
+                                            Name = car["name"]?.ToString(),
+                                            LogoURL = car["logoUrl"]?.ToString()
+                                        };
+
+                                        await _context.Carrier.AddAsync(newCarrier);
+                                        await _context.SaveChangesAsync();
+                                    }
+                                }
+                            }
+
+                            var segments = leg["segments"] as JArray;
+                            if (segments != null)
+                            {
+                                foreach (var segment in segments)
+                                {
+                                    City originCitySegment = await GetCityAsync(segment["origin"]["flightPlaceId"]?.ToString());
+                                    City destinationCitySegment = await GetCityAsync(segment["destination"]["flightPlaceId"]?.ToString());
+                                    Carrier carrierSegment = await GetCarrierAsync(segment["marketingCarrier"]["id"]?.ToString());
+
+                                    var item = new Segment
+                                    {
+                                        FlightNumber = segment["flightNumber"]?.ToString(),
+                                        Departure = DateTime.Parse(segment["departure"]?.ToString()),
+                                        Arrival = DateTime.Parse(segment["arrival"]?.ToString()),
+                                        Duration = ConvertMinutesToTimeString(segment["durationInMinutes"].ToObject<int>()),
+                                        FlightId = leg["id"]?.ToString(),
+                                        CarrierId = segment["marketingCarrier"]["id"]?.ToString(),
+                                        OriginCityId = segment["origin"]["flightPlaceId"]?.ToString(),
+                                        DestinationCityId = segment["destination"]["flightPlaceId"]?.ToString(),
+                                        OriginCity = originCitySegment,
+                                        DestinationCity = destinationCitySegment,
+                                        Carrier = carrierSegment,
+                                    };
+
+                                    flight.Segments.Add(item);
+                                }
+                            }
+
+                            trip.Flights.Add(flight);
+                        }
+                    }
+
+                    trips.Add(trip);
+                }
+            }
+
+            return prices.ToArray();
+        }
+
 
         private async Task<City> GetCityAsync(string cityId)
         {
@@ -542,7 +687,15 @@ namespace PROJETOESA.Services
             return destinationList;
         }
 
-        private string ConvertMinutesToTimeString(int durationInMinutes)
+        //public async Task<List<Trip> GetThreeCheapestTripPrices()
+        //{
+        //    // Assumindo que você tem um DbSet no contexto chamado "Flight" com uma propriedade "Price"
+        //    List<Trip> cheapestPrices = await _context.Trip.OrderBy(f => f.Price).Take(3).Select(f => f.Price).ToListAsync();
+
+        //    return cheapestPrices;
+        //}
+
+    private string ConvertMinutesToTimeString(int durationInMinutes)
         {
             int hours = durationInMinutes / 60;
             int minutes = durationInMinutes % 60;

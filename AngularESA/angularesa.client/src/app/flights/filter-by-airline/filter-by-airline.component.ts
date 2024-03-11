@@ -13,14 +13,21 @@ export class FilterByAirlineComponent implements OnInit {
   flightResults: Trip[] = [];
   isLoading: boolean = true;
   carrier: Carrier | undefined;
+  cheapestPrices: any[] = [];
+  showPriceStatistics!: boolean | false;
+
+  lowestPrice: number | undefined;
+  highestPrice: number | undefined;
+  averagePrice: number | undefined;
 
   constructor(private skyscannerService: SkyscannerService, private route: ActivatedRoute,) {}
 
   ngOnInit(): void {
     const routerState = history.state.data;
+    
     if (routerState) {
       this.carrier = routerState;
-    
+
       this.skyscannerService.getSugestionsCompany(routerState.id).subscribe({
         next: (response) => {
           this.flightResults = response;
@@ -33,5 +40,12 @@ export class FilterByAirlineComponent implements OnInit {
         }
       });
     }
+
+
+  }
+
+  onShowPricesClick() {
+    // Toggle the showPriceStatistics variable
+    this.showPriceStatistics = !this.showPriceStatistics;
   }
 }

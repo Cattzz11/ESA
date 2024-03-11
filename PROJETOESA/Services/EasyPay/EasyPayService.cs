@@ -17,7 +17,7 @@ namespace PROJETOESA.Services.EasyPay
 
             RequestData requestData = new RequestData();
 
-            if (method.Equals("mbway"))
+            if (method.Equals("mbw"))
             {
                 requestData.ExpirationTime = formattedDate;
 
@@ -62,11 +62,11 @@ namespace PROJETOESA.Services.EasyPay
 
                 payment.PaymentId = Guid.Parse((string)data["id"]);
                 payment.Price = value;
-                payment.Entity = method.Equals("multibanco") ? int.Parse((string)data["method"]["entity"]) : null;
-                payment.Reference = method.Equals("multibanco") ? int.Parse((string)data["method"]["reference"]) : null;
+                payment.Entity = method.Equals("mb") ? int.Parse((string)data["method"]["entity"]) : null;
+                payment.Reference = method.Equals("mb") ? int.Parse((string)data["method"]["reference"]) : null;
                 payment.LimitDate = formattedDate;
                 payment.paymentStatus = PaymentStatus.InProgress;
-                payment.PaymentMethod = method.Equals("mbway")?"MBWAY":"Multibanco";
+                payment.PaymentMethod = method.Equals("mbw")?"MBW":"MB";
             }
             return payment;
         }
@@ -86,13 +86,13 @@ namespace PROJETOESA.Services.EasyPay
 
                 MethodData method = new MethodData();
                 method.Type = (string)data["method"]["type"];
-                method.Entity = method.Type.ToLower().Equals("multibanco") ? int.Parse((string)data["method"]["entity"]):null;
-                method.Reference = method.Equals("multibanco") ? int.Parse((string)data["method"]["reference"]) : null;
+                method.Entity = method.Type.ToLower().Equals("mb") ? int.Parse((string)data["method"]["entity"]):null;
+                method.Reference = method.Equals("mb") ? int.Parse((string)data["method"]["reference"]) : null;
 
                 CustomerData customer = new CustomerData();
                 customer.Email = (string)data["customer"]["email"];
-                customer.Name = method.Type.ToLower().Equals("mbway") ? (string)data["customer"]["name"] : null;
-                customer.Phone = method.Type.ToLower().Equals("mbway") ? (string)data["customer"]["phone"] : null;
+                customer.Name = method.Type.ToLower().Equals("mbw") ? (string)data["customer"]["name"] : null;
+                customer.Phone = method.Type.ToLower().Equals("mbw") ? (string)data["customer"]["phone"] : null;
 
                 paymentDetails.Id = Guid.Parse((string)data["id"]);
                 paymentDetails.Customer = customer;

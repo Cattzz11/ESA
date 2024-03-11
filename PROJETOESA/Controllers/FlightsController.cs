@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using PROJETOESA.Data;
 using PROJETOESA.Models;
 using PROJETOESA.Services;
 using System.Diagnostics;
@@ -10,10 +12,12 @@ namespace PROJETOESA.Controllers
     public class FlightsController : Controller
     {
         private readonly SkyscannerService _skyscannerService;
+        private readonly AeroHelperContext _context;
 
-        public FlightsController(SkyscannerService skyscannerService)
+        public FlightsController(SkyscannerService skyscannerService, AeroHelperContext context)
         {
             _skyscannerService = skyscannerService;
+            _context = context;
         }
 
         // Viagens de ida e volta
@@ -22,6 +26,37 @@ namespace PROJETOESA.Controllers
         public async Task<IActionResult> SearchRoundtrip([FromQuery] FlightData data)
         {
             var result = await _skyscannerService.GetRoundtripAsync(data);
+
+            return Ok(result);
+        }
+
+        /// <summary>
+        /// Método que dá todas as opções de preço que existem para um determinado voo e faz o min, max e média
+        /// </summary>
+        /// <param name="data">Dados necessários para a observação destes preços (obrigatórios: departureAPIKey, destinationAPIKey, departureDate, arrivalDate)</param>
+        /// <returns>Opções de preços num array - min, max, média</returns>
+        [HttpGet]
+        [Route("api/flight/price-options")]
+        public async Task<IActionResult> PriceOptions([FromQuery] FlightData data)
+        {
+            var prices = await _skyscannerService.GetRoundtripPricesAsync(data);
+            Console.WriteLine("array preços", prices);
+
+            if (prices.Length == 0)
+            {
+                return NotFound("Nenhum preço encontrado.");
+            }
+
+            double minPrice = prices.Min();
+            double maxPrice = prices.Max();
+            double averagePrice = Math.Round(prices.Average(),2);
+
+            var result = new
+            {
+                MinPrice = minPrice,
+                MaxPrice = maxPrice,
+                AveragePrice = averagePrice
+            };
 
             return Ok(result);
         }
@@ -79,10 +114,10 @@ namespace PROJETOESA.Controllers
         [Route("api/flight/sugestions-company")]
         public async Task<IActionResult> getSugestionsCompany([FromQuery] string carrierId)
         {
-            List<Trip> result = await _skyscannerService.GetSugestionsCompanyAsyncTest();
+            //List<Trip> result = await _skyscannerService.GetSugestionsCompanyAsyncTest();
 
-            Debug.WriteLine(result.ToString());
-            //List<Trip> result = await _skyscannerService.GetSugestionsCompanyAsync(carrierId);
+            //Debug.WriteLine(result.ToString());
+            List<Trip> result = await _skyscannerService.GetSugestionsCompanyAsync(carrierId);
 
             return Ok(result);
         }
@@ -95,5 +130,6 @@ namespace PROJETOESA.Controllers
 
             return Ok(result);
         }
+
     }
 }

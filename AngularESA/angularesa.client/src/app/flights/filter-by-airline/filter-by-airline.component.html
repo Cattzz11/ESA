@@ -28,8 +28,15 @@
 
       <div class="price">
         <p>{{ trip.price }} €</p>
+        <a (click)="skyscannerService.getPriceOptions()" class="button-link">Todos os Preços</a>
         <a href="your-target-url" class="button-link">Mais opções</a>
       </div>
+      <div *ngIf="showPriceStatistics" class="price-statistics">
+        <p>Preço mais baixo: {{ lowestPrice | currency: 'EUR' }}</p>
+        <p>Preço mais alto: {{ highestPrice | currency: 'EUR' }}</p>
+        <p>Preço médio: {{ averagePrice | currency: 'EUR' }}</p>
+      </div>
+
 
     </div>
   </div>

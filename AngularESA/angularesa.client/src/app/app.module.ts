@@ -31,6 +31,7 @@ import { EditProfileComponent } from './users/edit-profile/edit-profile.componen
 import { PremiumComponent } from './users/premium/premium.component';
 import { SubscriptionPageComponent } from './users/subscription-page/subscription-page.component';
 import { PaymentComponentComponent } from './users/payment-component/payment-component.component';
+import { ThreePricesComponent } from './flights/three-prices/three-prices.component';
 
 @NgModule({
   declarations: [
@@ -57,6 +58,7 @@ import { PaymentComponentComponent } from './users/payment-component/payment-com
     PremiumComponent,
     SubscriptionPageComponent,
     PaymentComponentComponent,
+    ThreePricesComponent,
   ],
   imports: [
     BrowserModule, HttpClientModule,

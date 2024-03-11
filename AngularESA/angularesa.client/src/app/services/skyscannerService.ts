@@ -110,4 +110,8 @@ export class SkyscannerService {
   public getFavoriteAirline(): Observable<Carrier[]> {
     return this.http.get<Carrier[]>('api/flight/favorite-airline');
   }
+
+  public getPriceOptions(fromEntityId: string, toEntityId: string, departDate: Date, returnDate: Date): Observable<Trip[]> {
+    return this.http.get<Trip[]>(`https://localhost:7041/api/flight/price-options?fromEntityId=${fromEntityId}&toEntityId=${toEntityId}&departDate=${departDate}&returnDate=${returnDate}`);
+  }
 }
