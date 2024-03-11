@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { TripDetails } from '../../Models/TripDetails';
 import { AuthorizeService } from '../../../api-authorization/authorize.service';
-import { UserInputModel } from '../../Models/UserInput'
+import { UserInputModel } from '../../Models/UserInput';
+import { PaymentModel } from '../../Models/PaymentModel';
 import { SquareService } from '../../services/SquareService';
 
 @Component({
@@ -13,6 +14,16 @@ import { SquareService } from '../../services/SquareService';
 export class TripDetailsComponent implements OnInit {
   tripDetails: TripDetails | null = null;
   userInput: UserInputModel = new UserInputModel();
+  payment: PaymentModel = {
+      price: 0,
+      currency: '',
+      email: '',
+      creditCard: '',
+      firstName: '',
+      lastName: '',
+      shippingAddress: '',
+      tripId: ''
+  };
 
   constructor(
     //private tripService: TripDetailsService, // Inject your service
@@ -45,8 +56,17 @@ export class TripDetailsComponent implements OnInit {
   buyTicket() {
     const tripId = this.route.snapshot.paramMap.get('id') || '';
     console.log(this.userInput);
-    const price = this.tripDetails?.price || 0; // Default to 0 if tripDetails or price is not available
-    this.squareService.purchaseTicket(this.userInput, price, tripId).subscribe(
+    const priceOf = this.tripDetails?.price || 0; // Default to 0 if tripDetails or price is not available
+
+    this.payment.price = priceOf;
+    this.payment.currency = "EUR";
+    this.payment.firstName = this.userInput.firstName
+    this.payment.lastName = this.userInput.lastName
+    this.payment.email = this.userInput.shippingAddress
+    this.payment.creditCard = this.userInput.shippingAddress
+    this.payment.shippingAddress = this.userInput.shippingAddress
+
+    this.squareService.purchaseTicket(this.payment, tripId).subscribe(
       (response) => {
         // Handle successful response
         console.log('Ticket purchased successfully:', response);
@@ -57,5 +77,6 @@ export class TripDetailsComponent implements OnInit {
       }
     );
   }
+
 
 }

@@ -33,8 +33,8 @@ SquareClient squareClient = new SquareClient.Builder()
     .AccessToken(accessToken)
     .Build();
 
-
 builder.Services.AddSingleton(squareClient);
+builder.Services.AddScoped<SquareService>();
 
 
 /*builder.Services.AddHttpClient("SquareAPI", client =>
