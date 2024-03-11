@@ -159,16 +159,6 @@ namespace PROJETOESA.Services
             return trips;
         }
 
-        private async Task<City> GetCityAsync(string cityId)
-        {
-            return await _context.City.FirstOrDefaultAsync(c => c.Id == cityId);
-        }
-
-        private async Task<Carrier> GetCarrierAsync(string carrierId)
-        {
-            return await _context.Carrier.FirstOrDefaultAsync(c => c.Id == carrierId);
-        }
-
         public async Task<List<Country>> GetEverywhereAsync(FlightData data)
         {
             var queryParams = new List<string>();
@@ -261,7 +251,6 @@ namespace PROJETOESA.Services
             return content;
         }
 
-        // Falta depois Organizar como se recebe os dados
         public async Task<List<Calendar>> GetCalendarAsync(FlightData data)
         {
             var queryParams = new List<string>();
@@ -485,7 +474,6 @@ namespace PROJETOESA.Services
             return trips;
         }
 
-
         public async Task<List<Trip>> GetSugestionsCompanyAsync(string carrierId)
         {
             string tomorrow = DateTime.Now.AddDays(1).ToString("yyyy-MM-dd");
@@ -525,11 +513,89 @@ namespace PROJETOESA.Services
             return finalItineraries;
         }
 
+        public async Task<List<City>> GetFavouriteDestinationsAsync()
+        {
+            var cityCounts = new Dictionary<string, int>();
+
+            var trips = await _context.Trip
+                .Include(t => t.Flights)
+                .ThenInclude(f => f.DestinationCity)
+                .ToListAsync();
+
+            foreach (var trip in trips)
+            {
+                Flight relevantFlight;
+
+                if (trip.Flights.Count == 1)
+                {
+                    relevantFlight = trip.Flights.First();
+                }
+                else
+                {
+                    relevantFlight = trip.Flights.OrderBy(f => f.Departure).First();
+                }
+
+                if (cityCounts.ContainsKey(relevantFlight.DestinationCityId))
+                {
+                    cityCounts[relevantFlight.DestinationCityId]++;
+                }
+                else
+                {
+                    cityCounts[relevantFlight.DestinationCityId] = 1;
+                }
+            }
+
+            var topCityIds = cityCounts.OrderByDescending(kv => kv.Value)
+                .Take(5)
+                .Select(kv => kv.Key);
+
+            var topCities = await _context.City
+                .Where(c => topCityIds.Contains(c.Id))
+                .ToListAsync();
+
+            return topCities;
+        }
+
+        public async Task<List<Trip>> GetSugestionsDestinationsAsync()
+        {
+            string tomorrow = DateTime.Now.AddDays(1).ToString("yyyy-MM-dd");
+            string nextWeek = DateTime.Now.AddDays(8).ToString("yyyy-MM-dd");
+            FlightData origin = new FlightData { fromEntityId = "eyJlIjoiOTU1NjUwNTUiLCJzIjoiTElTIiwiaCI6IjI3NTQ0MDcyIn0=" };
+
+            List<City> possibleDestinations = await GetFavouriteDestinationsAsync();
+
+            List<Trip> finalItineraries = new List<Trip>();
+
+            foreach(City currentCity in possibleDestinations)
+            {
+                FlightData data = new FlightData { fromEntityId = origin.fromEntityId, toEntityId = currentCity.ApiKey, departDate = tomorrow, returnDate = nextWeek };
+
+                List<Trip> itineraries = await GetRoundtripAsync(data);
+
+                List<Trip> foundItineraries = itineraries
+                    .Take(2)
+                    .ToList();
+
+                finalItineraries.AddRange(foundItineraries);
+            }
+
+            return finalItineraries;
+        }
+
         public async Task<List<Carrier>> GetFavoriteAirlineAsync()
         {
             List<Carrier> carrierList = await _context.Carrier.OrderByDescending(e => e.SearchTimes).Take(5).ToListAsync();
 
             return carrierList;
+        }
+        private async Task<City> GetCityAsync(string cityId)
+        {
+            return await _context.City.FirstOrDefaultAsync(c => c.Id == cityId);
+        }
+
+        private async Task<Carrier> GetCarrierAsync(string carrierId)
+        {
+            return await _context.Carrier.FirstOrDefaultAsync(c => c.Id == carrierId);
         }
 
         private string ConvertMinutesToTimeString(int durationInMinutes)

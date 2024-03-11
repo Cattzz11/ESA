@@ -91,6 +91,136 @@
     background-color: #007faa;
   }
 
+/* Estilos para as recomendações */
+.recomendacoes-container {
+  font-family: Arial, sans-serif;
+  padding: 30px;
+}
+
+.viagens-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  padding: 20px 0;
+  border-radius: 20px;
+}
+
+.viagem-card {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #87CEEB;
+  padding: 15px;
+  margin: 10px 0;
+  border-radius: 20px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  font-weight: bold;
+  color: white;
+}
+
+  .viagem-card:hover {
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  }
+
+  .viagem-card img {
+    width: 100px;
+    height: auto;
+    border-radius: 15px;
+    margin-right: 30px;
+  }
+
+  .viagem-card:last-child {
+    margin-bottom: 0;
+  }
+
+.price a.button-link, .more a.button-link:visited {
+  color: white;
+  text-decoration: none;
+}
+
+  .price a.button-link:hover {
+    text-decoration: underline;
+  }
+
+.departure, .price, .destination {
+  text-align: center;
+  padding: 10px;
+}
+
+  .departure p, .price p, .destination p {
+    margin: 10px 0;
+  }
+
+.duration {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+  .duration p {
+    align-self: flex-start;
+    position: relative;
+    top: -10px;
+  }
+
+  .duration::after {
+    content: '';
+    position: absolute;
+    top: 90%;
+    left: 30%;
+    width: calc(100% + 60px);
+    height: 2px;
+    background-color: white;
+    transform: translateX(-45%);
+  }
+
+  .duration::before {
+    content: '';
+    position: absolute;
+    top: 93%;
+    left: calc(100% + 10px);
+    width: 0;
+    height: 0;
+    border-top: 6px solid transparent;
+    border-bottom: 6px solid transparent;
+    border-left: 12px solid white;
+    transform: translateX(135%) translateY(-50%);
+  }
+
+.loading-indicator {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* 100% da altura da viewport */
+}
+
+  .loading-indicator img {
+    width: 100px; /* ou o tamanho que desejar */
+    height: auto; /* mantém a proporção da imagem */
+  }
+
+.recommendations-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.recommendations-select {
+  padding: 5px 10px;
+  border: 1px solid #cccccc;
+  border-radius: 5px;
+  background-color: #FAF9F6;
+}
+
+/* You might also want to style the option elements */
+.recommendations-select option {
+  padding: 5px;
+}
+
+
 @media (max-width: 600px) {
   .airlines-container {
     flex-direction: column;

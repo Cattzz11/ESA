@@ -151,6 +151,23 @@ namespace PROJETOESA.Controllers
         }
 
 
+        [HttpGet]
+        [Route("api/data/favourite-destinations")]
+        public async Task<IActionResult> getFavouriteDestinations()
+        {
+            List<City> result = await _skyscannerService.GetFavouriteDestinationsAsync();
+
+            return Ok(result);
+        }
+
+        [HttpGet]
+        [Route("api/flight/sugestions-destinations")]
+        public async Task<IActionResult> getSugestionsDestinations()
+        {
+            List<Trip> result = await _skyscannerService.GetSugestionsDestinationsAsync();
+
+            return Ok(result);
+        }
     }
 
     public class TripDetailsModel
