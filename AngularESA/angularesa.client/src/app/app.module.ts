@@ -5,14 +5,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { HomeComponent } from './home/home.component';
-import { CounterComponent } from './counter/counter.component';
-import { FetchDataComponent } from './fetch-data/fetch-data.component';
-import { PeopleComponent } from './People/people.component';
-import { PersonComponent } from './person/person.component';
-import { PersonDetailsComponent } from './person-details/person-details.component';
-import { PersonCreateComponent } from './person-create/person-create.component';
-import { PersonEditComponent } from './person-edit/person-edit.component';
-import { PersonDeleteComponent } from './person-delete/person-delete.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ShortnamePipe } from './shortname.pipe';
 import { ApiAuthorizationModule } from '../api-authorization/api-authorization.module';
@@ -20,7 +12,6 @@ import { AuthInterceptor } from '../api-authorization/authorize.interceptor';
 import { AuthGuard } from '../api-authorization/authorize.guard';
 import { AuthorizeService } from '../api-authorization/authorize.service';
 import { PremiumProfilePageComponent } from './users/premium-profile-page/premium-profile-page.component';
-import { ProfileComponent } from './profile/profile.component';
 import { LogoutComponent } from '../api-authorization/logout/logout.component';
 import { FilterByAirlineComponent } from './flights/filter-by-airline/filter-by-airline.component';
 import { SearchFlightsComponent } from './flights/search-flights/search-flights.component';
@@ -31,6 +22,27 @@ import { EditProfileComponent } from './users/edit-profile/edit-profile.componen
 import { PremiumComponent } from './users/premium/premium.component';
 import { SubscriptionPageComponent } from './users/subscription-page/subscription-page.component';
 import { TripDetailsComponent } from './flights/trip-details/trip-details.component';
+import { FlightDataComponent } from './flights/flight-data/flight-data.component';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { MatCalendarCellClassFunction, MatDatepickerModule } from '@angular/material/datepicker';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { provideNativeDateAdapter } from '@angular/material/core';
+import { MAT_DATE_LOCALE, MAT_DATE_FORMATS } from '@angular/material/core';
+import { DateAdapter } from '@angular/material/core';
+import { DatePipe } from '@angular/common';
+
+export const MY_FORMATS = {
+  parse: {
+    dateInput: 'LL',
+  },
+  display: {
+    dateInput: 'YYYY-MM-DD',
+    monthYearLabel: 'MMM YYYY',
+    dateA11yLabel: 'LL',
+    monthYearA11yLabel: 'MMMM YYYY',
+  },
+};
 
 @NgModule({
   declarations: [
@@ -39,16 +51,7 @@ import { TripDetailsComponent } from './flights/trip-details/trip-details.compon
     HomeComponent,
     ShortnamePipe,
     PremiumProfilePageComponent,
-    PersonDetailsComponent,
-    PersonCreateComponent,
-    PersonEditComponent,
-    PersonDeleteComponent,
-    ProfileComponent,
     LogoutComponent,
-    CounterComponent,
-    FetchDataComponent,
-    PeopleComponent,
-    PersonComponent,
     FilterByAirlineComponent,
     SearchFlightsComponent,
     ConfirmationAccountComponent,
@@ -57,16 +60,29 @@ import { TripDetailsComponent } from './flights/trip-details/trip-details.compon
     PremiumComponent,
     SubscriptionPageComponent,
     TripDetailsComponent,
+    FlightDataComponent
   ],
   imports: [
-    BrowserModule, HttpClientModule,
-    AppRoutingModule, FormsModule,
-    ReactiveFormsModule, ApiAuthorizationModule
+    BrowserModule,
+    HttpClientModule,
+    AppRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
+    ApiAuthorizationModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatDatepickerModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
     AuthGuard,
-    AuthorizeService, PhotoUploadService
+    AuthorizeService,
+    PhotoUploadService,
+    provideAnimationsAsync(),
+    provideNativeDateAdapter(),
+    { provide: MAT_DATE_LOCALE, useValue: 'pt-PT' },
+    { provide: MAT_DATE_FORMATS, useValue: MY_FORMATS },
+    DatePipe
   ],
   bootstrap: [AppComponent]
 })

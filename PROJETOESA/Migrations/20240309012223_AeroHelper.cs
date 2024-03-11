@@ -6,7 +6,11 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace PROJETOESA.Migrations
 {
     /// <inheritdoc />
+<<<<<<<< HEAD:PROJETOESA/Migrations/20240309012223_AeroHelper.cs
     public partial class AeroHelper : Migration
+========
+    public partial class initial : Migration
+>>>>>>>> origin/Tarefa-22:PROJETOESA/Migrations/20240309153421_initial.cs
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

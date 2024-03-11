@@ -18,12 +18,20 @@
     </div>
   </div>
   <div class="input-group">
-    <label for="departure">Partida:</label>
-    <input type="date" id="departure" [(ngModel)]="departureDate" [disabled]="!departureEnabled" (ngModelChange)="arrivalEnabled = !!departureDate">
+    <mat-form-field>
+      <mat-label>Partida:</mat-label>
+      <input matInput [matDatepicker]="departure" id="departure" [(ngModel)]="departureDate" [disabled]="!departureEnabled" (dateChange)="onDepartureDateChange($event)">
+      <mat-datepicker-toggle matIconSuffix [for]="departure"></mat-datepicker-toggle>
+      <mat-datepicker [dateClass]="dateClass" #departure></mat-datepicker>
+    </mat-form-field>
   </div>
   <div class="input-group">
-    <label for="arrival">Chegada:</label>
-    <input type="date" id="arrival" [(ngModel)]="arrivalDate" [disabled]="!arrivalEnabled" (ngModelChange)="validateForm()">
+    <mat-form-field>
+      <mat-label>Partida:</mat-label>
+      <input matInput [matDatepicker]="arrival" id="arrival" [(ngModel)]="arrivalDate" [disabled]="!arrivalEnabled" (dateChange)="onArrivalDateChange($event)">
+      <mat-datepicker-toggle matIconSuffix [for]="arrival"></mat-datepicker-toggle>
+      <mat-datepicker [dateClass]="dateClass" #arrival></mat-datepicker>
+    </mat-form-field>
   </div>
   <div class="input-group number-group">
     <label for="adults">Nº Adultos:</label>
@@ -36,7 +44,61 @@
 
   <div class="input-group button-group">
     <button id="search" [disabled]="!canSearch" (click)="searchFlights()">Procurar</button>
-    
+
   </div>
 </div>
-<button id="search" (click)="printData()">Print</button>
+
+<div *ngIf="isLoading" class="loading-indicator">
+  <img src="../../assets/Images/Fading circles.gif" alt="Carregando...">
+</div>
+
+<div *ngIf="!isLoading" class="viagens-list">
+  <div class="travelHistory">
+    <div *ngFor="let trip of flights" class="travel">
+      <ng-container *ngIf="trip.flights && trip.flights.length > 0 && trip.flights[0].segments && trip.flights[0].segments.length > 0">
+        <div class="flight">
+          <div class="ida">
+            <img [src]="trip.flights[1].segments[0].carrier.logoURL" alt="Logotipo da Companhia" class="airlineLogo">
+            <div class="origin">
+              <p>{{ trip.flights[1].segments[0].departure | date: 'dd/MM/YYYY' }}</p>
+              <p>{{ trip.flights[1].segments[0].departure | date: 'HH:mm' }} H</p>
+              <p>{{ trip.flights[1].segments[0].originCity.name}}</p>
+            </div>
+            <div class="duration">
+              <p>{{ trip.flights[1].duration }}</p>
+              <div class="arrow-line"></div>
+              <div class="arrow-head"></div>
+            </div>
+            <div class="destination">
+              <p>{{ trip.flights[1].segments[0].arrival | date: 'dd/MM/YYYY' }}</p>
+              <p>{{ trip.flights[1].segments[0].arrival | date: 'HH:mm' }} H</p>
+              <p>{{ trip.flights[1].segments[0].destinationCity.name}}</p>
+            </div>
+          </div>
+          <div class="volta">
+            <img [src]="trip.flights[0].segments[0].carrier.logoURL" alt="Logotipo da Companhia" class="airlineLogo">
+            <div class="origin">
+              <p>{{ trip.flights[0].segments[0].departure | date: 'dd/MM/YYYY' }}</p>
+              <p>{{ trip.flights[0].segments[0].departure | date: 'HH:mm' }} H</p>
+              <p>{{ trip.flights[0].segments[0].originCity.name}}</p>
+            </div>
+            <div class="duration">
+              <p>{{ trip.flights[0].duration }}</p>
+              <div class="arrow-line"></div>
+              <div class="arrow-head"></div>
+            </div>
+            <div class="destination">
+              <p>{{ trip.flights[0].segments[0].arrival | date: 'dd/MM/YYYY' }}</p>
+              <p>{{ trip.flights[0].segments[0].arrival | date: 'HH:mm' }} H</p>
+              <p>{{ trip.flights[0].segments[0].destinationCity.name}}</p>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+      <div class="more">
+        <p>Preço: {{ trip.price }} €</p>
+        <a (click)="selectTrip(trip)" class="button-link">Mais opções</a>
+      </div>
+    </div>
+  </div>
+</div>

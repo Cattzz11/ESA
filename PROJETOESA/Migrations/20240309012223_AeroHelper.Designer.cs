@@ -12,8 +12,13 @@ using PROJETOESA.Data;
 namespace PROJETOESA.Migrations
 {
     [DbContext(typeof(AeroHelperContext))]
+<<<<<<<< HEAD:PROJETOESA/Migrations/20240309012223_AeroHelper.Designer.cs
     [Migration("20240309012223_AeroHelper")]
     partial class AeroHelper
+========
+    [Migration("20240309153421_initial")]
+    partial class initial
+>>>>>>>> origin/Tarefa-22:PROJETOESA/Migrations/20240309153421_initial.Designer.cs
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
