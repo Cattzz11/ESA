@@ -18,6 +18,7 @@ import { PremiumComponent } from './users/premium/premium.component';
 import { SubscriptionPageComponent } from './users/subscription-page/subscription-page.component';
 import { EditProfileComponent } from './users/edit-profile/edit-profile.component';
 import { FlightDataComponent } from './flights/flight-data/flight-data.component';
+import { TripDetailsComponent } from './flights/trip-details/trip-details.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent, pathMatch: 'full' },
@@ -38,6 +39,7 @@ const routes: Routes = [
   { path: 'flight-data', component: FlightDataComponent },
   { path: 'filter-by-airline', component: FilterByAirlineComponent },
   { path: 'search-flights', component: SearchFlightsComponent },
+  { path: 'trip-details/:id', component: TripDetailsComponent },
 ];
 
 @NgModule({

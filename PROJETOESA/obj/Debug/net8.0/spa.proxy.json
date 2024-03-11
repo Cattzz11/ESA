@@ -3,7 +3,11 @@
 "ServerUrl": "https://localhost:4200",
 "RedirectUrl": "",
 "LaunchCommand": "npm start",
+<<<<<<< HEAD
 "WorkingDirectory": "C:\\Users\\Tiago\\Desktop\\IPS\\ESA\\PROJETOESA\\..\\PROJETOESA.client",
+=======
+"WorkingDirectory": "C:\\Users\\danie\\OneDrive\\Documentos\\Meu\\UNI STUFF\\EsA\\Projeto\\ESA\\PROJETOESA\\..\\PROJETOESA.client",
+>>>>>>> Sprint3---T-84-23-Daniel
 "MaxTimeoutInSeconds": "120",
 "KeepRunning": "false"
 }

@@ -22,6 +22,7 @@ import { EditProfileComponent } from './users/edit-profile/edit-profile.componen
 import { PremiumComponent } from './users/premium/premium.component';
 import { SubscriptionPageComponent } from './users/subscription-page/subscription-page.component';
 import { FlightDataComponent } from './flights/flight-data/flight-data.component';
+import { TripDetailsComponent } from './flights/trip-details/trip-details.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { FlightDataComponent } from './flights/flight-data/flight-data.component
     EditProfileComponent,
     PremiumComponent,
     SubscriptionPageComponent,
-    FlightDataComponent
+    FlightDataComponent,
+    TripDetailsComponent,
   ],
   imports: [
     BrowserModule,

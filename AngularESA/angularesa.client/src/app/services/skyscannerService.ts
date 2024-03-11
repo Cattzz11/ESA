@@ -7,7 +7,7 @@ import { City } from '../Models/City';
 import { Flight } from '../Models/Flight';
 import { Carrier } from '../Models/Carrier';
 import { Trip } from '../Models/Trip';
-import { Country } from '../Models/Country';
+import { Country } from '../Models/country';
 import { Calendar } from '../Models/Calendar';
 
 @Injectable({

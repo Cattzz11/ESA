@@ -610,6 +610,7 @@ C:\Users\danie\OneDrive\Documentos\Meu\UNI STUFF\EsA\Projeto\ESA\PROJETOESA\bin\
 C:\Users\danie\OneDrive\Documentos\Meu\UNI STUFF\EsA\Projeto\ESA\PROJETOESA\bin\Debug\net8.0\AWSSDK.DynamoDBv2.dll
 D:\ESA\PROJETOESA\ESA\PROJETOESA\bin\Debug\net8.0\AWSSDK.Core.dll
 D:\ESA\PROJETOESA\ESA\PROJETOESA\bin\Debug\net8.0\AWSSDK.DynamoDBv2.dll
+<<<<<<< HEAD
 C:\Users\Tiago\Desktop\IPS\ESA\PROJETOESA\bin\Debug\net8.0\appsettings.Development.json
 C:\Users\Tiago\Desktop\IPS\ESA\PROJETOESA\bin\Debug\net8.0\package-lock.json
 C:\Users\Tiago\Desktop\IPS\ESA\PROJETOESA\bin\Debug\net8.0\package.json
@@ -916,3 +917,7 @@ C:\Users\Tiago\Desktop\IPS\ESA\PROJETOESA\obj\Debug\net8.0\refint\PROJETOESA.dll
 C:\Users\Tiago\Desktop\IPS\ESA\PROJETOESA\obj\Debug\net8.0\PROJETOESA.pdb
 C:\Users\Tiago\Desktop\IPS\ESA\PROJETOESA\obj\Debug\net8.0\PROJETOESA.genruntimeconfig.cache
 C:\Users\Tiago\Desktop\IPS\ESA\PROJETOESA\obj\Debug\net8.0\ref\PROJETOESA.dll
+=======
+C:\Users\danie\OneDrive\Documentos\Meu\UNI STUFF\EsA\Projeto\ESA\PROJETOESA\bin\Debug\net8.0\Polly.dll
+C:\Users\danie\OneDrive\Documentos\Meu\UNI STUFF\EsA\Projeto\ESA\PROJETOESA\bin\Debug\net8.0\Square.dll
+>>>>>>> Sprint3---T-84-23-Daniel

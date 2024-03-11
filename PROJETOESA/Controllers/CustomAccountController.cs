@@ -356,6 +356,7 @@ namespace PROJETOESA.Controllers
         }
 
 
+       
         //[HttpPost("api/upload-photo")]
         //public async Task<IActionResult> UploadPhoto(IFormFile file)
         //{
@@ -406,6 +407,20 @@ namespace PROJETOESA.Controllers
     public class UpdateConfirmedEmailModel
     {
         public string Email { get; set; }
+    }
+
+    public class TripDetails
+    {
+        public string LogoURL { get; set; }
+        public DateTime DepartureDate { get; set; }
+        public string DepartureTime { get; set; }
+        public string OriginCity { get; set; }
+        public int Duration { get; set; }
+        public DateTime ArrivalDate { get; set; }
+        public string ArrivalTime { get; set; }
+        public string DestinationCity { get; set; }
+        public decimal Price { get; set; }
+        // Add other properties as needed
     }
 
     public class EditUserModel

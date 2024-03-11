@@ -1,0 +1,53 @@
+.trip-details-container {
+  max-width: 800px; /* Increase the max-width for both sections to fit side by side */
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  text-align: left; /* Use flexbox for side-by-side layout */
+}
+
+.payment-details-container {
+  display: grid;
+  grid-template-columns: repeat(2, 2fr);
+  gap: 20px; /* Adjust the gap as needed */
+}
+
+.details-item {
+  margin-bottom: 10px;
+}
+
+.user-input-container {
+  margin-left: 20px; /* Add some space between the sections */
+  grid-column: span 1;
+  display: grid; /* Use grid layout for user input fields */
+  grid-template-columns: 1fr; /* Display one column per line */
+  gap: 10px; /* Adjust the gap as needed */
+}
+
+.buy-ticket-button {
+  background-color: #4caf50;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: block;
+  font-size: 16px;
+  margin-top: 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  flex: auto;
+}
+
+  .buy-ticket-button:hover {
+    background-color: #45a049;
+  }
+
+.not-found-container {
+  text-align: center;
+  margin-top: 20px;
+  color: #999;
+}

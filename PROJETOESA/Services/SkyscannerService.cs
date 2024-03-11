@@ -560,6 +560,9 @@ namespace PROJETOESA.Services
             var randomIndex = _random.Next(cities.Count);
             return cities[randomIndex];
         }
+
+        
+
     }
 
     public class CustomGetDataModel
@@ -570,4 +573,6 @@ namespace PROJETOESA.Services
         public string subtitle { get; set; }
         public string skyId { get; set; }
     }
+
+   
 }
