@@ -49,6 +49,7 @@ namespace PROJETOESA.Services
             var queryString = string.Join("&", queryParams);
 
             var response = await _httpClient.GetAsync($"flights/search-roundtrip?{queryString}");
+            Console.WriteLine("response", response);
             response.EnsureSuccessStatusCode();
 
             var content = await response.Content.ReadAsStringAsync();
@@ -160,6 +161,12 @@ namespace PROJETOESA.Services
             return trips;
         }
 
+        /// <summary>
+        /// Método que nos dá um array com todos os preços disponíveis das trips de um determinado ponto de partida para um determinado ponto de chegada,
+        /// de uma determinada data a uma determinada data. 
+        /// </summary>
+        /// <param name="data">Dados dos voos</param>
+        /// <returns>array com todos os preços disponíveis de uma trip</returns>
         public async Task<double[]> GetRoundtripPricesAsync(FlightData data)
         {
             var queryParams = new List<string>();
@@ -174,10 +181,6 @@ namespace PROJETOESA.Services
             {
                 queryParams.Add($"currency={data.currency}");
             }
-            else
-            {
-                queryParams.Add($"currency=EUR");
-            }
             if (data.Adults.HasValue) queryParams.Add($"adults={data.Adults}");
             if (data.Children.HasValue) queryParams.Add($"children={data.Children}");
             if (data.Infants.HasValue) queryParams.Add($"infants={data.Infants}");
@@ -186,6 +189,7 @@ namespace PROJETOESA.Services
             var queryString = string.Join("&", queryParams);
 
             var response = await _httpClient.GetAsync($"flights/search-roundtrip?{queryString}");
+            Console.WriteLine("response 2", response);
             response.EnsureSuccessStatusCode();
 
             var content = await response.Content.ReadAsStringAsync();

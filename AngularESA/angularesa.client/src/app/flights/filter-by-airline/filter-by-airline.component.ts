@@ -3,6 +3,7 @@ import { SkyscannerService } from '../../services/skyscannerService';
 import { ActivatedRoute } from '@angular/router';
 import { Carrier } from '../../Models/Carrier';
 import { Trip } from '../../Models/Trip';
+import { City } from '../../Models/City';
 
 @Component({
   selector: 'app-filter-by-airline',
@@ -20,7 +21,7 @@ export class FilterByAirlineComponent implements OnInit {
   highestPrice: number | undefined;
   averagePrice: number | undefined;
 
-  constructor(private skyscannerService: SkyscannerService, private route: ActivatedRoute,) {}
+  constructor(private skyscannerService: SkyscannerService, private route: ActivatedRoute,) { }
 
   ngOnInit(): void {
     const routerState = history.state.data;
@@ -39,13 +40,27 @@ export class FilterByAirlineComponent implements OnInit {
           this.isLoading = false;
         }
       });
-    }
+    } 
+    
 
 
   }
 
-  onShowPricesClick() {
-    // Toggle the showPriceStatistics variable
-    this.showPriceStatistics = !this.showPriceStatistics;
+  onShowPricesClick(fromEntityId: any, toEntityId: any, departureDate: any, returnDate: any) {
+    this.skyscannerService.getPriceOptions(fromEntityId, toEntityId, departureDate.toString("yyyy-MM-dd"), returnDate.toString("yyyy-MM-dd")).subscribe({
+      next: (response) => {
+        //this.lowestPrice = response.price.valueOf();
+        //this.highestPrice = response.highestPrice;
+        //this.averagePrice = response.averagePrice;
+        console.log(response);
+        this.showPriceStatistics = true;
+      },
+      error: (error) => {
+        console.error('Error fetching prices: ', error);
+        this.showPriceStatistics = false;
+      }
+    });
+
+    
   }
 }

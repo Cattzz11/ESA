@@ -388,6 +388,7 @@ namespace PROJETOESA.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("TripId")
+                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
@@ -423,6 +424,35 @@ namespace PROJETOESA.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("PasswordRecoveryCodes");
+                });
+
+            modelBuilder.Entity("PROJETOESA.Models.Payment", b =>
+                {
+                    b.Property<Guid>("PaymentId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int?>("Entity")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("LimitDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("PaymentMethod")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<double>("Price")
+                        .HasColumnType("float");
+
+                    b.Property<int?>("Reference")
+                        .HasColumnType("int");
+
+                    b.Property<int>("paymentStatus")
+                        .HasColumnType("int");
+
+                    b.HasKey("PaymentId");
+
+                    b.ToTable("Payment");
                 });
 
             modelBuilder.Entity("PROJETOESA.Models.Segment", b =>
@@ -603,7 +633,9 @@ namespace PROJETOESA.Migrations
 
                     b.HasOne("PROJETOESA.Models.Trip", null)
                         .WithMany("Flights")
-                        .HasForeignKey("TripId");
+                        .HasForeignKey("TripId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("DestinationCity");
 

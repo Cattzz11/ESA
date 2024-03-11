@@ -28,7 +28,7 @@
 
       <div class="price">
         <p>{{ trip.price }} €</p>
-        <a (click)="skyscannerService.getPriceOptions()" class="button-link">Todos os Preços</a>
+        <a (click)="onShowPricesClick(trip.flights[0].originCity.apiKey, trip.flights[0].destinationCity.apiKey, trip.flights[0].departure, trip.flights[0].arrival)" class="button-link">Todos os Preços</a>
         <a href="your-target-url" class="button-link">Mais opções</a>
       </div>
       <div *ngIf="showPriceStatistics" class="price-statistics">

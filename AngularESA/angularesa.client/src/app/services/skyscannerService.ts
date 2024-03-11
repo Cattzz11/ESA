@@ -111,7 +111,10 @@ export class SkyscannerService {
     return this.http.get<Carrier[]>('api/flight/favorite-airline');
   }
 
-  public getPriceOptions(fromEntityId: string, toEntityId: string, departDate: Date, returnDate: Date): Observable<Trip[]> {
-    return this.http.get<Trip[]>(`https://localhost:7041/api/flight/price-options?fromEntityId=${fromEntityId}&toEntityId=${toEntityId}&departDate=${departDate}&returnDate=${returnDate}`);
+  public getPriceOptions(fromEntityId: any, toEntityId: any, departDate: any, returnDate: any): Observable<Trip> {
+    return this.http.get<Trip>(`https://localhost:7041/api/flight/price-options?fromEntityId=${fromEntityId}&toEntityId=${toEntityId}&departDate=${departDate.toString("yyyy-MM-dd")}&returnDate=${returnDate.toString("yyyy-MM-dd") }`);
+    console.log(this.http.get<Trip>(`https://localhost:7041/api/flight/price-options?fromEntityId=${fromEntityId}&toEntityId=${toEntityId}&departDate=${departDate}&returnDate=${returnDate}`));
   }
+
+  
 }
