@@ -181,6 +181,10 @@ namespace PROJETOESA.Services
             {
                 queryParams.Add($"currency={data.currency}");
             }
+            else
+            {
+                queryParams.Add($"currency=EUR");
+            }
             if (data.Adults.HasValue) queryParams.Add($"adults={data.Adults}");
             if (data.Children.HasValue) queryParams.Add($"children={data.Children}");
             if (data.Infants.HasValue) queryParams.Add($"infants={data.Infants}");
