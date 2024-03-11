@@ -388,6 +388,7 @@ namespace PROJETOESA.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("TripId")
+                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
@@ -603,7 +604,9 @@ namespace PROJETOESA.Migrations
 
                     b.HasOne("PROJETOESA.Models.Trip", null)
                         .WithMany("Flights")
-                        .HasForeignKey("TripId");
+                        .HasForeignKey("TripId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("DestinationCity");
 
