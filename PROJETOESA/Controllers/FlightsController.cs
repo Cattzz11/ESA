@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using PROJETOESA.Data;
 using PROJETOESA.Models;
 using PROJETOESA.Services;
+using Square.Models;
 using System.Diagnostics;
 
 
@@ -14,6 +15,7 @@ namespace PROJETOESA.Controllers
     {
         private readonly SkyscannerService _skyscannerService;
         private readonly AeroHelperContext _context;
+        //private readonly SquareService _squareService;
 
         public FlightsController(SkyscannerService skyscannerService, AeroHelperContext context)
         {
@@ -146,6 +148,35 @@ namespace PROJETOESA.Controllers
 
                 // Return a BadRequest response with details
                 return BadRequest(new { Message = "Failed to retrieve trip details", Error = ex.Message });
+            }
+        }
+
+        [HttpPost]
+        [Route("api/purchase-ticket/{tripId}")]
+        //[Authorize]
+        public async Task<IActionResult> PurchaseTicket([FromBody] PaymentModel request, string tripId)
+        {
+            try
+            {
+                // Validate the request
+                if (request == null)
+                {
+                    return BadRequest(new { Message = "Invalid request" });
+                }
+
+               // _squareService.PayAsync(request);
+
+                await _context.SaveChangesAsync();
+
+                // Return a success response
+                return Ok(new { Message = "Ticket purchased successfully" });
+
+                
+            }
+            catch (Exception ex)
+            {
+                // Return an error response with details
+                return BadRequest(new { Message = "Failed to purchase ticket", Error = ex.Message });
             }
         }
 

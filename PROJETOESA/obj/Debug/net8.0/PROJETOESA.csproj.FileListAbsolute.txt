@@ -610,3 +610,5 @@ C:\Users\danie\OneDrive\Documentos\Meu\UNI STUFF\EsA\Projeto\ESA\PROJETOESA\bin\
 C:\Users\danie\OneDrive\Documentos\Meu\UNI STUFF\EsA\Projeto\ESA\PROJETOESA\bin\Debug\net8.0\AWSSDK.DynamoDBv2.dll
 D:\ESA\PROJETOESA\ESA\PROJETOESA\bin\Debug\net8.0\AWSSDK.Core.dll
 D:\ESA\PROJETOESA\ESA\PROJETOESA\bin\Debug\net8.0\AWSSDK.DynamoDBv2.dll
+C:\Users\danie\OneDrive\Documentos\Meu\UNI STUFF\EsA\Projeto\ESA\PROJETOESA\bin\Debug\net8.0\Polly.dll
+C:\Users\danie\OneDrive\Documentos\Meu\UNI STUFF\EsA\Projeto\ESA\PROJETOESA\bin\Debug\net8.0\Square.dll

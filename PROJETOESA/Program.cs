@@ -3,7 +3,10 @@ using Microsoft.EntityFrameworkCore;
 using PROJETOESA.Data;
 using PROJETOESA.Models;
 using PROJETOESA.Services;
-
+using Square;
+using Square.Http.Client;
+using Square.Apis;
+using Square.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,7 +23,26 @@ builder.Services.AddHttpClient("SkyscannerAPI", client =>
 builder.Services.AddHttpClient("CountriesAPI", client =>
 {
     client.BaseAddress = new Uri("https://restcountries.com/");
+
 });
+
+
+string accessToken = "EAAAl7w8P9qlJgAIDzJYhYIN3XivD0gDTpSRreKD2nLgYIVqdOJDwy8DpvL_-kYU";
+SquareClient squareClient = new SquareClient.Builder()
+    .Environment(Square.Environment.Sandbox)
+    .AccessToken(accessToken)
+    .Build();
+
+
+builder.Services.AddSingleton(squareClient);
+
+
+/*builder.Services.AddHttpClient("SquareAPI", client =>
+{
+    client.BaseAddress = new Uri("https://squareecommerceserg-osipchukv1.p.rapidapi.com/get-config");
+    client.DefaultRequestHeaders.Add("X-RapidAPI-Key", "5aeddf19cdmsh124dd08fde357b5p1533bfjsn58b2fe37abe3");
+    client.DefaultRequestHeaders.Add("X-RapidAPI-Host", "SquareECommerceserg-osipchukV1.p.rapidapi.com");
+});*/
 
 builder.Services.AddControllersWithViews();
 
