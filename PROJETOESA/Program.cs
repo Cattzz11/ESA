@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Identity.UI.Services;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
 using PROJETOESA.Data;
 using PROJETOESA.Models;
@@ -16,8 +16,15 @@ builder.Services.AddDbContext<AeroHelperContext>(options =>
 builder.Services.AddHttpClient("SkyscannerAPI", client =>
 {
     client.BaseAddress = new Uri("https://sky-scanner3.p.rapidapi.com/get-config");
-    client.DefaultRequestHeaders.Add("X-RapidAPI-Key", "e1615ff456msh56f2dd1e1017e8dp1527a2jsn8e9f84f026aa");
+    client.DefaultRequestHeaders.Add("X-RapidAPI-Key", "fe69c457bamsha7755c09a35ad6dp134575jsn61c112a259b0");
     client.DefaultRequestHeaders.Add("X-RapidAPI-Host", "sky-scanner3.p.rapidapi.com");
+});
+
+builder.Services.AddHttpClient("EasyPayAPI", async client =>
+{
+    client.BaseAddress = new Uri("https://api.test.easypay.pt/2.0");
+    client.DefaultRequestHeaders.Add("AccountId", "0507c24e-1222-433a-9c2c-ae578391eca7");
+    client.DefaultRequestHeaders.Add("ApiKey", "05d2b60e-ee43-46b4-bbf7-7046064af99b");
 });
 
 builder.Services.AddHttpClient("CountriesAPI", client =>
@@ -43,6 +50,16 @@ builder.Services.AddScoped<SquareService>();
     client.DefaultRequestHeaders.Add("X-RapidAPI-Key", "5aeddf19cdmsh124dd08fde357b5p1533bfjsn58b2fe37abe3");
     client.DefaultRequestHeaders.Add("X-RapidAPI-Host", "SquareECommerceserg-osipchukV1.p.rapidapi.com");
 });*/
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowOrigin", builder => {
+        builder.WithOrigins("https://localhost:4200")
+        .AllowAnyMethod()
+        .AllowAnyHeader()
+        .AllowCredentials();
+    });
+});
 
 builder.Services.AddControllersWithViews();
 
@@ -73,6 +90,7 @@ app.MapIdentityApi<ApplicationUser>();
 
 app.UseDefaultFiles();
 app.UseStaticFiles();
+app.UseCors("AllowOrigin");
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

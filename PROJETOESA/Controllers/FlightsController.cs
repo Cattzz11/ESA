@@ -151,6 +151,37 @@ namespace PROJETOESA.Controllers
         }
 
 
+        /// <summary>
+        /// Método que dá todas as opções de preço que existem para um determinado voo e faz o min, max e média
+        /// </summary>
+        /// <param name="data">Dados necessários para a observação destes preços (obrigatórios: departureAPIKey, destinationAPIKey, departureDate, arrivalDate)</param>
+        /// <returns>Opções de preços num array - min, max, média</returns>
+        [HttpGet]
+        [Route("api/flight/price-options")]
+        public async Task<IActionResult> PriceOptions([FromQuery] FlightData data)
+        {
+            var prices = await _skyscannerService.GetRoundtripPricesAsync(data);
+            Console.WriteLine("array preços", prices);
+
+            if (prices.Length == 0)
+            {
+                return NotFound("Nenhum preço encontrado.");
+            }
+
+            double minPrice = prices.Min();
+            double maxPrice = prices.Max();
+            double averagePrice = Math.Round(prices.Average(),2);
+
+            var result = new
+            {
+                MinPrice = minPrice,
+                MaxPrice = maxPrice,
+                AveragePrice = averagePrice
+            };
+
+            return Ok(result);
+        }
+
         [HttpGet]
         [Route("api/data/favourite-destinations")]
         public async Task<IActionResult> getFavouriteDestinations()

@@ -26,6 +26,8 @@ namespace PROJETOESA.Data
         public DbSet<AccompanyingPassenger> AccompanyingPassenger { get; set; }
         public DbSet<UserFlight> UserFlight { get; set; }
 
+        public DbSet<Payment> Payment { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);

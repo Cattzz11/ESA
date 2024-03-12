@@ -9,7 +9,7 @@
     <SpaProxyLaunchCommand>npm start</SpaProxyLaunchCommand>
     <SpaProxyServerUrl>https://localhost:4200</SpaProxyServerUrl>
   </PropertyGroup>
-
+	
   <ItemGroup>
     <Content Remove="wwwroot\assets\Images\background.png" />
     <Content Remove="wwwroot\assets\Images\Fading circles.gif" />
@@ -32,6 +32,7 @@
     <PackageReference Include="AWSSDK.DynamoDBv2" Version="3.7.301.17" />
     <PackageReference Include="MailKit" Version="4.3.0" />
     <PackageReference Include="Microsoft.AspNetCore.Components.QuickGrid.EntityFrameworkAdapter" Version="8.0.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Cors" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="8.0.1" />
 <PackageReference Include="microsoft.aspnetcore.spaproxy" Version="8.0.1" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.1" />

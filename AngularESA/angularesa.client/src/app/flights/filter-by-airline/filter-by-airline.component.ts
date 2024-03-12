@@ -7,6 +7,7 @@ import { HttpClient } from '@angular/common/http';
 import { TripDetails } from '../../Models/TripDetails';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { AuthorizeService } from '../../../api-authorization/authorize.service';
+import { City } from '../../Models/City';
 
 @Component({
   selector: 'app-filter-by-airline',
@@ -18,11 +19,18 @@ export class FilterByAirlineComponent implements OnInit {
   isLoading: boolean = true;
   carrier: Carrier | undefined;
   tripForm: FormGroup | undefined;
+  cheapestPrices: any[] = [];
+  showPriceStatistics!: boolean | false;
+
+  lowestPrice: number | undefined;
+  highestPrice: number | undefined;
+  averagePrice: number | undefined;
 
   constructor(private skyscannerService: SkyscannerService, private route: ActivatedRoute, private formBuilder: FormBuilder, private http: HttpClient, private router : Router) { }
 
   ngOnInit(): void {
     const routerState = history.state.data;
+    
 
     this.tripForm = this.formBuilder.group({
       tripID: ['']
@@ -58,6 +66,24 @@ export class FilterByAirlineComponent implements OnInit {
 
     // Redirect to the '/trip-details/id' page
     this.router.navigate(['/trip-details', tripID]);
+  }
+
+  onShowPricesClick(fromEntityId: any, toEntityId: any, departureDate: any, returnDate: any) {
+    this.skyscannerService.getPriceOptions(fromEntityId, toEntityId, departureDate.toString("yyyy-MM-dd"), returnDate.toString("yyyy-MM-dd")).subscribe({
+      next: (response) => {
+        //this.lowestPrice = response.price.valueOf();
+        //this.highestPrice = response.highestPrice;
+        //this.averagePrice = response.averagePrice;
+        console.log(response);
+        this.showPriceStatistics = true;
+      },
+      error: (error) => {
+        console.error('Error fetching prices: ', error);
+        this.showPriceStatistics = false;
+      }
+    });
+
+    
   }
     
 

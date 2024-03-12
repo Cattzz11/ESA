@@ -426,6 +426,35 @@ namespace PROJETOESA.Migrations
                     b.ToTable("PasswordRecoveryCodes");
                 });
 
+            modelBuilder.Entity("PROJETOESA.Models.Payment", b =>
+                {
+                    b.Property<Guid>("PaymentId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int?>("Entity")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("LimitDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("PaymentMethod")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<double>("Price")
+                        .HasColumnType("float");
+
+                    b.Property<int?>("Reference")
+                        .HasColumnType("int");
+
+                    b.Property<int>("paymentStatus")
+                        .HasColumnType("int");
+
+                    b.HasKey("PaymentId");
+
+                    b.ToTable("Payment");
+                });
+
             modelBuilder.Entity("PROJETOESA.Models.Segment", b =>
                 {
                     b.Property<string>("FlightNumber")
