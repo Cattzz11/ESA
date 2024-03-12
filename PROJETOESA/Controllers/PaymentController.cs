@@ -23,7 +23,6 @@ namespace PROJETOESA.Controllers
     public class PaymentController : Controller
     {
         private readonly int _pageSize = 5;
-        private readonly AeroHelperContext _context;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly IStringLocalizer<PaymentController> _stringLocalizer;
         private readonly IEmailSender _emailSender;
@@ -37,7 +36,6 @@ namespace PROJETOESA.Controllers
             IStringLocalizer<PaymentController> stringLocalizer, IEmailSender emailSender,
             IEasyPayService easyPayService, IOptions<EmailSender> emailSettings) 
         {
-            _context = context;
             _userManager = userManager;
             _stringLocalizer = stringLocalizer;
             _emailSender = emailSender;
