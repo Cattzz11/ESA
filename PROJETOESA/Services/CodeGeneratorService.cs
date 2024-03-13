@@ -1,5 +1,9 @@
 ﻿namespace PROJETOESA.Services
-{
+{ 
+    public interface ICodeGeneratorService
+    {
+        string GenerateCode();
+    }
     public class CodeGeneratorService
     {
         public string GenerateCode()

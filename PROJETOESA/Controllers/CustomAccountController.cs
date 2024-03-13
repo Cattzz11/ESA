@@ -21,11 +21,11 @@ namespace PROJETOESA.Controllers
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly IEmailSender _emailSender;
         private readonly ILogger<CustomAccountController> _logger;
-        private readonly CodeGeneratorService _codeGeneratorService;
+        private readonly ICodeGeneratorService _codeGeneratorService;
         private readonly AeroHelperContext _context;
 
 
-        public CustomAccountController(UserManager<ApplicationUser> userManager, IEmailSender emailSender, ILogger<CustomAccountController> logger, CodeGeneratorService codeGeneratorService, AeroHelperContext context)
+        public CustomAccountController(UserManager<ApplicationUser> userManager, IEmailSender emailSender, ILogger<CustomAccountController> logger, ICodeGeneratorService codeGeneratorService, AeroHelperContext context)
         {
             _userManager = userManager;
             _emailSender = emailSender;

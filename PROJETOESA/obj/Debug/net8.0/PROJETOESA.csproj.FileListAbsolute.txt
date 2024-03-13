@@ -614,3 +614,5 @@ C:\Users\danie\OneDrive\Documentos\Meu\UNI STUFF\EsA\Projeto\ESA\PROJETOESA\bin\
 D:\ESA\PROJETOESA\ESA\PROJETOESA\bin\Debug\net8.0\Polly.dll
 D:\ESA\PROJETOESA\ESA\PROJETOESA\bin\Debug\net8.0\Square.dll
 D:\ESA\PROJETOESA\ESA\PROJETOESA\obj\Debug\net8.0\PROJETOESA.csproj.Up2Date
+C:\Users\danie\OneDrive\Documentos\Meu\UNI STUFF\EsA\Projeto\ESA\PROJETOESA\bin\Debug\net8.0\Castle.Core.dll
+C:\Users\danie\OneDrive\Documentos\Meu\UNI STUFF\EsA\Projeto\ESA\PROJETOESA\bin\Debug\net8.0\Moq.dll
