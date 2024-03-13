@@ -298,9 +298,11 @@ D:\ESA\PROJETOESA\ESA\PROJETOESA\obj\Release\net8.0\staticwebassets\msbuild.buil
 D:\ESA\PROJETOESA\ESA\PROJETOESA\obj\Release\net8.0\staticwebassets\msbuild.buildTransitive.PROJETOESA.props
 D:\ESA\PROJETOESA\ESA\PROJETOESA\obj\Release\net8.0\staticwebassets.pack.json
 D:\ESA\PROJETOESA\ESA\PROJETOESA\obj\Release\net8.0\scopedcss\bundle\PROJETOESA.styles.css
-D:\ESA\PROJETOESA\ESA\PROJETOESA\obj\Release\net8.0\PROJETOESA.csproj.CopyComplete
 D:\ESA\PROJETOESA\ESA\PROJETOESA\obj\Release\net8.0\PROJETOESA.dll
 D:\ESA\PROJETOESA\ESA\PROJETOESA\obj\Release\net8.0\refint\PROJETOESA.dll
 D:\ESA\PROJETOESA\ESA\PROJETOESA\obj\Release\net8.0\PROJETOESA.pdb
 D:\ESA\PROJETOESA\ESA\PROJETOESA\obj\Release\net8.0\PROJETOESA.genruntimeconfig.cache
 D:\ESA\PROJETOESA\ESA\PROJETOESA\obj\Release\net8.0\ref\PROJETOESA.dll
+D:\ESA\PROJETOESA\ESA\PROJETOESA\bin\Release\net8.0\Polly.dll
+D:\ESA\PROJETOESA\ESA\PROJETOESA\bin\Release\net8.0\Square.dll
+D:\ESA\PROJETOESA\ESA\PROJETOESA\obj\Release\net8.0\PROJETOESA.csproj.Up2Date

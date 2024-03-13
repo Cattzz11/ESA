@@ -1,11 +1,8 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PROJETOESA.Data;
 using PROJETOESA.Models;
 using PROJETOESA.Services;
-using Square.Models;
-using System.Diagnostics;
 
 
 namespace PROJETOESA.Controllers
@@ -87,7 +84,7 @@ namespace PROJETOESA.Controllers
         {
             List<Trip> result = await _skyscannerService.GetSugestionsCompanyAsyncTest();
 
-            Debug.WriteLine(result.ToString());
+            //Debug.WriteLine(result.ToString());
             //List<Trip> result = await _skyscannerService.GetSugestionsCompanyAsync(carrierId);
 
             return Ok(result);

@@ -600,7 +600,6 @@ D:\ESA\PROJETOESA\ESA\PROJETOESA\obj\Debug\net8.0\staticwebassets\msbuild.buildM
 D:\ESA\PROJETOESA\ESA\PROJETOESA\obj\Debug\net8.0\staticwebassets\msbuild.buildTransitive.PROJETOESA.props
 D:\ESA\PROJETOESA\ESA\PROJETOESA\obj\Debug\net8.0\staticwebassets.pack.json
 D:\ESA\PROJETOESA\ESA\PROJETOESA\obj\Debug\net8.0\scopedcss\bundle\PROJETOESA.styles.css
-D:\ESA\PROJETOESA\ESA\PROJETOESA\obj\Debug\net8.0\PROJETOESA.csproj.CopyComplete
 D:\ESA\PROJETOESA\ESA\PROJETOESA\obj\Debug\net8.0\PROJETOESA.dll
 D:\ESA\PROJETOESA\ESA\PROJETOESA\obj\Debug\net8.0\refint\PROJETOESA.dll
 D:\ESA\PROJETOESA\ESA\PROJETOESA\obj\Debug\net8.0\PROJETOESA.pdb
@@ -612,3 +611,6 @@ D:\ESA\PROJETOESA\ESA\PROJETOESA\bin\Debug\net8.0\AWSSDK.Core.dll
 D:\ESA\PROJETOESA\ESA\PROJETOESA\bin\Debug\net8.0\AWSSDK.DynamoDBv2.dll
 C:\Users\danie\OneDrive\Documentos\Meu\UNI STUFF\EsA\Projeto\ESA\PROJETOESA\bin\Debug\net8.0\Polly.dll
 C:\Users\danie\OneDrive\Documentos\Meu\UNI STUFF\EsA\Projeto\ESA\PROJETOESA\bin\Debug\net8.0\Square.dll
+D:\ESA\PROJETOESA\ESA\PROJETOESA\bin\Debug\net8.0\Polly.dll
+D:\ESA\PROJETOESA\ESA\PROJETOESA\bin\Debug\net8.0\Square.dll
+D:\ESA\PROJETOESA\ESA\PROJETOESA\obj\Debug\net8.0\PROJETOESA.csproj.Up2Date
