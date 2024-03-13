@@ -100,16 +100,16 @@ namespace PROJETOESA.Controllers
                 var confirmationCode = this._codeGeneratorService.GenerateCode();
 
                 // Construção da mensagem para enviar
-                var htmlContent = $"<p>Seu código de confirmação é: {confirmationCode}</p>";
+                var htmlContent = $"<p>Seu código de recuperação é: {confirmationCode}</p>";
 
                 // Envio do e-mail
-                await _emailSender.SendEmailAsync(model.Email, "Confirmação da Conta", htmlContent);
+                await _emailSender.SendEmailAsync(model.Email, "Recuperação da Conta", htmlContent);
 
                 // Armazenar o código de recuperação na base de dados
                 await StoreRecoveryCodeAsync(model, confirmationCode);
             }
 
-            return Ok(new { Message = "Se o registo for bem sucedido, o código de confirmação será enviado." });
+            return Ok(new { Message = "Se o e-mail existir, um e-mail de recuperação será enviado." });
         }
 
         [HttpPost]

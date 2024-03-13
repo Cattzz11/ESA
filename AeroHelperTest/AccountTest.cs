@@ -81,6 +81,7 @@ namespace AeroHelperTest
             Assert.Equal("Se o e-mail existir, um e-mail de confirmação será enviado.", okResult.Value.GetType().GetProperty("Message").GetValue(okResult.Value));
         }
 
+        [Fact]
         public async Task SendRecoveryCode_ReturnsOkResult_WhenEmailExists()
         {
             // Arrange
@@ -94,12 +95,12 @@ namespace AeroHelperTest
 
             // Assert
             var okResult = Assert.IsType<OkObjectResult>(result);
-            Assert.Equal("Se o e-mail existir, um e-mail de confirmação será enviado.", okResult.Value.GetType().GetProperty("Message").GetValue(okResult.Value));
+            Assert.Equal("Se o e-mail existir, um e-mail de recuperação será enviado.", okResult.Value.GetType().GetProperty("Message").GetValue(okResult.Value));
         }
 
         [Fact]
         public async Task SendRecoveryCode_ReturnsOkResult_WhenEmailDoesNotExist()
-        {
+        { 
             // Arrange
             var model = new CustomRecoverModel { Email = "test@example.com" };
             _userManagerMock.Setup(x => x.FindByEmailAsync(model.Email)).ReturnsAsync((ApplicationUser)null);
@@ -109,7 +110,64 @@ namespace AeroHelperTest
 
             // Assert
             var okResult = Assert.IsType<OkObjectResult>(result);
-            Assert.Equal("Se o e-mail existir, um e-mail de confirmação será enviado.", okResult.Value.GetType().GetProperty("Message").GetValue(okResult.Value));
+            Assert.Equal("Se o e-mail existir, um e-mail de recuperação será enviado.", okResult.Value.GetType().GetProperty("Message").GetValue(okResult.Value));
+        }
+
+        [Fact]
+        public async Task DeleteUser_UserExists_ReturnsNoContent()
+        {
+            // Arrange
+            var email = "test@example.com";
+            var user = new ApplicationUser { Email = email };
+            _userManagerMock.Setup(m => m.FindByEmailAsync(email))
+                             .ReturnsAsync(user);
+            _userManagerMock.Setup(m => m.DeleteAsync(user))
+                             .ReturnsAsync(IdentityResult.Success);
+
+            // Act
+            var result = await _accountController.DeleteUser(email);
+
+            // Assert
+            var noContentResult = Assert.IsType<NoContentResult>(result);
+            Assert.Equal(204, noContentResult.StatusCode);
+        }
+
+        [Fact]
+        public async Task DeleteUser_UserNotFound_ReturnsNotFound()
+        {
+            // Arrange
+            var email = "test@example.com";
+            _userManagerMock.Setup(m => m.FindByEmailAsync(email))
+                             .ReturnsAsync((ApplicationUser)null);
+
+            // Act
+            var result = await _accountController.DeleteUser(email);
+
+            // Assert
+            var notFoundResult = Assert.IsType<NotFoundResult>(result);
+            Assert.Equal(404, notFoundResult.StatusCode);
+        }
+
+        [Fact]
+        public async Task DeleteUser_DeleteFails_ReturnsBadRequestWithErrors()
+        {
+            // Arrange
+            var email = "test@example.com";
+            var user = new ApplicationUser { Email = email };
+            _userManagerMock.Setup(m => m.FindByEmailAsync(email))
+                             .ReturnsAsync(user);
+            var errors = new List<IdentityError> { new IdentityError { Description = "Error deleting user" } };
+            _userManagerMock.Setup(m => m.DeleteAsync(user))
+                             .ReturnsAsync(IdentityResult.Failed(errors.ToArray()));
+
+            // Act
+            var result = await _accountController.DeleteUser(email);
+
+            // Assert
+            var badRequestResult = Assert.IsType<BadRequestObjectResult>(result);
+            var model = Assert.IsAssignableFrom<List<IdentityError>>(badRequestResult.Value);
+            Assert.Single(model); // Assert that only one error is returned
+            Assert.Equal("Error deleting user", model[0].Description); // Assert the error message
         }
 
 
