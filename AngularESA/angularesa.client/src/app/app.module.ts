@@ -32,7 +32,6 @@ import { MAT_DATE_LOCALE, MAT_DATE_FORMATS } from '@angular/material/core';
 import { DateAdapter } from '@angular/material/core';
 import { DatePipe } from '@angular/common';
 import { PaymentComponentComponent } from './users/payment-component/payment-component.component';
-import { ThreePricesComponent } from './flights/three-prices/three-prices.component';
 
 export const MY_FORMATS = {
   parse: {
@@ -65,7 +64,6 @@ export const MY_FORMATS = {
     TripDetailsComponent,
     FlightDataComponent,
     PaymentComponentComponent,
-    ThreePricesComponent,
   ],
   imports: [
     BrowserModule,

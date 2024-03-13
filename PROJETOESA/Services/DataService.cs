@@ -5,6 +5,7 @@ using System.Diagnostics;
 using System.Net.Http;
 using PROJETOESA.Data;
 using System.Text.Json;
+using PROJETOESA.Models.ViewModels;
 
 namespace PROJETOESA.Services
 {
@@ -28,7 +29,7 @@ namespace PROJETOESA.Services
             _skyscannerService = skyscannerService;
         }
 
-        public async Task<List<TripDto>> GetFlightsByUserAsync(string userId)
+        public async Task<List<TripViewModel>> GetFlightsByUserAsync(string userId)
         {
             var tripIds = await _context.UserFlight
                                 .Where(uf => uf.UserId == userId)
@@ -50,41 +51,41 @@ namespace PROJETOESA.Services
                                         .ThenInclude(s => s.Carrier)
                                 .ToListAsync();
 
-            var tripDtos = trips.Select(t => new TripDto
+            var tripDtos = trips.Select(t => new TripViewModel
             {
                 Id = t.Id,
                 Price = t.Price,
-                Flights = t.Flights.Select(f => new FlightDto
+                Flights = t.Flights.Select(f => new FlightViewModel
                 {
                     Id = f.Id,
                     Duration = f.Duration,
-                    Segments = f.Segments.Select(s => new SegmentDto
+                    Segments = f.Segments.Select(s => new SegmentViewModel
                     {
                         FlightNumber = s.FlightNumber,
                         Departure = s.Departure,
                         Arrival = s.Arrival,
                         Duration = s.Duration,
-                        OriginCity = new CityDto
+                        OriginCity = new CityViewModel
                         {
                             Id = s.OriginCity.Id,
                             Name = s.OriginCity.Name,
-                            Country = new CountryDto
+                            Country = new CountryViewModel
                             {
                                 Id = s.OriginCity.Country.Id,
                                 Name = s.OriginCity.Country.Name,
                             }
                         },
-                        DestinationCity = new CityDto
+                        DestinationCity = new CityViewModel
                         {
                             Id = s.DestinationCity.Id,
                             Name = s.DestinationCity.Name,
-                            Country = new CountryDto
+                            Country = new CountryViewModel
                             {
                                 Id = s.DestinationCity.Country.Id,
                                 Name = s.DestinationCity.Country.Name,
                             }
                         },
-                        Carrier = s.Carrier != null ? new CarrierDto
+                        Carrier = s.Carrier != null ? new CarrierViewModel
                         {
                             Id = s.Carrier.Id,
                             Name = s.Carrier.Name,
@@ -98,16 +99,16 @@ namespace PROJETOESA.Services
             return tripDtos;
         }
 
-        public async Task<List<CityDto>> GetAllCitiesAsync()
+        public async Task<List<CityViewModel>> GetAllCitiesAsync()
         {
             var citiesWithCountries = await _context.City
             .Include(c => c.Country)
-            .Select(c => new CityDto
+            .Select(c => new CityViewModel
             {
                 Id = c.Id,
                 Name = c.Name,
                 ApiKey = c.ApiKey,
-                Country = new CountryDto
+                Country = new CountryViewModel
                 {
                     Id = c.Country.Id,
                     Name = c.Country.Name

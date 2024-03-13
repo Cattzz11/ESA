@@ -16,11 +16,11 @@ builder.Services.AddDbContext<AeroHelperContext>(options =>
 builder.Services.AddHttpClient("SkyscannerAPI", client =>
 {
     client.BaseAddress = new Uri("https://sky-scanner3.p.rapidapi.com/get-config");
-    client.DefaultRequestHeaders.Add("X-RapidAPI-Key", "fe69c457bamsha7755c09a35ad6dp134575jsn61c112a259b0");
+    client.DefaultRequestHeaders.Add("X-RapidAPI-Key", "e1615ff456msh56f2dd1e1017e8dp1527a2jsn8e9f84f026aa");
     client.DefaultRequestHeaders.Add("X-RapidAPI-Host", "sky-scanner3.p.rapidapi.com");
 });
 
-builder.Services.AddHttpClient("EasyPayAPI", async client =>
+builder.Services.AddHttpClient("EasyPayAPI", client =>
 {
     client.BaseAddress = new Uri("https://api.test.easypay.pt/2.0");
     client.DefaultRequestHeaders.Add("AccountId", "0507c24e-1222-433a-9c2c-ae578391eca7");

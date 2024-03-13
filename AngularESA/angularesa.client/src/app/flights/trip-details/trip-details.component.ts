@@ -53,30 +53,30 @@ export class TripDetailsComponent implements OnInit {
   }
 
 
-  buyTicket() {
-    const tripId = this.route.snapshot.paramMap.get('id') || '';
-    console.log(this.userInput);
-    const priceOf = this.tripDetails?.price || 0; // Default to 0 if tripDetails or price is not available
+  //buyTicket() {
+  //  const tripId = this.route.snapshot.paramMap.get('id') || '';
+  //  console.log(this.userInput);
+  //  const priceOf = this.tripDetails?.price || 0; // Default to 0 if tripDetails or price is not available
 
-    this.payment.price = priceOf;
-    this.payment.currency = "EUR";
-    this.payment.firstName = this.userInput.firstName
-    this.payment.lastName = this.userInput.lastName
-    this.payment.email = this.userInput.shippingAddress
-    this.payment.creditCard = this.userInput.shippingAddress
-    this.payment.shippingAddress = this.userInput.shippingAddress
+  //  this.payment.price = priceOf;
+  //  this.payment.currency = "EUR";
+  //  this.payment.firstName = this.userInput.firstName
+  //  this.payment.lastName = this.userInput.lastName
+  //  this.payment.email = this.userInput.shippingAddress
+  //  this.payment.creditCard = this.userInput.shippingAddress
+  //  this.payment.shippingAddress = this.userInput.shippingAddress
 
-    this.squareService.purchaseTicket(this.payment, tripId).subscribe(
-      (response) => {
-        // Handle successful response
-        console.log('Ticket purchased successfully:', response);
-      },
-      (error) => {
-        // Handle error
-        console.error('Error purchasing ticket:', error);
-      }
-    );
-  }
+  //  this.squareService.purchaseTicket(this.payment, tripId).subscribe(
+  //    (response) => {
+  //      // Handle successful response
+  //      console.log('Ticket purchased successfully:', response);
+  //    },
+  //    (error) => {
+  //      // Handle error
+  //      console.error('Error purchasing ticket:', error);
+  //    }
+  //  );
+  //}
 
 
 }
