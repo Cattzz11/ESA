@@ -3,6 +3,10 @@ import { Trip } from '../../Models/Trip';
 import { User } from '../../Models/users';
 import { AuthorizeService } from '../../../api-authorization/authorize.service';
 import { TripDetails } from '../../Models/TripDetails';
+import { ActivatedRoute } from '@angular/router';
+import { SquareService } from '../../services/SquareService';
+import { PaymentModel } from '../../Models/PaymentModel';
+import { PriceOptions } from '../../Models/PriceOptions';
 
 @Component({
   selector: 'app-flight-data',
@@ -15,8 +19,12 @@ export class FlightDataComponent implements OnInit {
   trip: Trip | undefined;
   tripPremium: TripDetails | undefined;
 
+  payment: PaymentModel | undefined;
+
   constructor(
-    private auth: AuthorizeService
+    private auth: AuthorizeService,
+    private route: ActivatedRoute,
+    private squareService: SquareService
   ) { }
 
   ngOnInit(): void {
@@ -47,5 +55,35 @@ export class FlightDataComponent implements OnInit {
         }
       });
     }
+  }
+
+  buyTicket(trip: Trip) {
+    if (this.user && this.user.role !== 1) {
+      let payment: PaymentModel = {
+        price: trip.price,
+        currency: "EUR",
+        email: this.user.email,
+        creditCard: this.user.email,
+        firstName: this.user.name,
+        lastName: this.user.name,
+        shippingAddress: this.user.name,
+        trip: trip
+      }
+
+      this.squareService.purchaseTicket(payment).subscribe(
+        (response) => {
+          // Handle successful response
+          console.log('Ticket purchased successfully:', response);
+        },
+        (error) => {
+          // Handle error
+          console.error('Error purchasing ticket:', error);
+        }
+      );
+    } else {
+      
+    }
+
+    
   }
 }
