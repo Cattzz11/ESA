@@ -84,6 +84,8 @@ builder.Services.AddTransient<IEmailSender, EmailSender>();
 
 builder.Services.AddScoped<CodeGeneratorService>();
 
+builder.Services.AddScoped<StatisticsService>();
+
 var app = builder.Build();
 
 app.MapIdentityApi<ApplicationUser>();

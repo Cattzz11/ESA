@@ -21,6 +21,7 @@ export class PremiumProfilePageComponent {
   allUsers: User[] = [];
   public history: Trip[] = [];
   public historyLoading: boolean = true;
+  statistics: any;
   
   constructor(private auth: AuthorizeService, private formBuilder: FormBuilder, private userService: UsersService, private router: Router, private dataService: DataService, private cdr: ChangeDetectorRef) {
 
@@ -57,6 +58,10 @@ export class PremiumProfilePageComponent {
     }
 
     this.loadUsers();
+
+    this.userService.getStatistics().subscribe(data => {
+      this.statistics = data;
+    });
 
   }
 
