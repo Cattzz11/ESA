@@ -14721,19 +14721,24 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\danie\\.nuget\\packages\\": {}
+    "C:\\Users\\catar\\.nuget\\packages\\": {},
+    "D:\\VisualStudioComponentes\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\danie\\OneDrive\\Documentos\\Meu\\UNI STUFF\\EsA\\Projeto\\ESA\\AeroHelperTest\\AeroHelperTest.csproj",
+      "projectUniqueName": "D:\\ESA\\PROJETOESA\\ESA\\AeroHelperTest\\AeroHelperTest.csproj",
       "projectName": "AeroHelperTest",
-      "projectPath": "C:\\Users\\danie\\OneDrive\\Documentos\\Meu\\UNI STUFF\\EsA\\Projeto\\ESA\\AeroHelperTest\\AeroHelperTest.csproj",
-      "packagesPath": "C:\\Users\\danie\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\danie\\OneDrive\\Documentos\\Meu\\UNI STUFF\\EsA\\Projeto\\ESA\\AeroHelperTest\\obj\\",
+      "projectPath": "D:\\ESA\\PROJETOESA\\ESA\\AeroHelperTest\\AeroHelperTest.csproj",
+      "packagesPath": "C:\\Users\\catar\\.nuget\\packages\\",
+      "outputPath": "D:\\ESA\\PROJETOESA\\ESA\\AeroHelperTest\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "D:\\VisualStudioComponentes\\NuGetPackages"
+      ],
       "configFilePaths": [
-        "C:\\Users\\danie\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\catar\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -14747,8 +14752,8 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "C:\\Users\\danie\\OneDrive\\Documentos\\Meu\\UNI STUFF\\EsA\\Projeto\\ESA\\PROJETOESA\\PROJETOESA.csproj": {
-              "projectPath": "C:\\Users\\danie\\OneDrive\\Documentos\\Meu\\UNI STUFF\\EsA\\Projeto\\ESA\\PROJETOESA\\PROJETOESA.csproj"
+            "D:\\ESA\\PROJETOESA\\ESA\\PROJETOESA\\PROJETOESA.csproj": {
+              "projectPath": "D:\\ESA\\PROJETOESA\\ESA\\PROJETOESA\\PROJETOESA.csproj"
             }
           }
         }
@@ -14759,7 +14764,9 @@
         ]
       },
       "restoreAuditProperties": {
-        "enableAudit": "default"
+        "enableAudit": "true",
+        "auditLevel": "low",
+        "auditMode": "direct"
       }
     },
     "frameworks": {
@@ -14803,7 +14810,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.101/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.200/PortableRuntimeIdentifierGraph.json"
       }
     }
   },
@@ -14812,7 +14819,7 @@
       "code": "NU1603",
       "level": "Warning",
       "warningLevel": 1,
-      "message": "PROJETOESA depends on Square (>= 12.1.0) but Square 12.1.0 was not found. An approximate best match of Square 13.0.0 was resolved.",
+      "message": "PROJETOESA depende de Square (>= 12.1.0), mas Square 12.1.0 não foi encontrado. A melhor correspondência aproximada de Square 13.0.0 foi resolvida.",
       "libraryId": "Square",
       "targetGraphs": [
         "net8.0"

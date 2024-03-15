@@ -3,7 +3,7 @@
 "ServerUrl": "https://localhost:4200",
 "RedirectUrl": "",
 "LaunchCommand": "npm start",
-"WorkingDirectory": "C:\\Users\\Tiago\\Desktop\\IPS\\ESA\\PROJETOESA\\..\\PROJETOESA.client",
+"WorkingDirectory": "D:\\ESA\\PROJETOESA\\ESA\\PROJETOESA\\..\\PROJETOESA.client",
 "MaxTimeoutInSeconds": "120",
 "KeepRunning": "false"
 }

@@ -13928,19 +13928,24 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Tiago\\.nuget\\packages\\": {}
+    "C:\\Users\\catar\\.nuget\\packages\\": {},
+    "D:\\VisualStudioComponentes\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Tiago\\Desktop\\IPS\\ESA\\PROJETOESA\\PROJETOESA.csproj",
+      "projectUniqueName": "D:\\ESA\\PROJETOESA\\ESA\\PROJETOESA\\PROJETOESA.csproj",
       "projectName": "PROJETOESA",
-      "projectPath": "C:\\Users\\Tiago\\Desktop\\IPS\\ESA\\PROJETOESA\\PROJETOESA.csproj",
-      "packagesPath": "C:\\Users\\Tiago\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Tiago\\Desktop\\IPS\\ESA\\PROJETOESA\\obj\\",
+      "projectPath": "D:\\ESA\\PROJETOESA\\ESA\\PROJETOESA\\PROJETOESA.csproj",
+      "packagesPath": "C:\\Users\\catar\\.nuget\\packages\\",
+      "outputPath": "D:\\ESA\\PROJETOESA\\ESA\\PROJETOESA\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "D:\\VisualStudioComponentes\\NuGetPackages"
+      ],
       "configFilePaths": [
-        "C:\\Users\\Tiago\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\catar\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -13948,7 +13953,6 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -14067,7 +14071,7 @@
       "code": "NU1603",
       "level": "Warning",
       "warningLevel": 1,
-      "message": "PROJETOESA depends on Square (>= 12.1.0) but Square 12.1.0 was not found. An approximate best match of Square 13.0.0 was resolved.",
+      "message": "PROJETOESA depende de Square (>= 12.1.0), mas Square 12.1.0 não foi encontrado. A melhor correspondência aproximada de Square 13.0.0 foi resolvida.",
       "libraryId": "Square",
       "targetGraphs": [
         "net8.0"
