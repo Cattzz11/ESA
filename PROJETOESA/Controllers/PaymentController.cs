@@ -2,31 +2,24 @@
 using PROJETOESA.Data;
 using PROJETOESA.Models;
 using PROJETOESA.Services;
-using System.Text.Json;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
-using System.Diagnostics;
-using Microsoft.DotNet.Scaffolding.Shared.Messaging;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Microsoft.IdentityModel.Tokens;
 using Microsoft.Extensions.Localization;
 using PROJETOESA.Services.EasyPay;
 using System.Globalization;
-using Azure.Core;
-using System.Net.Mail;
 using Microsoft.Extensions.Options;
+using System.Diagnostics;
 
 namespace PROJETOESA.Controllers
 {
+    [ApiController]
     public class PaymentController : Controller
     {
         private readonly int _pageSize = 5;
         private readonly UserManager<ApplicationUser> _userManager;
-        private readonly IStringLocalizer<PaymentController> _stringLocalizer;
         private readonly IEmailSender _emailSender;
-        private readonly EmailSettings _emailSettings;
         private IEasyPayService _easyPayService;
 
 
@@ -37,12 +30,8 @@ namespace PROJETOESA.Controllers
             IEasyPayService easyPayService, IOptions<EmailSender> emailSettings) 
         {
             _userManager = userManager;
-            _stringLocalizer = stringLocalizer;
             _emailSender = emailSender;
             _easyPayService = easyPayService;
-            //_emailSettings = emailSettings.Value;
-
-
             _context = context;
             _squareService = squareService;
         }
@@ -50,10 +39,12 @@ namespace PROJETOESA.Controllers
 
 
         [HttpPost]
-        [Route("api/trip-details/purchase-ticket")]
-        //[Authorize]
+        [Route("api/payment/purchase-ticket")]
         public async Task<IActionResult> PurchaseTicket([FromBody] PaymentModel payment)
         {
+            Debug.WriteLine("AQUI Servidor");
+            Debug.WriteLine(payment.price);
+
             try
             {
                 // Check if required properties are present

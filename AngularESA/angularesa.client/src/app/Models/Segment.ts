@@ -12,7 +12,7 @@ export interface Segment {
   destinationCityId?: string;
   destinationCity: City;
   flightId?: string;
-  flight: Flight;
+  flight?: Flight;
   carrierId?: string;
   carrier: Carrier;
 }

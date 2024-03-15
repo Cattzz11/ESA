@@ -21,7 +21,6 @@ import { PhotoUploadService } from './services/photoUploadService.service';
 import { EditProfileComponent } from './users/edit-profile/edit-profile.component';
 import { PremiumComponent } from './users/premium/premium.component';
 import { SubscriptionPageComponent } from './users/subscription-page/subscription-page.component';
-import { TripDetailsComponent } from './flights/trip-details/trip-details.component';
 import { FlightDataComponent } from './flights/flight-data/flight-data.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { MatCalendarCellClassFunction, MatDatepickerModule } from '@angular/material/datepicker';
@@ -32,7 +31,6 @@ import { MAT_DATE_LOCALE, MAT_DATE_FORMATS } from '@angular/material/core';
 import { DateAdapter } from '@angular/material/core';
 import { DatePipe } from '@angular/common';
 import { PaymentComponentComponent } from './users/payment-component/payment-component.component';
-import { ThreePricesComponent } from './flights/three-prices/three-prices.component';
 
 export const MY_FORMATS = {
   parse: {
@@ -62,10 +60,8 @@ export const MY_FORMATS = {
     EditProfileComponent,
     PremiumComponent,
     SubscriptionPageComponent,
-    TripDetailsComponent,
     FlightDataComponent,
     PaymentComponentComponent,
-    ThreePricesComponent,
   ],
   imports: [
     BrowserModule,

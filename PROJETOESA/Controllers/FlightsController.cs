@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using PROJETOESA.Data;
 using PROJETOESA.Models;
+using PROJETOESA.Models.ViewModels;
 using PROJETOESA.Services;
 
 
@@ -25,6 +26,15 @@ namespace PROJETOESA.Controllers
         public async Task<IActionResult> SearchRoundtrip([FromQuery] FlightData data)
         {
             var result = await _skyscannerService.GetRoundtripAsync(data);
+
+            return Ok(result);
+        }
+
+        [HttpGet]
+        [Route("api/flight/search-roundtrip-premium")]
+        public async Task<IActionResult> SearchRoundtripPremium([FromQuery] FlightData data)
+        {
+            var result = await _skyscannerService.GetRoundtripPremiumAsync(data);
 
             return Ok(result);
         }
@@ -99,86 +109,6 @@ namespace PROJETOESA.Controllers
             return Ok(result);
         }
 
-
-        [HttpGet]
-        [Route("api/trip-details/{tripId}")]
-        public async Task<IActionResult> GetTripDetails(string tripId)
-        {
-            try
-            {
-                var flightDetail = await _context.Flights.FirstOrDefaultAsync(c => c.Id == tripId);
-                var dbTripId = flightDetail?.TripId;
-                var originCityDetail = await _context.City.FirstOrDefaultAsync(city => city.Id == flightDetail.OriginCityId);
-                var destinationCityDetail = await _context.City.FirstOrDefaultAsync(city => city.Id == flightDetail.DestinationCityId);
-                var tripDetail = await _context.Trip.FirstOrDefaultAsync(c => c.Id == dbTripId);
-                var price = tripDetail.Price;
-
-
-                if (flightDetail == null)
-                {
-                    // Return a NotFound response with details
-                    return NotFound(new { Message = "Flight details not found", TripId = tripId });
-                }
-
-                // Create an instance of TripDetailsModel with the desired properties
-                var tripDetailsModel = new TripDetailsModel
-                {
-                    Id = dbTripId,
-                    DepartureDate = flightDetail.Departure.Date,
-                    DepartureTime = flightDetail.Departure.Hour + ":" + flightDetail.Departure.Minute,
-                    OriginCity = originCityDetail.Name,
-                    Duration = flightDetail.Duration,
-                    ArrivalDate = flightDetail.Arrival.Date,
-                    ArrivalTime = flightDetail.Arrival.Hour + ":" + flightDetail.Arrival.Minute,
-                    DestinationCity = destinationCityDetail.Name,
-                    Price = price
-                };
-
-                // Optionally, you can perform additional processing or validation here
-
-                // Return an Ok response with the TripDetailsModel
-                return Ok(tripDetailsModel);
-            }
-            catch (Exception ex)
-            {
-
-                // Return a BadRequest response with details
-                return BadRequest(new { Message = "Failed to retrieve trip details", Error = ex.Message });
-            }
-        }
-
-
-        /// <summary>
-        /// Método que dá todas as opções de preço que existem para um determinado voo e faz o min, max e média
-        /// </summary>
-        /// <param name="data">Dados necessários para a observação destes preços (obrigatórios: departureAPIKey, destinationAPIKey, departureDate, arrivalDate)</param>
-        /// <returns>Opções de preços num array - min, max, média</returns>
-        [HttpGet]
-        [Route("api/flight/price-options")]
-        public async Task<IActionResult> PriceOptions([FromQuery] FlightData data)
-        {
-            var prices = await _skyscannerService.GetRoundtripPricesAsync(data);
-            Console.WriteLine("array preços", prices);
-
-            if (prices.Length == 0)
-            {
-                return NotFound("Nenhum preço encontrado.");
-            }
-
-            double minPrice = prices.Min();
-            double maxPrice = prices.Max();
-            double averagePrice = Math.Round(prices.Average(),2);
-
-            var result = new
-            {
-                MinPrice = minPrice,
-                MaxPrice = maxPrice,
-                AveragePrice = averagePrice
-            };
-
-            return Ok(result);
-        }
-
         [HttpGet]
         [Route("api/data/favourite-destinations")]
         public async Task<IActionResult> getFavouriteDestinations()
@@ -196,20 +126,14 @@ namespace PROJETOESA.Controllers
 
             return Ok(result);
         }
-    }
 
-    public class TripDetailsModel
-    {
-        public string Id { get; set; }
-        public DateTime DepartureDate { get; set; }
-        public string DepartureTime { get; set; }
-        public string OriginCity { get; set; }
-        public string Duration { get; set; }
-        public DateTime ArrivalDate { get; set; }
-        public string ArrivalTime { get; set; }
-        public string DestinationCity { get; set; }
-        public double Price { get; set; }
-        // Add other properties as needed
-    }
+        [HttpGet]
+        [Route("api/flight/trip-details")]
+        public async Task<IActionResult> getTripDetails(string token, string itineraryId)
+        {
+            TripDetailsViewModel result = await _skyscannerService.GetTripDetailsAsync(token, itineraryId);
 
+            return Ok(result);
+        }
+    }
 }
