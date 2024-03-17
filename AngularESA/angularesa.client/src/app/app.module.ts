@@ -31,6 +31,7 @@ import { MAT_DATE_LOCALE, MAT_DATE_FORMATS } from '@angular/material/core';
 import { DateAdapter } from '@angular/material/core';
 import { DatePipe } from '@angular/common';
 import { PaymentComponentComponent } from './users/payment-component/payment-component.component';
+import { MapComponent } from './flights/map/map.component';
 
 export const MY_FORMATS = {
   parse: {
@@ -43,7 +44,6 @@ export const MY_FORMATS = {
     monthYearA11yLabel: 'MMMM YYYY',
   },
 };
-
 
 @NgModule({
   declarations: [
@@ -62,6 +62,7 @@ export const MY_FORMATS = {
     SubscriptionPageComponent,
     FlightDataComponent,
     PaymentComponentComponent,
+    MapComponent,
   ],
   imports: [
     BrowserModule,

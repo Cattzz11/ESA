@@ -1,29 +1,23 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "D:\\ESA\\PROJETOESA\\ESA\\PROJETOESA\\",
+  "WorkspaceRootPath": "C:\\Users\\Tiago\\Desktop\\IPS\\ESA\\PROJETOESA\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\MSBuild\\Current\\Bin\\amd64\\Microsoft.Common.CurrentVersion.targets||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+      "AbsoluteMoniker": "D:0:0:{18DC2C31-CB3E-4B76-9D23-EDE9B7C6818B}|PROJETOESA.csproj|c:\\users\\tiago\\desktop\\ips\\esa\\projetoesa\\services\\flightservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{18DC2C31-CB3E-4B76-9D23-EDE9B7C6818B}|PROJETOESA.csproj|solutionrelative:services\\flightservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Program Files\\dotnet\\sdk\\8.0.200\\Sdks\\Microsoft.NET.Sdk.StaticWebAssets\\targets\\Microsoft.NET.Sdk.StaticWebAssets.targets||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+      "AbsoluteMoniker": "D:0:0:{FFDC8847-A03D-4B34-BF6B-037A713978B8}|..\\AngularESA\\angularesa.client\\angularesa.client.esproj|c:\\users\\tiago\\desktop\\ips\\esa\\angularesa\\angularesa.client\\src\\app\\flights\\map\\map.component.html||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{D13BD829-2B92-4950-9F4C-13F24F1C7F46}|..\\AeroHelperTest\\AeroHelperTest.csproj|d:\\esa\\projetoesa\\esa\\aerohelpertest\\accounttest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{FFDC8847-A03D-4B34-BF6B-037A713978B8}|..\\AngularESA\\angularesa.client\\angularesa.client.esproj|c:\\users\\tiago\\desktop\\ips\\esa\\angularesa\\angularesa.client\\src\\app\\models\\city.ts||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{18DC2C31-CB3E-4B76-9D23-EDE9B7C6818B}|PROJETOESA.csproj|d:\\esa\\projetoesa\\esa\\projetoesa\\controllers\\customaccountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{18DC2C31-CB3E-4B76-9D23-EDE9B7C6818B}|PROJETOESA.csproj|solutionrelative:controllers\\customaccountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{18DC2C31-CB3E-4B76-9D23-EDE9B7C6818B}|PROJETOESA.csproj|c:\\users\\tiago\\desktop\\ips\\esa\\projetoesa\\controllers\\flightitinerarycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{18DC2C31-CB3E-4B76-9D23-EDE9B7C6818B}|PROJETOESA.csproj|solutionrelative:controllers\\flightitinerarycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{D13BD829-2B92-4950-9F4C-13F24F1C7F46}|..\\AeroHelperTest\\AeroHelperTest.csproj|d:\\esa\\projetoesa\\esa\\aerohelpertest\\dbcontextoptionsprovider.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D13BD829-2B92-4950-9F4C-13F24F1C7F46}|..\\AeroHelperTest\\AeroHelperTest.csproj|d:\\esa\\projetoesa\\esa\\aerohelpertest\\usermanagermock.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{18DC2C31-CB3E-4B76-9D23-EDE9B7C6818B}|PROJETOESA.csproj|d:\\esa\\projetoesa\\esa\\projetoesa\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{18DC2C31-CB3E-4B76-9D23-EDE9B7C6818B}|PROJETOESA.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{FFDC8847-A03D-4B34-BF6B-037A713978B8}|..\\AngularESA\\angularesa.client\\angularesa.client.esproj|c:\\users\\tiago\\desktop\\ips\\esa\\angularesa\\angularesa.client\\src\\app\\flights\\map\\map.component.ts||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}"
     }
   ],
   "DocumentGroupContainers": [
@@ -33,106 +27,72 @@
       "DocumentGroups": [
         {
           "DockedWidth": 207,
-          "SelectedChildIndex": 4,
+          "SelectedChildIndex": 1,
           "Children": [
             {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{cce594b6-0c39-4442-ba28-10c64ac7e89f}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{eefa5220-e298-11d0-8f78-00a0c9110057}"
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "City.ts",
+              "DocumentMoniker": "C:\\Users\\Tiago\\Desktop\\IPS\\ESA\\AngularESA\\angularesa.client\\src\\app\\Models\\City.ts",
+              "RelativeDocumentMoniker": "..\\AngularESA\\angularesa.client\\src\\app\\Models\\City.ts",
+              "ToolTip": "C:\\Users\\Tiago\\Desktop\\IPS\\ESA\\AngularESA\\angularesa.client\\src\\app\\Models\\City.ts",
+              "RelativeToolTip": "..\\AngularESA\\angularesa.client\\src\\app\\Models\\City.ts",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAEAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003213|",
+              "WhenOpened": "2024-03-16T21:33:55.231Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "Microsoft.Common.CurrentVersion.targets",
-              "DocumentMoniker": "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\MSBuild\\Current\\Bin\\amd64\\Microsoft.Common.CurrentVersion.targets",
-              "ToolTip": "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\MSBuild\\Current\\Bin\\amd64\\Microsoft.Common.CurrentVersion.targets",
-              "ViewState": "AQIAAGIWAAAAAAAAAAAowGgWAAAYAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003801|",
-              "WhenOpened": "2024-03-15T16:22:46.26Z",
+              "Title": "FlightService.cs",
+              "DocumentMoniker": "C:\\Users\\Tiago\\Desktop\\IPS\\ESA\\PROJETOESA\\Services\\FlightService.cs",
+              "RelativeDocumentMoniker": "Services\\FlightService.cs",
+              "ToolTip": "C:\\Users\\Tiago\\Desktop\\IPS\\ESA\\PROJETOESA\\Services\\FlightService.cs",
+              "RelativeToolTip": "Services\\FlightService.cs",
+              "ViewState": "AQIAAE4AAAAAAAAAAAAuwFoAAAARAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-16T21:00:44.245Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "Microsoft.NET.Sdk.StaticWebAssets.targets",
-              "DocumentMoniker": "C:\\Program Files\\dotnet\\sdk\\8.0.200\\Sdks\\Microsoft.NET.Sdk.StaticWebAssets\\targets\\Microsoft.NET.Sdk.StaticWebAssets.targets",
-              "ToolTip": "C:\\Program Files\\dotnet\\sdk\\8.0.200\\Sdks\\Microsoft.NET.Sdk.StaticWebAssets\\targets\\Microsoft.NET.Sdk.StaticWebAssets.targets",
-              "ViewState": "AQIAAH0BAAAAAAAAAAAowNoBAAAEAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003801|",
-              "WhenOpened": "2024-03-15T16:22:12.017Z",
+              "Title": "map.component.html",
+              "DocumentMoniker": "C:\\Users\\Tiago\\Desktop\\IPS\\ESA\\AngularESA\\angularesa.client\\src\\app\\flights\\map\\map.component.html",
+              "RelativeDocumentMoniker": "..\\AngularESA\\angularesa.client\\src\\app\\flights\\map\\map.component.html",
+              "ToolTip": "C:\\Users\\Tiago\\Desktop\\IPS\\ESA\\AngularESA\\angularesa.client\\src\\app\\flights\\map\\map.component.html",
+              "RelativeToolTip": "..\\AngularESA\\angularesa.client\\src\\app\\flights\\map\\map.component.html",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAEAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
+              "WhenOpened": "2024-03-16T20:52:14.539Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "FlightItineraryController.cs",
+              "DocumentMoniker": "C:\\Users\\Tiago\\Desktop\\IPS\\ESA\\PROJETOESA\\Controllers\\FlightItineraryController.cs",
+              "RelativeDocumentMoniker": "Controllers\\FlightItineraryController.cs",
+              "ToolTip": "C:\\Users\\Tiago\\Desktop\\IPS\\ESA\\PROJETOESA\\Controllers\\FlightItineraryController.cs",
+              "RelativeToolTip": "Controllers\\FlightItineraryController.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAC4AAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-16T20:47:51.299Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 4,
-              "Title": "DbContextOptionsProvider.cs",
-              "DocumentMoniker": "D:\\ESA\\PROJETOESA\\ESA\\AeroHelperTest\\DbContextOptionsProvider.cs",
-              "RelativeDocumentMoniker": "..\\AeroHelperTest\\DbContextOptionsProvider.cs",
-              "ToolTip": "D:\\ESA\\PROJETOESA\\ESA\\AeroHelperTest\\DbContextOptionsProvider.cs",
-              "RelativeToolTip": "..\\AeroHelperTest\\DbContextOptionsProvider.cs",
-              "ViewState": "AQIAAAQAAAAAAAAAAAAqwB4AAAAIAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-15T16:20:51.903Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "UserManagerMock.cs",
-              "DocumentMoniker": "D:\\ESA\\PROJETOESA\\ESA\\AeroHelperTest\\UserManagerMock.cs",
-              "RelativeDocumentMoniker": "..\\AeroHelperTest\\UserManagerMock.cs",
-              "ToolTip": "D:\\ESA\\PROJETOESA\\ESA\\AeroHelperTest\\UserManagerMock.cs",
-              "RelativeToolTip": "..\\AeroHelperTest\\UserManagerMock.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAAjAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-15T16:20:52.044Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "CustomAccountController.cs",
-              "DocumentMoniker": "D:\\ESA\\PROJETOESA\\ESA\\PROJETOESA\\Controllers\\CustomAccountController.cs",
-              "RelativeDocumentMoniker": "Controllers\\CustomAccountController.cs",
-              "ToolTip": "D:\\ESA\\PROJETOESA\\ESA\\PROJETOESA\\Controllers\\CustomAccountController.cs",
-              "RelativeToolTip": "Controllers\\CustomAccountController.cs",
-              "ViewState": "AQIAAOEAAAAAAAAAAAAAACkAAAA3AAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-15T16:20:52.055Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "AccountTest.cs",
-              "DocumentMoniker": "D:\\ESA\\PROJETOESA\\ESA\\AeroHelperTest\\AccountTest.cs",
-              "RelativeDocumentMoniker": "..\\AeroHelperTest\\AccountTest.cs",
-              "ToolTip": "D:\\ESA\\PROJETOESA\\ESA\\AeroHelperTest\\AccountTest.cs",
-              "RelativeToolTip": "..\\AeroHelperTest\\AccountTest.cs",
-              "ViewState": "AQIAAIsAAAAAAAAAAAAgwKYAAABRAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-15T16:20:52.068Z",
+              "Title": "map.component.ts",
+              "DocumentMoniker": "C:\\Users\\Tiago\\Desktop\\IPS\\ESA\\AngularESA\\angularesa.client\\src\\app\\flights\\map\\map.component.ts",
+              "RelativeDocumentMoniker": "..\\AngularESA\\angularesa.client\\src\\app\\flights\\map\\map.component.ts",
+              "ToolTip": "C:\\Users\\Tiago\\Desktop\\IPS\\ESA\\AngularESA\\angularesa.client\\src\\app\\flights\\map\\map.component.ts",
+              "RelativeToolTip": "..\\AngularESA\\angularesa.client\\src\\app\\flights\\map\\map.component.ts",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABkAAAABAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003213|",
+              "WhenOpened": "2024-03-16T20:47:09.83Z",
               "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "Program.cs",
-              "DocumentMoniker": "D:\\ESA\\PROJETOESA\\ESA\\PROJETOESA\\Program.cs",
-              "RelativeDocumentMoniker": "Program.cs",
-              "ToolTip": "D:\\ESA\\PROJETOESA\\ESA\\PROJETOESA\\Program.cs",
-              "RelativeToolTip": "Program.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAB4AAAABAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-15T16:20:52.081Z"
             }
           ]
         }

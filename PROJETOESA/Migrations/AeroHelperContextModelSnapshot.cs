@@ -311,6 +311,9 @@ namespace PROJETOESA.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Coordinates")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("CountryId")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
@@ -509,6 +512,12 @@ namespace PROJETOESA.Migrations
 
                     b.Property<double>("Score")
                         .HasColumnType("float");
+
+                    b.Property<string>("SessionId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Token")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("isCancellationAllowed")
                         .HasColumnType("bit");

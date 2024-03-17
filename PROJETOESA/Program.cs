@@ -42,6 +42,7 @@ SquareClient squareClient = new SquareClient.Builder()
 
 builder.Services.AddSingleton(squareClient);
 builder.Services.AddScoped<SquareService>();
+builder.Services.AddHttpClient<FlightService>();
 
 
 /*builder.Services.AddHttpClient("SquareAPI", client =>

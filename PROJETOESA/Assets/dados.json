@@ -1,0 +1,3267 @@
+[
+  {
+    "flightIATA": "FM869",
+    "flightICAO": "CSH869",
+    "flightStatus": "active",
+    "departureLocation": {
+      "id": "PVG",
+      "name": "Shanghai Pudong",
+      "apiKey": "eyJlIjoiMTI4NjY3MDc3IiwicyI6IlBWRyIsImgiOiIyNzU0NjA3OSIsInQiOiJBSVJQT1JUIn0=",
+      "countryId": "CN",
+      "country": {
+        "id": "CN",
+        "name": "China"
+      }
+    },
+    "departureSchedule": "2024-03-17T01:10:00",
+    "arrivalLocation": {
+      "id": "BUD",
+      "name": "Budapest",
+      "apiKey": "eyJlIjoiOTU2NzM0MzkiLCJzIjoiQlVEIiwiaCI6IjI3NTM5NjA0IiwidCI6IkFJUlBPUlQifQ==",
+      "countryId": "HU",
+      "country": {
+        "id": "HU",
+        "name": "Hungary"
+      }
+    },
+    "arrivalSchedule": "2024-03-17T06:15:00",
+    "airline": {
+      "id": "-31882",
+      "name": "Shanghai Airlines",
+      "logoURL": "https://logos.skyscnr.com/images/airlines/favicon/FM.png",
+      "searchTimes": 0
+    }
+  },
+  {
+    "flightIATA": "3U3415",
+    "flightICAO": "CSC3415",
+    "flightStatus": "scheduled",
+    "departureLocation": {
+      "id": "PVG",
+      "name": "Shanghai Pudong",
+      "apiKey": "eyJlIjoiMTI4NjY3MDc3IiwicyI6IlBWRyIsImgiOiIyNzU0NjA3OSIsInQiOiJBSVJQT1JUIn0=",
+      "countryId": "CN",
+      "country": {
+        "id": "CN",
+        "name": "China"
+      }
+    },
+    "departureSchedule": "2024-03-17T07:00:00",
+    "arrivalLocation": {
+      "id": "PVG",
+      "name": "Shanghai Pudong",
+      "apiKey": "eyJlIjoiMTI4NjY3MDc3IiwicyI6IlBWRyIsImgiOiIyNzU0NjA3OSIsInQiOiJBSVJQT1JUIn0=",
+      "countryId": "CN",
+      "country": {
+        "id": "CN",
+        "name": "China"
+      }
+    },
+    "arrivalSchedule": "2024-03-17T09:05:00",
+    "airline": {
+      "id": "-31734",
+      "name": "Turkish Airlines",
+      "logoURL": "https://logos.skyscnr.com/images/airlines/favicon/TK.png",
+      "searchTimes": 0
+    }
+  },
+  {
+    "flightIATA": "NS8255",
+    "flightICAO": "HBH8255",
+    "flightStatus": "scheduled",
+    "departureLocation": {
+      "id": "PVG",
+      "name": "Shanghai Pudong",
+      "apiKey": "eyJlIjoiMTI4NjY3MDc3IiwicyI6IlBWRyIsImgiOiIyNzU0NjA3OSIsInQiOiJBSVJQT1JUIn0=",
+      "countryId": "CN",
+      "country": {
+        "id": "CN",
+        "name": "China"
+      }
+    },
+    "departureSchedule": "2024-03-17T06:35:00",
+    "arrivalLocation": {
+      "id": "PVG",
+      "name": "Shanghai Pudong",
+      "apiKey": "eyJlIjoiMTI4NjY3MDc3IiwicyI6IlBWRyIsImgiOiIyNzU0NjA3OSIsInQiOiJBSVJQT1JUIn0=",
+      "countryId": "CN",
+      "country": {
+        "id": "CN",
+        "name": "China"
+      }
+    },
+    "arrivalSchedule": "2024-03-17T09:20:00",
+    "airline": {
+      "id": "-31147",
+      "name": "Flair Airlines",
+      "logoURL": "https://logos.skyscnr.com/images/airlines/favicon/F..png",
+      "searchTimes": 0
+    }
+  },
+  {
+    "flightIATA": "NS8117",
+    "flightICAO": "HBH8117",
+    "flightStatus": "scheduled",
+    "departureLocation": {
+      "id": "PVG",
+      "name": "Shanghai Pudong",
+      "apiKey": "eyJlIjoiMTI4NjY3MDc3IiwicyI6IlBWRyIsImgiOiIyNzU0NjA3OSIsInQiOiJBSVJQT1JUIn0=",
+      "countryId": "CN",
+      "country": {
+        "id": "CN",
+        "name": "China"
+      }
+    },
+    "departureSchedule": "2024-03-17T07:00:00",
+    "arrivalLocation": {
+      "id": "BGW",
+      "name": "Baghdad International",
+      "apiKey": "eyJlIjoiMTI4NjY4MDMyIiwicyI6IkJHVyIsImgiOiIyNzUzODc2NiIsInQiOiJBSVJQT1JUIn0=",
+      "countryId": "IQ",
+      "country": {
+        "id": "IQ",
+        "name": "Iraq"
+      }
+    },
+    "arrivalSchedule": "2024-03-17T10:00:00",
+    "airline": {
+      "id": "-31147",
+      "name": "Flair Airlines",
+      "logoURL": "https://logos.skyscnr.com/images/airlines/favicon/F..png",
+      "searchTimes": 0
+    }
+  },
+  {
+    "flightIATA": "3U8229",
+    "flightICAO": "CSC8229",
+    "flightStatus": "scheduled",
+    "departureLocation": {
+      "id": "PVG",
+      "name": "Shanghai Pudong",
+      "apiKey": "eyJlIjoiMTI4NjY3MDc3IiwicyI6IlBWRyIsImgiOiIyNzU0NjA3OSIsInQiOiJBSVJQT1JUIn0=",
+      "countryId": "CN",
+      "country": {
+        "id": "CN",
+        "name": "China"
+      }
+    },
+    "departureSchedule": "2024-03-17T06:30:00",
+    "arrivalLocation": {
+      "id": "PVG",
+      "name": "Shanghai Pudong",
+      "apiKey": "eyJlIjoiMTI4NjY3MDc3IiwicyI6IlBWRyIsImgiOiIyNzU0NjA3OSIsInQiOiJBSVJQT1JUIn0=",
+      "countryId": "CN",
+      "country": {
+        "id": "CN",
+        "name": "China"
+      }
+    },
+    "arrivalSchedule": "2024-03-17T08:45:00",
+    "airline": {
+      "id": "-31734",
+      "name": "Turkish Airlines",
+      "logoURL": "https://logos.skyscnr.com/images/airlines/favicon/TK.png",
+      "searchTimes": 0
+    }
+  },
+  {
+    "flightIATA": "NH53",
+    "flightICAO": "ANA53",
+    "flightStatus": "scheduled",
+    "departureLocation": {
+      "id": "HND",
+      "name": "Tokyo Haneda",
+      "apiKey": "eyJlIjoiMTI4NjY3MTQzIiwicyI6IkhORCIsImgiOiIyNzU0MjA4OSIsInQiOiJBSVJQT1JUIn0=",
+      "countryId": "JP",
+      "country": {
+        "id": "JP",
+        "name": "Japan"
+      }
+    },
+    "departureSchedule": "2024-03-17T08:00:00",
+    "arrivalLocation": {
+      "id": "HND",
+      "name": "Tokyo Haneda",
+      "apiKey": "eyJlIjoiMTI4NjY3MTQzIiwicyI6IkhORCIsImgiOiIyNzU0MjA4OSIsInQiOiJBSVJQT1JUIn0=",
+      "countryId": "JP",
+      "country": {
+        "id": "JP",
+        "name": "Japan"
+      }
+    },
+    "arrivalSchedule": "2024-03-17T09:30:00",
+    "airline": {
+      "id": "-31963",
+      "name": "PIA",
+      "logoURL": "https://logos.skyscnr.com/images/airlines/favicon/PK.png",
+      "searchTimes": 0
+    }
+  },
+  {
+    "flightIATA": "QF5787",
+    "flightICAO": "QFA5787",
+    "flightStatus": "scheduled",
+    "departureLocation": {
+      "id": "HYD",
+      "name": "Hyderabad",
+      "apiKey": "eyJlIjoiMTI4NjY4MDczIiwicyI6IkhZRCIsImgiOiIyNzU0Mjc2NCIsInQiOiJBSVJQT1JUIn0=",
+      "countryId": "IN",
+      "country": {
+        "id": "IN",
+        "name": "India"
+      }
+    },
+    "departureSchedule": "2024-03-17T08:30:00",
+    "arrivalLocation": {
+      "id": "SYD",
+      "name": "Sydney",
+      "apiKey": "eyJlIjoiMTI4NjY3MDU4IiwicyI6IlNZRCIsImgiOiIyNzU0NzA5NyIsInQiOiJBSVJQT1JUIn0=",
+      "countryId": "AU",
+      "country": {
+        "id": "AU",
+        "name": "Australia"
+      }
+    },
+    "arrivalSchedule": "2024-03-17T11:10:00",
+    "airline": {
+      "id": "-31748",
+      "name": "transavia",
+      "logoURL": "https://logos.skyscnr.com/images/airlines/favicon/HV.png",
+      "searchTimes": 0
+    }
+  },
+  {
+    "flightIATA": "CA4687",
+    "flightICAO": "CCA4687",
+    "flightStatus": "scheduled",
+    "departureLocation": {
+      "id": "PVG",
+      "name": "Shanghai Pudong",
+      "apiKey": "eyJlIjoiMTI4NjY3MDc3IiwicyI6IlBWRyIsImgiOiIyNzU0NjA3OSIsInQiOiJBSVJQT1JUIn0=",
+      "countryId": "CN",
+      "country": {
+        "id": "CN",
+        "name": "China"
+      }
+    },
+    "departureSchedule": "2024-03-17T06:40:00",
+    "arrivalLocation": {
+      "id": "PVG",
+      "name": "Shanghai Pudong",
+      "apiKey": "eyJlIjoiMTI4NjY3MDc3IiwicyI6IlBWRyIsImgiOiIyNzU0NjA3OSIsInQiOiJBSVJQT1JUIn0=",
+      "countryId": "CN",
+      "country": {
+        "id": "CN",
+        "name": "China"
+      }
+    },
+    "arrivalSchedule": "2024-03-17T08:20:00",
+    "airline": {
+      "id": "-31488",
+      "name": "Thai LionAir",
+      "logoURL": "https://logos.skyscnr.com/images/airlines/favicon/0W.png",
+      "searchTimes": 0
+    }
+  },
+  {
+    "flightIATA": "ZH2005",
+    "flightICAO": "CSZ2005",
+    "flightStatus": "scheduled",
+    "departureLocation": {
+      "id": "PVG",
+      "name": "Shanghai Pudong",
+      "apiKey": "eyJlIjoiMTI4NjY3MDc3IiwicyI6IlBWRyIsImgiOiIyNzU0NjA3OSIsInQiOiJBSVJQT1JUIn0=",
+      "countryId": "CN",
+      "country": {
+        "id": "CN",
+        "name": "China"
+      }
+    },
+    "departureSchedule": "2024-03-17T06:50:00",
+    "arrivalLocation": {
+      "id": "PVG",
+      "name": "Shanghai Pudong",
+      "apiKey": "eyJlIjoiMTI4NjY3MDc3IiwicyI6IlBWRyIsImgiOiIyNzU0NjA3OSIsInQiOiJBSVJQT1JUIn0=",
+      "countryId": "CN",
+      "country": {
+        "id": "CN",
+        "name": "China"
+      }
+    },
+    "arrivalSchedule": "2024-03-17T09:30:00",
+    "airline": {
+      "id": "-31734",
+      "name": "Turkish Airlines",
+      "logoURL": "https://logos.skyscnr.com/images/airlines/favicon/TK.png",
+      "searchTimes": 0
+    }
+  },
+  {
+    "flightIATA": "CA1215",
+    "flightICAO": "CCA1215",
+    "flightStatus": "scheduled",
+    "departureLocation": {
+      "id": "PVG",
+      "name": "Shanghai Pudong",
+      "apiKey": "eyJlIjoiMTI4NjY3MDc3IiwicyI6IlBWRyIsImgiOiIyNzU0NjA3OSIsInQiOiJBSVJQT1JUIn0=",
+      "countryId": "CN",
+      "country": {
+        "id": "CN",
+        "name": "China"
+      }
+    },
+    "departureSchedule": "2024-03-17T06:35:00",
+    "arrivalLocation": {
+      "id": "PVG",
+      "name": "Shanghai Pudong",
+      "apiKey": "eyJlIjoiMTI4NjY3MDc3IiwicyI6IlBWRyIsImgiOiIyNzU0NjA3OSIsInQiOiJBSVJQT1JUIn0=",
+      "countryId": "CN",
+      "country": {
+        "id": "CN",
+        "name": "China"
+      }
+    },
+    "arrivalSchedule": "2024-03-17T12:15:00",
+    "airline": {
+      "id": "-31488",
+      "name": "Thai LionAir",
+      "logoURL": "https://logos.skyscnr.com/images/airlines/favicon/0W.png",
+      "searchTimes": 0
+    }
+  },
+  {
+    "flightIATA": "MF5127",
+    "flightICAO": "CXA5127",
+    "flightStatus": "scheduled",
+    "departureLocation": {
+      "id": "PVG",
+      "name": "Shanghai Pudong",
+      "apiKey": "eyJlIjoiMTI4NjY3MDc3IiwicyI6IlBWRyIsImgiOiIyNzU0NjA3OSIsInQiOiJBSVJQT1JUIn0=",
+      "countryId": "CN",
+      "country": {
+        "id": "CN",
+        "name": "China"
+      }
+    },
+    "departureSchedule": "2024-03-17T07:00:00",
+    "arrivalLocation": {
+      "id": "PVG",
+      "name": "Shanghai Pudong",
+      "apiKey": "eyJlIjoiMTI4NjY3MDc3IiwicyI6IlBWRyIsImgiOiIyNzU0NjA3OSIsInQiOiJBSVJQT1JUIn0=",
+      "countryId": "CN",
+      "country": {
+        "id": "CN",
+        "name": "China"
+      }
+    },
+    "arrivalSchedule": "2024-03-17T09:05:00",
+    "airline": {
+      "id": "-31664",
+      "name": "Xiamen Airlines",
+      "logoURL": "https://logos.skyscnr.com/images/airlines/favicon/MF.png",
+      "searchTimes": 0
+    }
+  },
+  {
+    "flightIATA": "ZH2587",
+    "flightICAO": "CSZ2587",
+    "flightStatus": "scheduled",
+    "departureLocation": {
+      "id": "PVG",
+      "name": "Shanghai Pudong",
+      "apiKey": "eyJlIjoiMTI4NjY3MDc3IiwicyI6IlBWRyIsImgiOiIyNzU0NjA3OSIsInQiOiJBSVJQT1JUIn0=",
+      "countryId": "CN",
+      "country": {
+        "id": "CN",
+        "name": "China"
+      }
+    },
+    "departureSchedule": "2024-03-17T06:40:00",
+    "arrivalLocation": {
+      "id": "PVG",
+      "name": "Shanghai Pudong",
+      "apiKey": "eyJlIjoiMTI4NjY3MDc3IiwicyI6IlBWRyIsImgiOiIyNzU0NjA3OSIsInQiOiJBSVJQT1JUIn0=",
+      "countryId": "CN",
+      "country": {
+        "id": "CN",
+        "name": "China"
+      }
+    },
+    "arrivalSchedule": "2024-03-17T08:20:00",
+    "airline": {
+      "id": "-31734",
+      "name": "Turkish Airlines",
+      "logoURL": "https://logos.skyscnr.com/images/airlines/favicon/TK.png",
+      "searchTimes": 0
+    }
+  },
+  {
+    "flightIATA": "ID6881",
+    "flightICAO": "BTK6881",
+    "flightStatus": "scheduled",
+    "departureLocation": {
+      "id": "YHM",
+      "name": "Hamilton",
+      "apiKey": "eyJlIjoiOTU2NzMzNTciLCJzIjoiWUhNIiwiaCI6IjI3NTM2NjQwIiwidCI6IkFJUlBPUlQifQ==",
+      "countryId": "CA",
+      "country": {
+        "id": "CA",
+        "name": "Canada"
+      }
+    },
+    "departureSchedule": "2024-03-17T06:00:00",
+    "arrivalLocation": {
+      "id": "ATL",
+      "name": "Atlanta Hartsfield-Jackson",
+      "apiKey": "eyJlIjoiOTU2NzM4MDAiLCJzIjoiQVRMIiwiaCI6IjI3NTQxNzM1IiwidCI6IkFJUlBPUlQifQ==",
+      "countryId": "GE",
+      "country": {
+        "id": "GE",
+        "name": "Georgia"
+      }
+    },
+    "arrivalSchedule": "2024-03-17T09:10:00",
+    "airline": {
+      "id": "-32024",
+      "name": "Nok Air",
+      "logoURL": "https://logos.skyscnr.com/images/airlines/favicon/DD.png",
+      "searchTimes": 0
+    }
+  },
+  {
+    "flightIATA": "OK3727",
+    "flightICAO": "CSA3727",
+    "flightStatus": "scheduled",
+    "departureLocation": {
+      "id": "RUH",
+      "name": "Riyadh",
+      "apiKey": "eyJlIjoiOTU2NzMzNjIiLCJzIjoiUlVIIiwiaCI6IjI3NTQ2MjIzIiwidCI6IkFJUlBPUlQifQ==",
+      "countryId": "SA",
+      "country": {
+        "id": "SA",
+        "name": "Saudi Arabia"
+      }
+    },
+    "departureSchedule": "2024-03-17T02:05:00",
+    "arrivalLocation": {
+      "id": "BVA",
+      "name": "Paris Beauvais",
+      "apiKey": "eyJlIjoiOTU1NjYyNzgiLCJzIjoiQlZBIiwiaCI6IjI3NTM5NzMzIiwidCI6IkFJUlBPUlQifQ==",
+      "countryId": "FR",
+      "country": {
+        "id": "FR",
+        "name": "France"
+      }
+    },
+    "arrivalSchedule": "2024-03-17T07:00:00",
+    "airline": {
+      "id": "-31963",
+      "name": "PIA",
+      "logoURL": "https://logos.skyscnr.com/images/airlines/favicon/PK.png",
+      "searchTimes": 0
+    }
+  },
+  {
+    "flightIATA": "HO5034",
+    "flightICAO": "DKH5034",
+    "flightStatus": "scheduled",
+    "departureLocation": {
+      "id": "PVG",
+      "name": "Shanghai Pudong",
+      "apiKey": "eyJlIjoiMTI4NjY3MDc3IiwicyI6IlBWRyIsImgiOiIyNzU0NjA3OSIsInQiOiJBSVJQT1JUIn0=",
+      "countryId": "CN",
+      "country": {
+        "id": "CN",
+        "name": "China"
+      }
+    },
+    "departureSchedule": "2024-03-17T06:55:00",
+    "arrivalLocation": {
+      "id": "PVG",
+      "name": "Shanghai Pudong",
+      "apiKey": "eyJlIjoiMTI4NjY3MDc3IiwicyI6IlBWRyIsImgiOiIyNzU0NjA3OSIsInQiOiJBSVJQT1JUIn0=",
+      "countryId": "CN",
+      "country": {
+        "id": "CN",
+        "name": "China"
+      }
+    },
+    "arrivalSchedule": "2024-03-17T09:00:00",
+    "airline": {
+      "id": "-31685",
+      "name": "Vueling Airlines",
+      "logoURL": "https://logos.skyscnr.com/images/airlines/favicon/07.png",
+      "searchTimes": 0
+    }
+  },
+  {
+    "flightIATA": "A12881",
+    "flightICAO": "A12881",
+    "flightStatus": "scheduled",
+    "departureLocation": {
+      "id": "UVF",
+      "name": "St Lucia Hewanorra",
+      "apiKey": "eyJlIjoiOTk1Mzk2NjYiLCJzIjoiVVZGIiwiaCI6IjI3NTQ3MDE1IiwidCI6IkFJUlBPUlQifQ==",
+      "countryId": "LC",
+      "country": {
+        "id": "LC",
+        "name": "Saint Lucia"
+      }
+    },
+    "departureSchedule": "2024-03-17T06:15:00",
+    "arrivalLocation": {
+      "id": "SGN",
+      "name": "Ho Chi Minh City",
+      "apiKey": "eyJlIjoiOTU2NzMzNzkiLCJzIjoiU0dOIiwiaCI6IjI3NTQ2MzI5IiwidCI6IkFJUlBPUlQifQ==",
+      "countryId": "VN",
+      "country": {
+        "id": "VN",
+        "name": "Vietnam"
+      }
+    },
+    "arrivalSchedule": "2024-03-17T09:20:00",
+    "airline": null
+  },
+  {
+    "flightIATA": "FD449",
+    "flightICAO": "AIQ449",
+    "flightStatus": "landed",
+    "departureLocation": {
+      "id": "AXA",
+      "name": "The Valley",
+      "apiKey": "eyJlIjoiMTA0MTIwMzE1IiwicyI6IkFYQSIsImgiOiIyNzU0ODIxNyIsInQiOiJBSVJQT1JUIn0=",
+      "countryId": "AI",
+      "country": {
+        "id": "AI",
+        "name": "Anguilla"
+      }
+    },
+    "departureSchedule": "2024-03-17T00:45:00",
+    "arrivalLocation": {
+      "id": "BRU",
+      "name": "Brussels International",
+      "apiKey": "eyJlIjoiOTU1NjUwMzYiLCJzIjoiQlJVIiwiaCI6IjI3NTM5NTY1IiwidCI6IkFJUlBPUlQifQ==",
+      "countryId": "BE",
+      "country": {
+        "id": "BE",
+        "name": "Belgium"
+      }
+    },
+    "arrivalSchedule": "2024-03-17T01:18:00",
+    "airline": {
+      "id": "-31768",
+      "name": "Thai AirAsia",
+      "logoURL": "https://logos.skyscnr.com/images/airlines/favicon/FD.png",
+      "searchTimes": 0
+    }
+  },
+  {
+    "flightIATA": "SC2249",
+    "flightICAO": "CDG2249",
+    "flightStatus": "scheduled",
+    "departureLocation": {
+      "id": "PVG",
+      "name": "Shanghai Pudong",
+      "apiKey": "eyJlIjoiMTI4NjY3MDc3IiwicyI6IlBWRyIsImgiOiIyNzU0NjA3OSIsInQiOiJBSVJQT1JUIn0=",
+      "countryId": "CN",
+      "country": {
+        "id": "CN",
+        "name": "China"
+      }
+    },
+    "departureSchedule": "2024-03-17T06:35:00",
+    "arrivalLocation": {
+      "id": "PVG",
+      "name": "Shanghai Pudong",
+      "apiKey": "eyJlIjoiMTI4NjY3MDc3IiwicyI6IlBWRyIsImgiOiIyNzU0NjA3OSIsInQiOiJBSVJQT1JUIn0=",
+      "countryId": "CN",
+      "country": {
+        "id": "CN",
+        "name": "China"
+      }
+    },
+    "arrivalSchedule": "2024-03-17T08:05:00",
+    "airline": {
+      "id": "-32229",
+      "name": "Hong Kong Airlines",
+      "logoURL": "https://logos.skyscnr.com/images/airlines/favicon/N8.png",
+      "searchTimes": 0
+    }
+  },
+  {
+    "flightIATA": "7C1164",
+    "flightICAO": "JJA1164",
+    "flightStatus": "scheduled",
+    "departureLocation": {
+      "id": "MSZ",
+      "name": "Namibe",
+      "apiKey": "eyJlIjoiMTI4NjY3ODcxIiwicyI6Ik1TWiIsImgiOiIyNzU0OTMxNiIsInQiOiJBSVJQT1JUIn0=",
+      "countryId": "AO",
+      "country": {
+        "id": "AO",
+        "name": "Angola"
+      }
+    },
+    "departureSchedule": "2024-03-17T07:35:00",
+    "arrivalLocation": {
+      "id": "HND",
+      "name": "Tokyo Haneda",
+      "apiKey": "eyJlIjoiMTI4NjY3MTQzIiwicyI6IkhORCIsImgiOiIyNzU0MjA4OSIsInQiOiJBSVJQT1JUIn0=",
+      "countryId": "JP",
+      "country": {
+        "id": "JP",
+        "name": "Japan"
+      }
+    },
+    "arrivalSchedule": "2024-03-17T09:35:00",
+    "airline": {
+      "id": "-32257",
+      "name": "Gulf Air",
+      "logoURL": "https://logos.skyscnr.com/images/airlines/favicon/GF.png",
+      "searchTimes": 0
+    }
+  },
+  {
+    "flightIATA": "H19853",
+    "flightICAO": "H19853",
+    "flightStatus": "scheduled",
+    "departureLocation": {
+      "id": "MSZ",
+      "name": "Namibe",
+      "apiKey": "eyJlIjoiMTI4NjY3ODcxIiwicyI6Ik1TWiIsImgiOiIyNzU0OTMxNiIsInQiOiJBSVJQT1JUIn0=",
+      "countryId": "AO",
+      "country": {
+        "id": "AO",
+        "name": "Angola"
+      }
+    },
+    "departureSchedule": "2024-03-17T07:35:00",
+    "arrivalLocation": {
+      "id": "HND",
+      "name": "Tokyo Haneda",
+      "apiKey": "eyJlIjoiMTI4NjY3MTQzIiwicyI6IkhORCIsImgiOiIyNzU0MjA4OSIsInQiOiJBSVJQT1JUIn0=",
+      "countryId": "JP",
+      "country": {
+        "id": "JP",
+        "name": "Japan"
+      }
+    },
+    "arrivalSchedule": "2024-03-17T09:35:00",
+    "airline": null
+  },
+  {
+    "flightIATA": "VJ969",
+    "flightICAO": "VJC969",
+    "flightStatus": "scheduled",
+    "departureLocation": {
+      "id": "MSZ",
+      "name": "Namibe",
+      "apiKey": "eyJlIjoiMTI4NjY3ODcxIiwicyI6Ik1TWiIsImgiOiIyNzU0OTMxNiIsInQiOiJBSVJQT1JUIn0=",
+      "countryId": "AO",
+      "country": {
+        "id": "AO",
+        "name": "Angola"
+      }
+    },
+    "departureSchedule": "2024-03-17T07:35:00",
+    "arrivalLocation": {
+      "id": "SGN",
+      "name": "Ho Chi Minh City",
+      "apiKey": "eyJlIjoiOTU2NzMzNzkiLCJzIjoiU0dOIiwiaCI6IjI3NTQ2MzI5IiwidCI6IkFJUlBPUlQifQ==",
+      "countryId": "VN",
+      "country": {
+        "id": "VN",
+        "name": "Vietnam"
+      }
+    },
+    "arrivalSchedule": "2024-03-17T11:05:00",
+    "airline": {
+      "id": "-32442",
+      "name": "China Eastern",
+      "logoURL": "https://logos.skyscnr.com/images/airlines/favicon/MU.png",
+      "searchTimes": 0
+    }
+  },
+  {
+    "flightIATA": "W24969",
+    "flightICAO": "FXT4969",
+    "flightStatus": "scheduled",
+    "departureLocation": {
+      "id": "MSZ",
+      "name": "Namibe",
+      "apiKey": "eyJlIjoiMTI4NjY3ODcxIiwicyI6Ik1TWiIsImgiOiIyNzU0OTMxNiIsInQiOiJBSVJQT1JUIn0=",
+      "countryId": "AO",
+      "country": {
+        "id": "AO",
+        "name": "Angola"
+      }
+    },
+    "departureSchedule": "2024-03-17T07:35:00",
+    "arrivalLocation": {
+      "id": "SGN",
+      "name": "Ho Chi Minh City",
+      "apiKey": "eyJlIjoiOTU2NzMzNzkiLCJzIjoiU0dOIiwiaCI6IjI3NTQ2MzI5IiwidCI6IkFJUlBPUlQifQ==",
+      "countryId": "VN",
+      "country": {
+        "id": "VN",
+        "name": "Vietnam"
+      }
+    },
+    "arrivalSchedule": "2024-03-17T11:05:00",
+    "airline": {
+      "id": "-32090",
+      "name": "Lufthansa",
+      "logoURL": "https://logos.skyscnr.com/images/airlines/favicon/LH.png",
+      "searchTimes": 0
+    }
+  },
+  {
+    "flightIATA": "A12969",
+    "flightICAO": "A12969",
+    "flightStatus": "scheduled",
+    "departureLocation": {
+      "id": "MSZ",
+      "name": "Namibe",
+      "apiKey": "eyJlIjoiMTI4NjY3ODcxIiwicyI6Ik1TWiIsImgiOiIyNzU0OTMxNiIsInQiOiJBSVJQT1JUIn0=",
+      "countryId": "AO",
+      "country": {
+        "id": "AO",
+        "name": "Angola"
+      }
+    },
+    "departureSchedule": "2024-03-17T07:35:00",
+    "arrivalLocation": {
+      "id": "SGN",
+      "name": "Ho Chi Minh City",
+      "apiKey": "eyJlIjoiOTU2NzMzNzkiLCJzIjoiU0dOIiwiaCI6IjI3NTQ2MzI5IiwidCI6IkFJUlBPUlQifQ==",
+      "countryId": "VN",
+      "country": {
+        "id": "VN",
+        "name": "Vietnam"
+      }
+    },
+    "arrivalSchedule": "2024-03-17T11:05:00",
+    "airline": null
+  },
+  {
+    "flightIATA": "H14290",
+    "flightICAO": "H14290",
+    "flightStatus": "scheduled",
+    "departureLocation": {
+      "id": "MSZ",
+      "name": "Namibe",
+      "apiKey": "eyJlIjoiMTI4NjY3ODcxIiwicyI6Ik1TWiIsImgiOiIyNzU0OTMxNiIsInQiOiJBSVJQT1JUIn0=",
+      "countryId": "AO",
+      "country": {
+        "id": "AO",
+        "name": "Angola"
+      }
+    },
+    "departureSchedule": "2024-03-17T07:35:00",
+    "arrivalLocation": {
+      "id": "SGN",
+      "name": "Ho Chi Minh City",
+      "apiKey": "eyJlIjoiOTU2NzMzNzkiLCJzIjoiU0dOIiwiaCI6IjI3NTQ2MzI5IiwidCI6IkFJUlBPUlQifQ==",
+      "countryId": "VN",
+      "country": {
+        "id": "VN",
+        "name": "Vietnam"
+      }
+    },
+    "arrivalSchedule": "2024-03-17T11:05:00",
+    "airline": null
+  },
+  {
+    "flightIATA": "BX148",
+    "flightICAO": "ABL148",
+    "flightStatus": "scheduled",
+    "departureLocation": {
+      "id": "MSZ",
+      "name": "Namibe",
+      "apiKey": "eyJlIjoiMTI4NjY3ODcxIiwicyI6Ik1TWiIsImgiOiIyNzU0OTMxNiIsInQiOiJBSVJQT1JUIn0=",
+      "countryId": "AO",
+      "country": {
+        "id": "AO",
+        "name": "Angola"
+      }
+    },
+    "departureSchedule": "2024-03-17T07:35:00",
+    "arrivalLocation": {
+      "id": "HND",
+      "name": "Tokyo Haneda",
+      "apiKey": "eyJlIjoiMTI4NjY3MTQzIiwicyI6IkhORCIsImgiOiIyNzU0MjA4OSIsInQiOiJBSVJQT1JUIn0=",
+      "countryId": "JP",
+      "country": {
+        "id": "JP",
+        "name": "Japan"
+      }
+    },
+    "arrivalSchedule": "2024-03-17T08:30:00",
+    "airline": {
+      "id": "-32753",
+      "name": "Aer Lingus",
+      "logoURL": "https://logos.skyscnr.com/images/airlines/favicon/EI.png",
+      "searchTimes": 0
+    }
+  },
+  {
+    "flightIATA": "OZ9738",
+    "flightICAO": "AAR9738",
+    "flightStatus": "scheduled",
+    "departureLocation": {
+      "id": "MSZ",
+      "name": "Namibe",
+      "apiKey": "eyJlIjoiMTI4NjY3ODcxIiwicyI6Ik1TWiIsImgiOiIyNzU0OTMxNiIsInQiOiJBSVJQT1JUIn0=",
+      "countryId": "AO",
+      "country": {
+        "id": "AO",
+        "name": "Angola"
+      }
+    },
+    "departureSchedule": "2024-03-17T07:35:00",
+    "arrivalLocation": {
+      "id": "HND",
+      "name": "Tokyo Haneda",
+      "apiKey": "eyJlIjoiMTI4NjY3MTQzIiwicyI6IkhORCIsImgiOiIyNzU0MjA4OSIsInQiOiJBSVJQT1JUIn0=",
+      "countryId": "JP",
+      "country": {
+        "id": "JP",
+        "name": "Japan"
+      }
+    },
+    "arrivalSchedule": "2024-03-17T08:30:00",
+    "airline": {
+      "id": "-31147",
+      "name": "Flair Airlines",
+      "logoURL": "https://logos.skyscnr.com/images/airlines/favicon/F..png",
+      "searchTimes": 0
+    }
+  },
+  {
+    "flightIATA": "BX8107",
+    "flightICAO": "ABL8107",
+    "flightStatus": "scheduled",
+    "departureLocation": {
+      "id": "MSZ",
+      "name": "Namibe",
+      "apiKey": "eyJlIjoiMTI4NjY3ODcxIiwicyI6Ik1TWiIsImgiOiIyNzU0OTMxNiIsInQiOiJBSVJQT1JUIn0=",
+      "countryId": "AO",
+      "country": {
+        "id": "AO",
+        "name": "Angola"
+      }
+    },
+    "departureSchedule": "2024-03-17T07:30:00",
+    "arrivalLocation": {
+      "id": "PBR",
+      "name": "Puerto Barrios",
+      "apiKey": "eyJlIjoiMTI5MDU1MDU1IiwicyI6IlBCUiIsImgiOiIyNzU1MDA2NyIsInQiOiJBSVJQT1JUIn0=",
+      "countryId": "GT",
+      "country": {
+        "id": "GT",
+        "name": "Guatemala"
+      }
+    },
+    "arrivalSchedule": "2024-03-17T08:35:00",
+    "airline": {
+      "id": "-32753",
+      "name": "Aer Lingus",
+      "logoURL": "https://logos.skyscnr.com/images/airlines/favicon/EI.png",
+      "searchTimes": 0
+    }
+  },
+  {
+    "flightIATA": "OZ8107",
+    "flightICAO": "AAR8107",
+    "flightStatus": "scheduled",
+    "departureLocation": {
+      "id": "MSZ",
+      "name": "Namibe",
+      "apiKey": "eyJlIjoiMTI4NjY3ODcxIiwicyI6Ik1TWiIsImgiOiIyNzU0OTMxNiIsInQiOiJBSVJQT1JUIn0=",
+      "countryId": "AO",
+      "country": {
+        "id": "AO",
+        "name": "Angola"
+      }
+    },
+    "departureSchedule": "2024-03-17T07:30:00",
+    "arrivalLocation": {
+      "id": "PBR",
+      "name": "Puerto Barrios",
+      "apiKey": "eyJlIjoiMTI5MDU1MDU1IiwicyI6IlBCUiIsImgiOiIyNzU1MDA2NyIsInQiOiJBSVJQT1JUIn0=",
+      "countryId": "GT",
+      "country": {
+        "id": "GT",
+        "name": "Guatemala"
+      }
+    },
+    "arrivalSchedule": "2024-03-17T08:35:00",
+    "airline": {
+      "id": "-31147",
+      "name": "Flair Airlines",
+      "logoURL": "https://logos.skyscnr.com/images/airlines/favicon/F..png",
+      "searchTimes": 0
+    }
+  },
+  {
+    "flightIATA": "7C211",
+    "flightICAO": "JJA211",
+    "flightStatus": "scheduled",
+    "departureLocation": {
+      "id": "MSZ",
+      "name": "Namibe",
+      "apiKey": "eyJlIjoiMTI4NjY3ODcxIiwicyI6Ik1TWiIsImgiOiIyNzU0OTMxNiIsInQiOiJBSVJQT1JUIn0=",
+      "countryId": "AO",
+      "country": {
+        "id": "AO",
+        "name": "Angola"
+      }
+    },
+    "departureSchedule": "2024-03-17T07:25:00",
+    "arrivalLocation": {
+      "id": "POS",
+      "name": "Port Of Spain",
+      "apiKey": "eyJlIjoiMTA0MTIwMzU4IiwicyI6IlBPUyIsImgiOiIyNzU0NjAxMSIsInQiOiJBSVJQT1JUIn0=",
+      "countryId": "ES",
+      "country": {
+        "id": "ES",
+        "name": "Spain"
+      }
+    },
+    "arrivalSchedule": "2024-03-17T08:25:00",
+    "airline": {
+      "id": "-32257",
+      "name": "Gulf Air",
+      "logoURL": "https://logos.skyscnr.com/images/airlines/favicon/GF.png",
+      "searchTimes": 0
+    }
+  },
+  {
+    "flightIATA": "LJ632",
+    "flightICAO": "JNA632",
+    "flightStatus": "scheduled",
+    "departureLocation": {
+      "id": "MSZ",
+      "name": "Namibe",
+      "apiKey": "eyJlIjoiMTI4NjY3ODcxIiwicyI6Ik1TWiIsImgiOiIyNzU0OTMxNiIsInQiOiJBSVJQT1JUIn0=",
+      "countryId": "AO",
+      "country": {
+        "id": "AO",
+        "name": "Angola"
+      }
+    },
+    "departureSchedule": "2024-03-17T07:15:00",
+    "arrivalLocation": {
+      "id": "POS",
+      "name": "Port Of Spain",
+      "apiKey": "eyJlIjoiMTA0MTIwMzU4IiwicyI6IlBPUyIsImgiOiIyNzU0NjAxMSIsInQiOiJBSVJQT1JUIn0=",
+      "countryId": "ES",
+      "country": {
+        "id": "ES",
+        "name": "Spain"
+      }
+    },
+    "arrivalSchedule": "2024-03-17T08:15:00",
+    "airline": {
+      "id": "-32024",
+      "name": "Nok Air",
+      "logoURL": "https://logos.skyscnr.com/images/airlines/favicon/DD.png",
+      "searchTimes": 0
+    }
+  },
+  {
+    "flightIATA": "9C6314",
+    "flightICAO": "CQH6314",
+    "flightStatus": "scheduled",
+    "departureLocation": {
+      "id": "PVG",
+      "name": "Shanghai Pudong",
+      "apiKey": "eyJlIjoiMTI4NjY3MDc3IiwicyI6IlBWRyIsImgiOiIyNzU0NjA3OSIsInQiOiJBSVJQT1JUIn0=",
+      "countryId": "CN",
+      "country": {
+        "id": "CN",
+        "name": "China"
+      }
+    },
+    "departureSchedule": "2024-03-17T07:05:00",
+    "arrivalLocation": {
+      "id": "PVG",
+      "name": "Shanghai Pudong",
+      "apiKey": "eyJlIjoiMTI4NjY3MDc3IiwicyI6IlBWRyIsImgiOiIyNzU0NjA3OSIsInQiOiJBSVJQT1JUIn0=",
+      "countryId": "CN",
+      "country": {
+        "id": "CN",
+        "name": "China"
+      }
+    },
+    "arrivalSchedule": "2024-03-17T09:45:00",
+    "airline": {
+      "id": "-31973",
+      "name": "Pegasus Airlines",
+      "logoURL": "https://logos.skyscnr.com/images/airlines/favicon/H9.png",
+      "searchTimes": 0
+    }
+  },
+  {
+    "flightIATA": "GJ8863",
+    "flightICAO": "CDC8863",
+    "flightStatus": "scheduled",
+    "departureLocation": {
+      "id": "PVG",
+      "name": "Shanghai Pudong",
+      "apiKey": "eyJlIjoiMTI4NjY3MDc3IiwicyI6IlBWRyIsImgiOiIyNzU0NjA3OSIsInQiOiJBSVJQT1JUIn0=",
+      "countryId": "CN",
+      "country": {
+        "id": "CN",
+        "name": "China"
+      }
+    },
+    "departureSchedule": "2024-03-17T06:35:00",
+    "arrivalLocation": {
+      "id": "PVG",
+      "name": "Shanghai Pudong",
+      "apiKey": "eyJlIjoiMTI4NjY3MDc3IiwicyI6IlBWRyIsImgiOiIyNzU0NjA3OSIsInQiOiJBSVJQT1JUIn0=",
+      "countryId": "CN",
+      "country": {
+        "id": "CN",
+        "name": "China"
+      }
+    },
+    "arrivalSchedule": "2024-03-17T10:15:00",
+    "airline": {
+      "id": "-32753",
+      "name": "Aer Lingus",
+      "logoURL": "https://logos.skyscnr.com/images/airlines/favicon/EI.png",
+      "searchTimes": 0
+    }
+  },
+  {
+    "flightIATA": "CZ4842",
+    "flightICAO": "CSN4842",
+    "flightStatus": "scheduled",
+    "departureLocation": {
+      "id": "PVG",
+      "name": "Shanghai Pudong",
+      "apiKey": "eyJlIjoiMTI4NjY3MDc3IiwicyI6IlBWRyIsImgiOiIyNzU0NjA3OSIsInQiOiJBSVJQT1JUIn0=",
+      "countryId": "CN",
+      "country": {
+        "id": "CN",
+        "name": "China"
+      }
+    },
+    "departureSchedule": "2024-03-17T06:35:00",
+    "arrivalLocation": {
+      "id": "PVG",
+      "name": "Shanghai Pudong",
+      "apiKey": "eyJlIjoiMTI4NjY3MDc3IiwicyI6IlBWRyIsImgiOiIyNzU0NjA3OSIsInQiOiJBSVJQT1JUIn0=",
+      "countryId": "CN",
+      "country": {
+        "id": "CN",
+        "name": "China"
+      }
+    },
+    "arrivalSchedule": "2024-03-17T10:15:00",
+    "airline": {
+      "id": "-31734",
+      "name": "Turkish Airlines",
+      "logoURL": "https://logos.skyscnr.com/images/airlines/favicon/TK.png",
+      "searchTimes": 0
+    }
+  },
+  {
+    "flightIATA": "3U4123",
+    "flightICAO": "CSC4123",
+    "flightStatus": "scheduled",
+    "departureLocation": {
+      "id": "PVG",
+      "name": "Shanghai Pudong",
+      "apiKey": "eyJlIjoiMTI4NjY3MDc3IiwicyI6IlBWRyIsImgiOiIyNzU0NjA3OSIsInQiOiJBSVJQT1JUIn0=",
+      "countryId": "CN",
+      "country": {
+        "id": "CN",
+        "name": "China"
+      }
+    },
+    "departureSchedule": "2024-03-17T06:35:00",
+    "arrivalLocation": {
+      "id": "PVG",
+      "name": "Shanghai Pudong",
+      "apiKey": "eyJlIjoiMTI4NjY3MDc3IiwicyI6IlBWRyIsImgiOiIyNzU0NjA3OSIsInQiOiJBSVJQT1JUIn0=",
+      "countryId": "CN",
+      "country": {
+        "id": "CN",
+        "name": "China"
+      }
+    },
+    "arrivalSchedule": "2024-03-17T10:15:00",
+    "airline": {
+      "id": "-31734",
+      "name": "Turkish Airlines",
+      "logoURL": "https://logos.skyscnr.com/images/airlines/favicon/TK.png",
+      "searchTimes": 0
+    }
+  },
+  {
+    "flightIATA": "TV2207",
+    "flightICAO": "TBA2207",
+    "flightStatus": "scheduled",
+    "departureLocation": {
+      "id": "PVG",
+      "name": "Shanghai Pudong",
+      "apiKey": "eyJlIjoiMTI4NjY3MDc3IiwicyI6IlBWRyIsImgiOiIyNzU0NjA3OSIsInQiOiJBSVJQT1JUIn0=",
+      "countryId": "CN",
+      "country": {
+        "id": "CN",
+        "name": "China"
+      }
+    },
+    "departureSchedule": "2024-03-17T06:35:00",
+    "arrivalLocation": {
+      "id": "PVG",
+      "name": "Shanghai Pudong",
+      "apiKey": "eyJlIjoiMTI4NjY3MDc3IiwicyI6IlBWRyIsImgiOiIyNzU0NjA3OSIsInQiOiJBSVJQT1JUIn0=",
+      "countryId": "CN",
+      "country": {
+        "id": "CN",
+        "name": "China"
+      }
+    },
+    "arrivalSchedule": "2024-03-17T10:15:00",
+    "airline": {
+      "id": "-32115",
+      "name": "LATAM Airlines",
+      "logoURL": "https://logos.skyscnr.com/images/airlines/favicon/LA.png",
+      "searchTimes": 0
+    }
+  },
+  {
+    "flightIATA": "MU3599",
+    "flightICAO": "CES3599",
+    "flightStatus": "scheduled",
+    "departureLocation": {
+      "id": "PVG",
+      "name": "Shanghai Pudong",
+      "apiKey": "eyJlIjoiMTI4NjY3MDc3IiwicyI6IlBWRyIsImgiOiIyNzU0NjA3OSIsInQiOiJBSVJQT1JUIn0=",
+      "countryId": "CN",
+      "country": {
+        "id": "CN",
+        "name": "China"
+      }
+    },
+    "departureSchedule": "2024-03-17T06:35:00",
+    "arrivalLocation": {
+      "id": "PVG",
+      "name": "Shanghai Pudong",
+      "apiKey": "eyJlIjoiMTI4NjY3MDc3IiwicyI6IlBWRyIsImgiOiIyNzU0NjA3OSIsInQiOiJBSVJQT1JUIn0=",
+      "countryId": "CN",
+      "country": {
+        "id": "CN",
+        "name": "China"
+      }
+    },
+    "arrivalSchedule": "2024-03-17T10:15:00",
+    "airline": {
+      "id": "-31734",
+      "name": "Turkish Airlines",
+      "logoURL": "https://logos.skyscnr.com/images/airlines/favicon/TK.png",
+      "searchTimes": 0
+    }
+  },
+  {
+    "flightIATA": "MF5907",
+    "flightICAO": "CXA5907",
+    "flightStatus": "scheduled",
+    "departureLocation": {
+      "id": "PVG",
+      "name": "Shanghai Pudong",
+      "apiKey": "eyJlIjoiMTI4NjY3MDc3IiwicyI6IlBWRyIsImgiOiIyNzU0NjA3OSIsInQiOiJBSVJQT1JUIn0=",
+      "countryId": "CN",
+      "country": {
+        "id": "CN",
+        "name": "China"
+      }
+    },
+    "departureSchedule": "2024-03-17T06:35:00",
+    "arrivalLocation": {
+      "id": "PVG",
+      "name": "Shanghai Pudong",
+      "apiKey": "eyJlIjoiMTI4NjY3MDc3IiwicyI6IlBWRyIsImgiOiIyNzU0NjA3OSIsInQiOiJBSVJQT1JUIn0=",
+      "countryId": "CN",
+      "country": {
+        "id": "CN",
+        "name": "China"
+      }
+    },
+    "arrivalSchedule": "2024-03-17T10:15:00",
+    "airline": {
+      "id": "-31664",
+      "name": "Xiamen Airlines",
+      "logoURL": "https://logos.skyscnr.com/images/airlines/favicon/MF.png",
+      "searchTimes": 0
+    }
+  },
+  {
+    "flightIATA": "A46016",
+    "flightICAO": "AZO6016",
+    "flightStatus": "scheduled",
+    "departureLocation": {
+      "id": "DME",
+      "name": "Moscow Domodedovo",
+      "apiKey": "eyJlIjoiMTI4NjY4MDEyIiwicyI6IkRNRSIsImgiOiIyNzUzOTQzOCIsInQiOiJBSVJQT1JUIn0=",
+      "countryId": "RU",
+      "country": {
+        "id": "RU",
+        "name": "Russia"
+      }
+    },
+    "departureSchedule": "2024-03-17T01:25:00",
+    "arrivalLocation": {
+      "id": "DME",
+      "name": "Moscow Domodedovo",
+      "apiKey": "eyJlIjoiMTI4NjY4MDEyIiwicyI6IkRNRSIsImgiOiIyNzUzOTQzOCIsInQiOiJBSVJQT1JUIn0=",
+      "countryId": "RU",
+      "country": {
+        "id": "RU",
+        "name": "Russia"
+      }
+    },
+    "arrivalSchedule": "2024-03-17T04:45:00",
+    "airline": {
+      "id": "-32348",
+      "name": "Emirates",
+      "logoURL": "https://logos.skyscnr.com/images/airlines/favicon/EK.png",
+      "searchTimes": 0
+    }
+  },
+  {
+    "flightIATA": "QF1429",
+    "flightICAO": "QFA1429",
+    "flightStatus": "scheduled",
+    "departureLocation": {
+      "id": "SYD",
+      "name": "Sydney",
+      "apiKey": "eyJlIjoiMTI4NjY3MDU4IiwicyI6IlNZRCIsImgiOiIyNzU0NzA5NyIsInQiOiJBSVJQT1JUIn0=",
+      "countryId": "AU",
+      "country": {
+        "id": "AU",
+        "name": "Australia"
+      }
+    },
+    "departureSchedule": "2024-03-17T09:10:00",
+    "arrivalLocation": {
+      "id": "SYD",
+      "name": "Sydney",
+      "apiKey": "eyJlIjoiMTI4NjY3MDU4IiwicyI6IlNZRCIsImgiOiIyNzU0NzA5NyIsInQiOiJBSVJQT1JUIn0=",
+      "countryId": "AU",
+      "country": {
+        "id": "AU",
+        "name": "Australia"
+      }
+    },
+    "arrivalSchedule": "2024-03-17T10:05:00",
+    "airline": {
+      "id": "-31748",
+      "name": "transavia",
+      "logoURL": "https://logos.skyscnr.com/images/airlines/favicon/HV.png",
+      "searchTimes": 0
+    }
+  },
+  {
+    "flightIATA": "GJ5275",
+    "flightICAO": "CDC5275",
+    "flightStatus": "scheduled",
+    "departureLocation": {
+      "id": "PVG",
+      "name": "Shanghai Pudong",
+      "apiKey": "eyJlIjoiMTI4NjY3MDc3IiwicyI6IlBWRyIsImgiOiIyNzU0NjA3OSIsInQiOiJBSVJQT1JUIn0=",
+      "countryId": "CN",
+      "country": {
+        "id": "CN",
+        "name": "China"
+      }
+    },
+    "departureSchedule": "2024-03-17T06:25:00",
+    "arrivalLocation": {
+      "id": "PVG",
+      "name": "Shanghai Pudong",
+      "apiKey": "eyJlIjoiMTI4NjY3MDc3IiwicyI6IlBWRyIsImgiOiIyNzU0NjA3OSIsInQiOiJBSVJQT1JUIn0=",
+      "countryId": "CN",
+      "country": {
+        "id": "CN",
+        "name": "China"
+      }
+    },
+    "arrivalSchedule": "2024-03-17T09:15:00",
+    "airline": {
+      "id": "-32753",
+      "name": "Aer Lingus",
+      "logoURL": "https://logos.skyscnr.com/images/airlines/favicon/EI.png",
+      "searchTimes": 0
+    }
+  },
+  {
+    "flightIATA": "QR976",
+    "flightICAO": "QTR976",
+    "flightStatus": "scheduled",
+    "departureLocation": {
+      "id": "DOH",
+      "name": "Hamad International",
+      "apiKey": "eyJlIjoiOTU2NzM4NTIiLCJzIjoiRE9IIiwiaCI6IjI3NTQwNzg1IiwidCI6IkFJUlBPUlQifQ==",
+      "countryId": "QA",
+      "country": {
+        "id": "QA",
+        "name": "Qatar"
+      }
+    },
+    "departureSchedule": "2024-03-17T01:45:00",
+    "arrivalLocation": {
+      "id": "SGN",
+      "name": "Ho Chi Minh City",
+      "apiKey": "eyJlIjoiOTU2NzMzNzkiLCJzIjoiU0dOIiwiaCI6IjI3NTQ2MzI5IiwidCI6IkFJUlBPUlQifQ==",
+      "countryId": "VN",
+      "country": {
+        "id": "VN",
+        "name": "Vietnam"
+      }
+    },
+    "arrivalSchedule": "2024-03-17T12:25:00",
+    "airline": {
+      "id": "-31939",
+      "name": "Qatar Airways",
+      "logoURL": "https://logos.skyscnr.com/images/airlines/favicon/QR.png",
+      "searchTimes": 0
+    }
+  },
+  {
+    "flightIATA": "",
+    "flightICAO": "",
+    "flightStatus": "scheduled",
+    "departureLocation": {
+      "id": "ECN",
+      "name": "Ercan",
+      "apiKey": "eyJlIjoiOTU2NzQwMjciLCJzIjoiRUNOIiwiaCI6IjI3NTUxMTc5IiwidCI6IkFJUlBPUlQifQ==",
+      "countryId": "CY",
+      "country": {
+        "id": "CY",
+        "name": "Cyprus"
+      }
+    },
+    "departureSchedule": "2024-03-17T02:40:00",
+    "arrivalLocation": {
+      "id": "RAI",
+      "name": "Praia",
+      "apiKey": "eyJlIjoiOTk1Mzk2NjAiLCJzIjoiUkFJIiwiaCI6IjI3NTQ2MTIzIiwidCI6IkFJUlBPUlQifQ==",
+      "countryId": "CV",
+      "country": {
+        "id": "CV",
+        "name": "Cape Verde"
+      }
+    },
+    "arrivalSchedule": "2024-03-17T03:09:00",
+    "airline": {
+      "id": "-32356",
+      "name": "easyJet",
+      "logoURL": "https://logos.skyscnr.com/images/airlines/favicon/EZ.png",
+      "searchTimes": 3
+    }
+  },
+  {
+    "flightIATA": "G59069",
+    "flightICAO": "HXA9069",
+    "flightStatus": "scheduled",
+    "departureLocation": {
+      "id": "PVG",
+      "name": "Shanghai Pudong",
+      "apiKey": "eyJlIjoiMTI4NjY3MDc3IiwicyI6IlBWRyIsImgiOiIyNzU0NjA3OSIsInQiOiJBSVJQT1JUIn0=",
+      "countryId": "CN",
+      "country": {
+        "id": "CN",
+        "name": "China"
+      }
+    },
+    "departureSchedule": "2024-03-17T07:05:00",
+    "arrivalLocation": {
+      "id": "PVG",
+      "name": "Shanghai Pudong",
+      "apiKey": "eyJlIjoiMTI4NjY3MDc3IiwicyI6IlBWRyIsImgiOiIyNzU0NjA3OSIsInQiOiJBSVJQT1JUIn0=",
+      "countryId": "CN",
+      "country": {
+        "id": "CN",
+        "name": "China"
+      }
+    },
+    "arrivalSchedule": "2024-03-17T08:40:00",
+    "airline": {
+      "id": "-32442",
+      "name": "China Eastern",
+      "logoURL": "https://logos.skyscnr.com/images/airlines/favicon/MU.png",
+      "searchTimes": 0
+    }
+  },
+  {
+    "flightIATA": "GJ3449",
+    "flightICAO": "CDC3449",
+    "flightStatus": "scheduled",
+    "departureLocation": {
+      "id": "PVG",
+      "name": "Shanghai Pudong",
+      "apiKey": "eyJlIjoiMTI4NjY3MDc3IiwicyI6IlBWRyIsImgiOiIyNzU0NjA3OSIsInQiOiJBSVJQT1JUIn0=",
+      "countryId": "CN",
+      "country": {
+        "id": "CN",
+        "name": "China"
+      }
+    },
+    "departureSchedule": "2024-03-17T07:05:00",
+    "arrivalLocation": {
+      "id": "PVG",
+      "name": "Shanghai Pudong",
+      "apiKey": "eyJlIjoiMTI4NjY3MDc3IiwicyI6IlBWRyIsImgiOiIyNzU0NjA3OSIsInQiOiJBSVJQT1JUIn0=",
+      "countryId": "CN",
+      "country": {
+        "id": "CN",
+        "name": "China"
+      }
+    },
+    "arrivalSchedule": "2024-03-17T08:40:00",
+    "airline": {
+      "id": "-32753",
+      "name": "Aer Lingus",
+      "logoURL": "https://logos.skyscnr.com/images/airlines/favicon/EI.png",
+      "searchTimes": 0
+    }
+  },
+  {
+    "flightIATA": "3U2249",
+    "flightICAO": "CSC2249",
+    "flightStatus": "scheduled",
+    "departureLocation": {
+      "id": "PVG",
+      "name": "Shanghai Pudong",
+      "apiKey": "eyJlIjoiMTI4NjY3MDc3IiwicyI6IlBWRyIsImgiOiIyNzU0NjA3OSIsInQiOiJBSVJQT1JUIn0=",
+      "countryId": "CN",
+      "country": {
+        "id": "CN",
+        "name": "China"
+      }
+    },
+    "departureSchedule": "2024-03-17T07:05:00",
+    "arrivalLocation": {
+      "id": "PVG",
+      "name": "Shanghai Pudong",
+      "apiKey": "eyJlIjoiMTI4NjY3MDc3IiwicyI6IlBWRyIsImgiOiIyNzU0NjA3OSIsInQiOiJBSVJQT1JUIn0=",
+      "countryId": "CN",
+      "country": {
+        "id": "CN",
+        "name": "China"
+      }
+    },
+    "arrivalSchedule": "2024-03-17T08:40:00",
+    "airline": {
+      "id": "-31734",
+      "name": "Turkish Airlines",
+      "logoURL": "https://logos.skyscnr.com/images/airlines/favicon/TK.png",
+      "searchTimes": 0
+    }
+  },
+  {
+    "flightIATA": "NS8273",
+    "flightICAO": "HBH8273",
+    "flightStatus": "scheduled",
+    "departureLocation": {
+      "id": "PVG",
+      "name": "Shanghai Pudong",
+      "apiKey": "eyJlIjoiMTI4NjY3MDc3IiwicyI6IlBWRyIsImgiOiIyNzU0NjA3OSIsInQiOiJBSVJQT1JUIn0=",
+      "countryId": "CN",
+      "country": {
+        "id": "CN",
+        "name": "China"
+      }
+    },
+    "departureSchedule": "2024-03-17T07:05:00",
+    "arrivalLocation": {
+      "id": "PVG",
+      "name": "Shanghai Pudong",
+      "apiKey": "eyJlIjoiMTI4NjY3MDc3IiwicyI6IlBWRyIsImgiOiIyNzU0NjA3OSIsInQiOiJBSVJQT1JUIn0=",
+      "countryId": "CN",
+      "country": {
+        "id": "CN",
+        "name": "China"
+      }
+    },
+    "arrivalSchedule": "2024-03-17T08:40:00",
+    "airline": {
+      "id": "-31147",
+      "name": "Flair Airlines",
+      "logoURL": "https://logos.skyscnr.com/images/airlines/favicon/F..png",
+      "searchTimes": 0
+    }
+  },
+  {
+    "flightIATA": "MU4719",
+    "flightICAO": "CES4719",
+    "flightStatus": "scheduled",
+    "departureLocation": {
+      "id": "PVG",
+      "name": "Shanghai Pudong",
+      "apiKey": "eyJlIjoiMTI4NjY3MDc3IiwicyI6IlBWRyIsImgiOiIyNzU0NjA3OSIsInQiOiJBSVJQT1JUIn0=",
+      "countryId": "CN",
+      "country": {
+        "id": "CN",
+        "name": "China"
+      }
+    },
+    "departureSchedule": "2024-03-17T07:05:00",
+    "arrivalLocation": {
+      "id": "PVG",
+      "name": "Shanghai Pudong",
+      "apiKey": "eyJlIjoiMTI4NjY3MDc3IiwicyI6IlBWRyIsImgiOiIyNzU0NjA3OSIsInQiOiJBSVJQT1JUIn0=",
+      "countryId": "CN",
+      "country": {
+        "id": "CN",
+        "name": "China"
+      }
+    },
+    "arrivalSchedule": "2024-03-17T08:40:00",
+    "airline": {
+      "id": "-31734",
+      "name": "Turkish Airlines",
+      "logoURL": "https://logos.skyscnr.com/images/airlines/favicon/TK.png",
+      "searchTimes": 0
+    }
+  },
+  {
+    "flightIATA": "MF8295",
+    "flightICAO": "CXA8295",
+    "flightStatus": "scheduled",
+    "departureLocation": {
+      "id": "PVG",
+      "name": "Shanghai Pudong",
+      "apiKey": "eyJlIjoiMTI4NjY3MDc3IiwicyI6IlBWRyIsImgiOiIyNzU0NjA3OSIsInQiOiJBSVJQT1JUIn0=",
+      "countryId": "CN",
+      "country": {
+        "id": "CN",
+        "name": "China"
+      }
+    },
+    "departureSchedule": "2024-03-17T07:05:00",
+    "arrivalLocation": {
+      "id": "PVG",
+      "name": "Shanghai Pudong",
+      "apiKey": "eyJlIjoiMTI4NjY3MDc3IiwicyI6IlBWRyIsImgiOiIyNzU0NjA3OSIsInQiOiJBSVJQT1JUIn0=",
+      "countryId": "CN",
+      "country": {
+        "id": "CN",
+        "name": "China"
+      }
+    },
+    "arrivalSchedule": "2024-03-17T08:40:00",
+    "airline": {
+      "id": "-31664",
+      "name": "Xiamen Airlines",
+      "logoURL": "https://logos.skyscnr.com/images/airlines/favicon/MF.png",
+      "searchTimes": 0
+    }
+  },
+  {
+    "flightIATA": "MF5080",
+    "flightICAO": "CXA5080",
+    "flightStatus": "scheduled",
+    "departureLocation": {
+      "id": "PVG",
+      "name": "Shanghai Pudong",
+      "apiKey": "eyJlIjoiMTI4NjY3MDc3IiwicyI6IlBWRyIsImgiOiIyNzU0NjA3OSIsInQiOiJBSVJQT1JUIn0=",
+      "countryId": "CN",
+      "country": {
+        "id": "CN",
+        "name": "China"
+      }
+    },
+    "departureSchedule": "2024-03-17T06:25:00",
+    "arrivalLocation": {
+      "id": "PVG",
+      "name": "Shanghai Pudong",
+      "apiKey": "eyJlIjoiMTI4NjY3MDc3IiwicyI6IlBWRyIsImgiOiIyNzU0NjA3OSIsInQiOiJBSVJQT1JUIn0=",
+      "countryId": "CN",
+      "country": {
+        "id": "CN",
+        "name": "China"
+      }
+    },
+    "arrivalSchedule": "2024-03-17T08:50:00",
+    "airline": {
+      "id": "-31664",
+      "name": "Xiamen Airlines",
+      "logoURL": "https://logos.skyscnr.com/images/airlines/favicon/MF.png",
+      "searchTimes": 0
+    }
+  },
+  {
+    "flightIATA": "G56872",
+    "flightICAO": "HXA6872",
+    "flightStatus": "scheduled",
+    "departureLocation": {
+      "id": "PVG",
+      "name": "Shanghai Pudong",
+      "apiKey": "eyJlIjoiMTI4NjY3MDc3IiwicyI6IlBWRyIsImgiOiIyNzU0NjA3OSIsInQiOiJBSVJQT1JUIn0=",
+      "countryId": "CN",
+      "country": {
+        "id": "CN",
+        "name": "China"
+      }
+    },
+    "departureSchedule": "2024-03-17T06:30:00",
+    "arrivalLocation": {
+      "id": "AAL",
+      "name": "Aalborg",
+      "apiKey": "eyJlIjoiOTU2NzM5OTAiLCJzIjoiQUFMIiwiaCI6IjI3NTM2NDEzIiwidCI6IkFJUlBPUlQifQ==",
+      "countryId": "DK",
+      "country": {
+        "id": "DK",
+        "name": "Denmark"
+      }
+    },
+    "arrivalSchedule": "2024-03-17T09:10:00",
+    "airline": {
+      "id": "-32442",
+      "name": "China Eastern",
+      "logoURL": "https://logos.skyscnr.com/images/airlines/favicon/MU.png",
+      "searchTimes": 0
+    }
+  },
+  {
+    "flightIATA": "3U3282",
+    "flightICAO": "CSC3282",
+    "flightStatus": "scheduled",
+    "departureLocation": {
+      "id": "PVG",
+      "name": "Shanghai Pudong",
+      "apiKey": "eyJlIjoiMTI4NjY3MDc3IiwicyI6IlBWRyIsImgiOiIyNzU0NjA3OSIsInQiOiJBSVJQT1JUIn0=",
+      "countryId": "CN",
+      "country": {
+        "id": "CN",
+        "name": "China"
+      }
+    },
+    "departureSchedule": "2024-03-17T06:25:00",
+    "arrivalLocation": {
+      "id": "PVG",
+      "name": "Shanghai Pudong",
+      "apiKey": "eyJlIjoiMTI4NjY3MDc3IiwicyI6IlBWRyIsImgiOiIyNzU0NjA3OSIsInQiOiJBSVJQT1JUIn0=",
+      "countryId": "CN",
+      "country": {
+        "id": "CN",
+        "name": "China"
+      }
+    },
+    "arrivalSchedule": "2024-03-17T08:50:00",
+    "airline": {
+      "id": "-31734",
+      "name": "Turkish Airlines",
+      "logoURL": "https://logos.skyscnr.com/images/airlines/favicon/TK.png",
+      "searchTimes": 0
+    }
+  },
+  {
+    "flightIATA": "HO5714",
+    "flightICAO": "DKH5714",
+    "flightStatus": "scheduled",
+    "departureLocation": {
+      "id": "PVG",
+      "name": "Shanghai Pudong",
+      "apiKey": "eyJlIjoiMTI4NjY3MDc3IiwicyI6IlBWRyIsImgiOiIyNzU0NjA3OSIsInQiOiJBSVJQT1JUIn0=",
+      "countryId": "CN",
+      "country": {
+        "id": "CN",
+        "name": "China"
+      }
+    },
+    "departureSchedule": "2024-03-17T06:30:00",
+    "arrivalLocation": {
+      "id": "AAL",
+      "name": "Aalborg",
+      "apiKey": "eyJlIjoiOTU2NzM5OTAiLCJzIjoiQUFMIiwiaCI6IjI3NTM2NDEzIiwidCI6IkFJUlBPUlQifQ==",
+      "countryId": "DK",
+      "country": {
+        "id": "DK",
+        "name": "Denmark"
+      }
+    },
+    "arrivalSchedule": "2024-03-17T09:10:00",
+    "airline": {
+      "id": "-31685",
+      "name": "Vueling Airlines",
+      "logoURL": "https://logos.skyscnr.com/images/airlines/favicon/07.png",
+      "searchTimes": 0
+    }
+  },
+  {
+    "flightIATA": "3U5332",
+    "flightICAO": "CSC5332",
+    "flightStatus": "scheduled",
+    "departureLocation": {
+      "id": "PVG",
+      "name": "Shanghai Pudong",
+      "apiKey": "eyJlIjoiMTI4NjY3MDc3IiwicyI6IlBWRyIsImgiOiIyNzU0NjA3OSIsInQiOiJBSVJQT1JUIn0=",
+      "countryId": "CN",
+      "country": {
+        "id": "CN",
+        "name": "China"
+      }
+    },
+    "departureSchedule": "2024-03-17T06:30:00",
+    "arrivalLocation": {
+      "id": "AAL",
+      "name": "Aalborg",
+      "apiKey": "eyJlIjoiOTU2NzM5OTAiLCJzIjoiQUFMIiwiaCI6IjI3NTM2NDEzIiwidCI6IkFJUlBPUlQifQ==",
+      "countryId": "DK",
+      "country": {
+        "id": "DK",
+        "name": "Denmark"
+      }
+    },
+    "arrivalSchedule": "2024-03-17T09:10:00",
+    "airline": {
+      "id": "-31734",
+      "name": "Turkish Airlines",
+      "logoURL": "https://logos.skyscnr.com/images/airlines/favicon/TK.png",
+      "searchTimes": 0
+    }
+  },
+  {
+    "flightIATA": "MF3961",
+    "flightICAO": "CXA3961",
+    "flightStatus": "scheduled",
+    "departureLocation": {
+      "id": "PVG",
+      "name": "Shanghai Pudong",
+      "apiKey": "eyJlIjoiMTI4NjY3MDc3IiwicyI6IlBWRyIsImgiOiIyNzU0NjA3OSIsInQiOiJBSVJQT1JUIn0=",
+      "countryId": "CN",
+      "country": {
+        "id": "CN",
+        "name": "China"
+      }
+    },
+    "departureSchedule": "2024-03-17T06:30:00",
+    "arrivalLocation": {
+      "id": "AAL",
+      "name": "Aalborg",
+      "apiKey": "eyJlIjoiOTU2NzM5OTAiLCJzIjoiQUFMIiwiaCI6IjI3NTM2NDEzIiwidCI6IkFJUlBPUlQifQ==",
+      "countryId": "DK",
+      "country": {
+        "id": "DK",
+        "name": "Denmark"
+      }
+    },
+    "arrivalSchedule": "2024-03-17T09:10:00",
+    "airline": {
+      "id": "-31664",
+      "name": "Xiamen Airlines",
+      "logoURL": "https://logos.skyscnr.com/images/airlines/favicon/MF.png",
+      "searchTimes": 0
+    }
+  },
+  {
+    "flightIATA": "MU6388",
+    "flightICAO": "CES6388",
+    "flightStatus": "scheduled",
+    "departureLocation": {
+      "id": "PVG",
+      "name": "Shanghai Pudong",
+      "apiKey": "eyJlIjoiMTI4NjY3MDc3IiwicyI6IlBWRyIsImgiOiIyNzU0NjA3OSIsInQiOiJBSVJQT1JUIn0=",
+      "countryId": "CN",
+      "country": {
+        "id": "CN",
+        "name": "China"
+      }
+    },
+    "departureSchedule": "2024-03-17T06:30:00",
+    "arrivalLocation": {
+      "id": "AAL",
+      "name": "Aalborg",
+      "apiKey": "eyJlIjoiOTU2NzM5OTAiLCJzIjoiQUFMIiwiaCI6IjI3NTM2NDEzIiwidCI6IkFJUlBPUlQifQ==",
+      "countryId": "DK",
+      "country": {
+        "id": "DK",
+        "name": "Denmark"
+      }
+    },
+    "arrivalSchedule": "2024-03-17T09:10:00",
+    "airline": {
+      "id": "-31734",
+      "name": "Turkish Airlines",
+      "logoURL": "https://logos.skyscnr.com/images/airlines/favicon/TK.png",
+      "searchTimes": 0
+    }
+  },
+  {
+    "flightIATA": "SC2171",
+    "flightICAO": "CDG2171",
+    "flightStatus": "scheduled",
+    "departureLocation": {
+      "id": "PVG",
+      "name": "Shanghai Pudong",
+      "apiKey": "eyJlIjoiMTI4NjY3MDc3IiwicyI6IlBWRyIsImgiOiIyNzU0NjA3OSIsInQiOiJBSVJQT1JUIn0=",
+      "countryId": "CN",
+      "country": {
+        "id": "CN",
+        "name": "China"
+      }
+    },
+    "departureSchedule": "2024-03-17T07:05:00",
+    "arrivalLocation": {
+      "id": "PVG",
+      "name": "Shanghai Pudong",
+      "apiKey": "eyJlIjoiMTI4NjY3MDc3IiwicyI6IlBWRyIsImgiOiIyNzU0NjA3OSIsInQiOiJBSVJQT1JUIn0=",
+      "countryId": "CN",
+      "country": {
+        "id": "CN",
+        "name": "China"
+      }
+    },
+    "arrivalSchedule": "2024-03-17T08:40:00",
+    "airline": {
+      "id": "-32229",
+      "name": "Hong Kong Airlines",
+      "logoURL": "https://logos.skyscnr.com/images/airlines/favicon/N8.png",
+      "searchTimes": 0
+    }
+  },
+  {
+    "flightIATA": "ET605",
+    "flightICAO": "ETH605",
+    "flightStatus": "active",
+    "departureLocation": {
+      "id": "PVG",
+      "name": "Shanghai Pudong",
+      "apiKey": "eyJlIjoiMTI4NjY3MDc3IiwicyI6IlBWRyIsImgiOiIyNzU0NjA3OSIsInQiOiJBSVJQT1JUIn0=",
+      "countryId": "CN",
+      "country": {
+        "id": "CN",
+        "name": "China"
+      }
+    },
+    "departureSchedule": "2024-03-17T00:10:00",
+    "arrivalLocation": {
+      "id": "ADD",
+      "name": "Addis Ababa",
+      "apiKey": "eyJlIjoiMTI4NjY4MjAzIiwicyI6IkFERCIsImgiOiIyNzUzNjQ0NSIsInQiOiJBSVJQT1JUIn0=",
+      "countryId": "ET",
+      "country": {
+        "id": "ET",
+        "name": "Ethiopia"
+      }
+    },
+    "arrivalSchedule": "2024-03-17T07:15:00",
+    "airline": {
+      "id": "-31734",
+      "name": "Turkish Airlines",
+      "logoURL": "https://logos.skyscnr.com/images/airlines/favicon/TK.png",
+      "searchTimes": 0
+    }
+  },
+  {
+    "flightIATA": "HA5100",
+    "flightICAO": "HAL5100",
+    "flightStatus": "scheduled",
+    "departureLocation": {
+      "id": "HND",
+      "name": "Tokyo Haneda",
+      "apiKey": "eyJlIjoiMTI4NjY3MTQzIiwicyI6IkhORCIsImgiOiIyNzU0MjA4OSIsInQiOiJBSVJQT1JUIn0=",
+      "countryId": "JP",
+      "country": {
+        "id": "JP",
+        "name": "Japan"
+      }
+    },
+    "departureSchedule": "2024-03-17T07:45:00",
+    "arrivalLocation": {
+      "id": "HND",
+      "name": "Tokyo Haneda",
+      "apiKey": "eyJlIjoiMTI4NjY3MTQzIiwicyI6IkhORCIsImgiOiIyNzU0MjA4OSIsInQiOiJBSVJQT1JUIn0=",
+      "countryId": "JP",
+      "country": {
+        "id": "JP",
+        "name": "Japan"
+      }
+    },
+    "arrivalSchedule": "2024-03-17T09:05:00",
+    "airline": {
+      "id": "-31734",
+      "name": "Turkish Airlines",
+      "logoURL": "https://logos.skyscnr.com/images/airlines/favicon/TK.png",
+      "searchTimes": 0
+    }
+  },
+  {
+    "flightIATA": "BA3432",
+    "flightICAO": "BAW3432",
+    "flightStatus": "scheduled",
+    "departureLocation": {
+      "id": "HND",
+      "name": "Tokyo Haneda",
+      "apiKey": "eyJlIjoiMTI4NjY3MTQzIiwicyI6IkhORCIsImgiOiIyNzU0MjA4OSIsInQiOiJBSVJQT1JUIn0=",
+      "countryId": "JP",
+      "country": {
+        "id": "JP",
+        "name": "Japan"
+      }
+    },
+    "departureSchedule": "2024-03-17T07:45:00",
+    "arrivalLocation": {
+      "id": "HND",
+      "name": "Tokyo Haneda",
+      "apiKey": "eyJlIjoiMTI4NjY3MTQzIiwicyI6IkhORCIsImgiOiIyNzU0MjA4OSIsInQiOiJBSVJQT1JUIn0=",
+      "countryId": "JP",
+      "country": {
+        "id": "JP",
+        "name": "Japan"
+      }
+    },
+    "arrivalSchedule": "2024-03-17T09:05:00",
+    "airline": {
+      "id": "-32480",
+      "name": "British Airways",
+      "logoURL": "https://logos.skyscnr.com/images/airlines/favicon/BA.png",
+      "searchTimes": 0
+    }
+  },
+  {
+    "flightIATA": "QF3842",
+    "flightICAO": "QFA3842",
+    "flightStatus": "scheduled",
+    "departureLocation": {
+      "id": "NOC",
+      "name": "Ireland West Knock",
+      "apiKey": "eyJlIjoiOTU2NzQyOTEiLCJzIjoiTk9DIiwiaCI6IjI3NTQ1MTM3IiwidCI6IkFJUlBPUlQifQ==",
+      "countryId": "IE",
+      "country": {
+        "id": "IE",
+        "name": "Ireland"
+      }
+    },
+    "departureSchedule": "2024-03-17T09:30:00",
+    "arrivalLocation": {
+      "id": "AKL",
+      "name": "Auckland International",
+      "apiKey": "eyJlIjoiOTU2NzM4MDUiLCJzIjoiQUtMIiwiaCI6IjI3NTM2NTI2IiwidCI6IkFJUlBPUlQifQ==",
+      "countryId": "NZ",
+      "country": {
+        "id": "NZ",
+        "name": "New Zealand"
+      }
+    },
+    "arrivalSchedule": "2024-03-17T13:40:00",
+    "airline": {
+      "id": "-31748",
+      "name": "transavia",
+      "logoURL": "https://logos.skyscnr.com/images/airlines/favicon/HV.png",
+      "searchTimes": 0
+    }
+  },
+  {
+    "flightIATA": "FJ411",
+    "flightICAO": "FJI411",
+    "flightStatus": "scheduled",
+    "departureLocation": {
+      "id": "NOC",
+      "name": "Ireland West Knock",
+      "apiKey": "eyJlIjoiOTU2NzQyOTEiLCJzIjoiTk9DIiwiaCI6IjI3NTQ1MTM3IiwidCI6IkFJUlBPUlQifQ==",
+      "countryId": "IE",
+      "country": {
+        "id": "IE",
+        "name": "Ireland"
+      }
+    },
+    "departureSchedule": "2024-03-17T09:30:00",
+    "arrivalLocation": {
+      "id": "AKL",
+      "name": "Auckland International",
+      "apiKey": "eyJlIjoiOTU2NzM4MDUiLCJzIjoiQUtMIiwiaCI6IjI3NTM2NTI2IiwidCI6IkFJUlBPUlQifQ==",
+      "countryId": "NZ",
+      "country": {
+        "id": "NZ",
+        "name": "New Zealand"
+      }
+    },
+    "arrivalSchedule": "2024-03-17T13:40:00",
+    "airline": {
+      "id": "-30727",
+      "name": "ITA Airways",
+      "logoURL": "https://logos.skyscnr.com/images/airlines/favicon/AZ.png",
+      "searchTimes": 0
+    }
+  },
+  {
+    "flightIATA": "2S1824",
+    "flightICAO": "STW1824",
+    "flightStatus": "scheduled",
+    "departureLocation": {
+      "id": "DME",
+      "name": "Moscow Domodedovo",
+      "apiKey": "eyJlIjoiMTI4NjY4MDEyIiwicyI6IkRNRSIsImgiOiIyNzUzOTQzOCIsInQiOiJBSVJQT1JUIn0=",
+      "countryId": "RU",
+      "country": {
+        "id": "RU",
+        "name": "Russia"
+      }
+    },
+    "departureSchedule": "2024-03-17T01:00:00",
+    "arrivalLocation": {
+      "id": "MPN",
+      "name": "Stanley",
+      "apiKey": "eyJlIjoiMTI4NjY4ODQ4IiwicyI6Ik1QTiIsImgiOiIyNzU0NjA1MyIsInQiOiJBSVJQT1JUIn0=",
+      "countryId": "FK",
+      "country": {
+        "id": "FK",
+        "name": "Falkland Islands"
+      }
+    },
+    "arrivalSchedule": "2024-03-17T05:55:00",
+    "airline": {
+      "id": "-31734",
+      "name": "Turkish Airlines",
+      "logoURL": "https://logos.skyscnr.com/images/airlines/favicon/TK.png",
+      "searchTimes": 0
+    }
+  },
+  {
+    "flightIATA": "GJ3431",
+    "flightICAO": "CDC3431",
+    "flightStatus": "scheduled",
+    "departureLocation": {
+      "id": "PVG",
+      "name": "Shanghai Pudong",
+      "apiKey": "eyJlIjoiMTI4NjY3MDc3IiwicyI6IlBWRyIsImgiOiIyNzU0NjA3OSIsInQiOiJBSVJQT1JUIn0=",
+      "countryId": "CN",
+      "country": {
+        "id": "CN",
+        "name": "China"
+      }
+    },
+    "departureSchedule": "2024-03-17T06:35:00",
+    "arrivalLocation": {
+      "id": "PVG",
+      "name": "Shanghai Pudong",
+      "apiKey": "eyJlIjoiMTI4NjY3MDc3IiwicyI6IlBWRyIsImgiOiIyNzU0NjA3OSIsInQiOiJBSVJQT1JUIn0=",
+      "countryId": "CN",
+      "country": {
+        "id": "CN",
+        "name": "China"
+      }
+    },
+    "arrivalSchedule": "2024-03-17T09:20:00",
+    "airline": {
+      "id": "-32753",
+      "name": "Aer Lingus",
+      "logoURL": "https://logos.skyscnr.com/images/airlines/favicon/EI.png",
+      "searchTimes": 0
+    }
+  },
+  {
+    "flightIATA": "AC6115",
+    "flightICAO": "ACA6115",
+    "flightStatus": "scheduled",
+    "departureLocation": {
+      "id": "BRU",
+      "name": "Brussels International",
+      "apiKey": "eyJlIjoiOTU1NjUwMzYiLCJzIjoiQlJVIiwiaCI6IjI3NTM5NTY1IiwidCI6IkFJUlBPUlQifQ==",
+      "countryId": "BE",
+      "country": {
+        "id": "BE",
+        "name": "Belgium"
+      }
+    },
+    "departureSchedule": "2024-03-17T08:30:00",
+    "arrivalLocation": {
+      "id": "AKL",
+      "name": "Auckland International",
+      "apiKey": "eyJlIjoiOTU2NzM4MDUiLCJzIjoiQUtMIiwiaCI6IjI3NTM2NTI2IiwidCI6IkFJUlBPUlQifQ==",
+      "countryId": "NZ",
+      "country": {
+        "id": "NZ",
+        "name": "New Zealand"
+      }
+    },
+    "arrivalSchedule": "2024-03-17T14:45:00",
+    "airline": {
+      "id": "-32695",
+      "name": "Air Canada",
+      "logoURL": "https://logos.skyscnr.com/images/airlines/favicon/AC.png",
+      "searchTimes": 0
+    }
+  },
+  {
+    "flightIATA": "VA1493",
+    "flightICAO": "VOZ1493",
+    "flightStatus": "scheduled",
+    "departureLocation": {
+      "id": "BRU",
+      "name": "Brussels International",
+      "apiKey": "eyJlIjoiOTU1NjUwMzYiLCJzIjoiQlJVIiwiaCI6IjI3NTM5NTY1IiwidCI6IkFJUlBPUlQifQ==",
+      "countryId": "BE",
+      "country": {
+        "id": "BE",
+        "name": "Belgium"
+      }
+    },
+    "departureSchedule": "2024-03-17T08:20:00",
+    "arrivalLocation": {
+      "id": "CXI",
+      "name": "Christmas Island",
+      "apiKey": "eyJlIjoiMTI4NjY4Mzk1IiwicyI6IkNYSSIsImgiOiI4MTk3NjA2NCIsInQiOiJBSVJQT1JUIn0=",
+      "countryId": "CX",
+      "country": {
+        "id": "CX",
+        "name": "Christmas Island"
+      }
+    },
+    "arrivalSchedule": "2024-03-17T10:00:00",
+    "airline": {
+      "id": "-31685",
+      "name": "Vueling Airlines",
+      "logoURL": "https://logos.skyscnr.com/images/airlines/favicon/07.png",
+      "searchTimes": 0
+    }
+  },
+  {
+    "flightIATA": "HA5126",
+    "flightICAO": "HAL5126",
+    "flightStatus": "scheduled",
+    "departureLocation": {
+      "id": "HND",
+      "name": "Tokyo Haneda",
+      "apiKey": "eyJlIjoiMTI4NjY3MTQzIiwicyI6IkhORCIsImgiOiIyNzU0MjA4OSIsInQiOiJBSVJQT1JUIn0=",
+      "countryId": "JP",
+      "country": {
+        "id": "JP",
+        "name": "Japan"
+      }
+    },
+    "departureSchedule": "2024-03-17T07:40:00",
+    "arrivalLocation": {
+      "id": "HND",
+      "name": "Tokyo Haneda",
+      "apiKey": "eyJlIjoiMTI4NjY3MTQzIiwicyI6IkhORCIsImgiOiIyNzU0MjA4OSIsInQiOiJBSVJQT1JUIn0=",
+      "countryId": "JP",
+      "country": {
+        "id": "JP",
+        "name": "Japan"
+      }
+    },
+    "arrivalSchedule": "2024-03-17T09:10:00",
+    "airline": {
+      "id": "-31734",
+      "name": "Turkish Airlines",
+      "logoURL": "https://logos.skyscnr.com/images/airlines/favicon/TK.png",
+      "searchTimes": 0
+    }
+  },
+  {
+    "flightIATA": "VJ120",
+    "flightICAO": "VJC120",
+    "flightStatus": "scheduled",
+    "departureLocation": {
+      "id": "SGN",
+      "name": "Ho Chi Minh City",
+      "apiKey": "eyJlIjoiOTU2NzMzNzkiLCJzIjoiU0dOIiwiaCI6IjI3NTQ2MzI5IiwidCI6IkFJUlBPUlQifQ==",
+      "countryId": "VN",
+      "country": {
+        "id": "VN",
+        "name": "Vietnam"
+      }
+    },
+    "departureSchedule": "2024-03-17T06:00:00",
+    "arrivalLocation": {
+      "id": "SGN",
+      "name": "Ho Chi Minh City",
+      "apiKey": "eyJlIjoiOTU2NzMzNzkiLCJzIjoiU0dOIiwiaCI6IjI3NTQ2MzI5IiwidCI6IkFJUlBPUlQifQ==",
+      "countryId": "VN",
+      "country": {
+        "id": "VN",
+        "name": "Vietnam"
+      }
+    },
+    "arrivalSchedule": "2024-03-17T08:10:00",
+    "airline": {
+      "id": "-32442",
+      "name": "China Eastern",
+      "logoURL": "https://logos.skyscnr.com/images/airlines/favicon/MU.png",
+      "searchTimes": 0
+    }
+  },
+  {
+    "flightIATA": "B78751",
+    "flightICAO": "UIA8751",
+    "flightStatus": "scheduled",
+    "departureLocation": {
+      "id": "TPE",
+      "name": "Taipei Taiwan Taoyuan",
+      "apiKey": "eyJlIjoiMTI4NjY3MDU0IiwicyI6IlRQRSIsImgiOiIyNzU0NzIzNiIsInQiOiJBSVJQT1JUIn0=",
+      "countryId": "TW",
+      "country": {
+        "id": "TW",
+        "name": "Taiwan"
+      }
+    },
+    "departureSchedule": "2024-03-17T06:30:00",
+    "arrivalLocation": {
+      "id": "TPE",
+      "name": "Taipei Taiwan Taoyuan",
+      "apiKey": "eyJlIjoiMTI4NjY3MDU0IiwicyI6IlRQRSIsImgiOiIyNzU0NzIzNiIsInQiOiJBSVJQT1JUIn0=",
+      "countryId": "TW",
+      "country": {
+        "id": "TW",
+        "name": "Taiwan"
+      }
+    },
+    "arrivalSchedule": "2024-03-17T07:25:00",
+    "airline": {
+      "id": "-32024",
+      "name": "Nok Air",
+      "logoURL": "https://logos.skyscnr.com/images/airlines/favicon/DD.png",
+      "searchTimes": 0
+    }
+  },
+  {
+    "flightIATA": "B78781",
+    "flightICAO": "UIA8781",
+    "flightStatus": "scheduled",
+    "departureLocation": {
+      "id": "TPE",
+      "name": "Taipei Taiwan Taoyuan",
+      "apiKey": "eyJlIjoiMTI4NjY3MDU0IiwicyI6IlRQRSIsImgiOiIyNzU0NzIzNiIsInQiOiJBSVJQT1JUIn0=",
+      "countryId": "TW",
+      "country": {
+        "id": "TW",
+        "name": "Taiwan"
+      }
+    },
+    "departureSchedule": "2024-03-17T06:45:00",
+    "arrivalLocation": {
+      "id": "TPE",
+      "name": "Taipei Taiwan Taoyuan",
+      "apiKey": "eyJlIjoiMTI4NjY3MDU0IiwicyI6IlRQRSIsImgiOiIyNzU0NzIzNiIsInQiOiJBSVJQT1JUIn0=",
+      "countryId": "TW",
+      "country": {
+        "id": "TW",
+        "name": "Taiwan"
+      }
+    },
+    "arrivalSchedule": "2024-03-17T07:40:00",
+    "airline": {
+      "id": "-32024",
+      "name": "Nok Air",
+      "logoURL": "https://logos.skyscnr.com/images/airlines/favicon/DD.png",
+      "searchTimes": 0
+    }
+  },
+  {
+    "flightIATA": "N4509",
+    "flightICAO": "NWS509",
+    "flightStatus": "scheduled",
+    "departureLocation": {
+      "id": "DME",
+      "name": "Moscow Domodedovo",
+      "apiKey": "eyJlIjoiMTI4NjY4MDEyIiwicyI6IkRNRSIsImgiOiIyNzUzOTQzOCIsInQiOiJBSVJQT1JUIn0=",
+      "countryId": "RU",
+      "country": {
+        "id": "RU",
+        "name": "Russia"
+      }
+    },
+    "departureSchedule": "2024-03-17T01:10:00",
+    "arrivalLocation": {
+      "id": "OCJ",
+      "name": "Ocho Rios",
+      "apiKey": "eyJlIjoiMTI5MDU2OTI3IiwicyI6Ik9DSiIsImgiOiIyNzU0NTE5MSIsInQiOiJBSVJQT1JUIn0=",
+      "countryId": "JM",
+      "country": {
+        "id": "JM",
+        "name": "Jamaica"
+      }
+    },
+    "arrivalSchedule": "2024-03-17T07:10:00",
+    "airline": {
+      "id": "-31899",
+      "name": "Azores Airlines",
+      "logoURL": "https://logos.skyscnr.com/images/airlines/favicon/S4.png",
+      "searchTimes": 0
+    }
+  },
+  {
+    "flightIATA": "ZH1787",
+    "flightICAO": "CSZ1787",
+    "flightStatus": "scheduled",
+    "departureLocation": {
+      "id": "PVG",
+      "name": "Shanghai Pudong",
+      "apiKey": "eyJlIjoiMTI4NjY3MDc3IiwicyI6IlBWRyIsImgiOiIyNzU0NjA3OSIsInQiOiJBSVJQT1JUIn0=",
+      "countryId": "CN",
+      "country": {
+        "id": "CN",
+        "name": "China"
+      }
+    },
+    "departureSchedule": "2024-03-17T06:30:00",
+    "arrivalLocation": {
+      "id": "PVG",
+      "name": "Shanghai Pudong",
+      "apiKey": "eyJlIjoiMTI4NjY3MDc3IiwicyI6IlBWRyIsImgiOiIyNzU0NjA3OSIsInQiOiJBSVJQT1JUIn0=",
+      "countryId": "CN",
+      "country": {
+        "id": "CN",
+        "name": "China"
+      }
+    },
+    "arrivalSchedule": "2024-03-17T08:35:00",
+    "airline": {
+      "id": "-31734",
+      "name": "Turkish Airlines",
+      "logoURL": "https://logos.skyscnr.com/images/airlines/favicon/TK.png",
+      "searchTimes": 0
+    }
+  },
+  {
+    "flightIATA": "SV8068",
+    "flightICAO": "SVA8068",
+    "flightStatus": "scheduled",
+    "departureLocation": {
+      "id": "RUH",
+      "name": "Riyadh",
+      "apiKey": "eyJlIjoiOTU2NzMzNjIiLCJzIjoiUlVIIiwiaCI6IjI3NTQ2MjIzIiwidCI6IkFJUlBPUlQifQ==",
+      "countryId": "SA",
+      "country": {
+        "id": "SA",
+        "name": "Saudi Arabia"
+      }
+    },
+    "departureSchedule": "2024-03-17T02:00:00",
+    "arrivalLocation": {
+      "id": "RUH",
+      "name": "Riyadh",
+      "apiKey": "eyJlIjoiOTU2NzMzNjIiLCJzIjoiUlVIIiwiaCI6IjI3NTQ2MjIzIiwidCI6IkFJUlBPUlQifQ==",
+      "countryId": "SA",
+      "country": {
+        "id": "SA",
+        "name": "Saudi Arabia"
+      }
+    },
+    "arrivalSchedule": "2024-03-17T03:45:00",
+    "airline": {
+      "id": "-32086",
+      "name": "Luxair",
+      "logoURL": "https://logos.skyscnr.com/images/airlines/favicon/LG.png",
+      "searchTimes": 0
+    }
+  },
+  {
+    "flightIATA": "G59061",
+    "flightICAO": "HXA9061",
+    "flightStatus": "scheduled",
+    "departureLocation": {
+      "id": "PVG",
+      "name": "Shanghai Pudong",
+      "apiKey": "eyJlIjoiMTI4NjY3MDc3IiwicyI6IlBWRyIsImgiOiIyNzU0NjA3OSIsInQiOiJBSVJQT1JUIn0=",
+      "countryId": "CN",
+      "country": {
+        "id": "CN",
+        "name": "China"
+      }
+    },
+    "departureSchedule": "2024-03-17T06:45:00",
+    "arrivalLocation": {
+      "id": "PVG",
+      "name": "Shanghai Pudong",
+      "apiKey": "eyJlIjoiMTI4NjY3MDc3IiwicyI6IlBWRyIsImgiOiIyNzU0NjA3OSIsInQiOiJBSVJQT1JUIn0=",
+      "countryId": "CN",
+      "country": {
+        "id": "CN",
+        "name": "China"
+      }
+    },
+    "arrivalSchedule": "2024-03-17T09:00:00",
+    "airline": {
+      "id": "-32442",
+      "name": "China Eastern",
+      "logoURL": "https://logos.skyscnr.com/images/airlines/favicon/MU.png",
+      "searchTimes": 0
+    }
+  },
+  {
+    "flightIATA": "NH4712",
+    "flightICAO": "ANA4712",
+    "flightStatus": "scheduled",
+    "departureLocation": {
+      "id": "HND",
+      "name": "Tokyo Haneda",
+      "apiKey": "eyJlIjoiMTI4NjY3MTQzIiwicyI6IkhORCIsImgiOiIyNzU0MjA4OSIsInQiOiJBSVJQT1JUIn0=",
+      "countryId": "JP",
+      "country": {
+        "id": "JP",
+        "name": "Japan"
+      }
+    },
+    "departureSchedule": "2024-03-17T08:00:00",
+    "arrivalLocation": {
+      "id": "HND",
+      "name": "Tokyo Haneda",
+      "apiKey": "eyJlIjoiMTI4NjY3MTQzIiwicyI6IkhORCIsImgiOiIyNzU0MjA4OSIsInQiOiJBSVJQT1JUIn0=",
+      "countryId": "JP",
+      "country": {
+        "id": "JP",
+        "name": "Japan"
+      }
+    },
+    "arrivalSchedule": "2024-03-17T09:35:00",
+    "airline": {
+      "id": "-31963",
+      "name": "PIA",
+      "logoURL": "https://logos.skyscnr.com/images/airlines/favicon/PK.png",
+      "searchTimes": 0
+    }
+  },
+  {
+    "flightIATA": "TK9316",
+    "flightICAO": "THY9316",
+    "flightStatus": "scheduled",
+    "departureLocation": {
+      "id": "SIN",
+      "name": "Singapore Changi",
+      "apiKey": "eyJlIjoiOTU2NzMzNzUiLCJzIjoiU0lOIiwiaCI6IjI3NTQ2MTExIiwidCI6IkFJUlBPUlQifQ==",
+      "countryId": "SG",
+      "country": {
+        "id": "SG",
+        "name": "Singapore"
+      }
+    },
+    "departureSchedule": "2024-03-17T00:25:00",
+    "arrivalLocation": {
+      "id": "SPX",
+      "name": "Sphinx International",
+      "apiKey": "eyJlIjoiMTk5Nzc1MjQxIiwicyI6IlNQWCIsImgiOiIzMzkyMjc3MyIsInQiOiJBSVJQT1JUIn0=",
+      "countryId": "EG",
+      "country": {
+        "id": "EG",
+        "name": "Egypt"
+      }
+    },
+    "arrivalSchedule": "2024-03-17T05:25:00",
+    "airline": {
+      "id": "-31734",
+      "name": "Turkish Airlines",
+      "logoURL": "https://logos.skyscnr.com/images/airlines/favicon/TK.png",
+      "searchTimes": 0
+    }
+  },
+  {
+    "flightIATA": "CA1055",
+    "flightICAO": "CCA1055",
+    "flightStatus": "scheduled",
+    "departureLocation": {
+      "id": "PVG",
+      "name": "Shanghai Pudong",
+      "apiKey": "eyJlIjoiMTI4NjY3MDc3IiwicyI6IlBWRyIsImgiOiIyNzU0NjA3OSIsInQiOiJBSVJQT1JUIn0=",
+      "countryId": "CN",
+      "country": {
+        "id": "CN",
+        "name": "China"
+      }
+    },
+    "departureSchedule": "2024-03-17T06:35:00",
+    "arrivalLocation": {
+      "id": "STT",
+      "name": "Saint Thomas Cyril E King",
+      "apiKey": "eyJlIjoiOTk1Mzk2NTIiLCJzIjoiU1RUIiwiaCI6IjgxOTcyMDUyIiwidCI6IkFJUlBPUlQifQ==",
+      "countryId": "AX",
+      "country": {
+        "id": "AX",
+        "name": "Åland Islands"
+      }
+    },
+    "arrivalSchedule": "2024-03-16T23:10:00",
+    "airline": {
+      "id": "-31488",
+      "name": "Thai LionAir",
+      "logoURL": "https://logos.skyscnr.com/images/airlines/favicon/0W.png",
+      "searchTimes": 0
+    }
+  },
+  {
+    "flightIATA": "A12501",
+    "flightICAO": "A12501",
+    "flightStatus": "scheduled",
+    "departureLocation": {
+      "id": "SGN",
+      "name": "Ho Chi Minh City",
+      "apiKey": "eyJlIjoiOTU2NzMzNzkiLCJzIjoiU0dOIiwiaCI6IjI3NTQ2MzI5IiwidCI6IkFJUlBPUlQifQ==",
+      "countryId": "VN",
+      "country": {
+        "id": "VN",
+        "name": "Vietnam"
+      }
+    },
+    "departureSchedule": "2024-03-17T05:30:00",
+    "arrivalLocation": {
+      "id": "SGN",
+      "name": "Ho Chi Minh City",
+      "apiKey": "eyJlIjoiOTU2NzMzNzkiLCJzIjoiU0dOIiwiaCI6IjI3NTQ2MzI5IiwidCI6IkFJUlBPUlQifQ==",
+      "countryId": "VN",
+      "country": {
+        "id": "VN",
+        "name": "Vietnam"
+      }
+    },
+    "arrivalSchedule": "2024-03-17T06:50:00",
+    "airline": null
+  },
+  {
+    "flightIATA": "W24501",
+    "flightICAO": "FXT4501",
+    "flightStatus": "scheduled",
+    "departureLocation": {
+      "id": "SGN",
+      "name": "Ho Chi Minh City",
+      "apiKey": "eyJlIjoiOTU2NzMzNzkiLCJzIjoiU0dOIiwiaCI6IjI3NTQ2MzI5IiwidCI6IkFJUlBPUlQifQ==",
+      "countryId": "VN",
+      "country": {
+        "id": "VN",
+        "name": "Vietnam"
+      }
+    },
+    "departureSchedule": "2024-03-17T05:30:00",
+    "arrivalLocation": {
+      "id": "SGN",
+      "name": "Ho Chi Minh City",
+      "apiKey": "eyJlIjoiOTU2NzMzNzkiLCJzIjoiU0dOIiwiaCI6IjI3NTQ2MzI5IiwidCI6IkFJUlBPUlQifQ==",
+      "countryId": "VN",
+      "country": {
+        "id": "VN",
+        "name": "Vietnam"
+      }
+    },
+    "arrivalSchedule": "2024-03-17T06:50:00",
+    "airline": {
+      "id": "-32090",
+      "name": "Lufthansa",
+      "logoURL": "https://logos.skyscnr.com/images/airlines/favicon/LH.png",
+      "searchTimes": 0
+    }
+  },
+  {
+    "flightIATA": "H14029",
+    "flightICAO": "H14029",
+    "flightStatus": "scheduled",
+    "departureLocation": {
+      "id": "SGN",
+      "name": "Ho Chi Minh City",
+      "apiKey": "eyJlIjoiOTU2NzMzNzkiLCJzIjoiU0dOIiwiaCI6IjI3NTQ2MzI5IiwidCI6IkFJUlBPUlQifQ==",
+      "countryId": "VN",
+      "country": {
+        "id": "VN",
+        "name": "Vietnam"
+      }
+    },
+    "departureSchedule": "2024-03-17T05:30:00",
+    "arrivalLocation": {
+      "id": "SGN",
+      "name": "Ho Chi Minh City",
+      "apiKey": "eyJlIjoiOTU2NzMzNzkiLCJzIjoiU0dOIiwiaCI6IjI3NTQ2MzI5IiwidCI6IkFJUlBPUlQifQ==",
+      "countryId": "VN",
+      "country": {
+        "id": "VN",
+        "name": "Vietnam"
+      }
+    },
+    "arrivalSchedule": "2024-03-17T06:50:00",
+    "airline": null
+  },
+  {
+    "flightIATA": "VJ501",
+    "flightICAO": "VJC501",
+    "flightStatus": "scheduled",
+    "departureLocation": {
+      "id": "SGN",
+      "name": "Ho Chi Minh City",
+      "apiKey": "eyJlIjoiOTU2NzMzNzkiLCJzIjoiU0dOIiwiaCI6IjI3NTQ2MzI5IiwidCI6IkFJUlBPUlQifQ==",
+      "countryId": "VN",
+      "country": {
+        "id": "VN",
+        "name": "Vietnam"
+      }
+    },
+    "departureSchedule": "2024-03-17T05:30:00",
+    "arrivalLocation": {
+      "id": "SGN",
+      "name": "Ho Chi Minh City",
+      "apiKey": "eyJlIjoiOTU2NzMzNzkiLCJzIjoiU0dOIiwiaCI6IjI3NTQ2MzI5IiwidCI6IkFJUlBPUlQifQ==",
+      "countryId": "VN",
+      "country": {
+        "id": "VN",
+        "name": "Vietnam"
+      }
+    },
+    "arrivalSchedule": "2024-03-17T06:50:00",
+    "airline": {
+      "id": "-32442",
+      "name": "China Eastern",
+      "logoURL": "https://logos.skyscnr.com/images/airlines/favicon/MU.png",
+      "searchTimes": 0
+    }
+  },
+  {
+    "flightIATA": "QH201",
+    "flightICAO": "BAV201",
+    "flightStatus": "scheduled",
+    "departureLocation": {
+      "id": "SGN",
+      "name": "Ho Chi Minh City",
+      "apiKey": "eyJlIjoiOTU2NzMzNzkiLCJzIjoiU0dOIiwiaCI6IjI3NTQ2MzI5IiwidCI6IkFJUlBPUlQifQ==",
+      "countryId": "VN",
+      "country": {
+        "id": "VN",
+        "name": "Vietnam"
+      }
+    },
+    "departureSchedule": "2024-03-17T05:35:00",
+    "arrivalLocation": {
+      "id": "SGN",
+      "name": "Ho Chi Minh City",
+      "apiKey": "eyJlIjoiOTU2NzMzNzkiLCJzIjoiU0dOIiwiaCI6IjI3NTQ2MzI5IiwidCI6IkFJUlBPUlQifQ==",
+      "countryId": "VN",
+      "country": {
+        "id": "VN",
+        "name": "Vietnam"
+      }
+    },
+    "arrivalSchedule": "2024-03-17T07:45:00",
+    "airline": {
+      "id": "-32480",
+      "name": "British Airways",
+      "logoURL": "https://logos.skyscnr.com/images/airlines/favicon/BA.png",
+      "searchTimes": 0
+    }
+  },
+  {
+    "flightIATA": "NH9731",
+    "flightICAO": "ANA9731",
+    "flightStatus": "scheduled",
+    "departureLocation": {
+      "id": "SGN",
+      "name": "Ho Chi Minh City",
+      "apiKey": "eyJlIjoiOTU2NzMzNzkiLCJzIjoiU0dOIiwiaCI6IjI3NTQ2MzI5IiwidCI6IkFJUlBPUlQifQ==",
+      "countryId": "VN",
+      "country": {
+        "id": "VN",
+        "name": "Vietnam"
+      }
+    },
+    "departureSchedule": "2024-03-17T05:45:00",
+    "arrivalLocation": {
+      "id": "SGN",
+      "name": "Ho Chi Minh City",
+      "apiKey": "eyJlIjoiOTU2NzMzNzkiLCJzIjoiU0dOIiwiaCI6IjI3NTQ2MzI5IiwidCI6IkFJUlBPUlQifQ==",
+      "countryId": "VN",
+      "country": {
+        "id": "VN",
+        "name": "Vietnam"
+      }
+    },
+    "arrivalSchedule": "2024-03-17T07:15:00",
+    "airline": {
+      "id": "-31963",
+      "name": "PIA",
+      "logoURL": "https://logos.skyscnr.com/images/airlines/favicon/PK.png",
+      "searchTimes": 0
+    }
+  },
+  {
+    "flightIATA": "VN157",
+    "flightICAO": "HVN157",
+    "flightStatus": "scheduled",
+    "departureLocation": {
+      "id": "SGN",
+      "name": "Ho Chi Minh City",
+      "apiKey": "eyJlIjoiOTU2NzMzNzkiLCJzIjoiU0dOIiwiaCI6IjI3NTQ2MzI5IiwidCI6IkFJUlBPUlQifQ==",
+      "countryId": "VN",
+      "country": {
+        "id": "VN",
+        "name": "Vietnam"
+      }
+    },
+    "departureSchedule": "2024-03-17T05:45:00",
+    "arrivalLocation": {
+      "id": "SGN",
+      "name": "Ho Chi Minh City",
+      "apiKey": "eyJlIjoiOTU2NzMzNzkiLCJzIjoiU0dOIiwiaCI6IjI3NTQ2MzI5IiwidCI6IkFJUlBPUlQifQ==",
+      "countryId": "VN",
+      "country": {
+        "id": "VN",
+        "name": "Vietnam"
+      }
+    },
+    "arrivalSchedule": "2024-03-17T07:15:00",
+    "airline": {
+      "id": "-32115",
+      "name": "LATAM Airlines",
+      "logoURL": "https://logos.skyscnr.com/images/airlines/favicon/LA.png",
+      "searchTimes": 0
+    }
+  },
+  {
+    "flightIATA": "W24121",
+    "flightICAO": "FXT4121",
+    "flightStatus": "scheduled",
+    "departureLocation": {
+      "id": "SGN",
+      "name": "Ho Chi Minh City",
+      "apiKey": "eyJlIjoiOTU2NzMzNzkiLCJzIjoiU0dOIiwiaCI6IjI3NTQ2MzI5IiwidCI6IkFJUlBPUlQifQ==",
+      "countryId": "VN",
+      "country": {
+        "id": "VN",
+        "name": "Vietnam"
+      }
+    },
+    "departureSchedule": "2024-03-17T06:00:00",
+    "arrivalLocation": {
+      "id": "SGN",
+      "name": "Ho Chi Minh City",
+      "apiKey": "eyJlIjoiOTU2NzMzNzkiLCJzIjoiU0dOIiwiaCI6IjI3NTQ2MzI5IiwidCI6IkFJUlBPUlQifQ==",
+      "countryId": "VN",
+      "country": {
+        "id": "VN",
+        "name": "Vietnam"
+      }
+    },
+    "arrivalSchedule": "2024-03-17T08:10:00",
+    "airline": {
+      "id": "-32090",
+      "name": "Lufthansa",
+      "logoURL": "https://logos.skyscnr.com/images/airlines/favicon/LH.png",
+      "searchTimes": 0
+    }
+  },
+  {
+    "flightIATA": "H14256",
+    "flightICAO": "H14256",
+    "flightStatus": "scheduled",
+    "departureLocation": {
+      "id": "SGN",
+      "name": "Ho Chi Minh City",
+      "apiKey": "eyJlIjoiOTU2NzMzNzkiLCJzIjoiU0dOIiwiaCI6IjI3NTQ2MzI5IiwidCI6IkFJUlBPUlQifQ==",
+      "countryId": "VN",
+      "country": {
+        "id": "VN",
+        "name": "Vietnam"
+      }
+    },
+    "departureSchedule": "2024-03-17T06:00:00",
+    "arrivalLocation": {
+      "id": "SGN",
+      "name": "Ho Chi Minh City",
+      "apiKey": "eyJlIjoiOTU2NzMzNzkiLCJzIjoiU0dOIiwiaCI6IjI3NTQ2MzI5IiwidCI6IkFJUlBPUlQifQ==",
+      "countryId": "VN",
+      "country": {
+        "id": "VN",
+        "name": "Vietnam"
+      }
+    },
+    "arrivalSchedule": "2024-03-17T08:10:00",
+    "airline": null
+  },
+  {
+    "flightIATA": "VJ121",
+    "flightICAO": "VJC121",
+    "flightStatus": "scheduled",
+    "departureLocation": {
+      "id": "SGN",
+      "name": "Ho Chi Minh City",
+      "apiKey": "eyJlIjoiOTU2NzMzNzkiLCJzIjoiU0dOIiwiaCI6IjI3NTQ2MzI5IiwidCI6IkFJUlBPUlQifQ==",
+      "countryId": "VN",
+      "country": {
+        "id": "VN",
+        "name": "Vietnam"
+      }
+    },
+    "departureSchedule": "2024-03-17T06:00:00",
+    "arrivalLocation": {
+      "id": "SGN",
+      "name": "Ho Chi Minh City",
+      "apiKey": "eyJlIjoiOTU2NzMzNzkiLCJzIjoiU0dOIiwiaCI6IjI3NTQ2MzI5IiwidCI6IkFJUlBPUlQifQ==",
+      "countryId": "VN",
+      "country": {
+        "id": "VN",
+        "name": "Vietnam"
+      }
+    },
+    "arrivalSchedule": "2024-03-17T08:10:00",
+    "airline": {
+      "id": "-32442",
+      "name": "China Eastern",
+      "logoURL": "https://logos.skyscnr.com/images/airlines/favicon/MU.png",
+      "searchTimes": 0
+    }
+  },
+  {
+    "flightIATA": "VN243",
+    "flightICAO": "HVN243",
+    "flightStatus": "scheduled",
+    "departureLocation": {
+      "id": "SGN",
+      "name": "Ho Chi Minh City",
+      "apiKey": "eyJlIjoiOTU2NzMzNzkiLCJzIjoiU0dOIiwiaCI6IjI3NTQ2MzI5IiwidCI6IkFJUlBPUlQifQ==",
+      "countryId": "VN",
+      "country": {
+        "id": "VN",
+        "name": "Vietnam"
+      }
+    },
+    "departureSchedule": "2024-03-17T06:00:00",
+    "arrivalLocation": {
+      "id": "SGN",
+      "name": "Ho Chi Minh City",
+      "apiKey": "eyJlIjoiOTU2NzMzNzkiLCJzIjoiU0dOIiwiaCI6IjI3NTQ2MzI5IiwidCI6IkFJUlBPUlQifQ==",
+      "countryId": "VN",
+      "country": {
+        "id": "VN",
+        "name": "Vietnam"
+      }
+    },
+    "arrivalSchedule": "2024-03-17T08:15:00",
+    "airline": {
+      "id": "-32115",
+      "name": "LATAM Airlines",
+      "logoURL": "https://logos.skyscnr.com/images/airlines/favicon/LA.png",
+      "searchTimes": 0
+    }
+  },
+  {
+    "flightIATA": "EY85",
+    "flightICAO": "ETD85",
+    "flightStatus": "scheduled",
+    "departureLocation": {
+      "id": "DWC",
+      "name": "Dubai Al Maktoum International",
+      "apiKey": "eyJlIjoiMTI4NjY4NDIzIiwicyI6IkRXQyIsImgiOiIyNzU0MDgzOSIsInQiOiJBSVJQT1JUIn0=",
+      "countryId": "AE",
+      "country": {
+        "id": "AE",
+        "name": "United Arab Emirates"
+      }
+    },
+    "departureSchedule": "2024-03-17T02:25:00",
+    "arrivalLocation": {
+      "id": "CIA",
+      "name": "Rome Ciampino",
+      "apiKey": "eyJlIjoiOTU1NjUwNjIiLCJzIjoiQ0lBIiwiaCI6IjI3NTM5NzkzIiwidCI6IkFJUlBPUlQifQ==",
+      "countryId": "IT",
+      "country": {
+        "id": "IT",
+        "name": "Italy"
+      }
+    },
+    "arrivalSchedule": "2024-03-17T05:45:00",
+    "airline": {
+      "id": "-32339",
+      "name": "Etihad Airways",
+      "logoURL": "https://logos.skyscnr.com/images/airlines/favicon/60.png",
+      "searchTimes": 0
+    }
+  },
+  {
+    "flightIATA": "LX9042",
+    "flightICAO": "SWR9042",
+    "flightStatus": "scheduled",
+    "departureLocation": {
+      "id": "SIN",
+      "name": "Singapore Changi",
+      "apiKey": "eyJlIjoiOTU2NzMzNzUiLCJzIjoiU0lOIiwiaCI6IjI3NTQ2MTExIiwidCI6IkFJUlBPUlQifQ==",
+      "countryId": "SG",
+      "country": {
+        "id": "SG",
+        "name": "Singapore"
+      }
+    },
+    "departureSchedule": "2024-03-17T00:25:00",
+    "arrivalLocation": {
+      "id": "SPX",
+      "name": "Sphinx International",
+      "apiKey": "eyJlIjoiMTk5Nzc1MjQxIiwicyI6IlNQWCIsImgiOiIzMzkyMjc3MyIsInQiOiJBSVJQT1JUIn0=",
+      "countryId": "EG",
+      "country": {
+        "id": "EG",
+        "name": "Egypt"
+      }
+    },
+    "arrivalSchedule": "2024-03-17T05:25:00",
+    "airline": {
+      "id": "-31799",
+      "name": "SWISS",
+      "logoURL": "https://logos.skyscnr.com/images/airlines/favicon/LX.png",
+      "searchTimes": 0
+    }
+  },
+  {
+    "flightIATA": "LH7206",
+    "flightICAO": "DLH7206",
+    "flightStatus": "scheduled",
+    "departureLocation": {
+      "id": "SIN",
+      "name": "Singapore Changi",
+      "apiKey": "eyJlIjoiOTU2NzMzNzUiLCJzIjoiU0lOIiwiaCI6IjI3NTQ2MTExIiwidCI6IkFJUlBPUlQifQ==",
+      "countryId": "SG",
+      "country": {
+        "id": "SG",
+        "name": "Singapore"
+      }
+    },
+    "departureSchedule": "2024-03-17T00:25:00",
+    "arrivalLocation": {
+      "id": "SPX",
+      "name": "Sphinx International",
+      "apiKey": "eyJlIjoiMTk5Nzc1MjQxIiwicyI6IlNQWCIsImgiOiIzMzkyMjc3MyIsInQiOiJBSVJQT1JUIn0=",
+      "countryId": "EG",
+      "country": {
+        "id": "EG",
+        "name": "Egypt"
+      }
+    },
+    "arrivalSchedule": "2024-03-17T05:25:00",
+    "airline": {
+      "id": "-32090",
+      "name": "Lufthansa",
+      "logoURL": "https://logos.skyscnr.com/images/airlines/favicon/LH.png",
+      "searchTimes": 0
+    }
+  },
+  {
+    "flightIATA": "JL688",
+    "flightICAO": "JAL688",
+    "flightStatus": "scheduled",
+    "departureLocation": {
+      "id": "HND",
+      "name": "Tokyo Haneda",
+      "apiKey": "eyJlIjoiMTI4NjY3MTQzIiwicyI6IkhORCIsImgiOiIyNzU0MjA4OSIsInQiOiJBSVJQT1JUIn0=",
+      "countryId": "JP",
+      "country": {
+        "id": "JP",
+        "name": "Japan"
+      }
+    },
+    "departureSchedule": "2024-03-17T07:50:00",
+    "arrivalLocation": {
+      "id": "HND",
+      "name": "Tokyo Haneda",
+      "apiKey": "eyJlIjoiMTI4NjY3MTQzIiwicyI6IkhORCIsImgiOiIyNzU0MjA4OSIsInQiOiJBSVJQT1JUIn0=",
+      "countryId": "JP",
+      "country": {
+        "id": "JP",
+        "name": "Japan"
+      }
+    },
+    "arrivalSchedule": "2024-03-17T09:25:00",
+    "airline": {
+      "id": "-31963",
+      "name": "PIA",
+      "logoURL": "https://logos.skyscnr.com/images/airlines/favicon/PK.png",
+      "searchTimes": 0
+    }
+  },
+  {
+    "flightIATA": "JL6062",
+    "flightICAO": "JTL6062",
+    "flightStatus": "scheduled",
+    "departureLocation": {
+      "id": "HND",
+      "name": "Tokyo Haneda",
+      "apiKey": "eyJlIjoiMTI4NjY3MTQzIiwicyI6IkhORCIsImgiOiIyNzU0MjA4OSIsInQiOiJBSVJQT1JUIn0=",
+      "countryId": "JP",
+      "country": {
+        "id": "JP",
+        "name": "Japan"
+      }
+    },
+    "departureSchedule": "2024-03-17T07:35:00",
+    "arrivalLocation": {
+      "id": "HND",
+      "name": "Tokyo Haneda",
+      "apiKey": "eyJlIjoiMTI4NjY3MTQzIiwicyI6IkhORCIsImgiOiIyNzU0MjA4OSIsInQiOiJBSVJQT1JUIn0=",
+      "countryId": "JP",
+      "country": {
+        "id": "JP",
+        "name": "Japan"
+      }
+    },
+    "arrivalSchedule": "2024-03-17T09:20:00",
+    "airline": {
+      "id": "-32289",
+      "name": "Frontier Airlines",
+      "logoURL": "https://logos.skyscnr.com/images/airlines/favicon/F9.png",
+      "searchTimes": 0
+    }
+  },
+  {
+    "flightIATA": "TV9971",
+    "flightICAO": "TBA9971",
+    "flightStatus": "cancelled",
+    "departureLocation": {
+      "id": "PVG",
+      "name": "Shanghai Pudong",
+      "apiKey": "eyJlIjoiMTI4NjY3MDc3IiwicyI6IlBWRyIsImgiOiIyNzU0NjA3OSIsInQiOiJBSVJQT1JUIn0=",
+      "countryId": "CN",
+      "country": {
+        "id": "CN",
+        "name": "China"
+      }
+    },
+    "departureSchedule": "2024-03-17T06:40:00",
+    "arrivalLocation": {
+      "id": "PVG",
+      "name": "Shanghai Pudong",
+      "apiKey": "eyJlIjoiMTI4NjY3MDc3IiwicyI6IlBWRyIsImgiOiIyNzU0NjA3OSIsInQiOiJBSVJQT1JUIn0=",
+      "countryId": "CN",
+      "country": {
+        "id": "CN",
+        "name": "China"
+      }
+    },
+    "arrivalSchedule": "2024-03-17T08:20:00",
+    "airline": {
+      "id": "-32115",
+      "name": "LATAM Airlines",
+      "logoURL": "https://logos.skyscnr.com/images/airlines/favicon/LA.png",
+      "searchTimes": 0
+    }
+  },
+  {
+    "flightIATA": "EU7941",
+    "flightICAO": "UEA7941",
+    "flightStatus": "cancelled",
+    "departureLocation": {
+      "id": "PVG",
+      "name": "Shanghai Pudong",
+      "apiKey": "eyJlIjoiMTI4NjY3MDc3IiwicyI6IlBWRyIsImgiOiIyNzU0NjA3OSIsInQiOiJBSVJQT1JUIn0=",
+      "countryId": "CN",
+      "country": {
+        "id": "CN",
+        "name": "China"
+      }
+    },
+    "departureSchedule": "2024-03-17T06:40:00",
+    "arrivalLocation": {
+      "id": "PVG",
+      "name": "Shanghai Pudong",
+      "apiKey": "eyJlIjoiMTI4NjY3MDc3IiwicyI6IlBWRyIsImgiOiIyNzU0NjA3OSIsInQiOiJBSVJQT1JUIn0=",
+      "countryId": "CN",
+      "country": {
+        "id": "CN",
+        "name": "China"
+      }
+    },
+    "arrivalSchedule": "2024-03-17T08:20:00",
+    "airline": {
+      "id": "-31685",
+      "name": "Vueling Airlines",
+      "logoURL": "https://logos.skyscnr.com/images/airlines/favicon/07.png",
+      "searchTimes": 0
+    }
+  },
+  {
+    "flightIATA": "GJ5441",
+    "flightICAO": "CDC5441",
+    "flightStatus": "cancelled",
+    "departureLocation": {
+      "id": "PVG",
+      "name": "Shanghai Pudong",
+      "apiKey": "eyJlIjoiMTI4NjY3MDc3IiwicyI6IlBWRyIsImgiOiIyNzU0NjA3OSIsInQiOiJBSVJQT1JUIn0=",
+      "countryId": "CN",
+      "country": {
+        "id": "CN",
+        "name": "China"
+      }
+    },
+    "departureSchedule": "2024-03-17T06:40:00",
+    "arrivalLocation": {
+      "id": "PVG",
+      "name": "Shanghai Pudong",
+      "apiKey": "eyJlIjoiMTI4NjY3MDc3IiwicyI6IlBWRyIsImgiOiIyNzU0NjA3OSIsInQiOiJBSVJQT1JUIn0=",
+      "countryId": "CN",
+      "country": {
+        "id": "CN",
+        "name": "China"
+      }
+    },
+    "arrivalSchedule": "2024-03-17T08:20:00",
+    "airline": {
+      "id": "-32753",
+      "name": "Aer Lingus",
+      "logoURL": "https://logos.skyscnr.com/images/airlines/favicon/EI.png",
+      "searchTimes": 0
+    }
+  },
+  {
+    "flightIATA": "CZ9624",
+    "flightICAO": "CSN9624",
+    "flightStatus": "scheduled",
+    "departureLocation": {
+      "id": "PVG",
+      "name": "Shanghai Pudong",
+      "apiKey": "eyJlIjoiMTI4NjY3MDc3IiwicyI6IlBWRyIsImgiOiIyNzU0NjA3OSIsInQiOiJBSVJQT1JUIn0=",
+      "countryId": "CN",
+      "country": {
+        "id": "CN",
+        "name": "China"
+      }
+    },
+    "departureSchedule": "2024-03-17T06:50:00",
+    "arrivalLocation": {
+      "id": "PVG",
+      "name": "Shanghai Pudong",
+      "apiKey": "eyJlIjoiMTI4NjY3MDc3IiwicyI6IlBWRyIsImgiOiIyNzU0NjA3OSIsInQiOiJBSVJQT1JUIn0=",
+      "countryId": "CN",
+      "country": {
+        "id": "CN",
+        "name": "China"
+      }
+    },
+    "arrivalSchedule": "2024-03-17T09:10:00",
+    "airline": {
+      "id": "-31734",
+      "name": "Turkish Airlines",
+      "logoURL": "https://logos.skyscnr.com/images/airlines/favicon/TK.png",
+      "searchTimes": 0
+    }
+  },
+  {
+    "flightIATA": "SC4877",
+    "flightICAO": "CDG4877",
+    "flightStatus": "scheduled",
+    "departureLocation": {
+      "id": "PVG",
+      "name": "Shanghai Pudong",
+      "apiKey": "eyJlIjoiMTI4NjY3MDc3IiwicyI6IlBWRyIsImgiOiIyNzU0NjA3OSIsInQiOiJBSVJQT1JUIn0=",
+      "countryId": "CN",
+      "country": {
+        "id": "CN",
+        "name": "China"
+      }
+    },
+    "departureSchedule": "2024-03-17T07:05:00",
+    "arrivalLocation": {
+      "id": "PVG",
+      "name": "Shanghai Pudong",
+      "apiKey": "eyJlIjoiMTI4NjY3MDc3IiwicyI6IlBWRyIsImgiOiIyNzU0NjA3OSIsInQiOiJBSVJQT1JUIn0=",
+      "countryId": "CN",
+      "country": {
+        "id": "CN",
+        "name": "China"
+      }
+    },
+    "arrivalSchedule": "2024-03-17T08:50:00",
+    "airline": {
+      "id": "-32229",
+      "name": "Hong Kong Airlines",
+      "logoURL": "https://logos.skyscnr.com/images/airlines/favicon/N8.png",
+      "searchTimes": 0
+    }
+  },
+  {
+    "flightIATA": "HA5955",
+    "flightICAO": "HAL5955",
+    "flightStatus": "scheduled",
+    "departureLocation": {
+      "id": "HND",
+      "name": "Tokyo Haneda",
+      "apiKey": "eyJlIjoiMTI4NjY3MTQzIiwicyI6IkhORCIsImgiOiIyNzU0MjA4OSIsInQiOiJBSVJQT1JUIn0=",
+      "countryId": "JP",
+      "country": {
+        "id": "JP",
+        "name": "Japan"
+      }
+    },
+    "departureSchedule": "2024-03-17T07:10:00",
+    "arrivalLocation": {
+      "id": "HND",
+      "name": "Tokyo Haneda",
+      "apiKey": "eyJlIjoiMTI4NjY3MTQzIiwicyI6IkhORCIsImgiOiIyNzU0MjA4OSIsInQiOiJBSVJQT1JUIn0=",
+      "countryId": "JP",
+      "country": {
+        "id": "JP",
+        "name": "Japan"
+      }
+    },
+    "arrivalSchedule": "2024-03-17T09:00:00",
+    "airline": {
+      "id": "-31734",
+      "name": "Turkish Airlines",
+      "logoURL": "https://logos.skyscnr.com/images/airlines/favicon/TK.png",
+      "searchTimes": 0
+    }
+  },
+  {
+    "flightIATA": "NU2",
+    "flightICAO": "JTA2",
+    "flightStatus": "scheduled",
+    "departureLocation": {
+      "id": "HND",
+      "name": "Tokyo Haneda",
+      "apiKey": "eyJlIjoiMTI4NjY3MTQzIiwicyI6IkhORCIsImgiOiIyNzU0MjA4OSIsInQiOiJBSVJQT1JUIn0=",
+      "countryId": "JP",
+      "country": {
+        "id": "JP",
+        "name": "Japan"
+      }
+    },
+    "departureSchedule": "2024-03-17T07:10:00",
+    "arrivalLocation": {
+      "id": "HND",
+      "name": "Tokyo Haneda",
+      "apiKey": "eyJlIjoiMTI4NjY3MTQzIiwicyI6IkhORCIsImgiOiIyNzU0MjA4OSIsInQiOiJBSVJQT1JUIn0=",
+      "countryId": "JP",
+      "country": {
+        "id": "JP",
+        "name": "Japan"
+      }
+    },
+    "arrivalSchedule": "2024-03-17T09:00:00",
+    "airline": {
+      "id": "-31795",
+      "name": "TAAG Angola Airlines",
+      "logoURL": "https://logos.skyscnr.com/images/airlines/favicon/DT.png",
+      "searchTimes": 0
+    }
+  },
+  {
+    "flightIATA": "TV3246",
+    "flightICAO": "TBA3246",
+    "flightStatus": "scheduled",
+    "departureLocation": {
+      "id": "PVG",
+      "name": "Shanghai Pudong",
+      "apiKey": "eyJlIjoiMTI4NjY3MDc3IiwicyI6IlBWRyIsImgiOiIyNzU0NjA3OSIsInQiOiJBSVJQT1JUIn0=",
+      "countryId": "CN",
+      "country": {
+        "id": "CN",
+        "name": "China"
+      }
+    },
+    "departureSchedule": "2024-03-17T07:05:00",
+    "arrivalLocation": {
+      "id": "PVG",
+      "name": "Shanghai Pudong",
+      "apiKey": "eyJlIjoiMTI4NjY3MDc3IiwicyI6IlBWRyIsImgiOiIyNzU0NjA3OSIsInQiOiJBSVJQT1JUIn0=",
+      "countryId": "CN",
+      "country": {
+        "id": "CN",
+        "name": "China"
+      }
+    },
+    "arrivalSchedule": "2024-03-17T08:50:00",
+    "airline": {
+      "id": "-32115",
+      "name": "LATAM Airlines",
+      "logoURL": "https://logos.skyscnr.com/images/airlines/favicon/LA.png",
+      "searchTimes": 0
+    }
+  }
+]

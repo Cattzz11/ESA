@@ -2,9 +2,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { FlightData } from '../Models/flight-data';
-import { map } from 'rxjs/operators';
 import { City } from '../Models/City';
-import { Flight } from '../Models/Flight';
 import { Carrier } from '../Models/Carrier';
 import { Trip } from '../Models/Trip';
 import { Country } from '../Models/country';
@@ -140,6 +138,4 @@ export class SkyscannerService {
   public getPriceOptions(fromEntityId: any, toEntityId: any, departDate: any, returnDate: any): Observable<Trip> {
     return this.http.get<Trip>(`https://localhost:7041/api/flight/price-options?fromEntityId=${fromEntityId}&toEntityId=${toEntityId}&departDate=${departDate.toString("yyyy-MM-dd")}&returnDate=${returnDate.toString("yyyy-MM-dd") }`);
   }
-
-  
 }
