@@ -7,4 +7,5 @@ export interface City {
   countryId?: string;
   country: Country;
   displayName?: string;
+  coordinates?: string;
 }

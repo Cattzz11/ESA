@@ -18,6 +18,7 @@ namespace PROJETOESA.Controllers
         [Route("api/flight-itinerary/live-flights")]
         public async Task<IActionResult> GetLiveFlights()
         {
+            //var data = await _flightService.GetLiveFlightData();
             var data = await _flightService.LoadFlightsAsync();
             return Ok(data);
         }
@@ -34,11 +35,7 @@ namespace PROJETOESA.Controllers
         [Route("api/flight-itinerary/generate-map")]
         public async Task<IActionResult> CreateMap()
         {
-            Debug.WriteLine("AQUI Controller!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-
             string data = await _flightService.GenerateMapUrl();
-
-            Debug.WriteLine(data);
 
             return Ok(data);
         }

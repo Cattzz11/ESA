@@ -3,21 +3,13 @@
   "WorkspaceRootPath": "C:\\Users\\Tiago\\Desktop\\IPS\\ESA\\PROJETOESA\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{18DC2C31-CB3E-4B76-9D23-EDE9B7C6818B}|PROJETOESA.csproj|c:\\users\\tiago\\desktop\\ips\\esa\\projetoesa\\services\\flightservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{18DC2C31-CB3E-4B76-9D23-EDE9B7C6818B}|PROJETOESA.csproj|solutionrelative:services\\flightservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{FFDC8847-A03D-4B34-BF6B-037A713978B8}|..\\AngularESA\\angularesa.client\\angularesa.client.esproj|c:\\users\\tiago\\desktop\\ips\\esa\\angularesa\\angularesa.client\\src\\app\\flights\\map\\map.component.ts||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{FFDC8847-A03D-4B34-BF6B-037A713978B8}|..\\AngularESA\\angularesa.client\\angularesa.client.esproj|c:\\users\\tiago\\desktop\\ips\\esa\\angularesa\\angularesa.client\\src\\app\\flights\\map\\map.component.html||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{FFDC8847-A03D-4B34-BF6B-037A713978B8}|..\\AngularESA\\angularesa.client\\angularesa.client.esproj|c:\\users\\tiago\\desktop\\ips\\esa\\angularesa\\angularesa.client\\src\\app\\models\\city.ts||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{18DC2C31-CB3E-4B76-9D23-EDE9B7C6818B}|PROJETOESA.csproj|c:\\users\\tiago\\desktop\\ips\\esa\\projetoesa\\controllers\\flightitinerarycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{18DC2C31-CB3E-4B76-9D23-EDE9B7C6818B}|PROJETOESA.csproj|solutionrelative:controllers\\flightitinerarycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{FFDC8847-A03D-4B34-BF6B-037A713978B8}|..\\AngularESA\\angularesa.client\\angularesa.client.esproj|c:\\users\\tiago\\desktop\\ips\\esa\\angularesa\\angularesa.client\\src\\app\\flights\\map\\map.component.ts||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}"
+      "AbsoluteMoniker": "D:0:0:{FFDC8847-A03D-4B34-BF6B-037A713978B8}|..\\AngularESA\\angularesa.client\\angularesa.client.esproj|c:\\users\\tiago\\desktop\\ips\\esa\\angularesa\\angularesa.client\\src\\index.html||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     }
   ],
   "DocumentGroupContainers": [
@@ -27,33 +19,19 @@
       "DocumentGroups": [
         {
           "DockedWidth": 207,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "City.ts",
-              "DocumentMoniker": "C:\\Users\\Tiago\\Desktop\\IPS\\ESA\\AngularESA\\angularesa.client\\src\\app\\Models\\City.ts",
-              "RelativeDocumentMoniker": "..\\AngularESA\\angularesa.client\\src\\app\\Models\\City.ts",
-              "ToolTip": "C:\\Users\\Tiago\\Desktop\\IPS\\ESA\\AngularESA\\angularesa.client\\src\\app\\Models\\City.ts",
-              "RelativeToolTip": "..\\AngularESA\\angularesa.client\\src\\app\\Models\\City.ts",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAEAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003213|",
-              "WhenOpened": "2024-03-16T21:33:55.231Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "FlightService.cs",
-              "DocumentMoniker": "C:\\Users\\Tiago\\Desktop\\IPS\\ESA\\PROJETOESA\\Services\\FlightService.cs",
-              "RelativeDocumentMoniker": "Services\\FlightService.cs",
-              "ToolTip": "C:\\Users\\Tiago\\Desktop\\IPS\\ESA\\PROJETOESA\\Services\\FlightService.cs",
-              "RelativeToolTip": "Services\\FlightService.cs",
-              "ViewState": "AQIAAE4AAAAAAAAAAAAuwFoAAAARAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-16T21:00:44.245Z",
-              "EditorCaption": ""
+              "Title": "index.html",
+              "DocumentMoniker": "C:\\Users\\Tiago\\Desktop\\IPS\\ESA\\AngularESA\\angularesa.client\\src\\index.html",
+              "RelativeDocumentMoniker": "..\\AngularESA\\angularesa.client\\src\\index.html",
+              "ToolTip": "C:\\Users\\Tiago\\Desktop\\IPS\\ESA\\AngularESA\\angularesa.client\\src\\index.html",
+              "RelativeToolTip": "..\\AngularESA\\angularesa.client\\src\\index.html",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAABWAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
+              "WhenOpened": "2024-03-18T21:07:05.965Z"
             },
             {
               "$type": "Document",
@@ -63,35 +41,22 @@
               "RelativeDocumentMoniker": "..\\AngularESA\\angularesa.client\\src\\app\\flights\\map\\map.component.html",
               "ToolTip": "C:\\Users\\Tiago\\Desktop\\IPS\\ESA\\AngularESA\\angularesa.client\\src\\app\\flights\\map\\map.component.html",
               "RelativeToolTip": "..\\AngularESA\\angularesa.client\\src\\app\\flights\\map\\map.component.html",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAEAAAAAAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAuAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
-              "WhenOpened": "2024-03-16T20:52:14.539Z",
+              "WhenOpened": "2024-03-18T20:38:40.749Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "FlightItineraryController.cs",
-              "DocumentMoniker": "C:\\Users\\Tiago\\Desktop\\IPS\\ESA\\PROJETOESA\\Controllers\\FlightItineraryController.cs",
-              "RelativeDocumentMoniker": "Controllers\\FlightItineraryController.cs",
-              "ToolTip": "C:\\Users\\Tiago\\Desktop\\IPS\\ESA\\PROJETOESA\\Controllers\\FlightItineraryController.cs",
-              "RelativeToolTip": "Controllers\\FlightItineraryController.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAC4AAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-16T20:47:51.299Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 0,
               "Title": "map.component.ts",
               "DocumentMoniker": "C:\\Users\\Tiago\\Desktop\\IPS\\ESA\\AngularESA\\angularesa.client\\src\\app\\flights\\map\\map.component.ts",
               "RelativeDocumentMoniker": "..\\AngularESA\\angularesa.client\\src\\app\\flights\\map\\map.component.ts",
               "ToolTip": "C:\\Users\\Tiago\\Desktop\\IPS\\ESA\\AngularESA\\angularesa.client\\src\\app\\flights\\map\\map.component.ts",
               "RelativeToolTip": "..\\AngularESA\\angularesa.client\\src\\app\\flights\\map\\map.component.ts",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABkAAAABAAAA",
+              "ViewState": "AQIAAEIAAAAAAAAAAAAAAEgAAAAxAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003213|",
-              "WhenOpened": "2024-03-16T20:47:09.83Z",
+              "WhenOpened": "2024-03-18T18:23:27.183Z",
               "EditorCaption": ""
             }
           ]

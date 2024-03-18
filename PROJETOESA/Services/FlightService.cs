@@ -135,13 +135,11 @@ namespace PROJETOESA.Services
                     }
                 }
             }
-
             return (mainLatitude, mainLongitude);
         }
 
         public async Task<string> GenerateMapUrl()
         {
-            Debug.WriteLine("AQUI Serviçe!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
             string baseUrl = "https://maps.googleapis.com/maps/api/staticmap?";
             int mapWidth = 640;
             int mapHeight = 640;
@@ -206,6 +204,11 @@ namespace PROJETOESA.Services
 
             var city = await _context.City.Include(c => c.Country).FirstOrDefaultAsync(c => EF.Functions.Like(c.Name, $"%{timezoneCityName}%"));
 
+            if (city != null && string.IsNullOrEmpty(city.Coordinates))
+            {
+                await GetCoordinatesAsync(city.Name);
+            }
+
             if (city != null)
             {
                 return city;
@@ -232,6 +235,11 @@ namespace PROJETOESA.Services
                     highestSimilarity = similarity;
                     mostSimilarCity = city;
                 }
+            }
+
+            if (string.IsNullOrEmpty(mostSimilarCity.Coordinates))
+            {
+                await GetCoordinatesAsync(mostSimilarCity.Name);
             }
 
             return mostSimilarCity;
