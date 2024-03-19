@@ -7,6 +7,8 @@ using Square;
 using Square.Http.Client;
 using Square.Apis;
 using Square.Models;
+using Microsoft.Extensions.Localization;
+using PROJETOESA.Controllers;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -42,7 +44,12 @@ SquareClient squareClient = new SquareClient.Builder()
 
 builder.Services.AddSingleton(squareClient);
 builder.Services.AddScoped<SquareService>();
+builder.Services.AddLocalization(options => options.ResourcesPath = "Resources");
 
+builder.Services.AddControllersWithViews()
+    .AddDataAnnotationsLocalization();
+
+builder.Services.AddTransient<IStringLocalizer<PaymentController>, StringLocalizer<PaymentController>>();
 
 /*builder.Services.AddHttpClient("SquareAPI", client =>
 {
@@ -82,7 +89,7 @@ builder.Configuration.GetSection("EmailSender"));
 // Adiciona o serviço de envio de e-mails
 builder.Services.AddTransient<IEmailSender, EmailSender>();
 
-builder.Services.AddScoped<CodeGeneratorService>();
+builder.Services.AddScoped<ICodeGeneratorService, CodeGeneratorService>();
 
 var app = builder.Build();
 

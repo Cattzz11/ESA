@@ -5,21 +5,25 @@ using Square.Http.Client;
 using System.Threading.Tasks;
 using Square.Models;
 using PROJETOESA.Services;
+using PROJETOESA.Data;
 
 namespace PROJETOESA.Services
 {
     public class SquareService
     {
         private SquareClient _client;
-        public SquareService(SquareClient client)
+        private AeroHelperContext _context;
+        public SquareService(SquareClient client, AeroHelperContext context)
         {
             _client = client ?? throw new ArgumentNullException(nameof(_client));
+            _context = context;
         }
 
         public async Task PayAsync(Models.PaymentModel payment)
         {
+            long lPrice = (long)payment.price;
             var amountMoney = new Money.Builder()
-                .Amount(payment.price)
+                .Amount(lPrice)
                 .Currency(payment.currency)
                 .Build();
 
@@ -29,6 +33,7 @@ namespace PROJETOESA.Services
 
             try
             {
+                // ADICIONAR DADOS NA BD PARA HISTORICO
                 // var result = await client.PaymentsApi.CreatePaymentAsync(body: body);
                 var result = await _client.PaymentsApi.CreatePaymentAsync(body);
             }

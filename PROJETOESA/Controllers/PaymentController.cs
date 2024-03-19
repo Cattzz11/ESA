@@ -7,8 +7,6 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Localization;
-using PROJETOESA.Services.EasyPay;
-using System.Globalization;
 using Microsoft.Extensions.Options;
 using System.Diagnostics;
 
@@ -20,18 +18,17 @@ namespace PROJETOESA.Controllers
         private readonly int _pageSize = 5;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly IEmailSender _emailSender;
-        private IEasyPayService _easyPayService;
+        //private IEasyPayService _easyPayService;
 
 
         private readonly SquareService _squareService;
         private readonly AeroHelperContext _context;
         public PaymentController(SquareService squareService, AeroHelperContext context, UserManager<ApplicationUser> userManager,
-            IStringLocalizer<PaymentController> stringLocalizer, IEmailSender emailSender,
-            IEasyPayService easyPayService, IOptions<EmailSender> emailSettings) 
+            IStringLocalizer<PaymentController> stringLocalizer, IEmailSender emailSender, IOptions<EmailSender> emailSettings) 
         {
             _userManager = userManager;
             _emailSender = emailSender;
-            _easyPayService = easyPayService;
+            //_easyPayService = easyPayService;
             _context = context;
             _squareService = squareService;
         }
@@ -65,7 +62,7 @@ namespace PROJETOESA.Controllers
                     ShippingAddress = payment.ShippingAddress,
                 };
 
-                _squareService.PayAsync(paymentModel);
+                await _squareService.PayAsync(paymentModel);
 
                 await _context.SaveChangesAsync();
 
@@ -80,7 +77,7 @@ namespace PROJETOESA.Controllers
                 return BadRequest(new { Message = "Failed to purchase ticket", Error = ex.Message });
             }
         }
-
+        /*
         [HttpGet("history")]
         [Authorize(Roles = "ClienteNormal, ClientePremium")]
         public async Task<IActionResult> GetPaymentsHistory(int? page, string order)
@@ -236,7 +233,7 @@ namespace PROJETOESA.Controllers
             await _context.SaveChangesAsync();
 
             return Ok();
-        }
+        }*/
 
         
     }
