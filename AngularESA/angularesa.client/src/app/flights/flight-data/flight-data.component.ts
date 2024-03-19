@@ -3,7 +3,7 @@ import { Trip } from '../../Models/Trip';
 import { User } from '../../Models/users';
 import { AuthorizeService } from '../../../api-authorization/authorize.service';
 import { TripDetails } from '../../Models/TripDetails';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { SquareService } from '../../services/SquareService';
 import { PaymentModel } from '../../Models/PaymentModel';
 import { PriceOptions } from '../../Models/PriceOptions';
@@ -24,6 +24,7 @@ export class FlightDataComponent implements OnInit {
   constructor(
     private auth: AuthorizeService,
     private route: ActivatedRoute,
+    private router: Router,
     private squareService: SquareService
   ) { }
 
@@ -86,4 +87,9 @@ export class FlightDataComponent implements OnInit {
 
     
   }
+
+  buyPage(trip: Trip) {
+    this.router.navigate(['/payment']); 
+  }
+
 }

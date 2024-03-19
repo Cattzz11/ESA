@@ -39,8 +39,6 @@ namespace PROJETOESA.Controllers
         [Route("api/payment/purchase-ticket")]
         public async Task<IActionResult> PurchaseTicket([FromBody] PaymentModel payment)
         {
-            Debug.WriteLine("AQUI Servidor");
-            Debug.WriteLine(payment.price);
 
             try
             {
