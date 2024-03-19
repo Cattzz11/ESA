@@ -27,6 +27,7 @@ export class SquareService {
       responseType: 'text'
     })
       .pipe<boolean>(map((res: HttpResponse<string>) => {
+        console.log(res);
         return res.ok;
       }));
   }
