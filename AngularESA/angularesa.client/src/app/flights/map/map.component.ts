@@ -24,9 +24,13 @@ export class MapComponent implements OnInit, AfterViewInit {
   markers: google.maps.marker.AdvancedMarkerElement[] = [];
   polylines: google.maps.PolylineOptions[] = [];
 
- constructor(private flights: FlightItineraryService) { }
+  originMarker: google.maps.Marker | null = null;
+  destinationMarker: google.maps.Marker | null = null;
+  markersPlaced: boolean = false;
 
   flightsLoaded = false;
+
+ constructor(private flights: FlightItineraryService) { }
 
   ngOnInit(): void {
     this.flights.getFlights().subscribe({
@@ -49,8 +53,92 @@ export class MapComponent implements OnInit, AfterViewInit {
         mapTypeId: "terrain",
       }
     );
+
+    this.map.addListener('click', (event: google.maps.MapMouseEvent) => {
+      const elevationService = new google.maps.ElevationService();
+
+      elevationService.getElevationForLocations({
+        'locations': [event.latLng!]
+      }, (results, status) => {
+        if (status === 'OK') {
+          if (results && results[0].elevation <= 1) {
+            console.log('Clicou no oceano, não adicione um marcador.');
+          } else {
+            if (this.markersPlaced) {
+              this.clearMarkers();
+              this.originMarker = this.createMarker(event.latLng!, 'green', 'Origem');
+              this.markersPlaced = false;
+            } else {
+              if (!this.originMarker) {
+                this.originMarker = this.createMarker(event.latLng!, 'green', 'Origem');
+              }
+              else if (!this.destinationMarker) {
+                this.destinationMarker = this.createMarker(event.latLng!, 'red', 'Destino');
+                this.markersPlaced = true;
+                this.performCustomAction(this.originMarker, this.destinationMarker);
+              }
+            }
+          }
+        }
+      });
+    });
+
     if (this.flightsLoaded) {
       this.addFlightMarkers();
+    }
+  }
+
+  createMarker(position: google.maps.LatLng, color: string, title: string): google.maps.Marker {
+    const iconUrl = color === 'green' ? 'http://maps.google.com/mapfiles/ms/icons/yellow-dot.png' :
+      'http://maps.google.com/mapfiles/ms/icons/red-dot.png';
+
+    return new google.maps.Marker({
+      map: this.map,
+      position: position,
+      icon: { url: iconUrl },
+      title: title
+    });
+  }
+
+  clearMarkers(): void {
+    if (this.originMarker) {
+      this.originMarker.setMap(null);
+      this.originMarker = null;
+    }
+    if (this.destinationMarker) {
+      this.destinationMarker.setMap(null);
+      this.destinationMarker = null;
+    }
+  }
+
+  performCustomAction(originMarker: google.maps.Marker | null, destinationMarker: google.maps.Marker | null): void {
+    if (originMarker && destinationMarker) {
+      const originPosition = originMarker.getPosition();
+      const destinationPosition = destinationMarker.getPosition();
+
+      if (originPosition && destinationPosition) {
+        const geocoder = new google.maps.Geocoder();
+
+        geocoder.geocode({ location: originPosition }, (results, status) => {
+          if (status === 'OK' && results && results[0]) {
+            console.log('Origem:', results[0].formatted_address);
+          } else {
+            console.error('Geocoder failed due to: ' + status);
+          }
+        });
+
+        // Geocodificação reversa para o Destino
+        geocoder.geocode({ location: destinationPosition }, (results, status) => {
+          if (status === 'OK' && results && results[0]) {
+            console.log('Destino:', results[0].formatted_address);
+
+            console.log('Destino:', results[0].plus_code?.compound_code);
+
+          } else {
+            console.error('Geocoder failed due to: ' + status);
+          }
+        });
+      }
     }
   }
 
