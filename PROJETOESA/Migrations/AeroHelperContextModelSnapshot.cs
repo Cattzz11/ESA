@@ -510,6 +510,14 @@ namespace PROJETOESA.Migrations
                     b.Property<double>("Score")
                         .HasColumnType("float");
 
+                    b.Property<string>("SessionId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Token")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<bool>("isCancellationAllowed")
                         .HasColumnType("bit");
 

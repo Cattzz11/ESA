@@ -143,7 +143,9 @@ namespace PROJETOESA.Migrations
                     isPartiallyChangeable = table.Column<bool>(type: "bit", nullable: false),
                     isCancellationAllowed = table.Column<bool>(type: "bit", nullable: false),
                     isPartiallyRefundable = table.Column<bool>(type: "bit", nullable: false),
-                    Score = table.Column<double>(type: "float", nullable: false)
+                    Score = table.Column<double>(type: "float", nullable: false),
+                    SessionId = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Token = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {

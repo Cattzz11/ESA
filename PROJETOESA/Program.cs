@@ -65,6 +65,7 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.AddScoped<SkyscannerService>();
 builder.Services.AddScoped<DataService>();
+builder.Services.AddScoped<ICodeGeneratorService, CodeGeneratorService>();
 
 builder.Services.AddAuthorization();
 builder.Services.AddIdentityApiEndpoints<ApplicationUser>()
@@ -81,8 +82,6 @@ builder.Configuration.GetSection("EmailSender"));
 
 // Adiciona o serviço de envio de e-mails
 builder.Services.AddTransient<IEmailSender, EmailSender>();
-
-builder.Services.AddScoped<CodeGeneratorService>();
 
 var app = builder.Build();
 
