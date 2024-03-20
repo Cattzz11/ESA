@@ -1,6 +1,13 @@
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from "@angular/core";
 import { FlightItineraryService } from "../../services/FlightItineraryService";
 import { FlightsItinerary } from "../../Models/FlightsItinerary";
+import { Trip } from "../../Models/Trip";
+import { City } from "../../Models/City";
+import { TripDetails } from "../../Models/TripDetails";
+import { Router } from "@angular/router";
+import { User } from "../../Models/users";
+import { AuthorizeService } from "../../../api-authorization/authorize.service";
+import { PriceOptions } from "../../Models/PriceOptions";
 
 @Component({
   selector: 'app-map',
@@ -10,9 +17,13 @@ import { FlightsItinerary } from "../../Models/FlightsItinerary";
 export class MapComponent implements OnInit, AfterViewInit {
   @ViewChild('mapContainer') mapContainer!: ElementRef;
 
+  user: User | null = null;
+
   map!: google.maps.Map;
 
   flightsList: FlightsItinerary[] = [];
+  tripList: Trip[] = [];
+  tripListPremium: TripDetails[] = [];
 
   display: any;
   center: google.maps.LatLngLiteral = {
@@ -29,10 +40,30 @@ export class MapComponent implements OnInit, AfterViewInit {
   markersPlaced: boolean = false;
 
   flightsLoaded = false;
+  isLoading = false;
 
- constructor(private flights: FlightItineraryService) { }
+  constructor(
+    private flights: FlightItineraryService,
+    private router: Router,
+    private auth: AuthorizeService
+  ) { }
 
   ngOnInit(): void {
+    const storedUser = sessionStorage.getItem('user');
+    if (storedUser) {
+      this.user = JSON.parse(storedUser);
+    }
+    else {
+      this.auth.getUserInfo().subscribe({
+        next: (userInfo: User) => {
+          this.user = userInfo;
+        },
+        error: (error) => {
+          console.error('Error fetching user info', error);
+        }
+      });
+    }
+
     this.flights.getFlights().subscribe({
       next: (response) => {
         this.flightsList = response;
@@ -111,35 +142,68 @@ export class MapComponent implements OnInit, AfterViewInit {
     }
   }
 
-  performCustomAction(originMarker: google.maps.Marker | null, destinationMarker: google.maps.Marker | null): void {
-    if (originMarker && destinationMarker) {
-      const originPosition = originMarker.getPosition();
-      const destinationPosition = destinationMarker.getPosition();
+  performCustomAction(originMarker: google.maps.Marker, destinationMarker: google.maps.Marker): void {
+    const geocoder = new google.maps.Geocoder();
+    const originPosition = originMarker.getPosition();
+    const destinationPosition = destinationMarker.getPosition();
+    this.isLoading = true;
 
-      if (originPosition && destinationPosition) {
-        const geocoder = new google.maps.Geocoder();
+    const getAddressComponents = (position: google.maps.LatLng | null | undefined): Promise<AddressComponents> => {
+      return new Promise((resolve, reject) => {
+        if (position) {
+          // Especificando o idioma dos resultados como inglês
+          geocoder.geocode({ location: position, language: 'en' }, (results, status) => {
+            if (status === 'OK' && results && results[0]) {
+              const addressComponents = results[0].address_components;
+              const cityComponent = addressComponents.find(component => component.types.includes("administrative_area_level_2"));
+              const countryComponent = addressComponents.find(component => component.types.includes("country"));
+              resolve({
+                city: cityComponent ? cityComponent.long_name : "",
+                country: countryComponent ? countryComponent.long_name : "",
+                latitude: position.lat().toString(),
+                longitude: position.lng().toString()
+              });
+            } else {
+              reject(new Error('Geocoder failed due to: ' + status));
+            }
+          });
+        } else {
+          reject(new Error('No position provided'));
+        }
+      });
+    }; 
 
-        geocoder.geocode({ location: originPosition }, (results, status) => {
-          if (status === 'OK' && results && results[0]) {
-            console.log('Origem:', results[0].formatted_address);
-          } else {
-            console.error('Geocoder failed due to: ' + status);
+    Promise.all([
+      getAddressComponents(originPosition),
+      getAddressComponents(destinationPosition)
+    ]).then(([originAddress, destinationAddress]: [AddressComponents, AddressComponents]) => {
+      if (this.user && this.user.role === 1) {
+        this.flights.getTripsPremium(originAddress, destinationAddress).subscribe({
+          next: (response) => {
+            this.tripListPremium = response;
+            this.isLoading = false;
+          },
+          error: (error) => {
+            this.isLoading = false;
+            console.error('Error fetching flights:', error);
           }
         });
-
-        // Geocodificação reversa para o Destino
-        geocoder.geocode({ location: destinationPosition }, (results, status) => {
-          if (status === 'OK' && results && results[0]) {
-            console.log('Destino:', results[0].formatted_address);
-
-            console.log('Destino:', results[0].plus_code?.compound_code);
-
-          } else {
-            console.error('Geocoder failed due to: ' + status);
+      } else {
+        this.flights.getTrips(originAddress, destinationAddress).subscribe({
+          next: (response) => {
+            this.tripList = response;
+            this.isLoading = false;
+          },
+          error: (error) => {
+            this.isLoading = false;
+            console.error('Error fetching flights:', error);
           }
         });
-      }
-    }
+      };
+    }).catch(error => {
+      console.error(error);
+      this.isLoading = false;
+    });
   }
 
   moveMap(event: google.maps.MapMouseEvent) {
@@ -195,6 +259,7 @@ export class MapComponent implements OnInit, AfterViewInit {
           position: randomPoint.position
         });
 
+        // Aqui é a ação quando de clica num avião
         marker.addListener('click', function () {
           console.log(flight.departureLocation.name);
           console.log(flight.arrivalLocation.name);
@@ -240,4 +305,34 @@ export class MapComponent implements OnInit, AfterViewInit {
       }
     });
   }
+
+  selectTrip(trip: any) {
+    this.router.navigate(['/flight-data'], { state: { data: trip } });
+  }
+
+  calculatePrices(inputField: 'max' | 'med' | 'min', options: PriceOptions[]) {
+    const prices = options.map(option => option.totalPrice);
+
+    switch (inputField) {
+      case 'max':
+        return Math.max(...prices);
+      case 'med':
+        const averagePrice = prices.reduce((a, b) => a + b, 0) / prices.length;
+
+        const closestToAveragePrice = prices.reduce((prev, curr) => {
+          return (Math.abs(curr - averagePrice) < Math.abs(prev - averagePrice) ? curr : prev);
+        });
+
+        return closestToAveragePrice;
+      case 'min':
+        return Math.min(...prices);;
+    }
+  }
+}
+
+export interface AddressComponents {
+  city: string;
+  country: string;
+  latitude: string;
+  longitude: string;
 }

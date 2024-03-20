@@ -4,7 +4,8 @@
     {
         string GenerateCode();
     }
-    public class CodeGeneratorService
+
+    public class CodeGeneratorService: ICodeGeneratorService
     {
         public string GenerateCode()
         {

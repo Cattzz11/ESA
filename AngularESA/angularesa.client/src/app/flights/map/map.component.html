@@ -1,13 +1,12 @@
-<div id="map" #mapContainer style="height: 100vh; width: 100vw;"></div>
+<div id="map" #mapContainer style="height: 60vh; width: 100vw;"></div>
 
-<!-- 
 <div *ngIf="isLoading" class="loading-indicator">
     <img src="../../assets/Images/Fading circles.gif" alt="Carregando...">
 </div>
 
-<div *ngIf="!isLoading && flights.length > 0" class="viagens-list">
+<div *ngIf="!isLoading && tripList.length > 0" class="viagens-list">
     <div class="travelHistory">
-        <div *ngFor="let trip of flights" class="travel">
+        <div *ngFor="let trip of tripList" class="travel">
             <ng-container *ngIf="trip.flights && trip.flights.length > 0 && trip.flights[0].segments && trip.flights[0].segments.length > 0">
                 <div class="flight">
                     <div class="ida">
@@ -58,7 +57,7 @@
 
 <div *ngIf="!isLoading && this.user && this.user.role === 1" class="viagens-list">
     <div class="travelHistory">
-        <div *ngFor="let trip of flightsPremium" class="travel">
+        <div *ngFor="let trip of tripListPremium" class="travel">
             <ng-container *ngIf="trip.flights && trip.flights.length > 0 && trip.flights[0].segments && trip.flights[0].segments.length > 0">
                 <div class="flight">
                     <div class="ida">
@@ -103,9 +102,9 @@
                 <p>Preço Mínimo: {{ calculatePrices('min', trip.priceOptions) }} €</p>
                 <p>Preço Médio: {{ calculatePrices('med', trip.priceOptions) }} €</p>
                 <p>Preço Máximo: {{ calculatePrices('max', trip.priceOptions) }} €</p>
-                <a (click)="selectTripPremium(trip)" class="button-link">Mais opções</a>
+                <a (click)="selectTrip(trip)" class="button-link">Mais opções</a>
             </div>
         </div>
     </div>
 </div>
- -->
+

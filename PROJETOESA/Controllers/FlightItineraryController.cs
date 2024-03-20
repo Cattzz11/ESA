@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using PROJETOESA.Models;
 using PROJETOESA.Services;
 using System.Diagnostics;
 
@@ -39,5 +40,40 @@ namespace PROJETOESA.Controllers
 
             return Ok(data);
         }
+
+        [HttpGet]
+        [Route("api/flight-itinerary/search-flights")]
+        public async Task<IActionResult> SearchFlights([FromQuery] AddressComponents origin, [FromQuery] AddressComponents destination)
+        {
+            var data = await _flightService.GetFlightsAsync(origin, destination);
+            return Ok(data);
+        }
+
+        [HttpGet]
+        [Route("api/flight-itinerary/search-flights-premium")]
+        public async Task<IActionResult> SearchFlightsPremium([FromQuery] AddressComponents origin, [FromQuery] AddressComponents destination)
+        {
+            var data = await _flightService.GetFlightsPremiumAsync(origin, destination);
+            return Ok(data);
+        }
+
+        [HttpGet]
+        [Route("api/flight-itinerary/populate-coordinates")]
+        public async Task<IActionResult> PopulateCoordinates()
+        {
+            var data = await _flightService.PopulateCoordinatesAsync();
+            return Ok(data);
+        }
+
+    }
+
+    public class AddressComponents
+    {
+        public string city { get; set; }
+        public string country { get; set; }
+        public string latitude { get; set; }
+        public string longitude { get; set; }
     }
 }
+
+

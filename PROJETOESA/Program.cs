@@ -7,6 +7,7 @@ using Square;
 using Square.Http.Client;
 using Square.Apis;
 using Square.Models;
+using Microsoft.Extensions.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -32,7 +33,6 @@ builder.Services.AddHttpClient("CountriesAPI", client =>
     client.BaseAddress = new Uri("https://restcountries.com/");
 
 });
-
 
 string accessToken = "EAAAl7w8P9qlJgAIDzJYhYIN3XivD0gDTpSRreKD2nLgYIVqdOJDwy8DpvL_-kYU";
 SquareClient squareClient = new SquareClient.Builder()
@@ -66,6 +66,7 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.AddScoped<SkyscannerService>();
 builder.Services.AddScoped<DataService>();
+builder.Services.AddScoped<ICodeGeneratorService, CodeGeneratorService>();
 
 builder.Services.AddAuthorization();
 builder.Services.AddIdentityApiEndpoints<ApplicationUser>()

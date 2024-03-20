@@ -1,7 +1,10 @@
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { FlightsItinerary } from "../Models/FlightsItinerary";
+import { AddressComponents } from "../flights/map/map.component";
+import { Trip } from "../Models/Trip";
+import { TripDetails } from "../Models/TripDetails";
 
 @Injectable({
   providedIn: 'root'
@@ -15,5 +18,33 @@ export class FlightItineraryService {
 
   public getFlights(): Observable<FlightsItinerary[]> {
     return this.http.get<FlightsItinerary[]>('api/flight-itinerary/live-flights');
+  }
+
+  public getTrips(origin: AddressComponents, destination: AddressComponents): Observable<Trip[]> {
+    let params = new HttpParams()
+      .set('origin.city', origin.city)
+      .set('origin.country', origin.country)
+      .set('origin.latitude', origin.latitude)
+      .set('origin.longitude', origin.longitude)
+      .set('destination.city', destination.city)
+      .set('destination.country', destination.country)
+      .set('destination.latitude', destination.latitude)
+      .set('destination.longitude', destination.longitude);
+
+    return this.http.get<Trip[]>('api/flight-itinerary/search-flights', { params });
+  }
+
+  public getTripsPremium(origin: AddressComponents, destination: AddressComponents): Observable<TripDetails[]> {
+    let params = new HttpParams()
+      .set('origin.city', origin.city)
+      .set('origin.country', origin.country)
+      .set('origin.latitude', origin.latitude)
+      .set('origin.longitude', origin.longitude)
+      .set('destination.city', destination.city)
+      .set('destination.country', destination.country)
+      .set('destination.latitude', destination.latitude)
+      .set('destination.longitude', destination.longitude);
+
+    return this.http.get<TripDetails[]>('api/flight-itinerary/search-flights-premium', { params });
   }
 }
