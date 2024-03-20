@@ -26,4 +26,8 @@ export class UsersService {
     return this.http.get('/statistics'); // Certifique-se de que a URL está correta conforme sua configuração
   }
 
+  getLoginCountByDate(date: string): Observable<number> {
+    return this.http.get<number>(`/api/statistics/login-count?date=${date}`);
+  }
+
 }

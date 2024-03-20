@@ -12,7 +12,7 @@ using PROJETOESA.Data;
 namespace PROJETOESA.Migrations
 {
     [DbContext(typeof(AeroHelperContext))]
-    [Migration("20240312115318_ESADB")]
+    [Migration("20240320211829_ESADB")]
     partial class ESADB
     {
         /// <inheritdoc />
@@ -227,6 +227,9 @@ namespace PROJETOESA.Migrations
 
                     b.Property<DateTimeOffset?>("LockoutEnd")
                         .HasColumnType("datetimeoffset");
+
+                    b.Property<DateTime?>("LoginTime")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -512,6 +515,14 @@ namespace PROJETOESA.Migrations
 
                     b.Property<double>("Score")
                         .HasColumnType("float");
+
+                    b.Property<string>("SessionId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Token")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("isCancellationAllowed")
                         .HasColumnType("bit");

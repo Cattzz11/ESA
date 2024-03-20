@@ -21,5 +21,13 @@ namespace PROJETOESA.Controllers
             var statistics = await _statisticsService.GetStatisticsAsync();
             return Ok(statistics);
         }
+
+        [HttpGet("/login-count")]
+        public async Task<IActionResult> GetLoginCountByDate([FromQuery] DateTime date)
+        {
+            var loginCount = await _statisticsService.GetLoginCountByDateAsync(date);
+            return Ok(loginCount);
+        }
+
     }
 }

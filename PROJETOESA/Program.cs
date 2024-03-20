@@ -10,6 +10,8 @@ using Square.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddScoped<StatisticsService>();
+
 builder.Services.AddDbContext<AeroHelperContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("AeroHelperContext") ?? throw new InvalidOperationException("Connection string 'AeroHelperContext' not found.")));
 
@@ -82,9 +84,9 @@ builder.Configuration.GetSection("EmailSender"));
 // Adiciona o serviço de envio de e-mails
 builder.Services.AddTransient<IEmailSender, EmailSender>();
 
-builder.Services.AddScoped<CodeGeneratorService>();
+builder.Services.AddScoped<ICodeGeneratorService, CodeGeneratorService>();
 
-builder.Services.AddScoped<StatisticsService>();
+
 
 var app = builder.Build();
 

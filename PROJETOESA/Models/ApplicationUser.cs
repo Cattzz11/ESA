@@ -20,5 +20,7 @@ namespace PROJETOESA.Models
         //public byte[]? ProfilePictureBinary{ get; set; }
 
         public List<UserFlight>? UserFlights { get; set; }
+
+        public DateTime? registerTime { get; set; }
     }
 }

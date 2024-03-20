@@ -28,6 +28,7 @@ namespace PROJETOESA.Data
 
         public DbSet<Payment> Payment { get; set; }
 
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);

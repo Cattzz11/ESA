@@ -103,6 +103,14 @@
 
     <div class="statistics">
       <p>Total de usuários registrados: {{ statistics.totalUsers }}</p>
-      <!-- Outras estatísticas conforme necessário -->
+      <div>
+        <label for="datePicker">Selecione uma data:</label>
+        <input type="date" id="datePicker" [(ngModel)]="selectedDate">
+        <button (click)="getLoginCount()">Buscar</button>
+      </div>
+
+      <div *ngIf="loginCount !== null">
+        <p>Número de logins em {{ selectedDate }}: {{ loginCount }}</p>
+      </div>
     </div>
   </div>

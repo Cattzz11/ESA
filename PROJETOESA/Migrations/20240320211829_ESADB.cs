@@ -38,6 +38,7 @@ namespace PROJETOESA.Migrations
                     Occupation = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ProfilePicture = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Gender = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    LoginTime = table.Column<DateTime>(type: "datetime2", nullable: true),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -143,7 +144,9 @@ namespace PROJETOESA.Migrations
                     isPartiallyChangeable = table.Column<bool>(type: "bit", nullable: false),
                     isCancellationAllowed = table.Column<bool>(type: "bit", nullable: false),
                     isPartiallyRefundable = table.Column<bool>(type: "bit", nullable: false),
-                    Score = table.Column<double>(type: "float", nullable: false)
+                    Score = table.Column<double>(type: "float", nullable: false),
+                    SessionId = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Token = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {

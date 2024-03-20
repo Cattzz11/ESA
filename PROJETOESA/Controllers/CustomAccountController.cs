@@ -43,6 +43,7 @@ namespace PROJETOESA.Controllers
 
             if (result.Succeeded)
             {
+                user.registerTime = DateTime.Now;
                 return Ok();
             }
 
