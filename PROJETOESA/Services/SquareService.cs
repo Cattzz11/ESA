@@ -34,6 +34,7 @@ namespace PROJETOESA.Services
             try
             {
                 // ADICIONAR DADOS NA BD PARA HISTORICO
+                //Criar Customer, criar Order e no fim Criar pagamento.
                 // var result = await client.PaymentsApi.CreatePaymentAsync(body: body);
                 var result = await _client.PaymentsApi.CreatePaymentAsync(body);
             }
@@ -44,6 +45,10 @@ namespace PROJETOESA.Services
                 Console.WriteLine($"Exception: {e.Message}");
             }
         }
+
+
+
+
     }
 
 }
