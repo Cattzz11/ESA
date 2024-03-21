@@ -2,7 +2,6 @@ import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from "@angula
 import { FlightItineraryService } from "../../services/FlightItineraryService";
 import { FlightsItinerary } from "../../Models/FlightsItinerary";
 import { Trip } from "../../Models/Trip";
-import { City } from "../../Models/City";
 import { TripDetails } from "../../Models/TripDetails";
 import { Router } from "@angular/router";
 import { User } from "../../Models/users";
@@ -151,7 +150,6 @@ export class MapComponent implements OnInit, AfterViewInit {
     const getAddressComponents = (position: google.maps.LatLng | null | undefined): Promise<AddressComponents> => {
       return new Promise((resolve, reject) => {
         if (position) {
-          // Especificando o idioma dos resultados como inglês
           geocoder.geocode({ location: position, language: 'en' }, (results, status) => {
             if (status === 'OK' && results && results[0]) {
               const addressComponents = results[0].address_components;
@@ -261,7 +259,7 @@ export class MapComponent implements OnInit, AfterViewInit {
 
         // Aqui é a ação quando de clica num avião
         marker.addListener('click', function () {
-          console.log(flight.departureLocation.name);
+          console.log(flight.flightIATA);
           console.log(flight.arrivalLocation.name);
         });
       }
