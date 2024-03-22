@@ -9,7 +9,7 @@ import { AuthorizeService } from "../authorize.service";
   styleUrl: './register.component.css'
 })
 export class RegisterComponent implements OnInit {
-  errors: string[] = [];
+  errors: string | undefined;
   registerForm!: FormGroup;
   confirmationMessage: string = '';
   registerFailed: boolean = false;
@@ -27,7 +27,7 @@ export class RegisterComponent implements OnInit {
   ngOnInit(): void {
     this.registerFailed = false;
     this.registerSucceeded = false;
-    this.errors = [];
+    this.errors = "";
     this.registerForm = this.formBuilder.group(
       {
         name: ['', Validators.required],
@@ -43,7 +43,7 @@ export class RegisterComponent implements OnInit {
     }
 
     this.registerFailed = false;
-    this.errors = [];
+    this.errors = "";
     const name = this.registerForm.get('name')?.value;
     const userName = this.registerForm.get('email')?.value;
     const password = this.registerForm.get('password')?.value;
@@ -51,7 +51,7 @@ export class RegisterComponent implements OnInit {
 
     if (password !== confirmPassword) {
       this.registerFailed = true;
-      this.errors.push('Passwords do not match.');
+      this.errors = 'Passwords do not match';
       return;
     }
 
@@ -64,20 +64,12 @@ export class RegisterComponent implements OnInit {
       }).catch(
         error => {
           this.registerFailed = true;
-          if (error.error) {
-            const errorObj = JSON.parse(error.error);
-            if (errorObj && errorObj.errors) {
-              //problem details { "field1": [ "error1", "error2" ], "field2": [ "error1", "error2" ]}
-              const errorList = errorObj.errors;
-              for (let field in errorList) {
-                if (Object.hasOwn(errorList, field)) {
-                  let list: string[] = errorList[field];
-                  for (let idx = 0; idx < list.length; idx += 1) {
-                    this.errors.push(`${field}: ${list[idx]}`);
-                  }
-                }
-              }
-            }
+          const match = /"description":"([^"]+)"/.exec(error.error);
+          if (match) {
+            this.errors = match[1];
+
+          } else {
+            this.errors = "Ocorreu um erro desconhecido.";
           }
         });
   }
@@ -88,14 +80,11 @@ export class RegisterComponent implements OnInit {
 
     this.authService.confirmAccount(email).subscribe({
       next: (response) => {
-        setTimeout(() => this.router.navigate(['/confirmation-account/', email]), 1000); // espera 1 segundos
+        setTimeout(() => this.router.navigate(['/confirmation-account/', email]), 1000);
       },
       error: (error) => {
-        setTimeout(() => this.router.navigate(['/confirmation-account/', email]), 1000); // espera 1 segundos
+        this.errors = "Não foi possivel concluir o pedido.";
       }
     });
   }
-  
-
-
 }

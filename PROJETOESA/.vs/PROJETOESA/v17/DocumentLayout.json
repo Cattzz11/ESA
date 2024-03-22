@@ -3,16 +3,7 @@
   "WorkspaceRootPath": "C:\\Users\\Tiago\\Desktop\\IPS\\ESA\\PROJETOESA\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{FFDC8847-A03D-4B34-BF6B-037A713978B8}|..\\AngularESA\\angularesa.client\\angularesa.client.esproj|c:\\users\\tiago\\desktop\\ips\\esa\\angularesa\\angularesa.client\\src\\app\\flights\\map\\map.component.ts||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{FFDC8847-A03D-4B34-BF6B-037A713978B8}|..\\AngularESA\\angularesa.client\\angularesa.client.esproj|c:\\users\\tiago\\desktop\\ips\\esa\\angularesa\\angularesa.client\\src\\api-authorization\\signin\\signin.component.html||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{FFDC8847-A03D-4B34-BF6B-037A713978B8}|..\\AngularESA\\angularesa.client\\angularesa.client.esproj|c:\\users\\tiago\\desktop\\ips\\esa\\angularesa\\angularesa.client\\src\\api-authorization\\signin\\signin.component.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{FFDC8847-A03D-4B34-BF6B-037A713978B8}|..\\AngularESA\\angularesa.client\\angularesa.client.esproj|c:\\users\\tiago\\desktop\\ips\\esa\\angularesa\\angularesa.client\\src\\api-authorization\\register\\register.component.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+      "AbsoluteMoniker": "D:0:0:{FFDC8847-A03D-4B34-BF6B-037A713978B8}|..\\AngularESA\\angularesa.client\\angularesa.client.esproj|c:\\users\\tiago\\desktop\\ips\\esa\\angularesa\\angularesa.client\\src\\api-authorization\\register\\register.component.ts||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{FFDC8847-A03D-4B34-BF6B-037A713978B8}|..\\AngularESA\\angularesa.client\\angularesa.client.esproj|c:\\users\\tiago\\desktop\\ips\\esa\\angularesa\\angularesa.client\\src\\api-authorization\\register\\register.component.html||{40D31677-CBC0-4297-A9EF-89D907823A98}"
@@ -30,66 +21,27 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "map.component.ts",
-              "DocumentMoniker": "C:\\Users\\Tiago\\Desktop\\IPS\\ESA\\AngularESA\\angularesa.client\\src\\app\\flights\\map\\map.component.ts",
-              "RelativeDocumentMoniker": "..\\AngularESA\\angularesa.client\\src\\app\\flights\\map\\map.component.ts",
-              "ToolTip": "C:\\Users\\Tiago\\Desktop\\IPS\\ESA\\AngularESA\\angularesa.client\\src\\app\\flights\\map\\map.component.ts",
-              "RelativeToolTip": "..\\AngularESA\\angularesa.client\\src\\app\\flights\\map\\map.component.ts",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABAAAAACAAAA",
+              "Title": "register.component.ts",
+              "DocumentMoniker": "C:\\Users\\Tiago\\Desktop\\IPS\\ESA\\AngularESA\\angularesa.client\\src\\api-authorization\\register\\register.component.ts",
+              "RelativeDocumentMoniker": "..\\AngularESA\\angularesa.client\\src\\api-authorization\\register\\register.component.ts",
+              "ToolTip": "C:\\Users\\Tiago\\Desktop\\IPS\\ESA\\AngularESA\\angularesa.client\\src\\api-authorization\\register\\register.component.ts",
+              "RelativeToolTip": "..\\AngularESA\\angularesa.client\\src\\api-authorization\\register\\register.component.ts",
+              "ViewState": "AQIAAA4AAAAAAAAAAAAAwEQAAAAiAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003213|",
-              "WhenOpened": "2024-03-22T15:18:08.941Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "register.component.css",
-              "DocumentMoniker": "C:\\Users\\Tiago\\Desktop\\IPS\\ESA\\AngularESA\\angularesa.client\\src\\api-authorization\\register\\register.component.css",
-              "RelativeDocumentMoniker": "..\\AngularESA\\angularesa.client\\src\\api-authorization\\register\\register.component.css",
-              "ToolTip": "C:\\Users\\Tiago\\Desktop\\IPS\\ESA\\AngularESA\\angularesa.client\\src\\api-authorization\\register\\register.component.css",
-              "RelativeToolTip": "..\\AngularESA\\angularesa.client\\src\\api-authorization\\register\\register.component.css",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABMAAAARAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
-              "WhenOpened": "2024-03-22T15:10:05.664Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "register.component.html",
-              "DocumentMoniker": "C:\\Users\\Tiago\\Desktop\\IPS\\ESA\\AngularESA\\angularesa.client\\src\\api-authorization\\register\\register.component.html",
-              "RelativeDocumentMoniker": "..\\AngularESA\\angularesa.client\\src\\api-authorization\\register\\register.component.html",
-              "ToolTip": "C:\\Users\\Tiago\\Desktop\\IPS\\ESA\\AngularESA\\angularesa.client\\src\\api-authorization\\register\\register.component.html",
-              "RelativeToolTip": "..\\AngularESA\\angularesa.client\\src\\api-authorization\\register\\register.component.html",
-              "ViewState": "AQIAABUAAAAAAAAAAAAAACwAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
-              "WhenOpened": "2024-03-22T14:55:47.872Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "signin.component.css",
-              "DocumentMoniker": "C:\\Users\\Tiago\\Desktop\\IPS\\ESA\\AngularESA\\angularesa.client\\src\\api-authorization\\signin\\signin.component.css",
-              "RelativeDocumentMoniker": "..\\AngularESA\\angularesa.client\\src\\api-authorization\\signin\\signin.component.css",
-              "ToolTip": "C:\\Users\\Tiago\\Desktop\\IPS\\ESA\\AngularESA\\angularesa.client\\src\\api-authorization\\signin\\signin.component.css",
-              "RelativeToolTip": "..\\AngularESA\\angularesa.client\\src\\api-authorization\\signin\\signin.component.css",
-              "ViewState": "AQIAADYAAAAAAAAAAAAuwG0AAAAQAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
-              "WhenOpened": "2024-03-22T14:17:36.519Z",
+              "WhenOpened": "2024-03-22T16:17:55.937Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "signin.component.html",
-              "DocumentMoniker": "C:\\Users\\Tiago\\Desktop\\IPS\\ESA\\AngularESA\\angularesa.client\\src\\api-authorization\\signin\\signin.component.html",
-              "RelativeDocumentMoniker": "..\\AngularESA\\angularesa.client\\src\\api-authorization\\signin\\signin.component.html",
-              "ToolTip": "C:\\Users\\Tiago\\Desktop\\IPS\\ESA\\AngularESA\\angularesa.client\\src\\api-authorization\\signin\\signin.component.html",
-              "RelativeToolTip": "..\\AngularESA\\angularesa.client\\src\\api-authorization\\signin\\signin.component.html",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAACkAAAAAAAAA",
+              "Title": "register.component.html",
+              "DocumentMoniker": "C:\\Users\\Tiago\\Desktop\\IPS\\ESA\\AngularESA\\angularesa.client\\src\\api-authorization\\register\\register.component.html",
+              "RelativeDocumentMoniker": "..\\AngularESA\\angularesa.client\\src\\api-authorization\\register\\register.component.html",
+              "ToolTip": "C:\\Users\\Tiago\\Desktop\\IPS\\ESA\\AngularESA\\angularesa.client\\src\\api-authorization\\register\\register.component.html",
+              "RelativeToolTip": "..\\AngularESA\\angularesa.client\\src\\api-authorization\\register\\register.component.html",
+              "ViewState": "AQIAABgAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
-              "WhenOpened": "2024-03-22T14:14:22.094Z",
+              "WhenOpened": "2024-03-22T16:17:54.214Z",
               "EditorCaption": ""
             }
           ]

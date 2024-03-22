@@ -1,47 +1,4 @@
 <link href='https://fonts.googleapis.com/css?family=Roboto Slab' rel='stylesheet'>
-<!-- <div class="registerinitial" *ngIf="!signedIn && !registerSucceeded">
-    <div class="regist-wrapper">
-        <div class="regist-box">
-            <div class="regist-form">
-                <form class="form" [formGroup]="registerForm" (submit)="register($event)">
-                    <h2 class="h2initial">Registo</h2>
-                    <div class="row m-3">
-                        <label for="name">Nome<span style="color:red; padding-left:5px;">*</span></label>
-                        <input class="col form-field" name="name" formControlName="name" />
-                    </div>
-                    <div class="row m-3">
-                        <label for="email">Email<span style="color:red; padding-left:5px;">*</span></label>
-                        <input class="col form-field" name="email" formControlName="email" />
-                    </div>
-                    <div class="row m-3">
-                        <label for="password">Password<span style="color:red; padding-left:5px;">*</span></label>
-                        <input class="col form-field" type="password" name="password" formControlName="password" autocomplete="on" />
-                    </div>
-                    <div class="row m-3">
-                        <label for="confirmPassword">Confirmar password<span style="color:red; padding-left:5px;">*</span></label>
-                        <input class="col form-field" type="password" name="confirmPassword" formControlName="confirmPassword" autocomplete="on" />
-                    </div>
-                    <div class="row m-3" *ngIf="registerFailed">
-                        <label style="color: red">Falha no registo.</label>
-                    </div>
-                    <div class="row m-3" *ngFor="let error of errors">
-                        <label style="color: red">{{error}}</label>
-                    </div>
-                    <div class="row m-3">
-                        <button class="col btn btn-primary" [disabled]="!registerForm.valid" type="submit">Registar</button>
-                    </div>
-                </form>
-            </div>
-            <div class="login-branding" style="background-image: url('.. /../assets/Images/background.png');">
-                <img src="../../assets/Images/logo.png" alt="Logo" class="logo" />
-            </div>
-
-            
-        </div>
-    </div>
-</div>
- -->
-
 <div class="registerinitial">
     <div class="register-box">
         <div class="register-form" *ngIf="!signedIn && !registerSucceeded">
@@ -63,10 +20,7 @@
 
                 <div *ngIf="registerFailed">
                     <label style="color: red">Falha no registo.</label>
-                </div>
-
-                <div *ngFor="let error of errors">
-                    <label style="color: red">{{error}}</label>
+                    <label style="color: red">{{errors}}</label>
                 </div>
 
                 <button [disabled]="!registerForm.valid" type="submit">Registar</button>
