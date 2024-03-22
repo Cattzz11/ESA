@@ -50,6 +50,38 @@ namespace PROJETOESA.Controllers
             return BadRequest(result.Errors);
         }
 
+        [HttpPost]
+        [Route("api/login-time")]
+        public async Task<IActionResult> LoginTime([FromBody] CustomLoginModel model)
+        {
+            try{
+                var user = await _userManager.FindByEmailAsync(model.Email);
+                if (user != null)
+                {
+                    // O usuário foi autenticado com sucesso, agora registre o horário de login
+                    var loginRecord = new LoginModel
+                    {
+                        UserId = user.Id,
+                        LoginTime = DateTime.Now // Ou utilize DateTime.Now, dependendo de como deseja registrar o horário
+                    };
+                    _context.Logins.Add(loginRecord);
+                    await _context.SaveChangesAsync();
+
+                    // Aqui você pode gerar e retornar um token JWT ou outra forma de confirmação de login, se necessário
+                    return Ok(new { message = "Login-time successful" });
+                }
+                return Unauthorized(new { message = "Login-time failed" });
+            }
+            catch (Exception ex)
+            {
+
+            }
+
+            return Ok();
+        }
+
+
+
         [HttpPost("api/logout")]
         [Authorize]
         public async Task<IActionResult> Logout()
@@ -392,6 +424,11 @@ namespace PROJETOESA.Controllers
         public string Email { get; set; }
         public string Password { get; set; }
 
+    }
+
+    public class CustomLoginModel
+    {
+        public string Email { get; set; }
     }
 
     public class CustomRecoverModel

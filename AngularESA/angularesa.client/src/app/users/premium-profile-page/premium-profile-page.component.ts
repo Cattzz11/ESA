@@ -69,17 +69,12 @@ export class PremiumProfilePageComponent {
 
   }
 
-  getLoginCount(): void {
-    if (this.selectedDate) {
-      this.userService.getLoginCountByDate(this.selectedDate)
-        .subscribe(count => {
-          this.loginCount = count;
-        }, error => {
-          console.error('Erro ao recuperar o número de logins:', error);
-        });
-    } else {
-      console.warn('Selecione uma data para buscar o número de logins.');
-    }
+  onDateChange(): void {
+    this.userService.getLoginsByDate(this.selectedDate).subscribe(count => {
+      this.loginCount = count;
+    }, error => {
+      console.error('Erro ao recuperar o número de logins:', error);
+    });
   }
 
   private loadUsers(): void {

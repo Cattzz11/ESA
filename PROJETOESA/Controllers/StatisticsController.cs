@@ -22,10 +22,11 @@ namespace PROJETOESA.Controllers
             return Ok(statistics);
         }
 
-        [HttpGet("/login-count")]
-        public async Task<IActionResult> GetLoginCountByDate([FromQuery] DateTime date)
+        [HttpGet]
+        [Route("/logins")]
+        public async Task<IActionResult> GetLoginsByDate([FromQuery] DateTime date)
         {
-            var loginCount = await _statisticsService.GetLoginCountByDateAsync(date);
+            var loginCount = await _statisticsService.GetLoginsByDateAsync(date);
             return Ok(loginCount);
         }
 

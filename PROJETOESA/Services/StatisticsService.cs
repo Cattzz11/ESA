@@ -25,15 +25,18 @@ namespace PROJETOESA.Services
             };
         }
 
-        public async Task<int> GetLoginCountByDateAsync(DateTime date)
+        public async Task<int> GetLoginsByDateAsync(DateTime date)
         {
-            var dateStart = date.Date; // Meia-noite do dia escolhido
+            var dateStart = date.Date; // Meia-noite do dia
             var dateEnd = dateStart.AddDays(1); // Meia-noite do dia seguinte
 
-            return await _context.Users
-                                 .Where(user1 => user1.LoginTime >= dateStart && user1.LoginTime < dateEnd)
+            return await _context.Logins
+                                 .Where(login => login.LoginTime >= dateStart && login.LoginTime < dateEnd)
+                                 .Select(login => login.UserId)
+                                 .Distinct() // Para contar cada usuário apenas uma vez
                                  .CountAsync();
         }
+
 
 
     }

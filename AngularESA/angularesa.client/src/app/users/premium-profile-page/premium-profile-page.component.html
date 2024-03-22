@@ -99,18 +99,21 @@
           <button (click)="deleteUser(u.email)">Delete</button>
         </li>
       </ul>
-    </div>
 
-    <div class="statistics">
-      <p>Total de usuários registrados: {{ statistics.totalUsers }}</p>
-      <div>
-        <label for="datePicker">Selecione uma data:</label>
-        <input type="date" id="datePicker" [(ngModel)]="selectedDate">
-        <button (click)="getLoginCount()">Buscar</button>
+      <div class="statistics">
+        <p>Total de usuários registrados: {{ statistics.totalUsers }}</p>
+        <div>
+          <label for="datePicker">Selecione uma data:</label>
+          <input type="date" [(ngModel)]="selectedDate" (change)="onDateChange()">
+          <p>Número de logins na data selecionada: {{ loginCount }}</p>
+        </div>
+
+        <!--<div *ngIf="loginCount !== null">
+          <p>Número de logins em {{ selectedDate }}: {{ loginCount }}</p>
+        </div>-->
       </div>
 
-      <div *ngIf="loginCount !== null">
-        <p>Número de logins em {{ selectedDate }}: {{ loginCount }}</p>
-      </div>
     </div>
+
+    
   </div>

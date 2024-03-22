@@ -225,9 +225,6 @@ namespace PROJETOESA.Migrations
                     b.Property<DateTimeOffset?>("LockoutEnd")
                         .HasColumnType("datetimeoffset");
 
-                    b.Property<DateTime?>("LoginTime")
-                        .HasColumnType("datetime2");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -270,6 +267,9 @@ namespace PROJETOESA.Migrations
                     b.Property<string>("UserName")
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
+
+                    b.Property<DateTime?>("registerTime")
+                        .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 
@@ -403,6 +403,26 @@ namespace PROJETOESA.Migrations
                     b.HasIndex("TripId");
 
                     b.ToTable("Flights");
+                });
+
+            modelBuilder.Entity("PROJETOESA.Models.LoginModel", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("LoginTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Logins");
                 });
 
             modelBuilder.Entity("PROJETOESA.Models.PasswordRecoveryCode", b =>

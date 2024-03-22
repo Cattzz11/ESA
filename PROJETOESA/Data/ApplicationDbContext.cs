@@ -28,6 +28,8 @@ namespace PROJETOESA.Data
 
         public DbSet<Payment> Payment { get; set; }
 
+        public DbSet<LoginModel> Logins { get; set; }
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -71,6 +73,12 @@ namespace PROJETOESA.Data
                     .HasForeignKey(s => s.FlightId)
                     .OnDelete(DeleteBehavior.Restrict);
             });
+
+            //modelBuilder.Entity<LoginModel>(entity =>
+            //{
+            //    entity.Property(e => e.Id)
+            //    .UseIdentityColumn();
+            //});
         }
     }
 }
