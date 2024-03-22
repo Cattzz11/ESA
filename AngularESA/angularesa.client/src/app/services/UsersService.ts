@@ -22,13 +22,7 @@ export class UsersService {
     return this.http.delete(apiUrl);
   }
 
-  getStatistics(): Observable<any> {
-    return this.http.get('/statistics'); // Certifique-se de que a URL está correta conforme sua configuração
-  }
-
- getLoginsByDate(date: string): Observable<any> {
-    return this.http.get(`/logins?date=${date}`);
- }
+  
 
 
 }

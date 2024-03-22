@@ -4,7 +4,7 @@
     <div class="topButtons">
         <button class="edit" *ngIf="!isLoggedInWGoogle"><a routerLink="/edit-profile">Editar Perfil</a></button>
         <button class="payments">Pagamentos</button>
-        <button class="estatísticas" *ngIf="user?.role===2">Estatísticas</button>
+        <button class="estatísticas" *ngIf="user?.role===2"><a routerLink="/statistics-page" style="text-decoration:none; color:black;">Estatísticas</a></button>
         <button class="premium"><a routerLink="/premium-component" style="text-decoration:none; color:black;">Premium</a></button>
     </div>
   </div>
@@ -100,18 +100,7 @@
         </li>
       </ul>
 
-      <div class="statistics">
-        <p>Total de usuários registrados: {{ statistics.totalUsers }}</p>
-        <div>
-          <label for="datePicker">Selecione uma data:</label>
-          <input type="date" [(ngModel)]="selectedDate" (change)="onDateChange()">
-          <p>Número de logins na data selecionada: {{ loginCount }}</p>
-        </div>
-
-        <!--<div *ngIf="loginCount !== null">
-          <p>Número de logins em {{ selectedDate }}: {{ loginCount }}</p>
-        </div>-->
-      </div>
+      
 
     </div>
 

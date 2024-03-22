@@ -1,7 +1,10 @@
 ﻿namespace PROJETOESA.Models
 {
     public class Statistics
+
     {
-        public int totalUsersStats { get; set; }
+        public int TotalUsersStats { get; set; }
+
+        public int TotalPremiumStats { get; set; }
     }
 }

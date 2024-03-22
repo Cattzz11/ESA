@@ -1,0 +1,18 @@
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<div class="logindia-wrapper">
+  <div class="container-logindia">
+    <label for="datePicker">Selecione uma data:</label>
+    <input type="date" [(ngModel)]="selectedDate" (change)="onDateChange()">
+  </div>
+  <p>Número de logins na data selecionada: {{ loginCount }}</p>
+</div>
+
+<div class="charts-wrapper">
+  <div class="charts-container1">
+    <canvas id="barchart"></canvas>
+  </div>
+  <div class="charts-container2">
+    <canvas id="barchart2"></canvas>
+  </div>
+</div>

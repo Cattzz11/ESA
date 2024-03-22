@@ -44,6 +44,7 @@ namespace PROJETOESA.Controllers
             if (result.Succeeded)
             {
                 user.registerTime = DateTime.Now;
+                await _context.SaveChangesAsync();
                 return Ok();
             }
 
@@ -423,6 +424,8 @@ namespace PROJETOESA.Controllers
         public string Name { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
+
+        //public string RegisterTime { get; set; }
 
     }
 

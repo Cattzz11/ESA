@@ -21,6 +21,6 @@ namespace PROJETOESA.Models
 
         public List<UserFlight>? UserFlights { get; set; }
 
-        public DateTime? registerTime { get; set; }
+        public DateTime registerTime { get; set; }
     }
 }

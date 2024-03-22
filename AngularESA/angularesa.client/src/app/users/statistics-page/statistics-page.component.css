@@ -1,0 +1,38 @@
+/*.charts-container{
+    display:flex;
+    justify-content:space-between;
+}
+
+canvas{
+    width: 45%;
+}
+*/
+*{
+  font-family:'Roboto Slab';
+}
+
+p{
+    display:flex;
+    justify-content:center;
+    margin-bottom:2%;
+}
+
+.container-logindia{
+    margin-top:3%;
+    margin-bottom:3%;
+    display:flex;
+    justify-content:center;
+}
+
+.charts-wrapper{
+    display:flex;
+    justify-content:space-between;
+}
+
+.charts-container1{
+    width:45%;
+}
+
+.charts-container2{
+    width:45%;
+}

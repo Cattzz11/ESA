@@ -15,7 +15,7 @@ namespace PROJETOESA.Controllers
         }
 
         [HttpGet]
-        [Route("/statistics")]
+        [Route("api/statistics")]
         public async Task<IActionResult> GetStatistics()
         {
             var statistics = await _statisticsService.GetStatisticsAsync();
@@ -23,12 +23,27 @@ namespace PROJETOESA.Controllers
         }
 
         [HttpGet]
-        [Route("/logins")]
+        [Route("api/logins")]
         public async Task<IActionResult> GetLoginsByDate([FromQuery] DateTime date)
         {
             var loginCount = await _statisticsService.GetLoginsByDateAsync(date);
             return Ok(loginCount);
         }
 
+        [HttpGet]
+        [Route("api/maxLogins")]
+        public async Task<IActionResult> GetMaxLogins()
+        {
+            var maxLogins = await _statisticsService.GetMaxDailyLoginsAsync();
+            return Ok(maxLogins);
+        }
+
+        [HttpGet]
+        [Route("api/maxRegistrations")]
+        public async Task<IActionResult> GetMaxRegistrations()
+        {
+            var maxRegistrations = await _statisticsService.GetMaxDailyRegistrationsAsync();
+            return Ok(maxRegistrations);
+        }
     }
 }

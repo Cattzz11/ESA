@@ -74,6 +74,10 @@ namespace PROJETOESA.Data
                     .OnDelete(DeleteBehavior.Restrict);
             });
 
+            //modelBuilder.Entity<ApplicationUser>()
+            //    .Property(u => u.registerTime)
+            //    .HasDefaultValueSql("GETDATE()");
+
             //modelBuilder.Entity<LoginModel>(entity =>
             //{
             //    entity.Property(e => e.Id)
