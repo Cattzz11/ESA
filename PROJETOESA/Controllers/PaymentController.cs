@@ -48,6 +48,8 @@ namespace PROJETOESA.Controllers
                     return BadRequest(new { Message = "Invalid request format" });
                 }
 
+                Task<ApplicationUser?> user = _userManager.FindByEmailAsync(payment.Email);
+
                 PaymentModel paymentModel = new PaymentModel
                 {
                     // Set properties based on userInput or other logic
@@ -60,7 +62,7 @@ namespace PROJETOESA.Controllers
                     ShippingAddress = payment.ShippingAddress,
                 };
 
-                await _squareService.PayAsync(paymentModel);
+                await _squareService.PayAsync(paymentModel, _userManager);
 
                 await _context.SaveChangesAsync();
 

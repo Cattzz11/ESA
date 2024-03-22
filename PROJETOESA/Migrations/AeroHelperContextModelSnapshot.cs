@@ -209,6 +209,9 @@ namespace PROJETOESA.Migrations
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("CustomerID")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Email")
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
@@ -428,27 +431,12 @@ namespace PROJETOESA.Migrations
 
             modelBuilder.Entity("PROJETOESA.Models.Payment", b =>
                 {
-                    b.Property<Guid>("PaymentId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<string>("PaymentId")
+                        .HasColumnType("nvarchar(450)");
 
-                    b.Property<int?>("Entity")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime?>("LimitDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("PaymentMethod")
+                    b.Property<string>("CustomerId")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<double>("Price")
-                        .HasColumnType("float");
-
-                    b.Property<int?>("Reference")
-                        .HasColumnType("int");
-
-                    b.Property<int>("paymentStatus")
-                        .HasColumnType("int");
 
                     b.HasKey("PaymentId");
 
@@ -509,6 +497,14 @@ namespace PROJETOESA.Migrations
 
                     b.Property<double>("Score")
                         .HasColumnType("float");
+
+                    b.Property<string>("SessionId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Token")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("isCancellationAllowed")
                         .HasColumnType("bit");

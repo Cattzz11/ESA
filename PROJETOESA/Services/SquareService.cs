@@ -2,10 +2,13 @@
 using Square.Exceptions;
 using Square;
 using Square.Http.Client;
-using System.Threading.Tasks;
 using Square.Models;
-using PROJETOESA.Services;
 using PROJETOESA.Data;
+using PROJETOESA.Models.SquareModels;
+using PROJETOESA.Models;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Configuration;
+using IConfiguration = Microsoft.Extensions.Configuration.IConfiguration;
 
 namespace PROJETOESA.Services
 {
@@ -13,30 +16,64 @@ namespace PROJETOESA.Services
     {
         private SquareClient _client;
         private AeroHelperContext _context;
-        public SquareService(SquareClient client, AeroHelperContext context)
+        private ApplicationUser _user;
+        private Models.Payment _payment;
+        private string squareId;
+        private string squareLocation;
+        private string squareOrderID;
+        private string squareSourceID = "cnon:card-nonce-ok";
+        private readonly IConfiguration _configuration;
+
+
+        public SquareService(SquareClient client, AeroHelperContext context, IConfiguration configuration)
         {
             _client = client ?? throw new ArgumentNullException(nameof(_client));
             _context = context;
+            _configuration = configuration;
         }
 
-        public async Task PayAsync(Models.PaymentModel payment)
+        public async Task PayAsync(PaymentModel payment, UserManager<ApplicationUser> userManager)
+
         {
+            _user = await userManager.FindByEmailAsync(payment.Email);
+            squareLocation = _configuration["SquareSettings:LOCATION_ID"];
+
+
             long lPrice = (long)payment.price;
             var amountMoney = new Money.Builder()
                 .Amount(lPrice)
-                .Currency(payment.currency)
+                .Currency("USD")
                 .Build();
 
-            var body = new CreatePaymentRequest.Builder(sourceId: "cnon:card-nonce-ok", idempotencyKey: "ff1dde35-032c-4a30-bb9e-b586f2963018", amountMoney)
-              .AmountMoney(amountMoney)
-              .Build();
+
 
             try
             {
                 // ADICIONAR DADOS NA BD PARA HISTORICO
                 //Criar Customer, criar Order e no fim Criar pagamento.
-                // var result = await client.PaymentsApi.CreatePaymentAsync(body: body);
-                var result = await _client.PaymentsApi.CreatePaymentAsync(body);
+
+                squareId = CreateSquareCustomer();
+                squareOrderID = CreateSquareOrder(payment);
+                var idempotencyKey = Guid.NewGuid().ToString();
+                CreatePaymentRequest paymentRequest = new CreatePaymentRequest.Builder(squareSourceID, idempotencyKey, amountMoney)
+                    .AcceptPartialAuthorization(false)
+                    .Autocomplete(false)
+                    .BuyerEmailAddress(payment.Email)
+                    .CustomerId(squareId)
+                    .LocationId(squareLocation)
+                    .OrderId(squareOrderID)
+                    .Build();
+
+                var result = await _client.PaymentsApi.CreatePaymentAsync(paymentRequest);
+                if (!String.IsNullOrEmpty(result.Payment.Id))
+                {
+                    Models.Payment p = new Models.Payment();
+                    p.PaymentId = result.Payment.Id;
+                    p.CustomerId = result.Payment.CustomerId;
+                    _context.Payment.Add(p);
+                }
+
+                //COMPLETAR PAGAMENTO (criar cartao????)
             }
             catch (ApiException e)
             {
@@ -46,11 +83,75 @@ namespace PROJETOESA.Services
             }
         }
 
+        public string CreateSquareCustomer()
+        {
 
+
+            if (_user.CustomerID == null || _user.CustomerID == "")
+            {
+                CreateCustomerRequest createCustomerRequest = new CreateCustomerRequest.Builder()
+                    .GivenName(_user.Name)
+                    .IdempotencyKey(Guid.NewGuid().ToString())
+                    .Birthday(_user.BirthDate.ToString())
+                    .EmailAddress(_user.Email)
+                    .Build();
+                var customer = _client.CustomersApi.CreateCustomer(createCustomerRequest);
+                _user.CustomerID = customer.Customer.Id;
+                return customer.Customer.Id;
+            }
+            else
+            {
+
+                var oldCustomer = _client.CustomersApi.RetrieveCustomer(_user.CustomerID);
+                return oldCustomer.Customer.Id;
+            }
+
+        }
+
+        public string CreateSquareOrder(PaymentModel model)
+        {
+            var amountMoney = new Money.Builder()
+                .Amount((long)model.price)
+                .Currency("USD")
+                .Build();
+
+            var taxMoney = new Money.Builder()
+                .Amount(0)
+                .Currency("USD")
+                .Build();
+
+            OrderServiceCharge orderServiceCharge = new OrderServiceCharge.Builder()
+                .AmountMoney(amountMoney)
+                .CalculationPhase("TOTAL_PHASE")
+                .Name(model.ShippingAddress)
+                .Uid(Guid.NewGuid().ToString())
+                .Build();
+
+
+            IList<OrderServiceCharge> orders = new List<OrderServiceCharge>();
+            orders?.Add(orderServiceCharge);
+
+
+            Order newOrder = new Order.Builder(squareLocation)
+                .CustomerId(_user.CustomerID)
+                .ServiceCharges(orders)
+                .Build();
+
+
+            CreateOrderRequest createOrderRequest = new CreateOrderRequest.Builder()
+                .IdempotencyKey(Guid.NewGuid().ToString())
+                .Order(newOrder)
+                .Build();
+
+            CreateOrderResponse createdOrder = _client.OrdersApi.CreateOrder(createOrderRequest);
+
+
+            return createdOrder.Order.Id;
+        }
 
 
     }
 
 }
-        
-    
+
+
