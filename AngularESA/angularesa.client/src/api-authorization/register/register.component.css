@@ -1,4 +1,4 @@
-*{
+/**{
     font-family:'Roboto Slab';
 }
 
@@ -89,3 +89,126 @@
     margin-left:37%;
 }
 
+*/
+
+.registerinitial {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  min-height: calc(100vh - 50px);
+  overflow: hidden;
+}
+
+.register-box {
+  width: 80%;
+  min-width: calc(100vw - 500px);
+  min-height: calc(100vh - 500px);
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+  background-color: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.register-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 20px;
+  flex-basis: 50%;
+  background-color: #006994;
+}
+
+.titulo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100px;
+}
+
+h2 {
+  margin: 0;
+}
+
+.register-form h2 {
+  color: white;
+  margin-bottom: 20px;
+}
+
+.register-form input {
+  display: block;
+  width: 100%;
+  margin-bottom: 10px;
+  padding: 10px;
+  border: 1px solid #000000;
+  border-radius: 10px;
+}
+
+.register-form button {
+  width: 100%;
+  padding: 10px;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  border: 1px solid #000000;
+  border-radius: 30px;
+  background-color: #ffffff;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: large;
+}
+
+  .register-form button:disabled {
+    background-color: #cccccc;
+  }
+
+.additional-options {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 10px;
+}
+
+.register-branding {
+  width: 60%;
+  background-size: cover;
+  background-position: center;
+}
+
+.logo {
+  max-width: 80%;
+  height: auto;
+  display: block;
+  margin: auto;
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.separator {
+  display: block;
+  height: 1px;
+  background-color: #dee2e6;
+  margin: 8px 0;
+}
+
+.btn-separator {
+  display: block;
+  height: 1px;
+  background-color: #dee2e6;
+  margin: 8px 0;
+}
+
+.register-form input,
+.register-form button,
+.register-form a{
+  margin-bottom: 30px;
+}
+
+.register-form label {
+  margin-bottom: 10px;
+  color: white;
+}

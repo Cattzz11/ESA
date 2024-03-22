@@ -32,7 +32,7 @@ export class MapComponent implements OnInit, AfterViewInit {
     lat: 38.52217424327734,
     lng: -8.838720917701721
   };
-  zoom = 2;
+  zoom = 3;
 
   markers: google.maps.marker.AdvancedMarkerElement[] = [];
   polylines: google.maps.PolylineOptions[] = [];
