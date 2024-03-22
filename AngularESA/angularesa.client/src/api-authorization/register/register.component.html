@@ -7,18 +7,18 @@
             </div>
             <form [formGroup]="registerForm" (submit)="register($event)">
                 <label for="name">Nome<span style="color:red; padding-left:5px;">*</span></label>
-                <input name="name" formControlName="name" />
+                <input class="col form-field" name="name" formControlName="name" />
 
                 <label for="email">Email<span style="color:red; padding-left:5px;">*</span></label>
-                <input name="email" formControlName="email" />
+                <input class="col form-field" name="email" formControlName="email" />
 
                 <label for="password">Password<span style="color:red; padding-left:5px;">*</span></label>
-                <input type="password" name="password" formControlName="password" />
+                <input class="col form-field" type="password" name="password" formControlName="password" autocomplete="on" />
 
                 <label for="confirmPassword">Confirmar password<span style="color:red; padding-left:5px;">*</span></label>
-                <input type="password" name="confirmPassword" formControlName="confirmPassword" />
+                <input class="col form-field" type="password" name="confirmPassword" formControlName="confirmPassword" autocomplete="on" />
 
-                <div *ngIf="registerFailed">
+                <div class="row m-3" *ngIf="registerFailed">
                     <label style="color: red">Falha no registo.</label>
                     <label style="color: red">{{errors}}</label>
                 </div>
@@ -26,18 +26,28 @@
                 <button [disabled]="!registerForm.valid" type="submit">Registar</button>
             </form>
         </div>
-        <div class="register-branding" style="background-image: url('../assets/Images/background.png');">
-            <img src="../assets/Images/logo.png" alt="Logo" class="logo" />
+
+        <div class="register-form" *ngIf="!signedIn && registerSucceeded && sendingEmail">
+            <div class="titulo">
+                <h2>Registo</h2>
+            </div>
+            <div class="loading-indicator">
+                <img src="../../assets/Images/icons8-load-100.png" alt="Carregando...">
+            </div>
         </div>
 
-        <div *ngIf="registerSucceeded">
+        <div class="register-branding" style="background-image: url('.. /../assets/Images/background.png');">
+            <img src="../../assets/Images/logo.png" alt="Logo" class="logo" />
+        </div>
+
+        <div *ngIf="registerSucceeded && !sendingEmail">
             <h4>Registo efetuado com sucesso!</h4>
             <div>
                 Por favor faça <a href="signin">login</a> para continuar.
             </div>
         </div>
 
-        <div *ngIf="signedIn">
+        <div *ngIf="signedIn && !sendingEmail">
             <h4>Login efetuado</h4>
             <div>
                 Por favor dê logout da sua conta para criar uma nova conta de utilizador.

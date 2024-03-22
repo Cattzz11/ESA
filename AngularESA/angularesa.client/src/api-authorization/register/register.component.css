@@ -1,96 +1,3 @@
-/**{
-    font-family:'Roboto Slab';
-}
-
-#div_textinitial{
-    margin-top:1%;
-    font-size:large;
-    text-align:center;
-}
-
-.regist-wrapper {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 80vh;
-  width: 80vw;
-  max-height: 1000px;
-  max-width: 1500px;
-  padding-left: 2%;
-  padding-top:1%;
-}
-
-.regist-box {
-  display: flex;
-  width: 100%;
-  height: 100%;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  border-radius: 40px;
-  overflow: hidden;
-  box-sizing: border-box;
-}
-
-.regist-form {
-  padding: 20px;
-  background-color: #006994;
-  width: 50%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-evenly;
-}
-
-  .regist-form form {
-    width: 80%;
-    box-sizing: border-box;
-    padding: 0;
-    margin: 0;
-  }
-
-  .regist-form h2 {
-    color: white;
-  }
-
-  .regist-form input {
-    display: block;
-    width: 100%;
-    margin-bottom: 10px;
-    padding: 5px;
-    border: 1px solid #000000;
-    border-radius: 10px;
-    color:black;
-  }
-
-  .regist-form label{
-      color:white;
-  }
-
-  .button{
-     color:white;
-  }
-
-.login-branding {
-  width: 50%;
-  background-size: cover;
-  background-position: center;
-}
-
-.logo {
-  max-width: 80%;
-  height: auto;
-  display: block;
-  margin: auto;
-  position: relative;
-  top: 50%;
-  transform: translateY(-50%);
-}
-
-.h2initial{
-    margin-left:37%;
-}
-
-*/
-
 .registerinitial {
   display: flex;
   justify-content: center;
@@ -212,3 +119,26 @@ h2 {
   margin-bottom: 10px;
   color: white;
 }
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.loading-indicator {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 100px;
+}
+
+  .loading-indicator img {
+    width: 70px;
+    height: auto;
+    animation: spin 2s linear infinite;
+  }

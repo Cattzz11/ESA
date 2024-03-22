@@ -1,37 +1,35 @@
 <div class="search-bar">
-  <div class="input-group custom-select">
-    <label for="from">Para:</label>
-    <input type="text" id="from" [(ngModel)]="selectedCityFrom" (input)="filterCitiesByText('from')" (focus)="filterCitiesByText('from')" (blur)="hideDropdown('from')" autocomplete="off">
+  <div class="input-group">
+    <input type="text" id="from" [(ngModel)]="selectedCityFrom" placeholder="De:" (input)="filterCitiesByText('from')" (focus)="filterCitiesByText('from')" (blur)="hideDropdown('from')" autocomplete="off">
     <div class="dropdown" *ngIf="showDropdownFrom">
       <div class="dropdown-item" *ngFor="let city of filteredCities" (mousedown)="selectCity(city, 'from')">
         {{ city.country.name }} -> {{ city.name }}
       </div>
     </div>
   </div>
-  <div class="input-group custom-select">
-    <label for="to">Para:</label>
-    <input type="text" id="to" [(ngModel)]="selectedCityTo" (input)="filterCitiesByText('to')" (focus)="filterCitiesByText('to')" (blur)="hideDropdown('to')" autocomplete="off" [disabled]="!fromValid">
+  <div class="input-group">
+    <input type="text" id="to" [(ngModel)]="selectedCityTo" placeholder="Para:" (input)="filterCitiesByText('to')" (focus)="filterCitiesByText('to')" (blur)="hideDropdown('to')" autocomplete="off" [disabled]="!fromValid">
     <div class="dropdown" *ngIf="showDropdownTo">
       <div class="dropdown-item" *ngFor="let city of filteredCities" (mousedown)="selectCity(city, 'to')">
         {{ city.country.name }} -> {{ city.name }}
       </div>
     </div>
   </div>
-  <div class="input-group">
-    <mat-form-field>
-      <mat-label>Partida:</mat-label>
-      <input matInput [matDatepicker]="departure" id="departure" [(ngModel)]="departureDate" [disabled]="!departureEnabled" (dateChange)="onDepartureDateChange($event)">
-      <mat-datepicker-toggle matIconSuffix [for]="departure"></mat-datepicker-toggle>
-      <mat-datepicker [dateClass]="dateClass" #departure></mat-datepicker>
-    </mat-form-field>
+  <div class="input-group date-group">
+      <mat-form-field>
+          <mat-label>Partida:</mat-label>
+          <input matInput [matDatepicker]="departure" id="departure" [(ngModel)]="departureDate" [disabled]="!departureEnabled" (dateChange)="onDepartureDateChange($event)">
+          <mat-datepicker-toggle matIconSuffix [for]="departure"></mat-datepicker-toggle>
+          <mat-datepicker [dateClass]="dateClass" #departure></mat-datepicker>
+      </mat-form-field>
   </div>
-  <div class="input-group">
-    <mat-form-field>
-      <mat-label>Partida:</mat-label>
-      <input matInput [matDatepicker]="arrival" id="arrival" [(ngModel)]="arrivalDate" [disabled]="!arrivalEnabled" (dateChange)="onArrivalDateChange($event)">
-      <mat-datepicker-toggle matIconSuffix [for]="arrival"></mat-datepicker-toggle>
-      <mat-datepicker [dateClass]="dateClass" #arrival></mat-datepicker>
-    </mat-form-field>
+  <div class="input-group date-group">
+      <mat-form-field>
+          <mat-label>Partida:</mat-label>
+          <input matInput [matDatepicker]="arrival" id="arrival" [(ngModel)]="arrivalDate" [disabled]="!arrivalEnabled" (dateChange)="onArrivalDateChange($event)">
+          <mat-datepicker-toggle matIconSuffix [for]="arrival"></mat-datepicker-toggle>
+          <mat-datepicker [dateClass]="dateClass" #arrival></mat-datepicker>
+      </mat-form-field>
   </div>
   <div class="input-group number-group">
     <label for="adults">Nº Adultos:</label>
@@ -44,7 +42,6 @@
 
   <div class="input-group button-group">
     <button id="search" [disabled]="!canSearch" (click)="searchFlights()">Procurar</button>
-
   </div>
 </div>
 

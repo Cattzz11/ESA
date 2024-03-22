@@ -29,36 +29,52 @@ button.date-low {
   display: flex;
   flex-direction: column;
   padding: 5px;
+  justify-content: center;
 }
 
   .input-group + .number-group {
     width: 35em;
   }
 
+.input-group + .date-group {
+  margin-bottom: -25px;
+}
+
   .input-group label {
     font-size: 0.9em;
     margin-bottom: 5px;
   }
 
-  .input-group input[type=text],
-  .input-group input[type=date],
   .input-group button {
     padding: 10px;
-    border: none;
     border-radius: 15px;
     font-size: 1em;
   }
 
+.input-group input[type=text],
+.input-group input[type=date]
+ {
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 1em;
+  height: 58px;
+}
+
     .input-group input[type=text]::placeholder,
     .input-group input[type=date]::placeholder {
       color: #A0A0A0;
+      font-size: 1.3em;
     }
 
   .input-group button {
-    background-color: #A0A0A0;
+    background-color: #006994;
     color: white;
     cursor: pointer;
   }
+
+    .input-group button:disabled {
+      background-color: #A0A0A0;
+    }
 
 .custom-select {
   position: relative;
@@ -94,7 +110,7 @@ button.date-low {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  height: 50vw;
 }
 
   .loading-indicator img {
@@ -149,9 +165,6 @@ button.date-low {
   background-color: #006994;
   font-weight: bold;
   color: white;
-}
-
-.more {
 }
 
 .airlineLogo {
@@ -220,13 +233,16 @@ button.date-low {
   }
 
 
-@media (max-width: 768px) {
+@media (max-width: 1370px) {
   .search-bar {
-    flex-direction: column;
+    flex-flow: row wrap;
+  }
+
+  .input-group + .number-group {
+    width: 90px;
   }
 
   .input-group {
     width: 100%;
-    margin-bottom: 10px;
   }
 }
