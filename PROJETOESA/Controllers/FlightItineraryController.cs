@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using PROJETOESA.Models;
-using PROJETOESA.Services;
+using PROJETOESA.Services.FlightService;
 using System.Diagnostics;
 
 namespace PROJETOESA.Controllers
@@ -8,9 +8,9 @@ namespace PROJETOESA.Controllers
     [ApiController]
     public class FlightItineraryController : Controller
     {
-        private readonly FlightService _flightService;
+        private readonly IFlightService _flightService;
 
-        public FlightItineraryController(FlightService flightService)
+        public FlightItineraryController(IFlightService flightService)
         {
             _flightService = flightService;
         }

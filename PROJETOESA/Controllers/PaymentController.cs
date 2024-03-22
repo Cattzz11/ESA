@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Localization;
-using PROJETOESA.Services.EasyPay;
+using PROJETOESA.Services.EasyPayService;
 using System.Globalization;
 using Microsoft.Extensions.Options;
 using System.Diagnostics;

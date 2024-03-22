@@ -4,10 +4,11 @@ using PROJETOESA.Data;
 using PROJETOESA.Models;
 using PROJETOESA.Services;
 using Square;
-using Square.Http.Client;
-using Square.Apis;
-using Square.Models;
-using Microsoft.Extensions.DependencyInjection;
+using PROJETOESA.Services.FlightService;
+using PROJETOESA.Services.SkyscannerService;
+using PROJETOESA.Services.DataService;
+using PROJETOESA.Services.CodeGeneratorService;
+using PROJETOESA.Services.AeroDataBoxService;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -34,16 +35,25 @@ builder.Services.AddHttpClient("CountriesAPI", client =>
 
 });
 
+builder.Services.AddHttpClient("AeroDataBoxClient", client =>
+{
+    client.BaseAddress = new Uri("https://aerodatabox.p.rapidapi.com/");
+    client.DefaultRequestHeaders.Add("X-RapidAPI-Key", "e1615ff456msh56f2dd1e1017e8dp1527a2jsn8e9f84f026aa");
+    client.DefaultRequestHeaders.Add("X-RapidAPI-Host", "aerodatabox.p.rapidapi.com");
+});
+
+builder.Services.AddHttpClient("FlighteraFlight", client =>
+{
+    client.BaseAddress = new Uri("https://flightera-flight-data.p.rapidapi.com/");
+    client.DefaultRequestHeaders.Add("X-RapidAPI-Key", "e1615ff456msh56f2dd1e1017e8dp1527a2jsn8e9f84f026aa");
+    client.DefaultRequestHeaders.Add("X-RapidAPI-Host", "flightera-flight-data.p.rapidapi.com");
+});
+
 string accessToken = "EAAAl7w8P9qlJgAIDzJYhYIN3XivD0gDTpSRreKD2nLgYIVqdOJDwy8DpvL_-kYU";
 SquareClient squareClient = new SquareClient.Builder()
     .Environment(Square.Environment.Sandbox)
     .AccessToken(accessToken)
     .Build();
-
-builder.Services.AddSingleton(squareClient);
-builder.Services.AddScoped<SquareService>();
-builder.Services.AddHttpClient<FlightService>();
-
 
 /*builder.Services.AddHttpClient("SquareAPI", client =>
 {
@@ -64,9 +74,13 @@ builder.Services.AddCors(options =>
 
 builder.Services.AddControllersWithViews();
 
-builder.Services.AddScoped<SkyscannerService>();
-builder.Services.AddScoped<DataService>();
+builder.Services.AddSingleton(squareClient);
+builder.Services.AddScoped<SquareService>();
+builder.Services.AddHttpClient<IFlightService, FlightService>();
+builder.Services.AddScoped<ISkyscannerService, SkyscannerService>();
+builder.Services.AddScoped<IDataService, DataService>();
 builder.Services.AddScoped<ICodeGeneratorService, CodeGeneratorService>();
+builder.Services.AddScoped<IAeroDataBoxService, AeroDataBoxService>();
 
 builder.Services.AddAuthorization();
 builder.Services.AddIdentityApiEndpoints<ApplicationUser>()

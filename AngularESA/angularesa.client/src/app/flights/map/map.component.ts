@@ -7,6 +7,8 @@ import { Router } from "@angular/router";
 import { User } from "../../Models/users";
 import { AuthorizeService } from "../../../api-authorization/authorize.service";
 import { PriceOptions } from "../../Models/PriceOptions";
+import { AeroDataBoxService } from "../../services/AeroDataBoxService";
+import { AircraftData } from "../../Models/AircraftData";
 
 @Component({
   selector: 'app-map',
@@ -23,6 +25,7 @@ export class MapComponent implements OnInit, AfterViewInit {
   flightsList: FlightsItinerary[] = [];
   tripList: Trip[] = [];
   tripListPremium: TripDetails[] = [];
+  aircraftData: AircraftData | undefined;
 
   display: any;
   center: google.maps.LatLngLiteral = {
@@ -43,6 +46,7 @@ export class MapComponent implements OnInit, AfterViewInit {
 
   constructor(
     private flights: FlightItineraryService,
+    private aircraft: AeroDataBoxService,
     private router: Router,
     private auth: AuthorizeService
   ) { }
@@ -257,10 +261,99 @@ export class MapComponent implements OnInit, AfterViewInit {
           position: randomPoint.position
         });
 
-        // Aqui é a ação quando de clica num avião
-        marker.addListener('click', function () {
-          console.log(flight.flightIATA);
-          console.log(flight.arrivalLocation.name);
+        marker.addListener('click', () => {
+          this.aircraft.getAirplaneData(flight.flightIATA).subscribe({
+            next: (data: AircraftData) => {
+              this.aircraftData = data;
+              const date = new Date(this.aircraftData.firstFlightDate);
+              const year = date.getFullYear();
+              const month = date.getMonth() + 1;
+              const day = date.getDate();
+              const monthPadded = String(month).padStart(2, '0');
+              const dayPadded = String(day).padStart(2, '0');
+              const formattedDate = `${dayPadded}/${monthPadded}/${year}`;
+              function formatarDataHora(date: Date): string {
+                const data = new Date(date);
+                const dia = data.getDate().toString().padStart(2, '0');
+                const mes = (data.getMonth() + 1).toString().padStart(2, '0'); // Meses são indexados a partir de 0
+                const ano = data.getFullYear();
+                const horas = data.getHours().toString().padStart(2, '0');
+                const minutos = data.getMinutes().toString().padStart(2, '0');
+
+                return `${dia}/${mes}/${ano} ${horas}:${minutos}`;
+              }
+
+              const infoWindowMain = `
+            <div id="infoWindow" style="font-family: Arial, sans-serif; display: flex; flex-direction: column; align-content: center; align-items: center; width: 100%;">
+              <h3 style="color: #006994;">Voo nº ${flight.flightIATA} com origem em ${flight.departureLocation.name} e destino a ${flight.arrivalLocation.name}</h3>
+              <button id="btnNextFlights" style="background-color: #87CEEB; color: white; margin: 4px; padding: 8px 16px; border: none; cursor: pointer; border-radius: 20px; width: 90%;">Informações sobre próximos voos</button>
+              <button id="btnBuyTickets" style="background-color: #87CEEB; color: white; margin: 4px; padding: 8px 16px; border: none; cursor: pointer; border-radius: 20px; width: 90%;">Comprar Bilhetes</button>
+              <button id="btnRequestTrip" style="background-color: #87CEEB; color: white; margin: 4px; padding: 8px 16px; border: none; cursor: pointer; border-radius: 20px; width: 90%;">Pedir Nova Viagem</button>
+              <div id="mainArea" style="font-family: Arial, sans-serif; display:flex; flex-direction: row; align-content: center; align-items: center; width: 100%;">
+                <div id="ballonButtons" style="display: flex; flex-direction: column; align-content: center; align-items: center; width: 50%;">
+                  <button id="btnAverageFlightTime" style="background-color: #87CEEB; color: white; margin: 4px; padding: 8px 16px; border: none; cursor: pointer; border-radius: 20px; width: 90%;">Média de tempo de viagem</button>
+                  <button id="btnAverageLate" style="background-color: #87CEEB; color: white; margin: 4px; padding: 8px 16px; border: none; cursor: pointer; border-radius: 20px; width: 90%;">Média de atrasos</button>
+                  <button id="btnCountries&Routes" style="background-color: #87CEEB; color: white; margin: 4px; padding: 8px 16px; border: none; cursor: pointer; border-radius: 20px; width: 90%;">Países e rotas</button>
+                  <label>Data do 1º vôo: ${formattedDate } </label>
+                </div>
+                <div id="airplaneData" style="display: flex; flex-direction: column; align-content: center; align-items: center; width: 50%;">
+                  <img src="${this.aircraftData?.photo}" style="height: 150px; width: 150px; "/>
+                  <button id="btnSpecifications" style="background-color: #87CEEB; color: white; margin: 4px; padding: 8px 16px; border: none; cursor: pointer; border-radius: 20px;">Especificações</button>
+                  <label>Tempo decorrido: 2H</label>
+                <label>Estimativa de chegada: ${formatarDataHora(flight.arrivalSchedule)}H</label>
+               </div>
+              </div>
+            </div>
+          `;
+
+              const infoWindow = new google.maps.InfoWindow({
+                content: infoWindowMain
+              });
+
+              infoWindow.open(this.map, marker);
+
+              google.maps.event.addListenerOnce(infoWindow, 'domready', () => {
+                // Verifique se o elemento existe antes de tentar adicionar um ouvinte de evento
+                const btnNextFlights = document.getElementById('btnNextFlights');
+                if (btnNextFlights) {
+                  btnNextFlights.addEventListener('click', () => {
+                    infoWindow.setContent('btnNextFlights');
+                  });
+                }
+
+                const backToMain = document.getElementById('backToMain');
+                if (backToMain) {
+                  backToMain.addEventListener('click', () => {
+                    infoWindow.setContent(infoWindowMain);
+                  });
+                }
+
+                const btnBuyTickets = document.getElementById('btnBuyTickets');
+                if (btnBuyTickets) {
+                  btnBuyTickets.addEventListener('click', () => {
+                    // Executar a ação para comprar bilhetes
+                  });
+                }
+
+                const btnRequestTrip = document.getElementById('btnRequestTrip');
+                if (btnRequestTrip) {
+                  btnRequestTrip.addEventListener('click', () => {
+                    // Executar a ação para pedir nova viagem
+                  });
+                }
+              });
+              console.log(data.photo);
+            },
+            error: (error) => {
+              console.error('Error fetching user info', error);
+            }
+          });
+
+          
+
+          
+          
+
         });
       }
     });

@@ -1,22 +1,19 @@
-using Newtonsoft.Json.Linq;
-using PROJETOESA.Models;
-using PROJETOESA.Data;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.Http;
-using PROJETOESA.Controllers;
-using PROJETOESA.Models.ViewModels;
-using System.Diagnostics;
-using System.Text.Json.Nodes;
 
-namespace PROJETOESA.Services
+using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json.Linq;
+using PROJETOESA.Data;
+using PROJETOESA.Models;
+using PROJETOESA.Models.ViewModels;
+
+namespace PROJETOESA.Services.SkyscannerService
 {
-    public class SkyscannerService
+    public class SkyscannerService : ISkyscannerService
     {
         private readonly HttpClient _httpClient;
         private readonly AeroHelperContext _context;
         private readonly Random _random = new Random();
 
-        public SkyscannerService(IHttpClientFactory httpClientFactory, AeroHelperContext context, IHttpClientFactory clientFactory)
+        public SkyscannerService(IHttpClientFactory httpClientFactory, AeroHelperContext context)
         {
             _httpClient = httpClientFactory.CreateClient("SkyscannerAPI");
             _context = context;
@@ -504,7 +501,7 @@ namespace PROJETOESA.Services
                 {
                     var newCountry = new Country { Id = country.Id, Name = country.Name };
                     var countryLocal = await _context.Country.FirstOrDefaultAsync(c => c.Id == newCountry.Id);
-                    
+
                     if (countryLocal == null)
                     {
                         await _context.Country.AddAsync(newCountry);
@@ -706,7 +703,7 @@ namespace PROJETOESA.Services
 
             List<Trip> finalItineraries = new List<Trip>();
 
-            foreach(City currentCity in possibleDestinations)
+            foreach (City currentCity in possibleDestinations)
             {
                 FlightData data = new FlightData { fromEntityId = origin.fromEntityId, toEntityId = currentCity.ApiKey, departDate = tomorrow, returnDate = nextWeek };
 
@@ -799,5 +796,5 @@ namespace PROJETOESA.Services
         public string skyId { get; set; }
     }
 
-   
+
 }

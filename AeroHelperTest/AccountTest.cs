@@ -5,12 +5,12 @@ using System.Threading.Tasks;
 using PROJETOESA.Controllers;
 using PROJETOESA.Models;
 using Microsoft.AspNetCore.Identity;
-using PROJETOESA.Services;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
 using PROJETOESA.Data;
 using Microsoft.Extensions.Options;
+using PROJETOESA.Services.CodeGenerator;
 
 namespace AeroHelperTest
 {

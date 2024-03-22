@@ -1,7 +1,7 @@
 ﻿using PROJETOESA.Models;
-using PROJETOESA.Services.EasyPay.Models;
+using PROJETOESA.Services.EasyPayService.Models;
 
-namespace PROJETOESA.Services.EasyPay
+namespace PROJETOESA.Services.EasyPayService
 {
     public interface IEasyPayService
     {

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using PROJETOESA.Data;
 using PROJETOESA.Models;
 using PROJETOESA.Models.ViewModels;
-using PROJETOESA.Services;
+using PROJETOESA.Services.SkyscannerService;
 
 
 namespace PROJETOESA.Controllers
@@ -11,10 +11,10 @@ namespace PROJETOESA.Controllers
     [ApiController]
     public class FlightsController : Controller
     {
-        private readonly SkyscannerService _skyscannerService;
+        private readonly ISkyscannerService _skyscannerService;
         private readonly AeroHelperContext _context;
 
-        public FlightsController(SkyscannerService skyscannerService, AeroHelperContext context)
+        public FlightsController(ISkyscannerService skyscannerService, AeroHelperContext context)
         {
             _skyscannerService = skyscannerService;
             _context = context;

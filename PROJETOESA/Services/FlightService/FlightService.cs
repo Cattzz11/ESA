@@ -1,26 +1,25 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json.Linq;
 using PROJETOESA.Controllers;
 using PROJETOESA.Data;
 using PROJETOESA.Models;
 using PROJETOESA.Models.ViewModels;
+using PROJETOESA.Services.SkyscannerService;
 using System.Diagnostics;
 using System.Globalization;
 using System.Text;
-using static System.Net.Mime.MediaTypeNames;
 
-namespace PROJETOESA.Services
+namespace PROJETOESA.Services.FlightService
 {
-    public class FlightService
+    public class FlightService : IFlightService
     {
         private readonly HttpClient _httpClient;
         private readonly string _apiKey = "ef9543daa9ed9c4a8cb31fca069c6107";
         private readonly string _googleApiKey = "AIzaSyD58yFxevJ8McI8Wc1WxUfx9EhVl-6D4gQ";
         private readonly AeroHelperContext _context;
-        private readonly SkyscannerService _skyscannerService;
+        private readonly ISkyscannerService _skyscannerService;
 
-        public FlightService(HttpClient httpClient, AeroHelperContext context, SkyscannerService skyscannerService)
+        public FlightService(HttpClient httpClient, AeroHelperContext context, ISkyscannerService skyscannerService)
         {
             _httpClient = httpClient;
             _context = context;
@@ -171,7 +170,7 @@ namespace PROJETOESA.Services
 
         public async Task<string> GetAirlinesDataAsync()
         {
-        
+
             var url = $"http://api.aviationstack.com/v1/airlines?access_key={_apiKey}";
             var response = await _httpClient.GetAsync(url);
             response.EnsureSuccessStatusCode();
@@ -221,7 +220,7 @@ namespace PROJETOESA.Services
 
             List<Trip> tripList = await _skyscannerService.GetRoundtripAsync(new FlightData { fromEntityId = originCity.ApiKey, toEntityId = destinationCity.ApiKey, departDate = tomorrow, returnDate = nextWeek });
 
-            return tripList; 
+            return tripList;
         }
 
         public async Task<List<TripDetailsViewModel>> GetFlightsPremiumAsync(AddressComponents origin, AddressComponents destination)
@@ -278,7 +277,7 @@ namespace PROJETOESA.Services
         }
 
         private double HaversineDistance(double lat1, double lon1, City city)
-        {          
+        {
             var coordinates = city.Coordinates.Split(';');
             double lat2;
             double lon2;

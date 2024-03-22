@@ -4,13 +4,10 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using PROJETOESA.Models;
 using Microsoft.AspNetCore.Identity.UI.Services;
-using PROJETOESA.Services;
 using Microsoft.EntityFrameworkCore;
 using PROJETOESA.Data;
 using System.Diagnostics;
-using Microsoft.DotNet.Scaffolding.Shared.Messaging;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Microsoft.IdentityModel.Tokens;
+using PROJETOESA.Services.CodeGeneratorService;
 
 namespace PROJETOESA.Controllers
 {

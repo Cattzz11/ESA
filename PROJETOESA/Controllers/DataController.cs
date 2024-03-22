@@ -1,17 +1,16 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using PROJETOESA.Models;
 using PROJETOESA.Models.ViewModels;
-using PROJETOESA.Services;
-using System.Diagnostics;
+using PROJETOESA.Services.DataService;
 
 namespace PROJETOESA.Controllers
 {
     [ApiController]
     public class DataController : Controller
     {
-        private readonly DataService _dataService;
+        private readonly IDataService _dataService;
 
-        public DataController(DataService dataService)
+        public DataController(IDataService dataService)
         {
             _dataService = dataService;
         }

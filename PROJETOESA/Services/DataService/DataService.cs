@@ -1,29 +1,26 @@
-﻿using Microsoft.EntityFrameworkCore;
-using PROJETOESA.Models;
-using static PROJETOESA.Services.SkyscannerService;
-using System.Diagnostics;
-using System.Net.Http;
-using PROJETOESA.Data;
-using System.Text.Json;
-using PROJETOESA.Models.ViewModels;
+﻿
 
-namespace PROJETOESA.Services
+using Microsoft.EntityFrameworkCore;
+using PROJETOESA.Data;
+using PROJETOESA.Models;
+using PROJETOESA.Models.ViewModels;
+using PROJETOESA.Services.SkyscannerService;
+using System.Text.Json;
+
+namespace PROJETOESA.Services.DataService
 {
-    public class DataService
+    public class DataService : IDataService
     {
-        private readonly HttpClient _httpClient;
         private readonly AeroHelperContext _context;
         private readonly HttpClient _httpClient2;
-        private readonly SkyscannerService _skyscannerService;
+        private readonly ISkyscannerService _skyscannerService;
 
         public DataService(
-            IHttpClientFactory httpClientFactory, 
-            AeroHelperContext context, 
+            AeroHelperContext context,
             IHttpClientFactory clientFactory,
-            SkyscannerService skyscannerService
+            ISkyscannerService skyscannerService
             )
         {
-            _httpClient = httpClientFactory.CreateClient("SkyscannerAPI");
             _context = context;
             _httpClient2 = clientFactory.CreateClient("CountriesAPI");
             _skyscannerService = skyscannerService;
@@ -234,5 +231,5 @@ namespace PROJETOESA.Services
         {
             public string common { get; set; }
         }
-    }    
+    }
 }

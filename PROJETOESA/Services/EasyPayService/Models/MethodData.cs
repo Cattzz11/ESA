@@ -1,4 +1,4 @@
-﻿namespace PROJETOESA.Services.EasyPay.Models
+﻿namespace PROJETOESA.Services.EasyPayService.Models
 {
     public class MethodData
     {

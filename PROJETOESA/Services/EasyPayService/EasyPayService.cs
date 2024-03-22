@@ -1,11 +1,9 @@
-﻿using Amazon.DynamoDBv2;
-using Microsoft.Build.Execution;
-using PROJETOESA.Models;
-using PROJETOESA.Services.EasyPay.Models;
+﻿using PROJETOESA.Models;
+using PROJETOESA.Services.EasyPayService.Models;
 using System.Text.Json;
 using System.Text.Json.Nodes;
 
-namespace PROJETOESA.Services.EasyPay
+namespace PROJETOESA.Services.EasyPayService
 {
     public class EasyPayService
     {
