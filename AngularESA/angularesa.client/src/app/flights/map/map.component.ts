@@ -269,7 +269,7 @@ export class MapComponent implements OnInit, AfterViewInit {
               function formatarDataHora(date: Date, type: 'arrival' | 'firstFlight'): string {
                 const data = new Date(date);
                 const dia = data.getDate().toString().padStart(2, '0');
-                const mes = (data.getMonth() + 1).toString().padStart(2, '0'); // Meses são indexados a partir de 0
+                const mes = (data.getMonth() + 1).toString().padStart(2, '0');
                 const ano = data.getFullYear();
                 const horas = data.getHours().toString().padStart(2, '0');
                 const minutos = data.getMinutes().toString().padStart(2, '0');
@@ -356,7 +356,7 @@ export class MapComponent implements OnInit, AfterViewInit {
               const infoSpecifications = `
                 <div id="infoWindow" style="font-family: Arial, sans-serif; display: flex; flex-direction: column; width: 100%; max-height: 400px; overflow-y: auto;">
                   <h3 style="color: #006994; align-self: center;">Informação sobre o avião</h3>
-                  <p style="margin-left: 20px;">Código do modelo: ${this.aircraftData.modelCode} < /p>
+                  <p style="margin-left: 20px;">Código do modelo: ${this.aircraftData.modelCode}</p>
                   <p style="margin-left: 20px;">Modelo: ${this.aircraftData.model}</p>
                   <p style="margin-left: 20px;">Matricula: ${this.aircraftData.registration}</p>
                   <p style="margin-left: 20px;">Companhia aérea: ${this.aircraftData.airline}</p>
