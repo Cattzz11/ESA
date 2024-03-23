@@ -1,0 +1,27 @@
+<div class="popup-window">
+  <div *ngIf="isLoading; else loadedContent">
+    <p>Loading...</p>
+  </div>
+  <ng-template #loadedContent>
+    <div *ngIf="cards && cards.length > 0">
+      <h3>Your Cards:</h3>
+      <div *ngFor="let card of cards" class="card-container">
+        <label>
+          <input type="radio" name="selectedCard" [value]="card.id" [(ngModel)]="selectedCard">
+          <div class="card-details">
+            <p>
+              <strong>Card Brand:</strong> {{ card.cardBrand }} &nbsp;
+              <strong>Last 4:</strong> {{ card.last4 }} &nbsp;
+              <strong>Exp. Date:</strong> {{ card.expMonth }}/{{ card.expYear }} &nbsp;
+              <strong>Name:</strong> {{ card.cardholderName }}
+            </p>
+          </div>
+        </label>
+      </div>
+      <button (click)="payNow(selectedCard)">Pay</button>
+    </div>
+    <div *ngIf="!cards || cards.length === 0">
+      <p>No cards found for this user.</p>
+    </div>
+  </ng-template>
+</div>

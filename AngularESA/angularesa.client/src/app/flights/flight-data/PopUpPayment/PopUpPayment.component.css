@@ -1,0 +1,49 @@
+/* PopUpPayment.component.css */
+
+.popup-window {
+  width: 400px; /* Adjust width as needed */
+  padding: 20px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.card-container {
+  width: 100%; /* Display one card per line */
+  margin-bottom: 20px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+  .card-container label {
+    display: block;
+    cursor: pointer;
+  }
+
+.card-details {
+  margin-top: 10px;
+}
+
+  .card-details p {
+    margin: 5px 0;
+  }
+
+button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+  button:hover {
+    background-color: #0056b3;
+  }
+
+p {
+  margin: 0;
+}

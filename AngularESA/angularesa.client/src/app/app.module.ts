@@ -32,6 +32,8 @@ import { DateAdapter } from '@angular/material/core';
 import { DatePipe } from '@angular/common';
 import { PaymentComponentComponent } from './users/payment-component/payment-component.component';
 import { PaymentComponent } from './payments/payment.component';
+import { MatDialogModule } from '@angular/material/dialog'
+import { PopUpPaymentComponent } from './flights/flight-data/PopUpPayment/PopUpPayment.component'
 
 export const MY_FORMATS = {
   parse: {
@@ -63,7 +65,8 @@ export const MY_FORMATS = {
     SubscriptionPageComponent,
     FlightDataComponent,
     PaymentComponentComponent,
-    PaymentComponent
+    PaymentComponent,
+    PopUpPaymentComponent
   ],
   imports: [
     BrowserModule,
@@ -74,7 +77,8 @@ export const MY_FORMATS = {
     ApiAuthorizationModule,
     MatFormFieldModule,
     MatInputModule,
-    MatDatepickerModule
+    MatDatepickerModule,
+    MatDialogModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },

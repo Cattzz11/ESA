@@ -9,5 +9,9 @@ namespace PROJETOESA.Models
         public string PaymentId { get; set; }
 
         public string CustomerId {  get; set; }
+
+        public DateTime date { get; set; }
+
+        public string paymentState { get; set; }
     }
 }

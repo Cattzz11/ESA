@@ -7,6 +7,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { SquareService } from '../../services/SquareService';
 import { PaymentModel } from '../../Models/PaymentModel';
 import { PriceOptions } from '../../Models/PriceOptions';
+import { MatDialog } from '@angular/material/dialog';
+import { PopUpPaymentComponent } from './PopUpPayment/PopUpPayment.component';
+
 
 @Component({
   selector: 'app-flight-data',
@@ -25,7 +28,8 @@ export class FlightDataComponent implements OnInit {
     private auth: AuthorizeService,
     private route: ActivatedRoute,
     private router: Router,
-    private squareService: SquareService
+    private squareService: SquareService,
+    private dialogRef : MatDialog
   ) { }
 
   ngOnInit(): void {
@@ -73,8 +77,9 @@ export class FlightDataComponent implements OnInit {
 
       this.squareService.purchaseTicket(payment).subscribe(
         (response) => {
-          // Handle successful response
           console.log('Ticket purchased successfully:', response);
+          this.dialogRef.open(PopUpPaymentComponent);
+
         },
         (error) => {
           // Handle error

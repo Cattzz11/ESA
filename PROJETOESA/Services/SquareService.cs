@@ -9,6 +9,9 @@ using PROJETOESA.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using IConfiguration = Microsoft.Extensions.Configuration.IConfiguration;
+using System.Diagnostics;
+using Microsoft.IdentityModel.Tokens;
+using Microsoft.EntityFrameworkCore;
 
 namespace PROJETOESA.Services
 {
@@ -70,10 +73,18 @@ namespace PROJETOESA.Services
                     Models.Payment p = new Models.Payment();
                     p.PaymentId = result.Payment.Id;
                     p.CustomerId = result.Payment.CustomerId;
+                    p.paymentState = result.Payment.Status;
+                    p.date = DateTime.Now;
                     _context.Payment.Add(p);
                 }
 
                 //COMPLETAR PAGAMENTO (criar cartao????)
+                if (CustomerCreateCard())
+                {
+                    Debug.WriteLine("Card Created");
+                }
+
+
             }
             catch (ApiException e)
             {
@@ -81,6 +92,27 @@ namespace PROJETOESA.Services
                 Console.WriteLine($"Response Code: {e.ResponseCode}");
                 Console.WriteLine($"Exception: {e.Message}");
             }
+        }
+
+
+        public async Task<bool> CompleteTicketPayment(string cardID)
+        { 
+            var card = _client.CardsApi.RetrieveCard(cardID);
+
+            var customerID = card.Card.CustomerId;
+
+            var payment = await _context.Payment
+                .Where(c => c.CustomerId == customerID)
+                .OrderByDescending(c => c.date) // Assuming 'Date' is the property representing the date
+                .FirstOrDefaultAsync();
+
+            if (payment != null) 
+            {
+                //_client.PaymentsApi.CompletePayment(payment.PaymentId);
+                return true;
+            }
+
+            return false;
         }
 
         public string CreateSquareCustomer()
@@ -147,6 +179,56 @@ namespace PROJETOESA.Services
 
 
             return createdOrder.Order.Id;
+        }
+
+
+        private Boolean CustomerCreateCard()
+        {
+            var customer = _client.CustomersApi.RetrieveCustomer(_user.CustomerID);
+            if (customer.Customer.Cards == null)
+            {   
+                var yearOfExpiration = DateTime.Now.Year + 4;
+                Card newCard = new Card.Builder()
+                    .CustomerId(_user.CustomerID)
+                    .CardholderName(_user.Name)
+                    .ExpMonth(DateTime.Now.Month)
+                    .ExpYear(yearOfExpiration)
+                    .Version(1)
+                    .Build();
+
+                CreateCardRequest newCardRequest = new CreateCardRequest.Builder(Guid.NewGuid().ToString(), squareSourceID, newCard)
+                    .Build();
+
+                _client.CardsApi.CreateCard(newCardRequest);
+
+                return true;
+            }
+
+            return true;
+        }
+
+        public async Task<SquareCard> GetSquareCardAsync(string customerEmail, UserManager<ApplicationUser> userManager)
+        {
+            _user = await userManager.FindByEmailAsync(customerEmail);
+
+            var cardId = _client.CustomersApi.RetrieveCustomer(_user.CustomerID);
+
+            var cardToModel = _client.CardsApi.RetrieveCard(cardId.Customer.Cards[0].Id);
+
+            SquareCard squareCard = new SquareCard
+            {
+                Id = cardToModel.Card.Id,
+                CardBrand = cardToModel.Card.CardBrand,
+                Last4 = cardToModel.Card.Last4,
+                ExpMonth = (long)cardToModel.Card.ExpMonth,
+                ExpYear = (long)cardToModel?.Card.ExpYear,
+                CardholderName = cardToModel.Card.CardholderName,
+                BillingAddress = new BillingAddress { PostalCode = cardToModel.Card.BillingAddress.PostalCode },
+                Fingerprint = cardToModel.Card.Fingerprint
+
+            };
+
+            return squareCard;
         }
 
 

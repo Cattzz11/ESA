@@ -9,6 +9,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Options;
 using System.Diagnostics;
+using Square.Models;
+using PROJETOESA.Models.SquareModels;
 
 namespace PROJETOESA.Controllers
 {
@@ -24,7 +26,7 @@ namespace PROJETOESA.Controllers
         private readonly SquareService _squareService;
         private readonly AeroHelperContext _context;
         public PaymentController(SquareService squareService, AeroHelperContext context, UserManager<ApplicationUser> userManager,
-            IStringLocalizer<PaymentController> stringLocalizer, IEmailSender emailSender, IOptions<EmailSender> emailSettings) 
+            IStringLocalizer<PaymentController> stringLocalizer, IEmailSender emailSender, IOptions<EmailSender> emailSettings)
         {
             _userManager = userManager;
             _emailSender = emailSender;
@@ -77,164 +79,27 @@ namespace PROJETOESA.Controllers
                 return BadRequest(new { Message = "Failed to purchase ticket", Error = ex.Message });
             }
         }
-        /*
-        [HttpGet("history")]
-        [Authorize(Roles = "ClienteNormal, ClientePremium")]
-        public async Task<IActionResult> GetPaymentsHistory(int? page, string order)
+
+        [HttpGet("api/payment/get-cards/{customerEmail}")]
+        public async Task<ActionResult<IEnumerable<SquareCard>>> GetCustomerCards(string customerEmail)
         {
-            if (User.Identity != null && User.Identity.IsAuthenticated)
-            {
-                var user = await _userManager.FindByEmailAsync(User.Identity.Name);
+            var cards = await _squareService.GetSquareCardAsync(customerEmail, _userManager);
 
-                if (user.Role.Equals(TipoConta.ClienteNormal) || user.Role.Equals(TipoConta.ClientePremium))
-                {
-                    var userPayments = await _context.Payment.ToListAsync();
-
-                    int pageNumber = (page ?? 1);
-                    var totalPages = Math.Ceiling((double)userPayments.Count() / _pageSize);
-
-                    switch (order)
-                    {
-                        case "PAsc":
-                            userPayments = userPayments.OrderBy(b => b.Price).ToList();
-                            break;
-                        case "PDesc":
-                            userPayments = userPayments.OrderByDescending(b => b.Price).ToList();
-                            break;
-                        case "SAsc":
-                            userPayments = userPayments.OrderBy(b => b.paymentStatus).ToList();
-                            break;
-                        case "SDesc":
-                            userPayments = userPayments.OrderByDescending(b => b.paymentStatus).ToList();
-                            break;
-                        default:
-                            userPayments = userPayments.OrderBy(b => b.paymentStatus).ToList();
-                            break;
-                    }
-
-                    var paginatedData = userPayments.Skip((pageNumber - 1) * _pageSize).Take(_pageSize).ToList();
-
-                    return Ok(paginatedData);
-                }
-            }
-
-            return Unauthorized(new { error = "Unauthorized" });
+            return Ok(cards);
         }
 
-        [HttpGet("details/{id}")]
-        [Authorize]
-        public async Task<IActionResult> GetPaymentDetails(Guid id)
+        [HttpPost]
+        [Route("api/payment/pay-now")]
+        public async Task<IActionResult> PayNow([FromBody] CardID cardID)
         {
-            if (User.Identity != null && User.Identity.IsAuthenticated)
-            {
-                var payments = await _context.Payment
-                    .ToListAsync();
+            var res = await _squareService.CompleteTicketPayment(cardID.cardID);
 
-                var payment = payments.Find(p => p.PaymentId == id);
-
-                if (payment == null)
-                {
-                    return NotFound(new { error = "Payment not found" });
-                }
-            }
-
-            return Unauthorized(new { error = "Unauthorized" });
+            return Ok(res);
         }
+    }
 
-        [HttpPost("/generateTemporaryPayment")]
-        public async Task<IActionResult> GenerateTemporaryPayment(double paymentValue, string paymentValueString)
-        {
-            var user = await _userManager.FindByEmailAsync(User.Identity.Name);
-            bool isPaymentValueValid = false;
-            if (paymentValueString != null)
-            {
-                isPaymentValueValid = double.TryParse(paymentValueString.Replace(',', '.').Replace("-", ""), NumberStyles.Any, CultureInfo.InvariantCulture, out _);
-            }
-
-            if (!isPaymentValueValid)
-            {
-                return BadRequest("Invalid payment value");
-            }
-
-            if (paymentValue == 0.0)
-            {
-                Payment zeroPayment = new Payment
-                {
-                    PaymentId = Guid.NewGuid(),
-                    Price = paymentValue,
-                    Entity = 00000,
-                    Reference = 000000000,
-                    LimitDate = DateTime.Now,
-                    paymentStatus = PaymentStatus.Paid,
-                    PaymentMethod = "NA"
-                };
-
-                _context.Payment.Add(zeroPayment);
-            }
-            else
-            {
-                Payment tempPayment = new Payment
-                {
-                    PaymentId = Guid.NewGuid(),
-                    Price = paymentValue,
-                    Entity = null,
-                    Reference = null,
-                    LimitDate = DateTime.Now.AddDays(2.0),
-                    paymentStatus = PaymentStatus.WaitingApproval,
-                    PaymentMethod = null
-                };
-
-                _context.Payment.Add(tempPayment);
-                
-                await _emailSender.SendEmailAsync(user.Email, "Pagamento Temporário", "{_stringLocalizer[\"payments.tempPaymentDescription\"].Value}");
-            }
-            await _context.SaveChangesAsync();
-
-            return Ok();
-        }
-
-        [HttpPost("/createPayment")]
-        public async Task<IActionResult> CreatePayment(Guid id, string method)
-        {
-            var user = await _userManager.FindByEmailAsync(User.Identity.Name);
-            Payment tempPayment = await _context.Payment.Where(p => p.PaymentId == id).FirstAsync();
-
-            DateTime dateLimit = DateTime.Now;
-
-            if (method.Equals("MB WAY"))
-            {
-                dateLimit = dateLimit.AddMinutes(5);
-                method = "mbw";
-            }
-            else
-            {
-                dateLimit = dateLimit.AddDays(2);
-                method = "mb";
-            }
-
-            Payment defPayment = await _easyPayService.CreateSinglePayment(dateLimit, user, tempPayment.Price, method);
-
-            if (defPayment.PaymentId == Guid.Empty)
-            {
-                return Ok("sucesso");
-            }
-
-            _context.Payment.Remove(tempPayment);
-            _context.Payment.Add(defPayment);
-
-            if (method.Equals("mb"))
-            {
-                await _emailSender.SendEmailAsync(user.Email, "Pagamento Criado", "{_stringLocalizer[\"payments.emailEntityText\"].Value}: " +
-                    "{defPayment.Entity}{_stringLocalizer[\"payments.emailReferenceText\"].Value}: {defPayment.Reference}" +
-                    "{_stringLocalizer[\"payments.emailPriceText\"].Value}: {defPayment.Price}€" +
-                    "{_stringLocalizer[\"payments.emailLimitDateText\"].Value}: {defPayment.LimitDate}");
-            }
-
-            await _context.SaveChangesAsync();
-
-            return Ok();
-        }*/
-
-        
+    public class CardID
+    {
+        public string cardID;
     }
 }
