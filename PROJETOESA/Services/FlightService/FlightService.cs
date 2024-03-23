@@ -327,7 +327,6 @@ namespace PROJETOESA.Services.FlightService
             return mostSimilarCarrier;
         }
 
-
         private async Task<City> GetCityAsync(string timezone, string cityName)
         {
             var timezoneCityName = timezone.Split('/').Last().Replace("\\", "");

@@ -266,7 +266,7 @@ export class MapComponent implements OnInit, AfterViewInit {
             next: (data: AircraftData) => {
               this.aircraftData = data;
 
-              function formatarDataHora(date: Date, type: 'arrival' | 'firstFlight'): string {
+              function formatarDataHora(date: Date, type: 'arrival' | 'firstFlight' | 'totalFlightTime'): string {
                 const data = new Date(date);
                 const dia = data.getDate().toString().padStart(2, '0');
                 const mes = (data.getMonth() + 1).toString().padStart(2, '0');
@@ -276,10 +276,16 @@ export class MapComponent implements OnInit, AfterViewInit {
 
                 if (type === 'arrival') {
                   return `${dia}/${mes}/${ano} ${horas}:${minutos}`;
+                } else if (type === 'totalFlightTime') {
+                  return `${horas}h${minutos}min`;
                 } else {
                   return `${dia}/${mes}/${ano}`;
                 }
               }
+
+              const arrivalTime = new Date(flight.arrivalSchedule).getTime();
+              const departureTime = new Date(flight.departureSchedule).getTime();
+              const totalFlightTime = new Date(arrivalTime - departureTime);
 
               const infoWindowMain = `
                 <div id="infoWindow" style="font-family: Arial, sans-serif; display: flex; flex-direction: column; align-content: center; align-items: center; width: 100%;">
@@ -297,7 +303,7 @@ export class MapComponent implements OnInit, AfterViewInit {
                     <div id="airplaneData" style="display: flex; flex-direction: column; align-content: center; align-items: center; width: 50%;">
                       <img src="${this.aircraftData?.photo}" style="height: 150px; width: 150px; border-radius: 10px; margin-top:20px; margin-bottom:10px;"/>
                       <button id="btnSpecifications" style="background-color: #87CEEB; color: white; margin: 4px; padding: 8px 16px; border: none; cursor: pointer; border-radius: 20px;">Especificações</button>
-                      <label style="margin-top:10px;">Tempo decorrido: 2H</label>
+                      <label style="margin-top:10px;">Tempo total de voo: ${formatarDataHora(totalFlightTime, 'totalFlightTime')}</label>
                       <label>Estimativa de chegada:</label>
                       <label>${formatarDataHora(flight.arrivalSchedule, 'arrival')}H</label>
                     </div>
@@ -468,6 +474,11 @@ export class MapComponent implements OnInit, AfterViewInit {
     });
   }
 
+  calculateTotalTime(totalTime: string) {
+    //${ formatarDataHora(flight.arrivalSchedule, 'arrival') }
+
+    
+  }
   
 
   getRandomPoint(polyline: google.maps.Polyline): { position: google.maps.LatLng, heading: number } {

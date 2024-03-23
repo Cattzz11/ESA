@@ -1,20 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Tiago\\Desktop\\IPS\\ESA\\PROJETOESA\\PROJETOESA.csproj": {}
+    "D:\\ESA\\PROJETOESA\\ESA\\PROJETOESA\\PROJETOESA.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Tiago\\Desktop\\IPS\\ESA\\PROJETOESA\\PROJETOESA.csproj": {
+    "D:\\ESA\\PROJETOESA\\ESA\\PROJETOESA\\PROJETOESA.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Tiago\\Desktop\\IPS\\ESA\\PROJETOESA\\PROJETOESA.csproj",
+        "projectUniqueName": "D:\\ESA\\PROJETOESA\\ESA\\PROJETOESA\\PROJETOESA.csproj",
         "projectName": "PROJETOESA",
-        "projectPath": "C:\\Users\\Tiago\\Desktop\\IPS\\ESA\\PROJETOESA\\PROJETOESA.csproj",
-        "packagesPath": "C:\\Users\\Tiago\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Tiago\\Desktop\\IPS\\ESA\\PROJETOESA\\obj\\",
+        "projectPath": "D:\\ESA\\PROJETOESA\\ESA\\PROJETOESA\\PROJETOESA.csproj",
+        "packagesPath": "C:\\Users\\catar\\.nuget\\packages\\",
+        "outputPath": "D:\\ESA\\PROJETOESA\\ESA\\PROJETOESA\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "D:\\VisualStudioComponentes\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\Tiago\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\catar\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -22,7 +26,6 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -156,7 +159,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.203/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.200/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
