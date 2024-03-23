@@ -12,6 +12,7 @@ using IConfiguration = Microsoft.Extensions.Configuration.IConfiguration;
 using System.Diagnostics;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.EntityFrameworkCore;
+using Castle.Core.Resource;
 
 namespace PROJETOESA.Services
 {
@@ -35,69 +36,88 @@ namespace PROJETOESA.Services
             _configuration = configuration;
         }
 
-        public async Task PayAsync(PaymentModel payment, UserManager<ApplicationUser> userManager)
+        public async Task<bool> PayAsync(PaymentModel payment, UserManager<ApplicationUser> userManager)
 
         {
             _user = await userManager.FindByEmailAsync(payment.Email);
-            squareLocation = _configuration["SquareSettings:LOCATION_ID"];
 
+            var checkingPayment = await _context.Payment
+                .Where(c => c.CustomerId == _user.CustomerID)
+                .OrderByDescending(c => c.date) // Assuming 'Date' is the property representing the date
+                .FirstOrDefaultAsync();
 
-            long lPrice = (long)payment.price;
-            var amountMoney = new Money.Builder()
-                .Amount(lPrice)
-                .Currency("USD")
-                .Build();
-
-
-
-            try
+            if (checkingPayment.paymentState.Equals("COMPLETED") || checkingPayment.paymentState.Equals("CANCELED") || checkingPayment == null)
             {
-                // ADICIONAR DADOS NA BD PARA HISTORICO
-                //Criar Customer, criar Order e no fim Criar pagamento.
 
-                squareId = CreateSquareCustomer();
-                squareOrderID = CreateSquareOrder(payment);
-                var idempotencyKey = Guid.NewGuid().ToString();
-                CreatePaymentRequest paymentRequest = new CreatePaymentRequest.Builder(squareSourceID, idempotencyKey, amountMoney)
-                    .AcceptPartialAuthorization(false)
-                    .Autocomplete(false)
-                    .BuyerEmailAddress(payment.Email)
-                    .CustomerId(squareId)
-                    .LocationId(squareLocation)
-                    .OrderId(squareOrderID)
+                squareLocation = _configuration["SquareSettings:LOCATION_ID"];
+
+
+                long lPrice = (long)payment.price;
+                var amountMoney = new Money.Builder()
+                    .Amount(lPrice)
+                    .Currency("USD")
                     .Build();
 
-                var result = await _client.PaymentsApi.CreatePaymentAsync(paymentRequest);
-                if (!String.IsNullOrEmpty(result.Payment.Id))
+
+
+                try
                 {
-                    Models.Payment p = new Models.Payment();
-                    p.PaymentId = result.Payment.Id;
-                    p.CustomerId = result.Payment.CustomerId;
-                    p.paymentState = result.Payment.Status;
-                    p.date = DateTime.Now;
-                    _context.Payment.Add(p);
+                    // ADICIONAR DADOS NA BD PARA HISTORICO
+                    //Criar Customer, criar Order e no fim Criar pagamento.
+
+                    squareId = CreateSquareCustomer();
+                    squareOrderID = CreateSquareOrder(payment);
+                    var idempotencyKey = Guid.NewGuid().ToString();
+                    CreatePaymentRequest paymentRequest = new CreatePaymentRequest.Builder(squareSourceID, idempotencyKey, amountMoney)
+                        .AcceptPartialAuthorization(false)
+                        .Autocomplete(false)
+                        .BuyerEmailAddress(payment.Email)
+                        .CustomerId(squareId)
+                        .LocationId(squareLocation)
+                        .OrderId(squareOrderID)
+                        .Build();
+
+                    var result = await _client.PaymentsApi.CreatePaymentAsync(paymentRequest);
+                    if (!String.IsNullOrEmpty(result.Payment.Id))
+                    {
+                        Models.Payment p = new Models.Payment();
+                        p.PaymentId = result.Payment.Id;
+                        p.CustomerId = result.Payment.CustomerId;
+                        p.paymentState = result.Payment.Status;
+                        p.date = DateTime.Now;
+                        _context.Payment.Add(p);
+                    }
+
+                    //COMPLETAR PAGAMENTO (criar cartao????)
+                    if (CustomerCreateCard())
+                    {
+                        Debug.WriteLine("Card Created");
+                    }
+
+
+                }
+                catch (ApiException e)
+                {
+                    Console.WriteLine("Failed to make the request");
+                    Console.WriteLine($"Response Code: {e.ResponseCode}");
+                    Console.WriteLine($"Exception: {e.Message}");
                 }
 
-                //COMPLETAR PAGAMENTO (criar cartao????)
-                if (CustomerCreateCard())
-                {
-                    Debug.WriteLine("Card Created");
-                }
-
-
+                return true;
             }
-            catch (ApiException e)
+            else 
             {
-                Console.WriteLine("Failed to make the request");
-                Console.WriteLine($"Response Code: {e.ResponseCode}");
-                Console.WriteLine($"Exception: {e.Message}");
+                return false;
             }
+
+            
+            
         }
 
 
-        public async Task<bool> CompleteTicketPayment(string cardID)
+        public async Task<bool> CompleteTicketPayment(string customerCardID)
         { 
-            var card = _client.CardsApi.RetrieveCard(cardID);
+            var card = _client.CardsApi.RetrieveCard(customerCardID);
 
             var customerID = card.Card.CustomerId;
 
@@ -108,8 +128,10 @@ namespace PROJETOESA.Services
 
             if (payment != null) 
             {
-                //_client.PaymentsApi.CompletePayment(payment.PaymentId);
-                return true;
+                var res = _client.PaymentsApi.CompletePayment(payment.PaymentId);
+                payment.paymentState = res.Payment.Status;
+                _context.SaveChanges();
+                return res.Payment.Status.Equals("COMPLETED") ? true : false;
             }
 
             return false;

@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { SquareService } from '../../../services/SquareService';
 import { Card } from '../../../Models/Card';
 import { CardID } from '../../../Models/CardID';
@@ -18,11 +18,13 @@ export class PopUpPaymentComponent implements OnInit {
   public cards: Card[] = [];
   public isLoading: boolean = true;
   public selectedCard: string | undefined;
-
+  transactionCompleted: boolean = false;
+  public isPaymentProcessing: boolean = false;
 
   constructor(
     private squareService: SquareService,
-    private auth: AuthorizeService
+    private auth: AuthorizeService,
+    public dialogRef: MatDialogRef<PopUpPaymentComponent>
   ) { }
 
   ngOnInit(): void {
@@ -95,20 +97,41 @@ export class PopUpPaymentComponent implements OnInit {
   }
 
   payNow(selectedCard?: string): void {
-    let card: CardID = { cardID: selectedCard?.toString() }
-
-    if (card) {
-      this.squareService.payNow(card).subscribe(
-        (response) => {
-          console.log('Payment successful:', response);
-          // Handle success scenario
-        },
-        (error) => {
-          console.error('Payment failed:', error);
-          // Handle error scenario
-        }
-      );
+    if (selectedCard) {
+      let newCard: CardID = { cardID: selectedCard.toString() }
+      this.isPaymentProcessing = true;
+      console.log("ENTREI");
+      //selectedCard.toString()
+      if (newCard) {
+        this.squareService.payNow(newCard).subscribe(
+          (response) => {
+            console.log('Payment response:', response);
+            if (response === true) {
+              // Payment successful
+              console.log('Payment successful');
+              this.transactionCompleted = true;
+              setTimeout(() => {
+                this.dialogRef.close();
+              }, 2000);
+              setTimeout(() => {
+                this.isPaymentProcessing = false;
+              }, 2000);
+              
+            } else {  
+              // Payment failed
+              console.error('Payment failed');
+              this.isPaymentProcessing = false;
+            }
+          },
+          (error) => {
+            console.error('Payment failed:', error);
+            this.isPaymentProcessing = false; 
+          }
+        );
+      }
     }
+
+    
   }
 
 

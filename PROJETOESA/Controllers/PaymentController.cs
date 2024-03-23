@@ -64,12 +64,12 @@ namespace PROJETOESA.Controllers
                     ShippingAddress = payment.ShippingAddress,
                 };
 
-                await _squareService.PayAsync(paymentModel, _userManager);
+                var res = await _squareService.PayAsync(paymentModel, _userManager);
 
                 await _context.SaveChangesAsync();
 
                 // Return a success response
-                return Ok(new { Message = "Ticket purchased successfully" });
+                return Ok(res);
 
 
             }
@@ -90,16 +90,16 @@ namespace PROJETOESA.Controllers
 
         [HttpPost]
         [Route("api/payment/pay-now")]
-        public async Task<IActionResult> PayNow([FromBody] CardID cardID)
+        public async Task<IActionResult> PayNow([FromBody] CustomerCardID custCard)
         {
-            var res = await _squareService.CompleteTicketPayment(cardID.cardID);
+            var res = await _squareService.CompleteTicketPayment(custCard.customerCardID);
 
             return Ok(res);
         }
     }
 
-    public class CardID
+    public class CustomerCardID
     {
-        public string cardID;
+        public string customerCardID { get; set; }
     }
 }

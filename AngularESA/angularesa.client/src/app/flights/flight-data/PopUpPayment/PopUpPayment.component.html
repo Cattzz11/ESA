@@ -18,10 +18,13 @@
           </div>
         </label>
       </div>
-      <button (click)="payNow(selectedCard)">Pay</button>
+      <button (click)="payNow(selectedCard)" [disabled]="isPaymentProcessing">Pay</button>
     </div>
     <div *ngIf="!cards || cards.length === 0">
       <p>No cards found for this user.</p>
+    </div>
+    <div *ngIf="transactionCompleted" class="success-message">
+      Payment Successful!
     </div>
   </ng-template>
 </div>

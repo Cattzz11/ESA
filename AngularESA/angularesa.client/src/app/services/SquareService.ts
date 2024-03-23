@@ -27,11 +27,7 @@ export class SquareService {
     }, {
       observe: 'response',
       responseType: 'text'
-    })
-      .pipe<boolean>(map((res: HttpResponse<string>) => {
-        console.log(res);
-        return res.ok;
-      }));
+    });
   }
 
   getCustomerCards(customerEmail: string): Observable<Card[]> {
@@ -43,8 +39,9 @@ export class SquareService {
     );
   }
 
-  payNow(cardID: CardID): Observable<any> {
-    return this.http.post('api/payment/pay-now', { cardID }, { observe: 'response', responseType: 'text' })
+  payNow(card: CardID): Observable<any> {
+    console.log("Card ID:", card);
+    return this.http.post(`api/payment/pay-now`, { customerCardID: card.cardID }, { observe: 'response', responseType: 'text' })
       .pipe<boolean>(map((res: HttpResponse<string>) => {
         console.log(res);
         return res.ok;
