@@ -619,3 +619,13 @@ C:\Users\Tiago\Desktop\IPS\ESA\PROJETOESA\obj\Debug\net8.0\PROJETOESA.pdb
 C:\Users\Tiago\Desktop\IPS\ESA\PROJETOESA\obj\Debug\net8.0\PROJETOESA.genruntimeconfig.cache
 C:\Users\Tiago\Desktop\IPS\ESA\PROJETOESA\obj\Debug\net8.0\ref\PROJETOESA.dll
 C:\Users\Tiago\Desktop\IPS\ESA\PROJETOESA\bin\Debug\net8.0\Assets\dados.json
+C:\Users\Tiago\Desktop\IPS\ESA\PROJETOESA\bin\Debug\net8.0\APIMatic.Core.dll
+C:\Users\Tiago\Desktop\IPS\ESA\PROJETOESA\bin\Debug\net8.0\Azure.Extensions.AspNetCore.Configuration.Secrets.dll
+C:\Users\Tiago\Desktop\IPS\ESA\PROJETOESA\bin\Debug\net8.0\Azure.Security.KeyVault.Secrets.dll
+C:\Users\Tiago\Desktop\IPS\ESA\PROJETOESA\bin\Debug\net8.0\Mailjet.Client.dll
+C:\Users\Tiago\Desktop\IPS\ESA\PROJETOESA\bin\Debug\net8.0\Microsoft.Bcl.HashCode.dll
+C:\Users\Tiago\Desktop\IPS\ESA\PROJETOESA\bin\Debug\net8.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+C:\Users\Tiago\Desktop\IPS\ESA\PROJETOESA\bin\Debug\net8.0\Microsoft.Extensions.Logging.Abstractions.dll
+C:\Users\Tiago\Desktop\IPS\ESA\PROJETOESA\bin\Debug\net8.0\Microsoft.Json.Pointer.dll
+C:\Users\Tiago\Desktop\IPS\ESA\PROJETOESA\bin\Debug\net8.0\RestSharp.dll
+C:\Users\Tiago\Desktop\IPS\ESA\PROJETOESA\bin\Debug\net8.0\RestSharp.Authenticators.dll

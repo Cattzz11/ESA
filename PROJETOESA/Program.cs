@@ -9,6 +9,8 @@ using PROJETOESA.Services.SkyscannerService;
 using PROJETOESA.Services.DataService;
 using PROJETOESA.Services.CodeGeneratorService;
 using PROJETOESA.Services.AeroDataBoxService;
+using System.Configuration;
+using PROJETOESA.Services.EmailService;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -49,18 +51,9 @@ builder.Services.AddHttpClient("FlighteraFlight", client =>
     client.DefaultRequestHeaders.Add("X-RapidAPI-Host", "flightera-flight-data.p.rapidapi.com");
 });
 
-string accessToken = "EAAAl7w8P9qlJgAIDzJYhYIN3XivD0gDTpSRreKD2nLgYIVqdOJDwy8DpvL_-kYU";
-SquareClient squareClient = new SquareClient.Builder()
-    .Environment(Square.Environment.Sandbox)
-    .AccessToken(accessToken)
-    .Build();
+builder.Services.Configure<MailjetSettings>(builder.Configuration.GetSection("MailjetSettings"));
 
-/*builder.Services.AddHttpClient("SquareAPI", client =>
-{
-    client.BaseAddress = new Uri("https://squareecommerceserg-osipchukv1.p.rapidapi.com/get-config");
-    client.DefaultRequestHeaders.Add("X-RapidAPI-Key", "5aeddf19cdmsh124dd08fde357b5p1533bfjsn58b2fe37abe3");
-    client.DefaultRequestHeaders.Add("X-RapidAPI-Host", "SquareECommerceserg-osipchukV1.p.rapidapi.com");
-});*/
+builder.Services.AddTransient<IEmailService, MailjetEmailSender>();
 
 builder.Services.AddCors(options =>
 {
@@ -74,8 +67,6 @@ builder.Services.AddCors(options =>
 
 builder.Services.AddControllersWithViews();
 
-builder.Services.AddSingleton(squareClient);
-builder.Services.AddScoped<SquareService>();
 builder.Services.AddHttpClient<IFlightService, FlightService>();
 builder.Services.AddScoped<ISkyscannerService, SkyscannerService>();
 builder.Services.AddScoped<IDataService, DataService>();
@@ -87,16 +78,8 @@ builder.Services.AddIdentityApiEndpoints<ApplicationUser>()
     .AddEntityFrameworkStores<AeroHelperContext>();
 
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-
-// Adiciona as configurações do EmailSettings a partir do appsettings.json
-builder.Services.Configure<EmailSettings>(
-builder.Configuration.GetSection("EmailSender"));
-
-// Adiciona o serviço de envio de e-mails
-builder.Services.AddTransient<IEmailSender, EmailSender>();
 
 builder.Services.AddScoped<CodeGeneratorService>();
 
@@ -108,7 +91,6 @@ app.UseDefaultFiles();
 app.UseStaticFiles();
 app.UseCors("AllowOrigin");
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();

@@ -10,7 +10,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
 using PROJETOESA.Data;
 using Microsoft.Extensions.Options;
-using PROJETOESA.Services.CodeGenerator;
+using PROJETOESA.Services.CodeGeneratorService;
 
 namespace AeroHelperTest
 {

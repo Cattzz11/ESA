@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using PROJETOESA.Models.ViewModels;
 using PROJETOESA.Services.AeroDataBoxService;
+using PROJETOESA.Services.EmailService;
 using System.Diagnostics;
 
 namespace PROJETOESA.Controllers
@@ -10,10 +10,12 @@ namespace PROJETOESA.Controllers
     {
 
         private readonly IAeroDataBoxService _aeroData;
+        private readonly IEmailService _email;
 
-        public AeroDataBoxController(IAeroDataBoxService aeroData)
+        public AeroDataBoxController(IAeroDataBoxService aeroData, IEmailService email)
         {
             _aeroData = aeroData;
+            _email = email;
         }
 
         [HttpGet]
