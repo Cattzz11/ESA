@@ -53,6 +53,7 @@ namespace PROJETOESA.Controllers
 
         [HttpPost]
         [Route("api/login-time")]
+        [Authorize]
         public async Task<IActionResult> LoginTime([FromBody] CustomLoginModel model)
         {
             try{
@@ -114,6 +115,7 @@ namespace PROJETOESA.Controllers
         }
 
         [HttpGet("api/userInfo")]
+        [Authorize]
         public async Task<IActionResult> GetUserInfo()
         {
             var user = await _userManager.GetUserAsync(User);
@@ -125,6 +127,7 @@ namespace PROJETOESA.Controllers
 
         [HttpPost]
         [Route("api/send-recovery-code")]
+        [Authorize]
         public async Task<IActionResult> SendRecoveryCode([FromBody] CustomRecoverModel model)
         {
             var user = await _userManager.FindByEmailAsync(model.Email);
@@ -148,6 +151,7 @@ namespace PROJETOESA.Controllers
 
         [HttpPost]
         [Route("api/send-confirmation-code")]
+        [Authorize]
         public async Task<IActionResult> SendConfirmationCode([FromBody] CustomRecoverModel model)
         {
             var user = await _userManager.FindByEmailAsync(model.Email);
@@ -217,6 +221,7 @@ namespace PROJETOESA.Controllers
 
         [HttpPost]
         [Route("api/validate-recovery-code")]
+        [Authorize]
         public async Task<IActionResult> ValidateRecoveryCodeAsync(string userEmail, string code)
         {
             var recoveryCode = await _context.PasswordRecoveryCodes
@@ -246,6 +251,7 @@ namespace PROJETOESA.Controllers
 
         [HttpPost]
         [Route("api/validate-confirmation-code")]
+        [Authorize]
         public async Task<IActionResult> ValidateConfirmationCodeAsync(string userEmail, string code)
         {
             var confirmationCode = await _context.ConfirmationCodes
@@ -292,6 +298,7 @@ namespace PROJETOESA.Controllers
 
         //Get:
         [HttpPut("api/edit-profile")]
+        [Authorize]
         public async Task<IActionResult> UpdateUserInfo([FromBody] EditUserModel model)
         {
             Debug.WriteLine("SERVIDOR");
@@ -324,13 +331,23 @@ namespace PROJETOESA.Controllers
         }
 
         [HttpGet("api/users")]
+        [Authorize]
         public async Task<IActionResult> GetUsers()
         {
-            var users = await _context.Users.ToListAsync();
-            return Ok(users);
+            var user = await _userManager.FindByEmailAsync(User.Identity.Name);
+
+            if (user.Role == TipoConta.Administrador)
+            {
+                var users = await _context.Users.ToListAsync();
+                return Ok(users);
+            }
+
+            return NotFound();
+            
         }
 
         [HttpDelete("api/users/{email}")]
+        [Authorize]
         public async Task<IActionResult> DeleteUser(string email)
         {
             var user = await _userManager.FindByEmailAsync(email);
@@ -338,6 +355,13 @@ namespace PROJETOESA.Controllers
             if (user == null)
             {
                 return NotFound(); // User not found
+            }
+
+            var user2 = await _userManager.FindByEmailAsync(User.Identity.Name);
+
+            if (user2.Email != email)
+            {
+                return NotFound();
             }
 
             var result = await _userManager.DeleteAsync(user);
@@ -369,6 +393,7 @@ namespace PROJETOESA.Controllers
 
         [HttpPost]
         [Route("api/update-confirmed-email")]
+        [Authorize]
         public async Task<IActionResult> UpdateConfirmedEmail([FromBody] UpdateConfirmedEmailModel model)
         {
             // Find the user in the database based on the email
