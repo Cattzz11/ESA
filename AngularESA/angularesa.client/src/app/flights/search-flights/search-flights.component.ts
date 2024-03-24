@@ -13,6 +13,7 @@ import { AuthorizeService } from '../../../api-authorization/authorize.service';
 import { User } from '../../Models/users';
 import { TripDetails } from '../../Models/TripDetails';
 import { PriceOptions } from '../../Models/PriceOptions';
+import { SearchStateService } from '../../services/SearchStateService';
 
 @Component({
   selector: 'app-search-flights',
@@ -50,11 +51,31 @@ export class SearchFlightsComponent implements OnInit {
     private router: Router,
     private cdr: ChangeDetectorRef,
     private datePipe: DatePipe,
-    private auth: AuthorizeService
+    private auth: AuthorizeService,
+    private searchStateService: SearchStateService 
   )
   {}
 
   ngOnInit(): void {
+    const savedState = this.searchStateService.getSearchState();
+    if (savedState) {
+      this.selectedCityFrom = savedState.selectedCityFrom;
+      this.selectedCityTo = savedState.selectedCityTo;
+      this.departureDate = savedState.departureDate;
+      this.arrivalDate = savedState.arrivalDate;
+      this.fromValid = savedState.fromValid;
+      this.toValid = savedState.toValid;
+      this.canSearch = savedState.canSearch;
+      this.departureEnabled = savedState.departureEnabled;
+      this.arrivalEnabled = savedState.arrivalEnabled;
+      this.cities = savedState.cities;
+      this.calendar = savedState.calendar;
+      this.flights = savedState.flights;
+      this.flightsPremium = savedState.flightsPremium;
+
+      this.searchStateService.clearSearchState();
+    }
+
     const storedUser = sessionStorage.getItem('user');
     if (storedUser) {
       this.user = JSON.parse(storedUser);
@@ -78,6 +99,27 @@ export class SearchFlightsComponent implements OnInit {
         console.error('Error fetching flights:', error);
       }
     });
+  }
+
+  saveStateAndNavigate(trip: Trip | TripDetails) {
+    const currentState = {
+      selectedCityFrom: this.selectedCityFrom,
+      selectedCityTo: this.selectedCityTo,
+      departureDate: this.departureDate,
+      arrivalDate: this.arrivalDate,
+      fromValid: this.fromValid,
+      toValid: this.toValid,
+      canSearch: this.canSearch,
+      departureEnabled: this.departureEnabled,
+      arrivalEnabled: this.arrivalEnabled,
+      cities: this.cities,
+      calendar: this.calendar,
+      flights: this.flights,
+      flightsPremium: this.flightsPremium
+    };
+
+    this.searchStateService.saveSearchState(currentState);
+    this.router.navigate(['/flight-data'], { state: { data: trip } });
   }
 
   loadCalendar(from: string, to: string) {
@@ -252,20 +294,20 @@ export class SearchFlightsComponent implements OnInit {
     if (inputField === 'from') {
       if (!this.interactingWithDropdownFrom) {
         this.showDropdownFrom = false;
+        this.fromValid = this.isCityValid(this.selectedCityFrom);
       }
     } else {
       if (!this.interactingWithDropdownFrom) {
         this.showDropdownTo = false;
+        this.toValid = this.isCityValid(this.selectedCityTo);
       }
     }
-  }
 
-  selectTrip(trip: Trip) {
-    this.router.navigate(['/flight-data'], { state: { data: trip } });
-  }
+    if (this.fromValid && this.toValid) {
+      this.loadCalendar(this.selectedCityFrom, this.selectedCityTo);
+    }
 
-  selectTripPremium(trip: TripDetails) {
-    this.router.navigate(['/flight-data'], { state: { data: trip } });
+    this.validateForm();
   }
 
   onDepartureDateChange(event: MatDatepickerInputEvent<Date>) {

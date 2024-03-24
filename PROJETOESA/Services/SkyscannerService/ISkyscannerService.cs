@@ -19,7 +19,7 @@ namespace PROJETOESA.Services.SkyscannerService
 
         Task<List<Calendar>> GetCalendarAsync(FlightData data);
 
-        Task<List<CustomGetDataModel>> GetDataAsync(Country data);
+        Task<List<CustomGetDataModel>> GetDataAsync(string data);
 
         Task<List<City>> GetAirportListAsync(Country country);
 

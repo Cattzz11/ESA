@@ -74,7 +74,7 @@ namespace PROJETOESA.Controllers
         [Route("api/flight/auto-complete")]
         public async Task<IActionResult> searchData([FromQuery] Country data)
         {
-            var result = await _skyscannerService.GetDataAsync(data);
+            var result = await _skyscannerService.GetDataAsync(data.Name);
 
             return Ok(result);
         }

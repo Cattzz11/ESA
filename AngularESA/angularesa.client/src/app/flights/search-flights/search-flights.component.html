@@ -94,7 +94,7 @@
             </ng-container>
             <div class="more">
                 <p>Preço: {{ trip.price }} €</p>
-                <a (click)="selectTrip(trip)" class="button-link">Mais opções</a>
+                <a (click)="saveStateAndNavigate(trip)" class="button-link">Mais opções</a>
             </div>
         </div>
     </div>
@@ -147,7 +147,7 @@
         <p>Preço Mínimo: {{ calculatePrices('min', trip.priceOptions) }} €</p>
         <p>Preço Médio: {{ calculatePrices('med', trip.priceOptions) }} €</p>
         <p>Preço Máximo: {{ calculatePrices('max', trip.priceOptions) }} €</p>
-        <a (click)="selectTripPremium(trip)" class="button-link">Mais opções</a>
+        <a (click)="saveStateAndNavigate(trip)" class="button-link">Mais opções</a>
       </div>
     </div>
   </div>

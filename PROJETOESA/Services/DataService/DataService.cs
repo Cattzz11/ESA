@@ -1,5 +1,6 @@
 ﻿
 
+using Mailjet.Client.Resources;
 using Microsoft.EntityFrameworkCore;
 using PROJETOESA.Data;
 using PROJETOESA.Models;
@@ -175,18 +176,18 @@ namespace PROJETOESA.Services.DataService
             }
             else
             {
-                var result = await _skyscannerService.GetDataAsync(country);
+                var result = await _skyscannerService.GetDataAsync(country.Name);
                 List<City> cities = new List<City>();
 
                 foreach (var item in result)
                 {
-                    if (item.flightPlaceType != "COUNTRY" && !existingCities.Any(c => c.Id == item.skyId))
+                    if (item.flightPlaceType != "COUNTRY" && !existingCities.Any(c => c.Id == item.cityId))
                     {
                         var city = new City
                         {
-                            Id = item.skyId,
-                            Name = item.localizedName,
-                            ApiKey = item.id,
+                            Id = item.cityId,
+                            Name = item.city,
+                            ApiKey = item.apiKey,
                             CountryId = country.Id
                         };
                         cities.Add(city);
