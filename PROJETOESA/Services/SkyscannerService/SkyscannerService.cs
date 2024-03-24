@@ -158,33 +158,27 @@ namespace PROJETOESA.Services.SkyscannerService
 
             Debug.WriteLine("alasjdçaojisºdfoajsdfgºoaidjfgçºzlkdmfºvbgaopidfjgçºaoidfjhhg+ºoahjiertfgoiaehjtgoihjaetroghjaeotijhgaoetihjgajhertgjaodpkfmgº-aPojidkerºtpgjaºerpjgºae+9irjgõeparkjgkeoprg~pajkeri~gp9okedrpºalasjdçaojisºdfoajsdfgºoaidjfgçºzlkdmfºvbgaopidfjgçºaoidfjhhg+ºoahjiertfgoiaehjtgoihjaetroghjaeotijhgaoetihjgajhertgjaodpkfmgº-aPojidkerºtpgjaºerpjgºae+9irjgõeparkjgkeoprg~pajkeri~gp9okedrpº");
             Debug.WriteLine(trips.Count);
-            // Inicializa uma lista de Task para cada detalhe de viagem que será obtido
+
             var tasks = new List<Task<TripDetailsViewModel>>();
 
             foreach (Trip trip in trips)
             {
-                // Inicia a task sem esperar por ela aqui, adicionando-a à lista de tasks
                 tasks.Add(GetTripDetailsAsync(trip.Token, trip.Id));
             }
 
-            // Aguarda a conclusão de todas as tasks de detalhes de viagens simultaneamente
             var results = await Task.WhenAll(tasks);
 
-            // Filtra os resultados para excluir os nulls e depois converte para lista
             var tripDetails = results.Where(detail => detail != null).ToList();
 
             Debug.WriteLine("alasjdçaojisºdfoajsdfgºoaidjfgçºzlkdmfºvbgaopidfjgçºaoidfjhhg+ºoahjiertfgoiaehjtgoihjaetroghjaeotijhgaoetihjgajhertgjaodpkfmgº-aPojidkerºtpgjaºerpjgºae+9irjgõeparkjgkeoprg~pajkeri~gp9okedrpºalasjdçaojisºdfoajsdfgºoaidjfgçºzlkdmfºvbgaopidfjgçºaoidfjhhg+ºoahjiertfgoiaehjtgoihjaetroghjaeotijhgaoetihjgajhertgjaodpkfmgº-aPojidkerºtpgjaºerpjgºae+9irjgõeparkjgkeoprg~pajkeri~gp9okedrpº");
             Debug.WriteLine(tripDetails.Count);
 
-            // Retorna a lista filtrada
             return tripDetails;
         }
 
 
         public async Task<TripDetailsViewModel> GetTripDetailsAsync(string token, string itineraryId)
         {
-            //var response = await _httpClient.GetAsync($"/flights/detail?token={token}&itineraryId={itineraryId}");
-
             HttpResponseMessage response = await _httpClient.GetAsync($"/flights/detail?token={token}&itineraryId={itineraryId}");
 
             if (!response.IsSuccessStatusCode)

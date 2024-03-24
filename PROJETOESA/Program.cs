@@ -64,7 +64,6 @@ builder.Services.AddCors(options =>
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddHttpClient<IFlightService, FlightService>();
-builder.Services.AddScoped<IFlightService, FlightService>();
 builder.Services.AddScoped<ISkyscannerService, SkyscannerService>();
 builder.Services.AddScoped<IDataService, DataService>();
 builder.Services.AddScoped<ICodeGeneratorService, CodeGeneratorService>();

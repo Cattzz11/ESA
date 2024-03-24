@@ -33,15 +33,6 @@ namespace PROJETOESA.Controllers
         }
 
         [HttpGet]
-        [Route("api/flight-itinerary/generate-map")]
-        public async Task<IActionResult> CreateMap()
-        {
-            string data = await _flightService.GenerateMapUrl();
-
-            return Ok(data);
-        }
-
-        [HttpGet]
         [Route("api/flight-itinerary/search-flights")]
         public async Task<IActionResult> SearchFlights([FromQuery] AddressComponents origin, [FromQuery] AddressComponents destination)
         {

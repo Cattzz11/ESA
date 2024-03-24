@@ -43,6 +43,7 @@ export class MapComponent implements OnInit, AfterViewInit {
 
   flightsLoaded = false;
   isLoading = false;
+  firstSearch = false;
 
   constructor(
     private flights: FlightItineraryService,
@@ -179,10 +180,8 @@ export class MapComponent implements OnInit, AfterViewInit {
       getAddressComponents(originPosition),
       getAddressComponents(destinationPosition)
     ]).then(([originAddress, destinationAddress]: [AddressComponents, AddressComponents]) => {
+      this.firstSearch = true;
       if (this.user && this.user.role === 1) {
-        console.log("AQUI");
-        console.log(originAddress);
-        console.log(destinationAddress);
         this.flights.getTripsPremium(originAddress, destinationAddress).subscribe({
           next: (response) => {
             this.tripListPremium = response;

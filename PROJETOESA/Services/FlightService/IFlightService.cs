@@ -11,9 +11,7 @@ namespace PROJETOESA.Services.FlightService
 
         Task<List<FlightsItinerary>> LoadFlightsAsync();
 
-        Task<(string latitude, string longitude)> GetCoordinatesAsync(string locationName);
-
-        Task<string> GenerateMapUrl();
+        Task<(string latitude, string longitude)> GetCoordenatesAsync(string locationName);
 
         Task<string> GetAirlinesDataAsync();
 

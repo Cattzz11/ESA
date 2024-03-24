@@ -8,6 +8,7 @@ using PROJETOESA.Services.SkyscannerService;
 using System.Diagnostics;
 using System.Globalization;
 using System.Text;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace PROJETOESA.Services.FlightService
 {
@@ -99,7 +100,7 @@ namespace PROJETOESA.Services.FlightService
             }
         }
 
-        public async Task<(string latitude, string longitude)> GetCoordinatesAsync(string locationName)
+        public async Task<(string latitude, string longitude)> GetCoordenatesAsync(string locationName)
         {
             var city = await _context.City.FirstOrDefaultAsync(c => c.Name == locationName);
 
@@ -143,31 +144,6 @@ namespace PROJETOESA.Services.FlightService
             return (mainLatitude, mainLongitude);
         }
 
-        public async Task<string> GenerateMapUrl()
-        {
-            string baseUrl = "https://maps.googleapis.com/maps/api/staticmap?";
-            int mapWidth = 640;
-            int mapHeight = 640;
-            var mapUrl = new StringBuilder($"{baseUrl}size={mapWidth}x{mapHeight}&maptype=roadmap");
-
-            List<FlightsItinerary> flights = await LoadFlightsAsync();
-
-            foreach (var flight in flights)
-            {
-                var departureCoordinates = await GetCoordinatesAsync(flight.DepartureLocation.Name);
-                var arrivalCoordinates = await GetCoordinatesAsync(flight.ArrivalLocation.Name);
-
-                mapUrl.Append($"&markers=color:blue%7Clabel:S%7C{departureCoordinates.latitude},{departureCoordinates.longitude}");
-                mapUrl.Append($"&markers=color:green%7Clabel:D%7C{arrivalCoordinates.latitude},{arrivalCoordinates.longitude}");
-
-                mapUrl.Append($"&path=color:0xff0000ff|weight:5|{departureCoordinates.latitude},{departureCoordinates.longitude}|{arrivalCoordinates.latitude},{arrivalCoordinates.longitude}");
-            }
-
-            mapUrl.Append($"&key={_googleApiKey}");
-
-            return mapUrl.ToString();
-        }
-
         public async Task<string> GetAirlinesDataAsync()
         {
 
@@ -180,9 +156,59 @@ namespace PROJETOESA.Services.FlightService
             return content;
         }
 
+        //public async Task<List<Trip>> GetFlightsAsync(AddressComponents origin, AddressComponents destination)
+        //{
+        //    var allCities = await _context.City.Include(c => c.Country).ToListAsync();
+
+        //    City FindCity(AddressComponents addressComponents)
+        //    {
+        //        var city = allCities.FirstOrDefault(c => c.Name.ToLower().Equals(addressComponents.city.ToLower()));
+
+        //        if (city != null)
+        //        {
+        //            return city;
+        //        }
+
+        //        var originLatitudeText = addressComponents.latitude.Replace(',', '.');
+        //        var originLongitudeText = addressComponents.longitude.Replace(',', '.');
+
+        //        double originLatitude;
+        //        double originLongitude;
+
+        //        double.TryParse(originLatitudeText, NumberStyles.Any, CultureInfo.InvariantCulture, out originLatitude);
+        //        double.TryParse(originLongitudeText, NumberStyles.Any, CultureInfo.InvariantCulture, out originLongitude);
+
+        //        return allCities
+        //            .Select(c => new
+        //            {
+        //                City = c,
+        //                Distance = HaversineDistance(originLatitude, originLongitude, c)
+        //            })
+        //            .OrderBy(c => c.Distance)
+        //            .First().City;
+        //    }
+
+        //    City originCity = FindCity(origin);
+        //    City destinationCity = FindCity(destination);
+
+        //    string tomorrow = DateTime.Now.AddDays(1).ToString("yyyy-MM-dd");
+        //    string nextWeek = DateTime.Now.AddDays(8).ToString("yyyy-MM-dd");
+
+        //    List<Trip> tripList = await _skyscannerService.GetRoundtripAsync(new FlightData { fromEntityId = originCity.ApiKey, toEntityId = destinationCity.ApiKey, departDate = tomorrow, returnDate = nextWeek });
+
+        //    return tripList;
+        //}
+
         public async Task<List<Trip>> GetFlightsAsync(AddressComponents origin, AddressComponents destination)
         {
             var allCities = await _context.City.Include(c => c.Country).ToListAsync();
+
+            var citiesWithEmptyCoordenates = await _context.City.Include(c => c.Country).Where(c => string.IsNullOrEmpty(c.Coordinates)).ToListAsync();
+
+            if (citiesWithEmptyCoordenates.Any()) 
+            {
+                allCities = await PopulateCoordinatesAsync();
+            }
 
             City FindCity(AddressComponents addressComponents)
             {
@@ -225,16 +251,18 @@ namespace PROJETOESA.Services.FlightService
 
         public async Task<List<TripDetailsViewModel>> GetFlightsPremiumAsync(AddressComponents origin, AddressComponents destination)
         {
-            Debug.WriteLine("Service");
-
             List<Trip> trips = await GetFlightsAsync(origin, destination);
 
-            List<TripDetailsViewModel> tripDetails = new List<TripDetailsViewModel>();
+            var tasks = new List<Task<TripDetailsViewModel>>();
 
             foreach (Trip trip in trips)
             {
-                tripDetails.Add(await _skyscannerService.GetTripDetailsAsync(trip.Token, trip.Id));
+                tasks.Add(_skyscannerService.GetTripDetailsAsync(trip.Token, trip.Id));
             }
+
+            var results = await Task.WhenAll(tasks);
+
+            var tripDetails = results.Where(detail => detail != null).ToList();
 
             return tripDetails;
         }
@@ -246,7 +274,31 @@ namespace PROJETOESA.Services.FlightService
             {
                 if (string.IsNullOrEmpty(city.Coordinates))
                 {
-                    await UpdateCoordenastesBD(city);
+                    Debug.WriteLine("Cidade!!", city.Name);
+                    string geocodeUrl = $"https://maps.googleapis.com/maps/api/geocode/json?address={Uri.EscapeDataString(city.Name)}&key={_googleApiKey}";
+
+                    using (HttpClient client = new HttpClient())
+                    {
+                        var response = await client.GetAsync(geocodeUrl);
+                        var content = await response.Content.ReadAsStringAsync();
+                        var json = JObject.Parse(content);
+
+                        var results = json["results"] as JArray;
+                        if (results != null && results.Count > 0)
+                        {
+                            var location = results[0]["geometry"]["location"];
+                            var mainLatitude = location["lat"].ToString().Replace(",", ".");
+                            var mainLongitude = location["lng"].ToString().Replace(",", ".");
+
+                            if (city != null)
+                            {
+                                city.Coordinates = $"{mainLatitude};{mainLongitude}";
+                                Debug.WriteLine("Coordenadas!!", city.Coordinates);
+
+                                _context.SaveChanges();
+                            }
+                        }
+                    }
                 }
 
             }
@@ -254,43 +306,8 @@ namespace PROJETOESA.Services.FlightService
             return await _context.City.ToListAsync();
         }
 
-        private async Task<City> UpdateCoordenastesBD(City city)
+        private double HaversineDistance(double lat1, double lon1, City city)
         {
-            string geocodeUrl = $"https://maps.googleapis.com/maps/api/geocode/json?address={Uri.EscapeDataString(city.Name)}&key={_googleApiKey}";
-
-            using (HttpClient client = new HttpClient())
-            {
-                var response = await client.GetAsync(geocodeUrl);
-                var content = await response.Content.ReadAsStringAsync();
-                var json = JObject.Parse(content);
-
-                var results = json["results"] as JArray;
-                if (results != null && results.Count > 0)
-                {
-                    var location = results[0]["geometry"]["location"];
-                    var mainLatitude = location["lat"].ToString().Replace(",", ".");
-                    var mainLongitude = location["lng"].ToString().Replace(",", ".");
-
-                    if (city != null)
-                    {
-                        city.Coordinates = $"{mainLatitude};{mainLongitude}";
-                        Debug.WriteLine("Coordenadas!!", city.Coordinates);
-
-                        _context.SaveChanges();
-                    }
-                }
-            }
-
-            return city!;
-        }
-
-        private async Task<double> HaversineDistance(double lat1, double lon1, City city)
-        {
-            if (string.IsNullOrEmpty(city.Coordinates))
-            {
-                city = await UpdateCoordenastesBD(city);
-            }
-
             var coordinates = city.Coordinates.Split(';');
             double lat2;
             double lon2;
@@ -348,7 +365,7 @@ namespace PROJETOESA.Services.FlightService
 
             if (city != null && string.IsNullOrEmpty(city.Coordinates))
             {
-                await GetCoordinatesAsync(city.Name);
+                await GetCoordenatesAsync(city.Name);
             }
 
             if (city != null)
@@ -381,7 +398,7 @@ namespace PROJETOESA.Services.FlightService
 
             if (string.IsNullOrEmpty(mostSimilarCity.Coordinates))
             {
-                await GetCoordinatesAsync(mostSimilarCity.Name);
+                await GetCoordenatesAsync(mostSimilarCity.Name);
             }
 
             return mostSimilarCity;
