@@ -53,6 +53,7 @@ namespace PROJETOESA.Controllers
         [Route("api/flight-itinerary/search-flights-premium")]
         public async Task<IActionResult> SearchFlightsPremium([FromQuery] AddressComponents origin, [FromQuery] AddressComponents destination)
         {
+            Debug.WriteLine("Controller");
             var data = await _flightService.GetFlightsPremiumAsync(origin, destination);
             return Ok(data);
         }

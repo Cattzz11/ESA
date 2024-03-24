@@ -173,13 +173,16 @@ export class MapComponent implements OnInit, AfterViewInit {
           reject(new Error('No position provided'));
         }
       });
-    }; 
+    };
 
     Promise.all([
       getAddressComponents(originPosition),
       getAddressComponents(destinationPosition)
     ]).then(([originAddress, destinationAddress]: [AddressComponents, AddressComponents]) => {
       if (this.user && this.user.role === 1) {
+        console.log("AQUI");
+        console.log(originAddress);
+        console.log(destinationAddress);
         this.flights.getTripsPremium(originAddress, destinationAddress).subscribe({
           next: (response) => {
             this.tripListPremium = response;
@@ -191,10 +194,6 @@ export class MapComponent implements OnInit, AfterViewInit {
           }
         });
       } else {
-        console.log("AQUi");
-        console.log(originAddress);
-        console.log(destinationAddress);
-
         this.flights.getTrips(originAddress, destinationAddress).subscribe({
           next: (response) => {
             this.tripList = response;
@@ -476,14 +475,7 @@ export class MapComponent implements OnInit, AfterViewInit {
         });
       }
     });
-  }
-
-  calculateTotalTime(totalTime: string) {
-    //${ formatarDataHora(flight.arrivalSchedule, 'arrival') }
-
-    
-  }
-  
+  }  
 
   getRandomPoint(polyline: google.maps.Polyline): { position: google.maps.LatLng, heading: number } {
     const path = polyline.getPath();
@@ -498,8 +490,6 @@ export class MapComponent implements OnInit, AfterViewInit {
 
     return { position: point, heading };
   }
-
-
 
   addMarker(lat: number, lng: number, type: 'departure' | 'arrival'): void {
     let icon;

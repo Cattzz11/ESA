@@ -1,16 +1,12 @@
-using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
 using PROJETOESA.Data;
 using PROJETOESA.Models;
-using PROJETOESA.Services;
-using Square;
+using PROJETOESA.Services.AeroDataBoxService;
+using PROJETOESA.Services.CodeGeneratorService;
+using PROJETOESA.Services.DataService;
+using PROJETOESA.Services.EmailService;
 using PROJETOESA.Services.FlightService;
 using PROJETOESA.Services.SkyscannerService;
-using PROJETOESA.Services.DataService;
-using PROJETOESA.Services.CodeGeneratorService;
-using PROJETOESA.Services.AeroDataBoxService;
-using System.Configuration;
-using PROJETOESA.Services.EmailService;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -68,6 +64,7 @@ builder.Services.AddCors(options =>
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddHttpClient<IFlightService, FlightService>();
+builder.Services.AddScoped<IFlightService, FlightService>();
 builder.Services.AddScoped<ISkyscannerService, SkyscannerService>();
 builder.Services.AddScoped<IDataService, DataService>();
 builder.Services.AddScoped<ICodeGeneratorService, CodeGeneratorService>();

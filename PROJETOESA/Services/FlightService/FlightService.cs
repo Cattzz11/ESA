@@ -225,6 +225,8 @@ namespace PROJETOESA.Services.FlightService
 
         public async Task<List<TripDetailsViewModel>> GetFlightsPremiumAsync(AddressComponents origin, AddressComponents destination)
         {
+            Debug.WriteLine("Service");
+
             List<Trip> trips = await GetFlightsAsync(origin, destination);
 
             List<TripDetailsViewModel> tripDetails = new List<TripDetailsViewModel>();
