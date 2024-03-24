@@ -114,6 +114,14 @@ namespace PROJETOESA.Controllers
 
             return Ok(res);
         }
+
+        [HttpGet("api/payment/get-user-payments/{userEmail}")]
+        public async Task<ActionResult<IEnumerable<PaymentHistoryModel>>> GetCustomerPayments(string userEmail)
+        {
+            List<PaymentHistoryModel> model = await _squareService.GetSquareCustomerPayments(userEmail, _userManager);
+
+            return Ok(model);
+        }
     }
 
     public class CustomerCardID

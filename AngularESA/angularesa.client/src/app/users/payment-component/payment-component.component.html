@@ -7,11 +7,59 @@
     <p *ngIf="user && user.occupation !== null">Ocupação: {{ user.occupation }}</p>
     <p *ngIf="user && user.nationality !== null">Nacionalidade: {{ user.nationality }}</p>
   </div>
-  <div class="personal-data-acompanhante">
-    <h1>Dados Pessoais:</h1>
-    <p>Nome: {{ acomp?.name }}</p>
-    <p>Género: {{acomp?.gender}}</p>
-    <p *ngIf="acomp && acomp.nationality !== null">Nacionalidade: {{ acomp.nationality }}</p>
-    <p *ngIf="acomp && acomp.birthDate !== undefined">Idade: {{ acomp.birthDate }} anos</p>
+
+  <div class="payment-history">
+    <h1>Histórico de Pagamentos:</h1>
+    <ul>
+      <li>
+        <!-- Pagamentos Completos -->
+        <h2>Pagamentos Completos</h2>
+        <ul class="history-item">
+          <li *ngFor="let payment of completedPayments">
+            <div class="payment-details">
+              <p>Preço: {{ payment.price }}€</p>
+              <p>Nome: {{ payment.firstName }}</p>
+            </div>
+            <!-- Display the rest of payment details below -->
+            <div class="additional-details">
+              <p>E-mail: {{ payment.email }}</p>
+              <p>Cartão de Crédito: {{ payment.creditCard }}</p>
+            </div>
+          </li>
+        </ul>
+      </li>
+      <li class="process-payments"><h2>Pagamentos Em Processo</h2></li>
+      <ul class="history-item">
+        <li *ngFor="let payment of processPayments">
+          <div class="payment-details">
+            <p>Preço: {{ payment.price }}€</p>
+            <p>Nome: {{ payment.firstName }}</p>
+          </div>
+          <!-- Display the rest of payment details below -->
+          <div class="additional-details">
+            <p>E-mail: {{ payment.email }}</p>
+            <p>Cartão de Crédito: {{ payment.creditCard }}</p>
+          </div>
+          <div class="payment-actions">
+            <button class="complete-button">Completar</button>
+            <button class="cancel-button">Cancelar</button>
+          </div>
+        </li>
+      </ul>
+      <li class="canceled-payments"><h2>Pagamentos Cancelados</h2></li>
+      <ul class="history-item">
+        <li *ngFor="let payment of canceledPayments">
+          <div class="payment-details">
+            <p>Preço: {{ payment.price }}€</p>
+            <p>Nome: {{ payment.firstName }}</p>
+          </div>
+          <!-- Display the rest of payment details below -->
+          <div class="additional-details">
+            <p>E-mail: {{ payment.email }}</p>
+            <p>Cartão de Crédito: {{ payment.creditCard }}</p>
+          </div>
+        </li>
+      </ul>
+    </ul>
   </div>
 </div>

@@ -4,6 +4,8 @@ import { Observable, map } from 'rxjs';
 import { PaymentModel } from '../Models/PaymentModel';
 import { Card } from '../Models/Card';
 import { CardID } from '../Models/CardID';
+import { User } from '../Models/users';
+import { PaymentHistoryModel } from '../Models/PaymentHistoryModel';
 
 @Injectable({
   providedIn: 'root',
@@ -64,6 +66,16 @@ export class SquareService {
         console.log(res);
         return res.ok;
       }));
+  }
+
+  fetchPaymentHistory(user: User): Observable<any> {
+    console.log("User email:", user.email);
+    return this.http.get<PaymentHistoryModel[]>(`api/payment/get-user-payments/${user.email}`).pipe(
+      map((response: PaymentHistoryModel[]) => {
+        // Perform any data transformations here if needed
+        return response;
+      })
+    );
   }
 
 }
