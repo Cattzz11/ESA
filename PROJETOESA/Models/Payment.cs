@@ -13,5 +13,6 @@ namespace PROJETOESA.Models
         public DateTime date { get; set; }
 
         public string paymentState { get; set; }
+
     }
 }

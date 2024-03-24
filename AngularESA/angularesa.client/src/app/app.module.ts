@@ -34,6 +34,8 @@ import { PaymentComponentComponent } from './users/payment-component/payment-com
 import { PaymentComponent } from './payments/payment.component';
 import { MatDialogModule } from '@angular/material/dialog'
 import { PopUpPaymentComponent } from './flights/flight-data/PopUpPayment/PopUpPayment.component'
+import { PopUpPremiumComponent } from './users/premium/PopUpPremium/PopUpPremium.component'
+import { PopUpCancelPremiumComponent } from './users/premium/PopUpCancelPremium/PopUpCancel.component'
 
 export const MY_FORMATS = {
   parse: {
@@ -66,7 +68,9 @@ export const MY_FORMATS = {
     FlightDataComponent,
     PaymentComponentComponent,
     PaymentComponent,
-    PopUpPaymentComponent
+    PopUpPaymentComponent,
+    PopUpPremiumComponent,
+    PopUpCancelPremiumComponent
   ],
   imports: [
     BrowserModule,

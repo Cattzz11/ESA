@@ -96,6 +96,24 @@ namespace PROJETOESA.Controllers
 
             return Ok(res);
         }
+
+        [HttpPost]
+        [Route("api/payment/premium-subscription")]
+        public async Task<IActionResult> PayNowPremium([FromBody] CustomerCardID custCard)
+        {
+            var res = await _squareService.SubscribePremium(custCard.customerCardID);
+
+            return Ok(res);
+        }
+
+        [HttpPost]
+        [Route("api/payment/cancel-subscription")]
+        public async Task<IActionResult> CancelPremiumNow([FromBody] CustomerCardID custCard)
+        {
+            var res = await _squareService.CancelSubscription(custCard.customerCardID);
+
+            return Ok(res);
+        }
     }
 
     public class CustomerCardID

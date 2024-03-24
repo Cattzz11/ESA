@@ -13,6 +13,8 @@ using System.Diagnostics;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.EntityFrameworkCore;
 using Castle.Core.Resource;
+using PROJETOESA.Controllers;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace PROJETOESA.Services
 {
@@ -27,6 +29,7 @@ namespace PROJETOESA.Services
         private string squareOrderID;
         private string squareSourceID = "cnon:card-nonce-ok";
         private readonly IConfiguration _configuration;
+        private const string subscriptionPlanID = "TAWJ57V3HV7376F4DSDG2ZED";
 
 
         public SquareService(SquareClient client, AeroHelperContext context, IConfiguration configuration)
@@ -34,6 +37,7 @@ namespace PROJETOESA.Services
             _client = client ?? throw new ArgumentNullException(nameof(_client));
             _context = context;
             _configuration = configuration;
+            squareLocation = _configuration["SquareSettings:LOCATION_ID"];
         }
 
         public async Task<bool> PayAsync(PaymentModel payment, UserManager<ApplicationUser> userManager)
@@ -86,9 +90,9 @@ namespace PROJETOESA.Services
                         p.paymentState = result.Payment.Status;
                         p.date = DateTime.Now;
                         _context.Payment.Add(p);
+                        _context.SaveChanges();
                     }
 
-                    //COMPLETAR PAGAMENTO (criar cartao????)
                     if (CustomerCreateCard())
                     {
                         Debug.WriteLine("Card Created");
@@ -137,6 +141,83 @@ namespace PROJETOESA.Services
             return false;
         }
 
+        public async Task<bool> SubscribePremium(string customerCardID)
+        {
+            var card = _client.CardsApi.RetrieveCard(customerCardID);
+
+            var customerID = card.Card.CustomerId;
+
+            var customerToPremium = await _context.Users
+                .Where(c => c.CustomerID == customerID)
+                .FirstOrDefaultAsync();
+
+
+            if (customerToPremium != null)
+            {
+                CreateSubscriptionRequest subscription = CreateSquareSubscription(customerCardID);
+
+                var res = _client.SubscriptionsApi.CreateSubscription(subscription);
+                
+                if (res.Subscription.Id != "")
+                {
+                    customerToPremium.Role = TipoConta.ClientePremium;
+                    customerToPremium.subscriptionID = res.Subscription.Id;
+                    _context.SaveChanges();
+                    return true; 
+                } 
+                else 
+                { return false; }
+            }
+
+            return false;
+        }
+
+
+        public async Task<bool> CancelSubscription(string customerCardID)
+        {
+            var card = _client.CardsApi.RetrieveCard(customerCardID);
+
+            var customerID = card.Card.CustomerId;
+
+            var customerRemovePremium = await _context.Users
+                .Where(c => c.CustomerID == customerID)
+                .FirstOrDefaultAsync();
+
+
+            if (customerRemovePremium != null)
+            {
+                var res = _client.SubscriptionsApi.CancelSubscription(customerRemovePremium.subscriptionID);
+
+                customerRemovePremium.Role = TipoConta.ClienteNormal;
+                customerRemovePremium.subscriptionID = "";
+                _context.SaveChanges();
+
+                return true;
+            }
+
+            return false;
+
+        }
+
+
+        public CreateSubscriptionRequest CreateSquareSubscription(string customerCardID)
+        {
+            var card = _client.CardsApi.RetrieveCard(customerCardID);
+            var customerID = card.Card.CustomerId;
+
+            var day = DateTime.Now.Day;
+            var month = DateTime.Now.Month;
+            var year = DateTime.Now.Year;
+            var dateForReq = year + "-" + month + "-" + day;
+            CreateSubscriptionRequest createSubscription = new CreateSubscriptionRequest.Builder(squareLocation, subscriptionPlanID, customerID)
+                    .CardId(customerCardID)
+                    .IdempotencyKey(Guid.NewGuid().ToString())
+                    .StartDate(dateForReq)
+                    .Build();
+
+            return createSubscription;
+        }
+
         public string CreateSquareCustomer()
         {
 
@@ -150,7 +231,9 @@ namespace PROJETOESA.Services
                     .EmailAddress(_user.Email)
                     .Build();
                 var customer = _client.CustomersApi.CreateCustomer(createCustomerRequest);
-                _user.CustomerID = customer.Customer.Id;
+                var user = _context.Users.FirstOrDefault(x => x.Email == _user.Email);
+                user.CustomerID = customer.Customer.Id;
+                _context.SaveChanges();
                 return customer.Customer.Id;
             }
             else
@@ -233,24 +316,46 @@ namespace PROJETOESA.Services
         {
             _user = await userManager.FindByEmailAsync(customerEmail);
 
-            var cardId = _client.CustomersApi.RetrieveCustomer(_user.CustomerID);
+            try {
+                if (_user.CustomerID == null)
+                {
+                    CreateSquareCustomer();
+                }
 
-            var cardToModel = _client.CardsApi.RetrieveCard(cardId.Customer.Cards[0].Id);
 
-            SquareCard squareCard = new SquareCard
+                if (CustomerCreateCard())
+                {
+                    var cardId = _client.CustomersApi.RetrieveCustomer(_user.CustomerID);
+                    var cardToModel = _client.CardsApi.RetrieveCard(cardId.Customer.Cards[0].Id);
+                    SquareCard squareCard = new SquareCard
+                    {
+                        Id = cardToModel.Card.Id,
+                        CardBrand = cardToModel.Card.CardBrand,
+                        Last4 = cardToModel.Card.Last4,
+                        ExpMonth = (long)cardToModel.Card.ExpMonth,
+                        ExpYear = (long)cardToModel?.Card.ExpYear,
+                        CardholderName = cardToModel.Card.CardholderName,
+                        BillingAddress = new BillingAddress { PostalCode = cardToModel.Card.BillingAddress.PostalCode },
+                        Fingerprint = cardToModel.Card.Fingerprint
+
+                    };
+
+                    return squareCard;
+                }
+
+                return null;
+                
+            }
+            catch (ApiException e)
             {
-                Id = cardToModel.Card.Id,
-                CardBrand = cardToModel.Card.CardBrand,
-                Last4 = cardToModel.Card.Last4,
-                ExpMonth = (long)cardToModel.Card.ExpMonth,
-                ExpYear = (long)cardToModel?.Card.ExpYear,
-                CardholderName = cardToModel.Card.CardholderName,
-                BillingAddress = new BillingAddress { PostalCode = cardToModel.Card.BillingAddress.PostalCode },
-                Fingerprint = cardToModel.Card.Fingerprint
+                Console.WriteLine("Failed to make the request");
+                Console.WriteLine($"Response Code: {e.ResponseCode}");
+                Console.WriteLine($"Exception: {e.Message}");
+            }
 
-            };
 
-            return squareCard;
+
+            return null;
         }
 
 

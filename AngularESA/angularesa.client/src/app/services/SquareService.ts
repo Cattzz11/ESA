@@ -48,4 +48,22 @@ export class SquareService {
       }));
   }
 
+  premiumSubscription(card: CardID): Observable<any> {
+    console.log("Card ID:", card);
+    return this.http.post(`api/payment/premium-subscription`, { customerCardID: card.cardID }, { observe: 'response', responseType: 'text' })
+      .pipe<boolean>(map((res: HttpResponse<string>) => {
+        console.log(res);
+        return res.ok;
+      }));
+  }
+
+  cancelPremiumSubscription(card: CardID): Observable<any> {
+    console.log("Card ID:", card);
+    return this.http.post(`api/payment/cancel-subscription`, { customerCardID: card.cardID }, { observe: 'response', responseType: 'text' })
+      .pipe<boolean>(map((res: HttpResponse<string>) => {
+        console.log(res);
+        return res.ok;
+      }));
+  }
+
 }

@@ -22,5 +22,7 @@ namespace PROJETOESA.Models
         public List<UserFlight>? UserFlights { get; set; }
 
         public string? CustomerID { get; set; }
+
+        public string? subscriptionID { get; set; }
     }
 }
