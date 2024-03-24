@@ -244,31 +244,7 @@ namespace PROJETOESA.Services.FlightService
             {
                 if (string.IsNullOrEmpty(city.Coordinates))
                 {
-                    Debug.WriteLine("Cidade!!", city.Name);
-                    string geocodeUrl = $"https://maps.googleapis.com/maps/api/geocode/json?address={Uri.EscapeDataString(city.Name)}&key={_googleApiKey}";
-
-                    using (HttpClient client = new HttpClient())
-                    {
-                        var response = await client.GetAsync(geocodeUrl);
-                        var content = await response.Content.ReadAsStringAsync();
-                        var json = JObject.Parse(content);
-
-                        var results = json["results"] as JArray;
-                        if (results != null && results.Count > 0)
-                        {
-                            var location = results[0]["geometry"]["location"];
-                            var mainLatitude = location["lat"].ToString().Replace(",", ".");
-                            var mainLongitude = location["lng"].ToString().Replace(",", ".");
-
-                            if (city != null)
-                            {
-                                city.Coordinates = $"{mainLatitude};{mainLongitude}";
-                                Debug.WriteLine("Coordenadas!!", city.Coordinates);
-
-                                _context.SaveChanges();
-                            }
-                        }
-                    }
+                    await UpdateCoordenastesBD(city);
                 }
 
             }
@@ -276,8 +252,43 @@ namespace PROJETOESA.Services.FlightService
             return await _context.City.ToListAsync();
         }
 
-        private double HaversineDistance(double lat1, double lon1, City city)
+        private async Task<City> UpdateCoordenastesBD(City city)
         {
+            string geocodeUrl = $"https://maps.googleapis.com/maps/api/geocode/json?address={Uri.EscapeDataString(city.Name)}&key={_googleApiKey}";
+
+            using (HttpClient client = new HttpClient())
+            {
+                var response = await client.GetAsync(geocodeUrl);
+                var content = await response.Content.ReadAsStringAsync();
+                var json = JObject.Parse(content);
+
+                var results = json["results"] as JArray;
+                if (results != null && results.Count > 0)
+                {
+                    var location = results[0]["geometry"]["location"];
+                    var mainLatitude = location["lat"].ToString().Replace(",", ".");
+                    var mainLongitude = location["lng"].ToString().Replace(",", ".");
+
+                    if (city != null)
+                    {
+                        city.Coordinates = $"{mainLatitude};{mainLongitude}";
+                        Debug.WriteLine("Coordenadas!!", city.Coordinates);
+
+                        _context.SaveChanges();
+                    }
+                }
+            }
+
+            return city!;
+        }
+
+        private async Task<double> HaversineDistance(double lat1, double lon1, City city)
+        {
+            if (string.IsNullOrEmpty(city.Coordinates))
+            {
+                city = await UpdateCoordenastesBD(city);
+            }
+
             var coordinates = city.Coordinates.Split(';');
             double lat2;
             double lon2;

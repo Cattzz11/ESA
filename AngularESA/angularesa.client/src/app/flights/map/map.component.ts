@@ -191,6 +191,10 @@ export class MapComponent implements OnInit, AfterViewInit {
           }
         });
       } else {
+        console.log("AQUi");
+        console.log(originAddress);
+        console.log(destinationAddress);
+
         this.flights.getTrips(originAddress, destinationAddress).subscribe({
           next: (response) => {
             this.tripList = response;

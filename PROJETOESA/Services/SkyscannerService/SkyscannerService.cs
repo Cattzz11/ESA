@@ -187,6 +187,14 @@ namespace PROJETOESA.Services.SkyscannerService
 
             HttpResponseMessage response = await _httpClient.GetAsync($"/flights/detail?token={token}&itineraryId={itineraryId}");
 
+            if (!response.IsSuccessStatusCode)
+            {
+                var errorContent = await response.Content.ReadAsStringAsync();
+                Debug.WriteLine($"Erro ao buscar detalhes do voo: {response.StatusCode}. Detalhes: {errorContent}");
+
+                return null;
+            }
+
             response.EnsureSuccessStatusCode();
 
             var content = await response.Content.ReadAsStringAsync();
