@@ -1,16 +1,16 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using PROJETOESA.Models;
-using PROJETOESA.Services;
-using System.Diagnostics;
+using PROJETOESA.Models.ViewModels;
+using PROJETOESA.Services.DataService;
 
 namespace PROJETOESA.Controllers
 {
     [ApiController]
     public class DataController : Controller
     {
-        private readonly DataService _dataService;
+        private readonly IDataService _dataService;
 
-        public DataController(DataService dataService)
+        public DataController(IDataService dataService)
         {
             _dataService = dataService;
         }
@@ -19,7 +19,7 @@ namespace PROJETOESA.Controllers
         [Route("api/data/flight-by-user")]
         public async Task<IActionResult> getFlightsByUser([FromQuery] string userId)
         {
-            List<TripDto> result = await _dataService.GetFlightsByUserAsync(userId);
+            List<TripViewModel> result = await _dataService.GetFlightsByUserAsync(userId);
 
             return Ok(result);
         }
@@ -28,7 +28,7 @@ namespace PROJETOESA.Controllers
         [Route("api/data/all-cities-and-countries")]
         public async Task<IActionResult> getAllCities()
         {
-            List<CityDto> result = await _dataService.GetAllCitiesAsync();
+            List<CityViewModel> result = await _dataService.GetAllCitiesAsync();
 
             return Ok(result);
         }

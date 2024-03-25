@@ -1,44 +1,54 @@
-<header>
-  <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-006994 box-shadow ">
-    <div class="container-fluid">
-      <a class="navbar-brand d-flex align-items-center"><img id="logotipo" src="/assets/Images/logo.png" /></a>
-      <button class="navbar-toggler"
-              type="button"
-              data-toggle="collapse"
-              data-target=".navbar-collapse"
-              aria-label="Toggle navigation"
-              [attr.aria-expanded]="isExpanded"
-              (click)="toggle()">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="navbar-collapse collapse bg-006994 d-sm-inline-flex justify-content-between"
-           [ngClass]="{ show: isExpanded }">
-        <ul class="navbar-nav flex-grow-1">
-          <li class="nav-item"
-              [routerLinkActive]="['link-active']"
-              [routerLinkActiveOptions]="{ exact: true }">
-            <a class="nav-link text-white" [routerLink]="['/']">Home</a>
-          </li>
-          <li class="nav-item" [routerLinkActive]="['link-active']">
-            <a class="nav-link text-white" [routerLink]="['/about']">About</a>
-          </li>
-          <li class="nav-item" [routerLinkActive]="['link-active']" *ngIf="!isUserSignedIn && !isSignedIn">
-            <a class="nav-link text-white" [routerLink]="['/register']">Registar</a>
-          </li>
-          <li class="nav-item" [routerLinkActive]="['link-active']" *ngIf="!isUserSignedIn && !isSignedIn">
-            <a class="nav-link text-white" [routerLink]='["/sigin"]'>Login</a>
-          </li>
-          <li class="nav-item" [routerLinkActive]="['link-active']" *ngIf="isUserSignedIn || isSignedIn">
-            <button class="nav-link text-white" [routerLink]='["/premium-profile-page"]'> Perfil </button>
-          </li>
-          <li class="nav-item" [routerLinkActive]="['link-active']" *ngIf="isUserSignedIn && !isSignedIn">
-            <button class="nav-link text-white" [routerLink]='["/logout"]'>Logout</button>
-          </li>
-          <li class="nav-item" [routerLinkActive]="['link-active']" *ngIf="!isUserSignedIn && isSignedIn">
-            <button class="nav-link text-white" (click)="signOut()" >Logout</button>
-          </li>
-        </ul>
-      </div>
+<nav class="navbarx">
+    <div class="logo">
+        <a class="navbar-brand" [routerLinkActive]="['link-active']" [routerLink]="['/']"><img id="logotipo" src="/assets/Images/logo.png" /></a>
     </div>
-  </nav>
-</header>
+    <div class="navbar-collapse">
+        <ul class="navbar-nav">
+            <li class="nav-item" [routerLinkActive]="['link-active']" [routerLinkActiveOptions]="{ exact: true }">
+                <a class="nav-link text-white" [routerLink]="['/']">
+                  <img src="../../assets/Images/home.png" alt="home icon">
+                </a>
+            </li>
+            <li class="nav-item" [routerLinkActive]="['link-active']">
+                <a class="nav-link" [routerLink]="['/about']">
+                  <img src="../../assets/Images/information-button.png" alt="about icon">
+                </a>
+            </li>
+            <li class="nav-item" [routerLinkActive]="['link-active']">
+                <a class="nav-link" [routerLink]="['/search-flights']">
+                  <img src="../../assets/Images/AERO21.png" alt="search-flights icon">
+                </a>
+            </li>
+            <li class="nav-item" [routerLinkActive]="['link-active']">
+                <a class="nav-link" [routerLink]="['/map']">
+                  <img src="../../assets/Images/location.png" alt="map icon">
+                </a>
+            </li>
+            <li class="nav-item" [routerLinkActive]="['link-active']" *ngIf="!isUserSignedIn && !isSignedIn">
+                <a class="nav-link" [routerLink]="['/register']">
+                  <img src="../../assets/Images/add-user.png" alt="register icon">
+                </a>
+            </li>
+            <li class="nav-item" [routerLinkActive]="['link-active']" *ngIf="!isUserSignedIn && !isSignedIn">
+                <a class="nav-link" [routerLink]='["/sigin"]'>
+                  <img src="../../assets/Images/enter.png" alt="login icon">
+                </a>
+            </li>
+            <li class="nav-item" [routerLinkActive]="['link-active']" *ngIf="isUserSignedIn || isSignedIn">
+                <a class="nav-link" [routerLink]='["/premium-profile-page"]'>
+                  <img src="../../assets/Images/user (1).png" alt="profile icon">
+                </a>
+            </li>
+            <li class="nav-item" [routerLinkActive]="['link-active']" *ngIf="isUserSignedIn && !isSignedIn">
+                <a class="nav-link" [routerLink]='["/logout"]'>
+                  <img src="../../assets/Images/logout.png" alt="logout icon">
+                </a>
+            </li>
+            <li class="nav-item" [routerLinkActive]="['link-active']" *ngIf="!isUserSignedIn && isSignedIn">
+                <a class="nav-link" (click)="signOut()">
+                  <img src="../../assets/Images/logout.png" alt="logout icon">
+                </a>
+            </li>
+        </ul>
+    </div>
+</nav>

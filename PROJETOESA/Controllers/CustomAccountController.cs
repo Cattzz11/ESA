@@ -4,13 +4,12 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using PROJETOESA.Models;
 using Microsoft.AspNetCore.Identity.UI.Services;
-using PROJETOESA.Services;
 using Microsoft.EntityFrameworkCore;
 using PROJETOESA.Data;
 using System.Diagnostics;
-using Microsoft.DotNet.Scaffolding.Shared.Messaging;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Microsoft.IdentityModel.Tokens;
+using PROJETOESA.Services.CodeGeneratorService;
+using PROJETOESA.Services.EmailService;
+using PROJETOESA.Services;
 
 namespace PROJETOESA.Controllers
 {
@@ -19,13 +18,13 @@ namespace PROJETOESA.Controllers
     public class CustomAccountController : ControllerBase
     {
         private readonly UserManager<ApplicationUser> _userManager;
-        private readonly IEmailSender _emailSender;
+        private readonly IEmailService _emailSender;
         private readonly ILogger<CustomAccountController> _logger;
-        private readonly CodeGeneratorService _codeGeneratorService;
+        private readonly ICodeGeneratorService _codeGeneratorService;
         private readonly AeroHelperContext _context;
 
 
-        public CustomAccountController(UserManager<ApplicationUser> userManager, IEmailSender emailSender, ILogger<CustomAccountController> logger, CodeGeneratorService codeGeneratorService, AeroHelperContext context)
+        public CustomAccountController(UserManager<ApplicationUser> userManager, IEmailService emailSender, ILogger<CustomAccountController> logger, ICodeGeneratorService codeGeneratorService, AeroHelperContext context)
         {
             _userManager = userManager;
             _emailSender = emailSender;
@@ -43,11 +42,46 @@ namespace PROJETOESA.Controllers
 
             if (result.Succeeded)
             {
+                user.registerTime = DateTime.Now;
+                await _context.SaveChangesAsync();
                 return Ok();
             }
 
             return BadRequest(result.Errors);
         }
+
+        [HttpPost]
+        [Route("api/login-time")]
+        [Authorize]
+        public async Task<IActionResult> LoginTime([FromBody] CustomLoginModel model)
+        {
+            try{
+                var user = await _userManager.FindByEmailAsync(model.Email);
+                if (user != null)
+                {
+                    // O usuário foi autenticado com sucesso, agora registre o horário de login
+                    var loginRecord = new LoginModel
+                    {
+                        UserId = user.Id,
+                        LoginTime = DateTime.Now // Ou utilize DateTime.Now, dependendo de como deseja registrar o horário
+                    };
+                    _context.Logins.Add(loginRecord);
+                    await _context.SaveChangesAsync();
+
+                    // Aqui você pode gerar e retornar um token JWT ou outra forma de confirmação de login, se necessário
+                    return Ok(new { message = "Login-time successful" });
+                }
+                return Unauthorized(new { message = "Login-time failed" });
+            }
+            catch (Exception ex)
+            {
+
+            }
+
+            return Ok();
+        }
+
+
 
         [HttpPost("api/logout")]
         [Authorize]
@@ -80,6 +114,7 @@ namespace PROJETOESA.Controllers
         }
 
         [HttpGet("api/userInfo")]
+        [Authorize]
         public async Task<IActionResult> GetUserInfo()
         {
             var user = await _userManager.GetUserAsync(User);
@@ -91,6 +126,7 @@ namespace PROJETOESA.Controllers
 
         [HttpPost]
         [Route("api/send-recovery-code")]
+        [Authorize]
         public async Task<IActionResult> SendRecoveryCode([FromBody] CustomRecoverModel model)
         {
             var user = await _userManager.FindByEmailAsync(model.Email);
@@ -100,20 +136,21 @@ namespace PROJETOESA.Controllers
                 var confirmationCode = this._codeGeneratorService.GenerateCode();
 
                 // Construção da mensagem para enviar
-                var htmlContent = $"<p>Seu código de confirmação é: {confirmationCode}</p>";
+                var htmlContent = $"<p>Seu código de recuperação é: {confirmationCode}</p>";
 
                 // Envio do e-mail
-                await _emailSender.SendEmailAsync(model.Email, "Confirmação da Conta", htmlContent);
+                await _emailSender.SendEmailAsync(model.Email, "Recuperação da Conta", htmlContent);
 
                 // Armazenar o código de recuperação na base de dados
                 await StoreRecoveryCodeAsync(model, confirmationCode);
             }
 
-            return Ok(new { Message = "Se o registo for bem sucedido, o código de confirmação será enviado." });
+            return Ok(new { Message = "Se o e-mail existir, um e-mail de recuperação será enviado." });
         }
 
         [HttpPost]
         [Route("api/send-confirmation-code")]
+        [Authorize]
         public async Task<IActionResult> SendConfirmationCode([FromBody] CustomRecoverModel model)
         {
             var user = await _userManager.FindByEmailAsync(model.Email);
@@ -183,6 +220,7 @@ namespace PROJETOESA.Controllers
 
         [HttpPost]
         [Route("api/validate-recovery-code")]
+        [Authorize]
         public async Task<IActionResult> ValidateRecoveryCodeAsync(string userEmail, string code)
         {
             var recoveryCode = await _context.PasswordRecoveryCodes
@@ -212,6 +250,7 @@ namespace PROJETOESA.Controllers
 
         [HttpPost]
         [Route("api/validate-confirmation-code")]
+        [Authorize]
         public async Task<IActionResult> ValidateConfirmationCodeAsync(string userEmail, string code)
         {
             var confirmationCode = await _context.ConfirmationCodes
@@ -258,6 +297,7 @@ namespace PROJETOESA.Controllers
 
         //Get:
         [HttpPut("api/edit-profile")]
+        [Authorize]
         public async Task<IActionResult> UpdateUserInfo([FromBody] EditUserModel model)
         {
             Debug.WriteLine("SERVIDOR");
@@ -290,13 +330,23 @@ namespace PROJETOESA.Controllers
         }
 
         [HttpGet("api/users")]
+        [Authorize]
         public async Task<IActionResult> GetUsers()
         {
-            var users = await _context.Users.ToListAsync();
-            return Ok(users);
+            var user = await _userManager.FindByEmailAsync(User.Identity.Name);
+
+            if (user.Role == TipoConta.Administrador)
+            {
+                var users = await _context.Users.ToListAsync();
+                return Ok(users);
+            }
+
+            return NotFound();
+            
         }
 
         [HttpDelete("api/users/{email}")]
+        [Authorize]
         public async Task<IActionResult> DeleteUser(string email)
         {
             var user = await _userManager.FindByEmailAsync(email);
@@ -304,6 +354,13 @@ namespace PROJETOESA.Controllers
             if (user == null)
             {
                 return NotFound(); // User not found
+            }
+
+            var user2 = await _userManager.FindByEmailAsync(User.Identity.Name);
+
+            if (user2.Email != email)
+            {
+                return NotFound();
             }
 
             var result = await _userManager.DeleteAsync(user);
@@ -335,6 +392,7 @@ namespace PROJETOESA.Controllers
 
         [HttpPost]
         [Route("api/update-confirmed-email")]
+        [Authorize]
         public async Task<IActionResult> UpdateConfirmedEmail([FromBody] UpdateConfirmedEmailModel model)
         {
             // Find the user in the database based on the email
@@ -391,6 +449,13 @@ namespace PROJETOESA.Controllers
         public string Email { get; set; }
         public string Password { get; set; }
 
+        //public string RegisterTime { get; set; }
+
+    }
+
+    public class CustomLoginModel
+    {
+        public string Email { get; set; }
     }
 
     public class CustomRecoverModel

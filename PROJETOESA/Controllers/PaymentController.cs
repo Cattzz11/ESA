@@ -2,46 +2,33 @@
 using PROJETOESA.Data;
 using PROJETOESA.Models;
 using PROJETOESA.Services;
-using System.Text.Json;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
-using System.Diagnostics;
-using Microsoft.DotNet.Scaffolding.Shared.Messaging;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Microsoft.IdentityModel.Tokens;
 using Microsoft.Extensions.Localization;
-using PROJETOESA.Services.EasyPay;
-using System.Globalization;
-using Azure.Core;
-using System.Net.Mail;
 using Microsoft.Extensions.Options;
+using System.Diagnostics;
+using Square.Models;
+using PROJETOESA.Models.SquareModels;
+using Castle.Core.Smtp;
 
 namespace PROJETOESA.Controllers
 {
+    [ApiController]
     public class PaymentController : Controller
     {
         private readonly int _pageSize = 5;
         private readonly UserManager<ApplicationUser> _userManager;
-        private readonly IStringLocalizer<PaymentController> _stringLocalizer;
-        private readonly IEmailSender _emailSender;
-        private readonly EmailSettings _emailSettings;
-        private IEasyPayService _easyPayService;
+        //private IEasyPayService _easyPayService;
 
 
         private readonly SquareService _squareService;
         private readonly AeroHelperContext _context;
         public PaymentController(SquareService squareService, AeroHelperContext context, UserManager<ApplicationUser> userManager,
-            IStringLocalizer<PaymentController> stringLocalizer, IEmailSender emailSender,
-            IEasyPayService easyPayService, IOptions<EmailSender> emailSettings) 
+            IStringLocalizer<PaymentController> stringLocalizer)
         {
             _userManager = userManager;
-            _stringLocalizer = stringLocalizer;
-            _emailSender = emailSender;
-            _easyPayService = easyPayService;
-            //_emailSettings = emailSettings.Value;
-
 
             _context = context;
             _squareService = squareService;
@@ -50,10 +37,10 @@ namespace PROJETOESA.Controllers
 
 
         [HttpPost]
-        [Route("api/trip-details/purchase-ticket")]
-        //[Authorize]
+        [Route("api/payment/purchase-ticket")]
         public async Task<IActionResult> PurchaseTicket([FromBody] PaymentModel payment)
         {
+
             try
             {
                 // Check if required properties are present
@@ -61,6 +48,8 @@ namespace PROJETOESA.Controllers
                 {
                     return BadRequest(new { Message = "Invalid request format" });
                 }
+
+                Task<ApplicationUser?> user = _userManager.FindByEmailAsync(payment.Email);
 
                 PaymentModel paymentModel = new PaymentModel
                 {
@@ -74,12 +63,12 @@ namespace PROJETOESA.Controllers
                     ShippingAddress = payment.ShippingAddress,
                 };
 
-                _squareService.PayAsync(paymentModel);
+                var res = await _squareService.PayAsync(paymentModel, _userManager);
 
                 await _context.SaveChangesAsync();
 
                 // Return a success response
-                return Ok(new { Message = "Ticket purchased successfully" });
+                return Ok(res);
 
 
             }
@@ -90,163 +79,52 @@ namespace PROJETOESA.Controllers
             }
         }
 
-        [HttpGet("history")]
-        [Authorize(Roles = "ClienteNormal, ClientePremium")]
-        public async Task<IActionResult> GetPaymentsHistory(int? page, string order)
+        [HttpGet("api/payment/get-cards/{customerEmail}")]
+        public async Task<ActionResult<IEnumerable<SquareCard>>> GetCustomerCards(string customerEmail)
         {
-            if (User.Identity != null && User.Identity.IsAuthenticated)
-            {
-                var user = await _userManager.FindByEmailAsync(User.Identity.Name);
+            var cards = await _squareService.GetSquareCardAsync(customerEmail, _userManager);
 
-                if (user.Role.Equals(TipoConta.ClienteNormal) || user.Role.Equals(TipoConta.ClientePremium))
-                {
-                    var userPayments = await _context.Payment.ToListAsync();
-
-                    int pageNumber = (page ?? 1);
-                    var totalPages = Math.Ceiling((double)userPayments.Count() / _pageSize);
-
-                    switch (order)
-                    {
-                        case "PAsc":
-                            userPayments = userPayments.OrderBy(b => b.Price).ToList();
-                            break;
-                        case "PDesc":
-                            userPayments = userPayments.OrderByDescending(b => b.Price).ToList();
-                            break;
-                        case "SAsc":
-                            userPayments = userPayments.OrderBy(b => b.paymentStatus).ToList();
-                            break;
-                        case "SDesc":
-                            userPayments = userPayments.OrderByDescending(b => b.paymentStatus).ToList();
-                            break;
-                        default:
-                            userPayments = userPayments.OrderBy(b => b.paymentStatus).ToList();
-                            break;
-                    }
-
-                    var paginatedData = userPayments.Skip((pageNumber - 1) * _pageSize).Take(_pageSize).ToList();
-
-                    return Ok(paginatedData);
-                }
-            }
-
-            return Unauthorized(new { error = "Unauthorized" });
+            return Ok(cards);
         }
 
-        [HttpGet("details/{id}")]
-        [Authorize]
-        public async Task<IActionResult> GetPaymentDetails(Guid id)
+        [HttpPost]
+        [Route("api/payment/pay-now")]
+        public async Task<IActionResult> PayNow([FromBody] CustomerCardID custCard)
         {
-            if (User.Identity != null && User.Identity.IsAuthenticated)
-            {
-                var payments = await _context.Payment
-                    .ToListAsync();
+            var res = await _squareService.CompleteTicketPayment(custCard.customerCardID);
 
-                var payment = payments.Find(p => p.PaymentId == id);
-
-                if (payment == null)
-                {
-                    return NotFound(new { error = "Payment not found" });
-                }
-            }
-
-            return Unauthorized(new { error = "Unauthorized" });
+            return Ok(res);
         }
 
-        [HttpPost("/generateTemporaryPayment")]
-        public async Task<IActionResult> GenerateTemporaryPayment(double paymentValue, string paymentValueString)
+        [HttpPost]
+        [Route("api/payment/premium-subscription")]
+        public async Task<IActionResult> PayNowPremium([FromBody] CustomerCardID custCard)
         {
-            var user = await _userManager.FindByEmailAsync(User.Identity.Name);
-            bool isPaymentValueValid = false;
-            if (paymentValueString != null)
-            {
-                isPaymentValueValid = double.TryParse(paymentValueString.Replace(',', '.').Replace("-", ""), NumberStyles.Any, CultureInfo.InvariantCulture, out _);
-            }
+            var res = await _squareService.SubscribePremium(custCard.customerCardID);
 
-            if (!isPaymentValueValid)
-            {
-                return BadRequest("Invalid payment value");
-            }
-
-            if (paymentValue == 0.0)
-            {
-                Payment zeroPayment = new Payment
-                {
-                    PaymentId = Guid.NewGuid(),
-                    Price = paymentValue,
-                    Entity = 00000,
-                    Reference = 000000000,
-                    LimitDate = DateTime.Now,
-                    paymentStatus = PaymentStatus.Paid,
-                    PaymentMethod = "NA"
-                };
-
-                _context.Payment.Add(zeroPayment);
-            }
-            else
-            {
-                Payment tempPayment = new Payment
-                {
-                    PaymentId = Guid.NewGuid(),
-                    Price = paymentValue,
-                    Entity = null,
-                    Reference = null,
-                    LimitDate = DateTime.Now.AddDays(2.0),
-                    paymentStatus = PaymentStatus.WaitingApproval,
-                    PaymentMethod = null
-                };
-
-                _context.Payment.Add(tempPayment);
-                
-                await _emailSender.SendEmailAsync(user.Email, "Pagamento Temporário", "{_stringLocalizer[\"payments.tempPaymentDescription\"].Value}");
-            }
-            await _context.SaveChangesAsync();
-
-            return Ok();
+            return Ok(res);
         }
 
-        [HttpPost("/createPayment")]
-        public async Task<IActionResult> CreatePayment(Guid id, string method)
+        [HttpPost]
+        [Route("api/payment/cancel-subscription")]
+        public async Task<IActionResult> CancelPremiumNow([FromBody] CustomerCardID custCard)
         {
-            var user = await _userManager.FindByEmailAsync(User.Identity.Name);
-            Payment tempPayment = await _context.Payment.Where(p => p.PaymentId == id).FirstAsync();
+            var res = await _squareService.CancelSubscription(custCard.customerCardID);
 
-            DateTime dateLimit = DateTime.Now;
-
-            if (method.Equals("MB WAY"))
-            {
-                dateLimit = dateLimit.AddMinutes(5);
-                method = "mbw";
-            }
-            else
-            {
-                dateLimit = dateLimit.AddDays(2);
-                method = "mb";
-            }
-
-            Payment defPayment = await _easyPayService.CreateSinglePayment(dateLimit, user, tempPayment.Price, method);
-
-            if (defPayment.PaymentId == Guid.Empty)
-            {
-                return Ok("sucesso");
-            }
-
-            _context.Payment.Remove(tempPayment);
-            _context.Payment.Add(defPayment);
-
-            if (method.Equals("mb"))
-            {
-                await _emailSender.SendEmailAsync(user.Email, "Pagamento Criado", "{_stringLocalizer[\"payments.emailEntityText\"].Value}: " +
-                    "{defPayment.Entity}{_stringLocalizer[\"payments.emailReferenceText\"].Value}: {defPayment.Reference}" +
-                    "{_stringLocalizer[\"payments.emailPriceText\"].Value}: {defPayment.Price}€" +
-                    "{_stringLocalizer[\"payments.emailLimitDateText\"].Value}: {defPayment.LimitDate}");
-            }
-
-            await _context.SaveChangesAsync();
-
-            return Ok();
+            return Ok(res);
         }
 
-        
+        [HttpGet("api/payment/get-user-payments/{userEmail}")]
+        public async Task<ActionResult<IEnumerable<PaymentHistoryModel>>> GetCustomerPayments(string userEmail)
+        {
+            List<PaymentHistoryModel> model = await _squareService.GetSquareCustomerPayments(userEmail, _userManager);
+
+            return Ok(model);
+        }
+    }
+
+    public class CustomerCardID
+    {
+        public string customerCardID { get; set; }
     }
 }

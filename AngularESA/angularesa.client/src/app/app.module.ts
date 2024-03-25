@@ -21,18 +21,23 @@ import { PhotoUploadService } from './services/photoUploadService.service';
 import { EditProfileComponent } from './users/edit-profile/edit-profile.component';
 import { PremiumComponent } from './users/premium/premium.component';
 import { SubscriptionPageComponent } from './users/subscription-page/subscription-page.component';
-import { TripDetailsComponent } from './flights/trip-details/trip-details.component';
 import { FlightDataComponent } from './flights/flight-data/flight-data.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
-import { MatCalendarCellClassFunction, MatDatepickerModule } from '@angular/material/datepicker';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { provideNativeDateAdapter } from '@angular/material/core';
 import { MAT_DATE_LOCALE, MAT_DATE_FORMATS } from '@angular/material/core';
-import { DateAdapter } from '@angular/material/core';
 import { DatePipe } from '@angular/common';
 import { PaymentComponentComponent } from './users/payment-component/payment-component.component';
-import { ThreePricesComponent } from './flights/three-prices/three-prices.component';
+import { PaymentComponent } from './payments/payment.component';
+import { MatDialogModule } from '@angular/material/dialog'
+import { PopUpPaymentComponent } from './flights/flight-data/PopUpPayment/PopUpPayment.component'
+import { PopUpPremiumComponent } from './users/premium/PopUpPremium/PopUpPremium.component'
+import { PopUpCancelPremiumComponent } from './users/premium/PopUpCancelPremium/PopUpCancel.component'
+import { StatisticsPageComponent } from './users/statistics-page/statistics-page.component';
+import { GoogleMapsModule } from '@angular/google-maps';
+import { MapComponent } from './flights/map/map.component'
 
 export const MY_FORMATS = {
   parse: {
@@ -45,7 +50,6 @@ export const MY_FORMATS = {
     monthYearA11yLabel: 'MMMM YYYY',
   },
 };
-
 
 @NgModule({
   declarations: [
@@ -62,10 +66,14 @@ export const MY_FORMATS = {
     EditProfileComponent,
     PremiumComponent,
     SubscriptionPageComponent,
-    TripDetailsComponent,
     FlightDataComponent,
     PaymentComponentComponent,
-    ThreePricesComponent,
+    PaymentComponent,
+    PopUpPaymentComponent,
+    PopUpPremiumComponent,
+    PopUpCancelPremiumComponent,
+    StatisticsPageComponent,
+    MapComponent,
   ],
   imports: [
     BrowserModule,
@@ -76,7 +84,9 @@ export const MY_FORMATS = {
     ApiAuthorizationModule,
     MatFormFieldModule,
     MatInputModule,
-    MatDatepickerModule
+    MatDatepickerModule,
+    MatDialogModule,
+    GoogleMapsModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },

@@ -11,6 +11,8 @@
         public bool isCancellationAllowed { get; set; }
         public bool isPartiallyRefundable { get; set; }
         public double Score { get; set; }
+        public string? SessionId { get; set; }
+        public string? Token { get; set; }
         public virtual ICollection<Flight> Flights { get; set; }
     }
 }

@@ -7,12 +7,13 @@ import { FlightData } from '../../Models/flight-data';
 import { Trip } from '../../Models/Trip';
 import { Router } from '@angular/router';
 import { ViewEncapsulation } from '@angular/core';
-import { MatCalendarCellClassFunction, MatDatepickerInputEvent, MatDatepickerModule } from '@angular/material/datepicker';
-import { MatInputModule } from '@angular/material/input';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { provideNativeDateAdapter } from '@angular/material/core';
-import { DateAdapter } from '@angular/material/core';
+import { MatCalendarCellClassFunction, MatDatepickerInputEvent } from '@angular/material/datepicker';
 import { DatePipe } from '@angular/common';
+import { AuthorizeService } from '../../../api-authorization/authorize.service';
+import { User } from '../../Models/users';
+import { TripDetails } from '../../Models/TripDetails';
+import { PriceOptions } from '../../Models/PriceOptions';
+import { SearchStateService } from '../../services/SearchStateService';
 
 @Component({
   selector: 'app-search-flights',
@@ -21,10 +22,13 @@ import { DatePipe } from '@angular/common';
   encapsulation: ViewEncapsulation.None,
 })
 export class SearchFlightsComponent implements OnInit {
+  user: User | null = null;
+
   cities: City[] = [];
   calendar: Calendar[] | undefined;
   filteredCities: City[] = [];
   flights: Trip[] = [];
+  flightsPremium: TripDetails[] = [];
 
   selectedCityFrom = '';
   selectedCityTo = '';
@@ -47,10 +51,46 @@ export class SearchFlightsComponent implements OnInit {
     private router: Router,
     private cdr: ChangeDetectorRef,
     private datePipe: DatePipe,
+    private auth: AuthorizeService,
+    private searchStateService: SearchStateService 
   )
   {}
 
   ngOnInit(): void {
+    const savedState = this.searchStateService.getSearchState();
+    if (savedState) {
+      this.selectedCityFrom = savedState.selectedCityFrom;
+      this.selectedCityTo = savedState.selectedCityTo;
+      this.departureDate = savedState.departureDate;
+      this.arrivalDate = savedState.arrivalDate;
+      this.fromValid = savedState.fromValid;
+      this.toValid = savedState.toValid;
+      this.canSearch = savedState.canSearch;
+      this.departureEnabled = savedState.departureEnabled;
+      this.arrivalEnabled = savedState.arrivalEnabled;
+      this.cities = savedState.cities;
+      this.calendar = savedState.calendar;
+      this.flights = savedState.flights;
+      this.flightsPremium = savedState.flightsPremium;
+
+      this.searchStateService.clearSearchState();
+    }
+
+    const storedUser = sessionStorage.getItem('user');
+    if (storedUser) {
+      this.user = JSON.parse(storedUser);
+    }
+    else {
+      this.auth.getUserInfo().subscribe({
+        next: (userInfo: User) => {
+          this.user = userInfo;
+        },
+        error: (error) => {
+          console.error('Error fetching user info', error);
+        }
+      });
+    }
+
     this.dataService.getAllCities().subscribe({
       next: (response) => {
         this.cities = response;
@@ -59,6 +99,27 @@ export class SearchFlightsComponent implements OnInit {
         console.error('Error fetching flights:', error);
       }
     });
+  }
+
+  saveStateAndNavigate(trip: Trip | TripDetails) {
+    const currentState = {
+      selectedCityFrom: this.selectedCityFrom,
+      selectedCityTo: this.selectedCityTo,
+      departureDate: this.departureDate,
+      arrivalDate: this.arrivalDate,
+      fromValid: this.fromValid,
+      toValid: this.toValid,
+      canSearch: this.canSearch,
+      departureEnabled: this.departureEnabled,
+      arrivalEnabled: this.arrivalEnabled,
+      cities: this.cities,
+      calendar: this.calendar,
+      flights: this.flights,
+      flightsPremium: this.flightsPremium
+    };
+
+    this.searchStateService.saveSearchState(currentState);
+    this.router.navigate(['/flight-data'], { state: { data: trip } });
   }
 
   loadCalendar(from: string, to: string) {
@@ -89,16 +150,49 @@ export class SearchFlightsComponent implements OnInit {
       returnDate: this.arrivalDate
     }
 
-    this.skyscannerService.getRoundtripFlights(data).subscribe({
-      next: (response) => {
-        this.flights = response;
-        this.isLoading = false;
-      },
-      error: (error) => {
-        this.isLoading = false;
-        console.error('Error fetching flights:', error);
-      }
-    });
+    if (this.user && this.user.role === 1) {
+      this.skyscannerService.getRoundtripFlightsPremium(data).subscribe({
+        next: (response) => {
+          this.flightsPremium = response;
+          this.isLoading = false;
+        },
+        error: (error) => {
+          this.isLoading = false;
+          console.error('Error fetching flights:', error);
+        }
+      });
+    } else {
+      this.skyscannerService.getRoundtripFlights(data).subscribe({
+        next: (response) => {
+          this.flights = response;
+          this.isLoading = false;
+        },
+        error: (error) => {
+          this.isLoading = false;
+          console.error('Error fetching flights:', error);
+        }
+      });
+    }
+    
+  }
+
+  calculatePrices(inputField: 'max' | 'med' | 'min', options: PriceOptions[]) {
+    const prices = options.map(option => option.totalPrice);
+
+    switch (inputField) {
+      case 'max':
+        return Math.max(...prices);
+      case 'med':
+        const averagePrice = prices.reduce((a, b) => a + b, 0) / prices.length;
+
+        const closestToAveragePrice = prices.reduce((prev, curr) => {
+          return (Math.abs(curr - averagePrice) < Math.abs(prev - averagePrice) ? curr : prev);
+        });
+
+        return closestToAveragePrice;
+      case 'min':
+        return Math.min(...prices);;
+    }
   }
 
   dateClass: MatCalendarCellClassFunction<Date> = (cellDate, view) => {
@@ -200,24 +294,20 @@ export class SearchFlightsComponent implements OnInit {
     if (inputField === 'from') {
       if (!this.interactingWithDropdownFrom) {
         this.showDropdownFrom = false;
+        this.fromValid = this.isCityValid(this.selectedCityFrom);
       }
     } else {
       if (!this.interactingWithDropdownFrom) {
         this.showDropdownTo = false;
+        this.toValid = this.isCityValid(this.selectedCityTo);
       }
     }
-  }
 
-  printData() {
-    console.log(this.selectedCityFrom);
-    console.log(this.selectedCityTo);
-    console.log(this.departureDate);
-    console.log(this.arrivalDate);
-    console.log(this.calendar?.length);
-  }
+    if (this.fromValid && this.toValid) {
+      this.loadCalendar(this.selectedCityFrom, this.selectedCityTo);
+    }
 
-  selectTrip(trip: Trip) {
-    this.router.navigate(['/flight-data'], { state: { data: trip } });
+    this.validateForm();
   }
 
   onDepartureDateChange(event: MatDatepickerInputEvent<Date>) {

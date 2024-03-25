@@ -1,46 +1,41 @@
 <link href='https://fonts.googleapis.com/css?family=Roboto Slab' rel='stylesheet'>
-<!--<script src="https://accounts.google.com/gsi/client" async></script>-->
-<div class="signinitial d-flex flex-column align-items-center justify-content-center" *ngIf="!signedIn else signedInAlready" >
-  <div>Por favor registe-se para continuar. Novo Utilizador? <a href="new">Registe-se aqui.</a>.</div>
-  <div class="passwordforgot m-3">
-    <p>Esqueceu-se da password? <a routerLink="/recover-password">Recupere-a aqui</a>.</p>
-  </div>
-  <div class="login-wrapper">
+<div class="signinitial" *ngIf="!signedIn else signedInAlready">
     <div class="login-box">
-      <div class="login-form">
-        <h2 class="m-4">Login</h2>
-        <form class="form w-60" [formGroup]="loginForm" (submit)="submitForm()">
-          <div class="row m-3">
-            <label for="name">Email<span style="color:red; padding-left:5px;">*</span></label>
-            <input class="col form-field" name="email" formControlName="email" />
-          </div>
-          <div class="row m-3">
-            <label for="password">Password<span style="color:red; padding-left:5px;">*</span></label>
-            <input class="col form-field" type="password" name="password" formControlName="password" autocomplete="on" />
-          </div>
-          <div class="btn-separator"></div>
-          <div id="login-googleBTN" *ngIf="!isLoggedIn"></div>
-          <button class="login-outlook">Login por Outlook</button>
-          <div class="row m-3" *ngIf="authFailed">
-            <label style="color: red">Invalid credentials</label>
-          </div>
-          <div class="row m-3">
-            <button class="button-signin col btn btn-primary text-white" [disabled]="!loginForm.valid" type="submit">Sign In</button>
-          </div>
-        </form>
-      </div>
-      <div class="login-branding" style="background-image: url('.. /../assets/Images/background.png');">
-        <img src="../../assets/Images/logo.png" alt="Logo" class="logo" />
-      </div>
+        <div class="login-form" *ngIf="!signedIn else signedInAlready">
+            <div class="titulo">
+                <h2>Login</h2>
+            </div>
+            <form [formGroup]="loginForm" (submit)="submitForm()">
+                <input type="text" id="email" placeholder="E-Mail" formControlName="email" />
+                <input type="password" id="password" placeholder="Password" formControlName="password" />
+                <div *ngIf="authFailed" style="color: red">
+                    Invalid credentials
+                </div>
+                <button type="submit" [disabled]="!loginForm.valid">Sign in</button>
+
+                <div class="separator"></div>
+
+                <div class="additional-options">
+                    <a routerLink="/recover-password">Perdeu a password?</a>
+                    <a routerLink="/register">Criar nova conta</a>
+                </div>
+
+                <div class="btn-separator"></div>
+                <div id="login-googleBTN" *ngIf="!isLoggedIn"></div>
+                <!-- <button class="login-outlook">Login por Outlook</button> -->
+            </form>
+        </div>
+        <div class="login-branding" style="background-image: url('../assets/Images/background.png');">
+            <img src="../assets/Images/logo.png" alt="Logo" class="logo" />
+        </div>
     </div>
-  </div>
 </div>
 
 <ng-template #signedInAlready>
-  <div class="login-form">
-    <h2>Login</h2>
-    <div>
-      You are already signed in!
+    <div class="login-form">
+        <h2>Login</h2>
+        <div>
+            You are already signed in!
+        </div>
     </div>
-  </div>
 </ng-template>

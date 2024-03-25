@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PROJETOESA", "PROJETOESA.cs
 EndProject
 Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "angularesa.client", "..\AngularESA\angularesa.client\angularesa.client.esproj", "{FFDC8847-A03D-4B34-BF6B-037A713978B8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AeroHelperTest", "..\AeroHelperTest\AeroHelperTest.csproj", "{D13BD829-2B92-4950-9F4C-13F24F1C7F46}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,6 +25,10 @@ Global
 		{FFDC8847-A03D-4B34-BF6B-037A713978B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FFDC8847-A03D-4B34-BF6B-037A713978B8}.Release|Any CPU.Build.0 = Release|Any CPU
 		{FFDC8847-A03D-4B34-BF6B-037A713978B8}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{D13BD829-2B92-4950-9F4C-13F24F1C7F46}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D13BD829-2B92-4950-9F4C-13F24F1C7F46}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D13BD829-2B92-4950-9F4C-13F24F1C7F46}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D13BD829-2B92-4950-9F4C-13F24F1C7F46}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

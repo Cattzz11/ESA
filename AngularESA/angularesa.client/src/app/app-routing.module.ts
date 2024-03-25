@@ -17,9 +17,11 @@ import { SuccessComponent } from '../api-authorization/success/success.component
 import { PremiumComponent } from './users/premium/premium.component';
 import { SubscriptionPageComponent } from './users/subscription-page/subscription-page.component';
 import { EditProfileComponent } from './users/edit-profile/edit-profile.component';
-import { TripDetailsComponent } from './flights/trip-details/trip-details.component';
 import { FlightDataComponent } from './flights/flight-data/flight-data.component';
 import { PaymentComponentComponent } from './users/payment-component/payment-component.component';
+import { PaymentComponent } from './payments/payment.component';
+import { StatisticsPageComponent } from './users/statistics-page/statistics-page.component';
+import { MapComponent } from './flights/map/map.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent, pathMatch: 'full' },
@@ -40,8 +42,10 @@ const routes: Routes = [
   { path: 'flight-data', component: FlightDataComponent },
   { path: 'filter-by-airline', component: FilterByAirlineComponent },
   { path: 'search-flights', component: SearchFlightsComponent },
-  { path: 'trip-details/:id', component: TripDetailsComponent },
   { path: 'payment-component', component: PaymentComponentComponent },
+  { path: 'payment', component: PaymentComponent },
+  {path: 'statistics-page', component: StatisticsPageComponent},
+  { path: 'map', component: MapComponent },
 ];
 
 @NgModule({

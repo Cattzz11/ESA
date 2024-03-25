@@ -1,37 +1,185 @@
-<!-- Container Principal -->
 <div *ngIf="trip" class="flight-data-container">
   <h2>Detalhes da viagem</h2>
-  <div class="details-list">
-    <p>Preço: {{ trip.price }} €</p>
-    <p>É Auto-transferência: {{ trip.isSelfTransfer ? 'Sim' : 'Não' }}</p>
-    <p>Auto-transferência Protegida: {{ trip.isProtectedSelfTransfer ? 'Sim' : 'Não' }}</p>
-    <p>Permite Alterações: {{ trip.isChangeAllowed ? 'Sim' : 'Não' }}</p>
-    <p>Parcialmente Alterável: {{ trip.isPartiallyChangeable ? 'Sim' : 'Não' }}</p>
-    <p>Permite Cancelamento: {{ trip.isCancellationAllowed ? 'Sim' : 'Não' }}</p>
-    <p>Parcialmente Reembolsável: {{ trip.isPartiallyRefundable ? 'Sim' : 'Não' }}</p>
+
+  <h2>Vôo de Ida</h2>
+
+  <div *ngIf="trip.flights[0].segments.length === 1" class="flight-section">
+      <div class="flight-details">
+          <p>Número de Vôo: {{ trip.flights[0].segments[0].flightNumber }} H</p>
+          <p>Duração: {{ trip.flights[0].duration }} H</p>
+          <p>Dia de Partida: {{ trip.flights[0].departure | date: 'dd/MM/YYYY' }}</p>
+          <p>Hora de Partida: {{ trip.flights[0].departure | date: 'HH:mm' }} H</p>
+          <p>Hora de Chegada: {{ trip.flights[0].arrival | date: 'HH:mm' }}</p>
+          <p>Origem: {{ trip.flights[0].originCity.name }}</p>
+          <p>Destino: {{ trip.flights[0].destinationCity.name }}</p>
+          <p>Companhia aérea: {{ trip.flights[0].segments[0].carrier.name }}</p>
+      </div>
   </div>
 
-  <h2>Voo</h2>
-  <div *ngFor="let flight of trip.flights" class="flight-section">
+  <div *ngIf="trip.flights[0].segments.length !== 1" class="flight-section">
     <div class="flight-details">
-      <p>Duração: {{ flight.duration }} H</p>
-      <p>Partida: {{ flight.departure }}</p>
-      <p>Chegada: {{ flight.arrival }}</p>
-      <p>Origem: {{ flight.originCity.name }}</p>
-      <p>Destino: {{ flight.destinationCity.name }}</p>
+      <p>Duração: {{ trip.flights[0].duration }} H</p>
+      <p>Dia de Partida: {{ trip.flights[0].departure | date: 'dd/MM/YYYY' }}</p>
+      <p>Hora de Partida: {{ trip.flights[0].departure | date: 'HH:mm' }} H</p>
+      <p>Hora de Chegada: {{ trip.flights[0].arrival | date: 'HH:mm' }}</p>
+      <p>Origem: {{ trip.flights[0].originCity.name }}</p>
+      <p>Destino: {{ trip.flights[0].destinationCity.name }}</p>
     </div>
 
     <h4>Escala</h4>
-    <div *ngFor="let segment of flight.segments" class="segment-section">
+    <div *ngFor="let segment of trip.flights[0].segments" class="segment-section">
       <h5>Número do voo {{ segment.flightNumber }}</h5>
       <div class="segment-details">
         <p>Duração: {{ segment.duration }}</p>
-        <p>Data de partida: {{ segment.departure }}</p>
-        <p>Data de chegada: {{ segment.arrival }}</p>
+        <p>Hora de Partida: {{ segment.arrival | date: 'HH:mm' }} H</p>
+        <p>Hora de Chegada: {{ segment.arrival | date: 'HH:mm' }}</p>
         <p>Origem: {{ segment.originCity.name }}</p>
         <p>Destino: {{ segment.destinationCity.name }}</p>
         <p>Companhia aérea: {{ segment.carrier.name }}</p>
       </div>
+    </div>
+  </div>
+
+  <h2>Vôo de Volta</h2>
+
+  <div *ngIf="trip.flights[0].segments.length === 1" class="flight-section">
+    <div class="flight-details">
+        <p>Número de Vôo: {{ trip.flights[1].segments[0].flightNumber }} H</p>
+      <p>Duração: {{ trip.flights[1].duration }} H</p>
+      <p>Dia de Partida: {{ trip.flights[1].departure | date: 'dd/MM/YYYY' }}</p>
+      <p>Hora de Partida: {{ trip.flights[1].departure | date: 'HH:mm' }} H</p>
+      <p>Hora de Chegada: {{ trip.flights[1].arrival | date: 'HH:mm' }}</p>
+      <p>Origem: {{ trip.flights[1].originCity.name }}</p>
+      <p>Destino: {{ trip.flights[1].destinationCity.name }}</p>
+      <p>Companhia aérea: {{ trip.flights[1].segments[0].carrier.name }}</p>
+    </div>
+  </div>
+
+  <div *ngIf="trip.flights[0].segments.length !== 1" class="flight-section">
+    <div class="flight-details">
+      <p>Duração: {{ trip.flights[1].duration }} H</p>
+      <p>Partida: {{ trip.flights[1].departure }}</p>
+      <p>Chegada: {{ trip.flights[1].arrival }}</p>
+      <p>Origem: {{ trip.flights[1].originCity.name }}</p>
+      <p>Destino: {{ trip.flights[1].destinationCity.name }}</p>
+    </div>
+
+    <h4>Escala</h4>
+    <div *ngFor="let segment of trip.flights[0].segments" class="segment-section">
+      <h5>Número do voo {{ segment.flightNumber }}</h5>
+      <div class="segment-details">
+        <p>Duração: {{ segment.duration }}</p>
+        <p>Hora de Partida: {{ segment.arrival | date: 'HH:mm' }} H</p>
+        <p>Hora de Chegada: {{ segment.arrival | date: 'HH:mm' }}</p>
+        <p>Origem: {{ segment.originCity.name }}</p>
+        <p>Destino: {{ segment.destinationCity.name }}</p>
+        <p>Companhia aérea: {{ segment.carrier.name }}</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="details-list">
+    <div class="legend">
+      <p>Preço: {{ trip.price }} €</p>
+    </div>
+    <div class="button">
+      <button class="search-btn" (click)="buyTicket(trip)" [disabled]="processingTicket">Comprar</button>
+    </div>
+  </div>
+  <div *ngIf="paymentToDo" class="payment-message">
+    Você já tem um pagamento em processo. Por favor dirija-se ao Perfil > Pagamentos para completar ou cancelar o seu pagamento.
+  </div>
+</div>
+
+<!------------------------------------------------------------------------------------------------------------------------------>
+
+<div *ngIf="tripPremium" class="flight-data-container">
+  <h2>Detalhes da viagem</h2>
+
+  <h2>Vôo de Ida</h2>
+  <div *ngIf="tripPremium.flights[0].segments.length === 1" class="flight-section">
+      <div class="flight-details">
+          <p>Número de Vôo: {{ tripPremium.flights[0].segments[0].flightNumber }} H</p>
+          <p>Duração: {{ tripPremium.flights[0].duration }} H</p>
+          <p>Dia de Partida: {{ tripPremium.flights[0].departure | date: 'dd/MM/YYYY' }}</p>
+          <p>Hora de Partida: {{ tripPremium.flights[0].departure | date: 'HH:mm' }} H</p>
+          <p>Hora de Chegada: {{ tripPremium.flights[0].arrival | date: 'HH:mm' }}</p>
+          <p>Origem: {{ tripPremium.flights[0].originCity.name }}</p>
+          <p>Destino: {{ tripPremium.flights[0].destinationCity.name }}</p>
+          <p>Companhia aérea: {{ tripPremium.flights[0].segments[0].carrier.name }}</p>
+      </div>
+  </div>
+
+  <div *ngIf="tripPremium.flights[0].segments.length !== 1" class="flight-section">
+    <div class="flight-details">
+      <p>Duração: {{ tripPremium.flights[0].duration }} H</p>
+      <p>Dia de Partida: {{ tripPremium.flights[0].departure | date: 'dd/MM/YYYY' }}</p>
+      <p>Hora de Partida: {{ tripPremium.flights[0].departure | date: 'HH:mm' }} H</p>
+      <p>Hora de Chegada: {{ tripPremium.flights[0].arrival | date: 'HH:mm' }}</p>
+      <p>Origem: {{ tripPremium.flights[0].originCity.name }}</p>
+      <p>Destino: {{ tripPremium.flights[0].destinationCity.name }}</p>
+    </div>
+
+    <h4>Escala</h4>
+    <div *ngFor="let segment of tripPremium.flights[0].segments" class="segment-section">
+      <h5>Número do voo {{ segment.flightNumber }}</h5>
+      <div class="segment-details">
+        <p>Duração: {{ segment.duration }}</p>
+        <p>Hora de Partida: {{ segment.arrival | date: 'HH:mm' }} H</p>
+        <p>Hora de Chegada: {{ segment.arrival | date: 'HH:mm' }}</p>
+        <p>Origem: {{ segment.originCity.name }}</p>
+        <p>Destino: {{ segment.destinationCity.name }}</p>
+        <p>Companhia aérea: {{ segment.carrier.name }}</p>
+      </div>
+    </div>
+  </div>
+
+  <h2>Vôo de Volta</h2>
+  <div *ngIf="tripPremium.flights[1].segments.length === 1" class="flight-section">
+    <div class="flight-details">
+        <p>Número de Vôo: {{ tripPremium.flights[1].segments[0].flightNumber }} H</p>
+      <p>Duração: {{ tripPremium.flights[1].duration }} H</p>
+      <p>Dia de Partida: {{ tripPremium.flights[1].departure | date: 'dd/MM/YYYY' }}</p>
+      <p>Hora de Partida: {{ tripPremium.flights[1].departure | date: 'HH:mm' }} H</p>
+      <p>Hora de Chegada: {{ tripPremium.flights[1].arrival | date: 'HH:mm' }}</p>
+      <p>Origem: {{ tripPremium.flights[1].originCity.name }}</p>
+      <p>Destino: {{ tripPremium.flights[1].destinationCity.name }}</p>
+      <p>Companhia aérea: {{ tripPremium.flights[1].segments[0].carrier.name }}</p>
+    </div>
+  </div>
+
+  <div *ngIf="tripPremium.flights[1].segments.length !== 1" class="flight-section">
+    <div class="flight-details">
+      <p>Duração: {{ tripPremium.flights[1].duration }} H</p>
+      <p>Dia de Partida: {{ tripPremium.flights[1].departure | date: 'dd/MM/YYYY' }}</p>
+      <p>Hora de Partida: {{ tripPremium.flights[1].departure | date: 'HH:mm' }} H</p>
+      <p>Hora de Chegada: {{ tripPremium.flights[1].arrival | date: 'HH:mm' }}</p>
+      <p>Origem: {{ tripPremium.flights[1].originCity.name }}</p>
+      <p>Destino: {{ tripPremium.flights[1].destinationCity.name }}</p>
+    </div>
+
+    <h4>Escala</h4>
+    <div *ngFor="let segment of tripPremium.flights[1].segments" class="segment-section">
+      <h5>Número do voo {{ segment.flightNumber }}</h5>
+      <div class="segment-details">
+        <p>Duração: {{ segment.duration }}</p>
+        <p>Hora de Partida: {{ segment.arrival | date: 'HH:mm' }} H</p>
+        <p>Hora de Chegada: {{ segment.arrival | date: 'HH:mm' }}</p>
+        <p>Origem: {{ segment.originCity.name }}</p>
+        <p>Destino: {{ segment.destinationCity.name }}</p>
+        <p>Companhia aérea: {{ segment.carrier.name }}</p>
+      </div>
+    </div>
+  </div>
+
+  <h2>Preços</h2>
+  <div *ngFor="let option of tripPremium.priceOptions" class="details-list">
+    <div class="legend">
+      <p>Site: {{ option.agentName }}</p>
+      <p>Preço: {{ option.totalPrice }} €</p>
+    </div>
+    <div class="button">
+      <button class="search-btn">Comprar</button>
     </div>
   </div>
 </div>

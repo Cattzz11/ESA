@@ -1,3 +1,5 @@
+import { Trip } from "./Trip";
+
 export interface PaymentModel {
   price: number;
   currency: string;
@@ -6,5 +8,5 @@ export interface PaymentModel {
   firstName: string;
   lastName: string;
   shippingAddress: string;
-  tripId: string;
+  trip: Trip;
 }

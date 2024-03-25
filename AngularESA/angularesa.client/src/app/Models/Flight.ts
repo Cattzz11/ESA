@@ -11,4 +11,5 @@ export interface Flight {
   destinationCityId?: string;
   destinationCity: City;
   segments: Segment[];
+  stopCount?: number;
 }

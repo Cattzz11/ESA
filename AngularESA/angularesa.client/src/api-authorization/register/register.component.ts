@@ -15,8 +15,9 @@ export class RegisterComponent implements OnInit {
   registerFailed: boolean = false;
   registerSucceeded: boolean = false;
   signedIn: boolean = false;
+  sendingEmail = false;
 
-  constructor(private authService: AuthorizeService, private router : Router,
+  constructor(private authService: AuthorizeService, private router: Router,
     private formBuilder: FormBuilder) {
     this.authService.isSignedIn().forEach(
       isSignedIn => {
@@ -83,19 +84,21 @@ export class RegisterComponent implements OnInit {
   }
 
   public confirmationEmail() {
+    this.sendingEmail = true;
     const email = this.registerForm.get('email')?.value;
     this.confirmationMessage = "Se o e-mail existir, irá receber um código de recuperação de password.";
+    
 
     this.authService.confirmAccount(email).subscribe({
       next: (response) => {
-        setTimeout(() => this.router.navigate(['/confirmation-account/', email]), 1000); // espera 1 segundos
+        this.router.navigate(['/confirmation-account/', email]); // espera 1 segundos
       },
       error: (error) => {
-        setTimeout(() => this.router.navigate(['/confirmation-account/', email]), 1000); // espera 1 segundos
+        this.router.navigate(['/confirmation-account/', email]) // espera 1 segundos
       }
     });
   }
-  
+
 
 
 }

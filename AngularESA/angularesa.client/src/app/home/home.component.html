@@ -1,63 +1,62 @@
-<body class="home-component">
-  <div>
-    <script src="../home/home.component.css"></script>
-    <img id="plane" src="../../assets/Images/plane.png" />
-    <p class="slogan text-black">Connosco Viajar Tornou-se Mais Simples e Fácil</p>
-  </div>
-
-  <div class="recommendations-header">
-    <h2>Recomendações</h2>
-    <select class="recommendations-select" [(ngModel)]="selectedOption">
-      <option value="airlines">Companhias Aéreas Mais Procuradas</option>
-      <option value="destinations">Destinos mais populares</option>
-    </select>
-  </div>
-
- <div class="airline-recommendations" *ngIf="selectedOption === 'airlines'">
-    <h2>Companhias Aéreas Mais Procuradas</h2>
-    <div class="airlines-container">
-      <div *ngFor="let airline of airLineResults; let i = index" class="airline-card">
-        <div class="ranking">{{i + 1}}º</div>
-        <div class="logo-container">
-          <img *ngIf="airline.logoURL" [src]="airline.logoURL" alt="Logo">
-        </div>
-        <button class="search-flight-btn" (click)="searchFlights(airline)">Procurar Voo</button>
-      </div>
-    </div>
-  </div>
-
-  <div class="recomendacoes-container" *ngIf="selectedOption === 'destinations'">
-    <div *ngIf="isLoading" class="loading-indicator">
-      <img src="../../assets/Images/Fading circles.gif" alt="Carregando...">
+<div class="main">
+    <div class="logo">
+        <p class="slogan">Connosco Viajar Tornou-se Mais Simples e Fácil</p>
+        <img class="plane" src="../../assets/Images/plane.png" />
     </div>
 
-    <div *ngIf="!isLoading" class="viagens-list">
-      <div *ngFor="let trip of flightResults" class="viagem-card">
-
-        <img *ngIf="trip.flights[0].segments?.[0]?.carrier?.logoURL" [src]="trip.flights[0].segments[0].carrier.logoURL" alt="Logo da Companhia Aérea">
-
-        <div class="departure">
-          <p>{{ trip.flights[0].segments[0].departure | date: 'dd/MM/YYYY' }}</p>
-          <p>{{ trip.flights[0].segments[0].departure | date: 'HH:mm' }} h</p>
-          <p>{{ trip.flights[0].segments[0].originCity.name }}</p>
-        </div>
-
-        <div class="duration">
-          <p>{{ trip.flights[0].duration }} h</p>
-        </div>
-
-        <div class="destination">
-          <p>{{ trip.flights[0].segments[trip.flights[0].segments.length - 1].arrival | date: 'dd/MM/YYYY' }}</p>
-          <p>{{ trip.flights[0].segments[trip.flights[0].segments.length - 1].arrival | date: 'HH:mm' }} h</p>
-          <p>{{ trip.flights[0].segments[trip.flights[0].segments.length - 1].destinationCity.name }}</p>
-        </div>
-
-        <div class="price">
-          <p>{{ trip.price }} €</p>
-          <a href="your-target-url" class="button-link">Mais opções</a>
-        </div>
-
-      </div>
+    <div class="recommendations-header">
+        <h2>Recomendações</h2>
+        <select class="recommendations-select" [(ngModel)]="selectedOption">
+            <option value="airlines">Companhias Aéreas Mais Procuradas</option>
+            <option value="destinations">Destinos mais populares</option>
+        </select>
     </div>
-  </div>
-</body>
+
+    <div class="airline-recommendations" *ngIf="selectedOption === 'airlines'">
+        <h2>Companhias Aéreas Mais Procuradas</h2>
+        <div class="airlines-container">
+            <div *ngFor="let airline of airLineResults; let i = index" class="airline-card">
+                <div class="ranking">{{i + 1}}º</div>
+                <div class="logo-container">
+                    <img *ngIf="airline.logoURL" [src]="airline.logoURL" alt="Logo">
+                </div>
+                <button class="search-flight-btn" (click)="searchFlights(airline)">Procurar Voo</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="recomendacoes-container" *ngIf="selectedOption === 'destinations'">
+        <div *ngIf="isLoading" class="loading-indicator">
+            <img src="../../assets/Images/icons8-load-100.png" alt="Carregando...">
+        </div>
+
+        <div *ngIf="!isLoading" class="viagens-list">
+            <div *ngFor="let trip of flightResults" class="viagem-card">
+
+                <img *ngIf="trip.flights[0].segments?.[0]?.carrier?.logoURL" [src]="trip.flights[0].segments[0].carrier.logoURL" alt="Logo da Companhia Aérea">
+
+                <div class="departure">
+                    <p>{{ trip.flights[0].segments[0].departure | date: 'dd/MM/YYYY' }}</p>
+                    <p>{{ trip.flights[0].segments[0].departure | date: 'HH:mm' }} h</p>
+                    <p>{{ trip.flights[0].segments[0].originCity.name }}</p>
+                </div>
+
+                <div class="duration">
+                    <p>{{ trip.flights[0].duration }} h</p>
+                </div>
+
+                <div class="destination">
+                    <p>{{ trip.flights[0].segments[trip.flights[0].segments.length - 1].arrival | date: 'dd/MM/YYYY' }}</p>
+                    <p>{{ trip.flights[0].segments[trip.flights[0].segments.length - 1].arrival | date: 'HH:mm' }} h</p>
+                    <p>{{ trip.flights[0].segments[trip.flights[0].segments.length - 1].destinationCity.name }}</p>
+                </div>
+
+                <div class="price">
+                    <p>{{ trip.price }} €</p>
+                    <a (click)="selectTrip(trip)" class="button-link">Mais opções</a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

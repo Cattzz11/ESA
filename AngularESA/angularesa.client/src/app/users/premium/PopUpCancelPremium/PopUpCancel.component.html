@@ -1,0 +1,23 @@
+<div class="popup-window">
+  <div *ngIf="isLoading; else loadedContent">
+    <p>Loading...</p>
+  </div>
+  <ng-template #loadedContent>
+    <div *ngIf="cards && cards.length > 0">
+      <h3>Tem a certeza que deseja cancelar a subscrição premium?
+        <p>
+          <strong>Esta irá ter efeito imediato!</strong>
+        </p>
+      </h3>
+        <div *ngIf="cards[0] !== null">
+          <button (click)="cancelPremiumSubscription(cards[0].id)" [disabled]="isPaymentProcessing">Cancelar</button>
+        </div>
+      </div>
+      <div *ngIf="!cards || cards.length === 0">
+        <p>No cards found for this user.</p>
+      </div>
+      <div *ngIf="transactionCompleted" class="success-message">
+        Cancelamento sucedido.
+      </div>
+</ng-template>
+</div>

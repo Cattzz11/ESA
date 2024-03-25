@@ -60,6 +60,10 @@ export class FilterByAirlineComponent implements OnInit {
       this.submitForm();
     }
 
+  selectTrip(trip: Trip) {
+    this.router.navigate(['/flight-data'], { state: { data: trip } });
+  }
+
   submitForm() {
     // Handle form submission logic
     const tripID = this.tripForm?.value.tripID;

@@ -47,4 +47,9 @@ export class HomeComponent implements OnInit {
   searchFlights(data: Carrier) {
     this.router.navigate(['/filter-by-airline'], { state: { data: data } });
   }
+
+  selectTrip(trip: any) {
+    this.router.navigate(['/flight-data'], { state: { data: trip } });
+  }
+  
 }
