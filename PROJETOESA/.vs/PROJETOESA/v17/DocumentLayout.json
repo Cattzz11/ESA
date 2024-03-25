@@ -45,6 +45,7 @@
         {
           "DockedWidth": 207,
           "SelectedChildIndex": 7,
+          "SelectedChildIndex": 7,
           "Children": [
             {
               "$type": "Bookmark",
@@ -181,7 +182,59 @@
               "RelativeToolTip": "..\\AeroHelperTest\\AccountTest.cs",
               "ViewState": "AQIAAIsAAAAAAAAAAAAgwKYAAABRAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-15T16:20:52.068Z",
+              "WhenOpened": "2024-03-24T17:09:50.254Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "premium-profile-page.component.ts",
+              "DocumentMoniker": "D:\\ESA\\PROJETOESA\\ESA\\AngularESA\\angularesa.client\\src\\app\\users\\premium-profile-page\\premium-profile-page.component.ts",
+              "RelativeDocumentMoniker": "..\\AngularESA\\angularesa.client\\src\\app\\users\\premium-profile-page\\premium-profile-page.component.ts",
+              "ToolTip": "D:\\ESA\\PROJETOESA\\ESA\\AngularESA\\angularesa.client\\src\\app\\users\\premium-profile-page\\premium-profile-page.component.ts",
+              "RelativeToolTip": "..\\AngularESA\\angularesa.client\\src\\app\\users\\premium-profile-page\\premium-profile-page.component.ts",
+              "ViewState": "AQIAADEAAAAAAAAAAAAQwD0AAAAVAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003213|",
+              "WhenOpened": "2024-03-24T17:00:16.711Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "search-flights.component.ts",
+              "DocumentMoniker": "D:\\ESA\\PROJETOESA\\ESA\\AngularESA\\angularesa.client\\src\\app\\flights\\search-flights\\search-flights.component.ts",
+              "RelativeDocumentMoniker": "..\\AngularESA\\angularesa.client\\src\\app\\flights\\search-flights\\search-flights.component.ts",
+              "ToolTip": "D:\\ESA\\PROJETOESA\\ESA\\AngularESA\\angularesa.client\\src\\app\\flights\\search-flights\\search-flights.component.ts",
+              "RelativeToolTip": "..\\AngularESA\\angularesa.client\\src\\app\\flights\\search-flights\\search-flights.component.ts",
+              "ViewState": "AQIAADEAAAAAAAAAAAAlwEAAAAAfAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003213|",
+              "WhenOpened": "2024-03-24T19:19:25.797Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "flight-data.component.ts",
+              "DocumentMoniker": "D:\\ESA\\PROJETOESA\\ESA\\AngularESA\\angularesa.client\\src\\app\\flights\\flight-data\\flight-data.component.ts",
+              "RelativeDocumentMoniker": "..\\AngularESA\\angularesa.client\\src\\app\\flights\\flight-data\\flight-data.component.ts",
+              "ToolTip": "D:\\ESA\\PROJETOESA\\ESA\\AngularESA\\angularesa.client\\src\\app\\flights\\flight-data\\flight-data.component.ts",
+              "RelativeToolTip": "..\\AngularESA\\angularesa.client\\src\\app\\flights\\flight-data\\flight-data.component.ts",
+              "ViewState": "AQIAABYAAAAAAAAAAAAlwCAAAAAGAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003213|",
+              "WhenOpened": "2024-03-24T19:19:13.676Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "UsersService.ts",
+              "DocumentMoniker": "D:\\ESA\\PROJETOESA\\ESA\\AngularESA\\angularesa.client\\src\\app\\services\\UsersService.ts",
+              "RelativeDocumentMoniker": "..\\AngularESA\\angularesa.client\\src\\app\\services\\UsersService.ts",
+              "ToolTip": "D:\\ESA\\PROJETOESA\\ESA\\AngularESA\\angularesa.client\\src\\app\\services\\UsersService.ts",
+              "RelativeToolTip": "..\\AngularESA\\angularesa.client\\src\\app\\services\\UsersService.ts",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003213|",
+              "WhenOpened": "2024-03-24T17:00:01.368Z",
               "EditorCaption": ""
             }
           ]

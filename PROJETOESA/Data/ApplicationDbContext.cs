@@ -28,6 +28,9 @@ namespace PROJETOESA.Data
 
         public DbSet<Payment> Payment { get; set; }
 
+        public DbSet<LoginModel> Logins { get; set; }
+
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -70,6 +73,16 @@ namespace PROJETOESA.Data
                     .HasForeignKey(s => s.FlightId)
                     .OnDelete(DeleteBehavior.Restrict);
             });
+
+            //modelBuilder.Entity<ApplicationUser>()
+            //    .Property(u => u.registerTime)
+            //    .HasDefaultValueSql("GETDATE()");
+
+            //modelBuilder.Entity<LoginModel>(entity =>
+            //{
+            //    entity.Property(e => e.Id)
+            //    .UseIdentityColumn();
+            //});
         }
     }
 }

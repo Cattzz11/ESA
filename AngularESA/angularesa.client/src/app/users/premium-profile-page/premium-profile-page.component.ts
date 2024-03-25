@@ -21,6 +21,9 @@ export class PremiumProfilePageComponent {
   allUsers: User[] = [];
   public history: Trip[] = [];
   public historyLoading: boolean = true;
+  //statistics: any;
+  //loginCount: number = 0;
+  //selectedDate: string = '';
   
   constructor(private auth: AuthorizeService, private formBuilder: FormBuilder, private userService: UsersService, private router: Router, private dataService: DataService, private cdr: ChangeDetectorRef) {
 
@@ -58,7 +61,21 @@ export class PremiumProfilePageComponent {
 
     this.loadUsers();
 
+    //if (this.user?.role === 2) {
+    //  this.userService.getStatistics().subscribe(data => {
+    //    this.statistics = data;
+    //  });
+    //}
+
   }
+
+  //onDateChange(): void {
+  //  this.userService.getLoginsByDate(this.selectedDate).subscribe(count => {
+  //    this.loginCount = count;
+  //  }, error => {
+  //    console.error('Erro ao recuperar o número de logins:', error);
+  //  });
+  //}
 
   private loadUsers(): void {
     this.userService.getUsers().subscribe(

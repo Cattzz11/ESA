@@ -1,8 +1,8 @@
+D:\ESA\PROJETOESA\ESA\PROJETOESA\bin\Debug\net8.0\spa.proxy.json
 D:\ESA\PROJETOESA\ESA\PROJETOESA\bin\Debug\net8.0\appsettings.Development.json
 D:\ESA\PROJETOESA\ESA\PROJETOESA\bin\Debug\net8.0\appsettings.json
 D:\ESA\PROJETOESA\ESA\PROJETOESA\bin\Debug\net8.0\package-lock.json
 D:\ESA\PROJETOESA\ESA\PROJETOESA\bin\Debug\net8.0\package.json
-D:\ESA\PROJETOESA\ESA\PROJETOESA\bin\Debug\net8.0\spa.proxy.json
 D:\ESA\PROJETOESA\ESA\PROJETOESA\bin\Debug\net8.0\PROJETOESA.staticwebassets.runtime.json
 D:\ESA\PROJETOESA\ESA\PROJETOESA\bin\Debug\net8.0\PROJETOESA.exe
 D:\ESA\PROJETOESA\ESA\PROJETOESA\bin\Debug\net8.0\PROJETOESA.deps.json

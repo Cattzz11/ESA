@@ -20,6 +20,7 @@ import { EditProfileComponent } from './users/edit-profile/edit-profile.componen
 import { FlightDataComponent } from './flights/flight-data/flight-data.component';
 import { PaymentComponentComponent } from './users/payment-component/payment-component.component';
 import { PaymentComponent } from './payments/payment.component';
+import { StatisticsPageComponent } from './users/statistics-page/statistics-page.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent, pathMatch: 'full' },
@@ -42,6 +43,7 @@ const routes: Routes = [
   { path: 'search-flights', component: SearchFlightsComponent },
   { path: 'payment-component', component: PaymentComponentComponent },
   { path: 'payment', component: PaymentComponent },
+  {path: 'statistics-page', component: StatisticsPageComponent},
 ];
 
 @NgModule({

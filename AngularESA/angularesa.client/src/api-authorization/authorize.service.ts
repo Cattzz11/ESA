@@ -36,6 +36,9 @@ export class AuthorizeService {
           })
             .pipe<boolean>(map((res: HttpResponse<string>) => {
               this._authStateChanged.next(res.ok);
+              this.http.post('/api/login-time', {
+                email: email
+              }).subscribe();
               return res.ok;
             }));
         } else {

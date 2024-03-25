@@ -36,6 +36,7 @@ import { MatDialogModule } from '@angular/material/dialog'
 import { PopUpPaymentComponent } from './flights/flight-data/PopUpPayment/PopUpPayment.component'
 import { PopUpPremiumComponent } from './users/premium/PopUpPremium/PopUpPremium.component'
 import { PopUpCancelPremiumComponent } from './users/premium/PopUpCancelPremium/PopUpCancel.component'
+import { StatisticsPageComponent } from './users/statistics-page/statistics-page.component';
 
 export const MY_FORMATS = {
   parse: {
@@ -70,7 +71,8 @@ export const MY_FORMATS = {
     PaymentComponent,
     PopUpPaymentComponent,
     PopUpPremiumComponent,
-    PopUpCancelPremiumComponent
+    PopUpCancelPremiumComponent,
+    StatisticsPageComponent,
   ],
   imports: [
     BrowserModule,

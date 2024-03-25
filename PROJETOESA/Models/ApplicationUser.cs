@@ -24,5 +24,6 @@ namespace PROJETOESA.Models
         public string? CustomerID { get; set; }
 
         public string? subscriptionID { get; set; }
+        public DateTime registerTime { get; set; }
     }
 }

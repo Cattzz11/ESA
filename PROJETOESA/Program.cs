@@ -12,6 +12,8 @@ using PROJETOESA.Controllers;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddScoped<StatisticsService>();
+
 builder.Services.AddDbContext<AeroHelperContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("AeroHelperContext") ?? throw new InvalidOperationException("Connection string 'AeroHelperContext' not found.")));
 
@@ -91,6 +93,8 @@ builder.Configuration.GetSection("EmailSender"));
 builder.Services.AddTransient<IEmailSender, EmailSender>();
 
 builder.Services.AddScoped<ICodeGeneratorService, CodeGeneratorService>();
+
+
 
 var app = builder.Build();
 
