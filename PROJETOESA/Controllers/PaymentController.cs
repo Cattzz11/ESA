@@ -105,6 +105,7 @@ namespace PROJETOESA.Controllers
             return Ok(res);
         }
 
+
         [HttpPost]
         [Route("api/payment/cancel-subscription")]
         public async Task<IActionResult> CancelPremiumNow([FromBody] CustomerCardID custCard)
@@ -114,10 +115,27 @@ namespace PROJETOESA.Controllers
             return Ok(res);
         }
 
+        [HttpPost]
+        [Route("api/payment/cancel-payment")]
+        public async Task<IActionResult> CancelPayment([FromBody] CustomerCardID custCard)
+        {
+            var res = await _squareService.CancelPayment(custCard.customerCardID);
+
+            return Ok(res);
+        }
+
         [HttpGet("api/payment/get-user-payments/{userEmail}")]
         public async Task<ActionResult<IEnumerable<PaymentHistoryModel>>> GetCustomerPayments(string userEmail)
         {
             List<PaymentHistoryModel> model = await _squareService.GetSquareCustomerPayments(userEmail, _userManager);
+
+            return Ok(model);
+        }
+
+        [HttpGet("api/payment/get-all-user-payments")]
+        public async Task<ActionResult<IEnumerable<PaymentHistoryModel>>> GetAllPayments()
+        {
+            List<PaymentHistoryModel> model = await _squareService.GetSquareAllPayments();
 
             return Ok(model);
         }

@@ -126,7 +126,6 @@ namespace PROJETOESA.Controllers
 
         [HttpPost]
         [Route("api/send-recovery-code")]
-        [Authorize]
         public async Task<IActionResult> SendRecoveryCode([FromBody] CustomRecoverModel model)
         {
             var user = await _userManager.FindByEmailAsync(model.Email);
@@ -150,7 +149,6 @@ namespace PROJETOESA.Controllers
 
         [HttpPost]
         [Route("api/send-confirmation-code")]
-        [Authorize]
         public async Task<IActionResult> SendConfirmationCode([FromBody] CustomRecoverModel model)
         {
             var user = await _userManager.FindByEmailAsync(model.Email);
@@ -220,7 +218,6 @@ namespace PROJETOESA.Controllers
 
         [HttpPost]
         [Route("api/validate-recovery-code")]
-        [Authorize]
         public async Task<IActionResult> ValidateRecoveryCodeAsync(string userEmail, string code)
         {
             var recoveryCode = await _context.PasswordRecoveryCodes
@@ -250,7 +247,6 @@ namespace PROJETOESA.Controllers
 
         [HttpPost]
         [Route("api/validate-confirmation-code")]
-        [Authorize]
         public async Task<IActionResult> ValidateConfirmationCodeAsync(string userEmail, string code)
         {
             var confirmationCode = await _context.ConfirmationCodes

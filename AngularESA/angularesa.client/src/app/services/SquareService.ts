@@ -68,9 +68,27 @@ export class SquareService {
       }));
   }
 
+  cancelPayment(card: CardID): Observable<any> {
+    console.log("Card ID:", card);
+    return this.http.post(`api/payment/cancel-payment`, { customerCardID: card.cardID }, { observe: 'response', responseType: 'text' })
+      .pipe<boolean>(map((res: HttpResponse<string>) => {
+        console.log(res);
+        return res.ok;
+      }));
+  }
+
   fetchPaymentHistory(user: User): Observable<any> {
     console.log("User email:", user.email);
     return this.http.get<PaymentHistoryModel[]>(`api/payment/get-user-payments/${user.email}`).pipe(
+      map((response: PaymentHistoryModel[]) => {
+        // Perform any data transformations here if needed
+        return response;
+      })
+    );
+  }
+
+  fetchPaymentHistoryAdmin(): Observable<any> {
+    return this.http.get<PaymentHistoryModel[]>(`api/payment/get-all-user-payments`).pipe(
       map((response: PaymentHistoryModel[]) => {
         // Perform any data transformations here if needed
         return response;

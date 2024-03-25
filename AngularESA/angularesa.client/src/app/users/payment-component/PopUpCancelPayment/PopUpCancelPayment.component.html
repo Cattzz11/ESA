@@ -1,0 +1,23 @@
+<div class="popup-window">
+  <div *ngIf="isLoading; else loadedContent">
+    <p>Loading...</p>
+  </div>
+  <ng-template #loadedContent>
+    <div *ngIf="cards && cards.length > 0">
+      <h3>Tem a certeza que deseja cancelar o pagamento do voo?
+        <p>
+          <strong>Terá de repetir todo o processo caso deseje de novo uma viagem!</strong>
+        </p>
+      </h3>
+        <div *ngIf="cards[0] !== null">
+          <button (click)="cancelPayment(cards[0].id)" [disabled]="isPaymentProcessing">Cancelar Pagamento</button>
+        </div>
+      </div>
+      <div *ngIf="!cards || cards.length === 0">
+        <p>No cards found for this user.</p>
+      </div>
+      <div *ngIf="transactionCompleted" class="success-message">
+        Cancelamento sucedido.
+      </div>
+</ng-template>
+</div>

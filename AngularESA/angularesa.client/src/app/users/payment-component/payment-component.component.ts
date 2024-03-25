@@ -9,6 +9,9 @@ import { Router } from '@angular/router';
 import { SquareService } from '../../services/SquareService';
 import { PaymentModel } from '../../Models/PaymentModel';
 import { PaymentHistoryModel } from '../../Models/PaymentHistoryModel';
+import { MatDialog } from '@angular/material/dialog';
+import { PopUpPaymentComponent } from '../../flights/flight-data/PopUpPayment/PopUpPayment.component';
+import { PopUpCancelPaymentComponent } from './PopUpCancelPayment/PopUpCancelPayment.component';
 
 @Component({
   selector: 'app-payment-component',
@@ -28,7 +31,8 @@ export class PaymentComponentComponent {
     private auth: AuthorizeService,
     private userService: UsersService,
     private router: Router,
-    public squareService: SquareService
+    public squareService: SquareService,
+    private dialogRef: MatDialog
   ) {
 
   }
@@ -42,7 +46,11 @@ export class PaymentComponentComponent {
       this.auth.getUserInfo().subscribe({
         next: (userInfo: User) => {
           this.user = userInfo;
-          this.fetchPaymentHistory();
+          if (this.user.role == 0 || this.user.role == 1)
+            this.fetchPaymentHistory();
+          else if (this.user.role == 2) {
+            this.fetchPaymentHistoryAdmin();
+          }
 
         },
         error: (error) => {
@@ -71,8 +79,27 @@ export class PaymentComponentComponent {
     }
       
   }
+
+  fetchPaymentHistoryAdmin() {
+    if (this.user != null) {
+      this.squareService.fetchPaymentHistoryAdmin().subscribe(
+        (paymentList: PaymentHistoryModel[]) => {
+          console.log('Payment list:', paymentList);
+          this.usersPayments = paymentList;
+          this.orderPayments(this.usersPayments);
+        },
+        (error) => {
+          // Handle error if any
+          console.error('Error fetching payment history:', error);
+        }
+      );
+    }
+
+  }
+
     orderPayments(paymentsOrder: PaymentHistoryModel[]) {
       paymentsOrder.forEach(payment => {
+        
         if (payment.status === 'CANCELED') {
           this.canceledPayments.push(payment);
         } else if (payment.status === 'APPROVED') {
@@ -86,5 +113,12 @@ export class PaymentComponentComponent {
       console.log("PROCESSED: ", this.processPayments);
     }
 
+  resumePayment() {
+    this.dialogRef.open(PopUpPaymentComponent);
+  }
+
+  cancelPayment() {
+    this.dialogRef.open(PopUpCancelPaymentComponent);
+  }
 
 }

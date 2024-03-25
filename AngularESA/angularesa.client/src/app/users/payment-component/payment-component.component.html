@@ -1,5 +1,5 @@
 <div class="payment-div">
-  <div class="personal-data-cliente">
+  <div class="personal-data-cliente" *ngIf="user?.role===0 || user?.role===1">
     <h1>Dados Pessoais:</h1>
     <p>Nome: {{ user?.name }}</p>
     <p>E-mail: {{ user?.email }}</p>
@@ -8,7 +8,7 @@
     <p *ngIf="user && user.nationality !== null">Nacionalidade: {{ user.nationality }}</p>
   </div>
 
-  <div class="payment-history">
+  <div class="payment-history" *ngIf="user?.role===0 || user?.role===1">
     <h1>Histórico de Pagamentos:</h1>
     <ul>
       <li>
@@ -40,9 +40,9 @@
             <p>E-mail: {{ payment.email }}</p>
             <p>Cartão de Crédito: {{ payment.creditCard }}</p>
           </div>
-          <div class="payment-actions">
-            <button class="complete-button">Completar</button>
-            <button class="cancel-button">Cancelar</button>
+          <div class="payment-actions" >
+            <button (click)="resumePayment()" class="complete-button">Completar</button>
+            <button (click)="cancelPayment()" class="cancel-button">Cancelar</button>
           </div>
         </li>
       </ul>
@@ -57,6 +57,67 @@
           <div class="additional-details">
             <p>E-mail: {{ payment.email }}</p>
             <p>Cartão de Crédito: {{ payment.creditCard }}</p>
+          </div>
+        </li>
+      </ul>
+    </ul>
+  </div>
+  <div class="personal-data-cliente" *ngIf="user?.role===2">
+    <h1>Dados Pessoais:</h1>
+    <p><strong>ADMIN</strong></p>
+    <p>Nome: {{ user?.name }}</p>
+    <p>E-mail: {{ user?.email }}</p>
+    <p *ngIf="user && user.age !== undefined">Idade: {{ user.age }} anos</p>
+    <p *ngIf="user && user.occupation !== null">Ocupação: {{ user.occupation }}</p>
+    <p *ngIf="user && user.nationality !== null">Nacionalidade: {{ user.nationality }}</p>
+  </div>
+
+  <div class="payment-history" *ngIf="user?.role===2">
+    <h1>Histórico de Pagamentos:</h1>
+    <ul>
+      <li>
+        <!-- Pagamentos Completos -->
+        <h2>Pagamentos Completos</h2>
+        <ul class="history-item">
+          <li *ngFor="let payment of completedPayments">
+            <div class="payment-details">
+              <p>Preço: {{ payment.price }}€</p>
+              <p>Nome: {{ payment.firstName }}</p>
+            </div>
+            <!-- Display the rest of payment details below -->
+            <div class="additional-details">
+              <p>E-mail: {{ payment.email }}</p>
+            </div>
+          </li>
+        </ul>
+      </li>
+      <li class="process-payments"><h2>Pagamentos Em Processo</h2></li>
+      <ul class="history-item">
+        <li *ngFor="let payment of processPayments">
+          <div class="payment-details">
+            <p>Preço: {{ payment.price }}€</p>
+            <p>Nome: {{ payment.firstName }}</p>
+          </div>
+          <!-- Display the rest of payment details below -->
+          <div class="additional-details">
+            <p>E-mail: {{ payment.email }}</p>
+          </div>
+          <div class="payment-actions" *ngIf="this.user != null && payment.email === this.user.email">
+            <button (click)="resumePayment()" class="complete-button">Completar</button>
+            <button (click)="cancelPayment()" class="cancel-button">Cancelar</button>
+          </div>
+        </li>
+      </ul>
+      <li class="canceled-payments"><h2>Pagamentos Cancelados</h2></li>
+      <ul class="history-item">
+        <li *ngFor="let payment of canceledPayments">
+          <div class="payment-details">
+            <p>Preço: {{ payment.price }}€</p>
+            <p>Nome: {{ payment.firstName }}</p>
+          </div>
+          <!-- Display the rest of payment details below -->
+          <div class="additional-details">
+            <p>E-mail: {{ payment.email }}</p>
           </div>
         </li>
       </ul>
