@@ -47,6 +47,7 @@ SquareClient squareClient = new SquareClient.Builder()
 builder.Services.AddSingleton(squareClient);
 builder.Services.AddScoped<SquareService>();
 builder.Services.AddLocalization(options => options.ResourcesPath = "Resources");
+builder.Services.AddHttpClient<FlightService>();
 
 builder.Services.AddControllersWithViews()
     .AddDataAnnotationsLocalization();

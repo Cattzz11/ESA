@@ -23,12 +23,11 @@ import { PremiumComponent } from './users/premium/premium.component';
 import { SubscriptionPageComponent } from './users/subscription-page/subscription-page.component';
 import { FlightDataComponent } from './flights/flight-data/flight-data.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
-import { MatCalendarCellClassFunction, MatDatepickerModule } from '@angular/material/datepicker';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { provideNativeDateAdapter } from '@angular/material/core';
 import { MAT_DATE_LOCALE, MAT_DATE_FORMATS } from '@angular/material/core';
-import { DateAdapter } from '@angular/material/core';
 import { DatePipe } from '@angular/common';
 import { PaymentComponentComponent } from './users/payment-component/payment-component.component';
 import { PaymentComponent } from './payments/payment.component';
@@ -37,6 +36,8 @@ import { PopUpPaymentComponent } from './flights/flight-data/PopUpPayment/PopUpP
 import { PopUpPremiumComponent } from './users/premium/PopUpPremium/PopUpPremium.component'
 import { PopUpCancelPremiumComponent } from './users/premium/PopUpCancelPremium/PopUpCancel.component'
 import { StatisticsPageComponent } from './users/statistics-page/statistics-page.component';
+import { GoogleMapsModule } from '@angular/google-maps';
+import { MapComponent } from './flights/map/map.component'
 
 export const MY_FORMATS = {
   parse: {
@@ -49,7 +50,6 @@ export const MY_FORMATS = {
     monthYearA11yLabel: 'MMMM YYYY',
   },
 };
-
 
 @NgModule({
   declarations: [
@@ -73,6 +73,7 @@ export const MY_FORMATS = {
     PopUpPremiumComponent,
     PopUpCancelPremiumComponent,
     StatisticsPageComponent,
+    MapComponent,
   ],
   imports: [
     BrowserModule,
@@ -84,7 +85,8 @@ export const MY_FORMATS = {
     MatFormFieldModule,
     MatInputModule,
     MatDatepickerModule,
-    MatDialogModule
+    MatDialogModule,
+    GoogleMapsModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },

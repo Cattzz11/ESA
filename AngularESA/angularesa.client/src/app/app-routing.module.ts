@@ -21,6 +21,7 @@ import { FlightDataComponent } from './flights/flight-data/flight-data.component
 import { PaymentComponentComponent } from './users/payment-component/payment-component.component';
 import { PaymentComponent } from './payments/payment.component';
 import { StatisticsPageComponent } from './users/statistics-page/statistics-page.component';
+import { MapComponent } from './flights/map/map.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent, pathMatch: 'full' },
@@ -44,6 +45,7 @@ const routes: Routes = [
   { path: 'payment-component', component: PaymentComponentComponent },
   { path: 'payment', component: PaymentComponent },
   {path: 'statistics-page', component: StatisticsPageComponent},
+  { path: 'map', component: MapComponent },
 ];
 
 @NgModule({
