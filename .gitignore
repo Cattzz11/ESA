@@ -647,3 +647,4 @@ PROJETOESA/.vs/PROJETOESA/v17/.suo
 *.bin
 *.dll
 /AeroHelperTest/bin/Debug/net8.0
+/PROJETOESA/bin/Debug/net8.0
