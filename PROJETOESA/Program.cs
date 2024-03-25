@@ -3,12 +3,8 @@ using PROJETOESA.Data;
 using PROJETOESA.Models;
 using PROJETOESA.Services;
 using Square;
-using Square.Http.Client;
-using Square.Apis;
-using Square.Models;
 using Microsoft.Extensions.Localization;
 using PROJETOESA.Controllers;
-using Microsoft.Extensions.DependencyInjection;
 using PROJETOESA.Services.AeroDataBoxService;
 using PROJETOESA.Services.CodeGeneratorService;
 using PROJETOESA.Services.DataService;
@@ -103,13 +99,6 @@ builder.Services.AddIdentityApiEndpoints<ApplicationUser>()
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-
-// Adiciona as configurações do EmailSettings a partir do appsettings.json
-//builder.Services.Configure<EmailSettings>(
-//builder.Configuration.GetSection("EmailSender"));
-
-// Adiciona o serviço de envio de e-mails
-//builder.Services.AddTransient<IEmailSender, EmailSender>();
 
 builder.Services.AddScoped<ICodeGeneratorService, CodeGeneratorService>();
 

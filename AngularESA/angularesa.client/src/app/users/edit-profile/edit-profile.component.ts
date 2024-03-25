@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { User } from '../../Models/users';
 import { Router } from '@angular/router';
 import { PhotoUploadService } from '../../services/photoUploadService.service';
+import { UsersService } from '../../services/UsersService';
 
 @Component({
   selector: 'app-edit-profile',
@@ -11,14 +12,21 @@ import { PhotoUploadService } from '../../services/photoUploadService.service';
   styleUrl: './edit-profile.component.css'
 })
 export class EditProfileComponent implements OnInit {
-  public user: User | null = null;
+  public user!: User;
   public editForm!: FormGroup;
   photoPreview: string | ArrayBuffer | null = null;
   selectedFile: File | null = null;
   private photoUploadService!: PhotoUploadService;
 
-  constructor(private auth: AuthorizeService, private formBuilder: FormBuilder, private router: Router, private _photoUploadService: PhotoUploadService) {
+  constructor(
+    private auth: AuthorizeService,
+    private formBuilder: FormBuilder,
+    private router: Router,
+    private _photoUploadService: PhotoUploadService,
+    private userService: UsersService
+  ) {
     this.photoUploadService = _photoUploadService;
+
     this.editForm = this.formBuilder.group({
       name: ['', Validators.required],
       email: ['', Validators.required],
@@ -72,6 +80,22 @@ export class EditProfileComponent implements OnInit {
       //  this.updateUserInformation();
       //}
     }
+  }
+
+  deleteUserProfile(email: string): void {
+    console.log(email);
+    this.userService.deleteUser(email).subscribe(
+      () => {
+        // Success
+        console.log('User deleted successfully', email);
+        // Optionally, you can reload the user list after deletion
+        this.router.navigateByUrl("/");
+      },
+      (error) => {
+        // Handle error
+        console.error('Error deleting user:', error);
+      }
+    );
   }
 
   updateUserInformation() {
