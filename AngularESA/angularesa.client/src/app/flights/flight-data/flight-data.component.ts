@@ -3,10 +3,13 @@ import { Trip } from '../../Models/Trip';
 import { User } from '../../Models/users';
 import { AuthorizeService } from '../../../api-authorization/authorize.service';
 import { TripDetails } from '../../Models/TripDetails';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { SquareService } from '../../services/SquareService';
 import { PaymentModel } from '../../Models/PaymentModel';
 import { PriceOptions } from '../../Models/PriceOptions';
+import { MatDialog } from '@angular/material/dialog';
+import { PopUpPaymentComponent } from './PopUpPayment/PopUpPayment.component';
+
 
 @Component({
   selector: 'app-flight-data',
@@ -18,13 +21,16 @@ export class FlightDataComponent implements OnInit {
 
   trip: Trip | undefined;
   tripPremium: TripDetails | undefined;
-
+  processingTicket: boolean = false;
   payment: PaymentModel | undefined;
+  paymentToDo: boolean = false;
 
   constructor(
     private auth: AuthorizeService,
     private route: ActivatedRoute,
-    private squareService: SquareService
+    private router: Router,
+    private squareService: SquareService,
+    private dialogRef : MatDialog
   ) { }
 
   ngOnInit(): void {
@@ -59,6 +65,7 @@ export class FlightDataComponent implements OnInit {
 
   buyTicket(trip: Trip) {
     if (this.user && this.user.role !== 1) {
+      this.processingTicket = true;
       let payment: PaymentModel = {
         price: trip.price,
         currency: "EUR",
@@ -69,15 +76,25 @@ export class FlightDataComponent implements OnInit {
         shippingAddress: this.user.name,
         trip: trip
       }
-
+      
       this.squareService.purchaseTicket(payment).subscribe(
         (response) => {
-          // Handle successful response
-          console.log('Ticket purchased successfully:', response);
+          if (response.body == "true") {
+            console.log('Ticket purchased successfully:', response);
+            this.dialogRef.open(PopUpPaymentComponent);
+            this.processingTicket = false;
+          }
+          else
+          {
+            this.paymentToDo = true;
+            this.processingTicket = false;
+          }
+
         },
         (error) => {
           // Handle error
           console.error('Error purchasing ticket:', error);
+          this.processingTicket = false;
         }
       );
     } else {
@@ -86,4 +103,9 @@ export class FlightDataComponent implements OnInit {
 
     
   }
+
+  buyPage(trip: Trip) {
+    this.router.navigate(['/payment']); 
+  }
+
 }

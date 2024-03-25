@@ -20,5 +20,9 @@ namespace PROJETOESA.Models
         //public byte[]? ProfilePictureBinary{ get; set; }
 
         public List<UserFlight>? UserFlights { get; set; }
+
+        public string? CustomerID { get; set; }
+
+        public string? subscriptionID { get; set; }
     }
 }

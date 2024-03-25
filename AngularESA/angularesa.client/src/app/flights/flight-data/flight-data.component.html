@@ -81,8 +81,11 @@
       <p>Preço: {{ trip.price }} €</p>
     </div>
     <div class="button">
-        <button class="search-btn" (click)="buyTicket(trip)">Comprar</button>
+      <button class="search-btn" (click)="buyTicket(trip)" [disabled]="processingTicket">Comprar</button>
     </div>
+  </div>
+  <div *ngIf="paymentToDo" class="payment-message">
+    Você já tem um pagamento em processo. Por favor dirija-se ao Perfil > Pagamentos para completar ou cancelar o seu pagamento.
   </div>
 </div>
 

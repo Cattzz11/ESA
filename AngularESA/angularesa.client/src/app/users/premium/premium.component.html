@@ -27,9 +27,14 @@
           <li>E mais!</li>
           <li>Apenas 15€ por mês</li>
         </ul>
-        <button class="btn_subs" [routerLink]="['/subscription-component']"> Subscrever </button>
+        <div *ngIf="user !== null && user.role === 0">
+          <button class="btn_subs" (click)="premiumSubscribe()"> Subscrever </button>
+        </div>
+        <div *ngIf="user !== null && user.role === 1">
+          <button class="btn_subs" (click)="cancelPremiumSubscription()"> Cancelar Subscrição </button>
+        </div>
       </div>
-    </div>
+     </div>
   </div>
   <div class="subs_aqui">
     <p>Já subscrito? Clique <a routerLink="" style="text-decoration:auto">AQUI</a> para cancelar a sua subscrição.</p>

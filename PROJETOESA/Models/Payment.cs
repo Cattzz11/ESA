@@ -6,22 +6,13 @@ namespace PROJETOESA.Models
     public class Payment
     {
         [Key]
-        public Guid PaymentId { get; set; }
+        public string PaymentId { get; set; }
 
-        [Required(ErrorMessage ="Required")]
-        [DataType(DataType.Currency)]
-        public double Price { get; set; }
+        public string CustomerId {  get; set; }
 
-        public int? Entity { get; set; }
+        public DateTime date { get; set; }
 
-        public int? Reference {  get; set; }
+        public string paymentState { get; set; }
 
-        public DateTime? LimitDate {  get; set; }
-
-        [Required(ErrorMessage = "Required")]
-        [EnumDataType(typeof(PaymentStatus))]
-        public PaymentStatus paymentStatus { get; set; }
-
-        public string? PaymentMethod {  get; set; }
     }
 }

@@ -31,6 +31,11 @@ import { MAT_DATE_LOCALE, MAT_DATE_FORMATS } from '@angular/material/core';
 import { DateAdapter } from '@angular/material/core';
 import { DatePipe } from '@angular/common';
 import { PaymentComponentComponent } from './users/payment-component/payment-component.component';
+import { PaymentComponent } from './payments/payment.component';
+import { MatDialogModule } from '@angular/material/dialog'
+import { PopUpPaymentComponent } from './flights/flight-data/PopUpPayment/PopUpPayment.component'
+import { PopUpPremiumComponent } from './users/premium/PopUpPremium/PopUpPremium.component'
+import { PopUpCancelPremiumComponent } from './users/premium/PopUpCancelPremium/PopUpCancel.component'
 
 export const MY_FORMATS = {
   parse: {
@@ -62,6 +67,10 @@ export const MY_FORMATS = {
     SubscriptionPageComponent,
     FlightDataComponent,
     PaymentComponentComponent,
+    PaymentComponent,
+    PopUpPaymentComponent,
+    PopUpPremiumComponent,
+    PopUpCancelPremiumComponent
   ],
   imports: [
     BrowserModule,
@@ -72,7 +81,8 @@ export const MY_FORMATS = {
     ApiAuthorizationModule,
     MatFormFieldModule,
     MatInputModule,
-    MatDatepickerModule
+    MatDatepickerModule,
+    MatDialogModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },

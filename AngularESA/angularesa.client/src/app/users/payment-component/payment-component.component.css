@@ -1,0 +1,113 @@
+.payment-div {
+  display: flex;
+  margin-top: 5%;
+  margin-left: 10%;
+  padding-left: 5%;
+}
+
+.personal-data-cliente {
+  flex: 1;
+}
+
+  .personal-data-cliente h1 {
+    font-size: 24px;
+    margin-bottom: 10%;
+  }
+
+.payment-history {
+  grid: auto;
+  flex: 1;
+  margin-top: 0%;
+}
+
+  .payment-history h1 {
+    font-size: 32px;
+    font: bold;
+    margin-bottom: 10%;
+  }
+
+  .payment-history ul {
+    list-style-type: none;
+    padding: 0;
+  }
+
+    .payment-history ul li {
+      margin-bottom: 5px;
+      cursor: pointer;
+    }
+
+.history-item :hover {
+  color: blue; /* Change color on hover */
+}
+
+.history-item li {
+  border-top: 2px solid #006994;
+  margin-bottom: 5px;
+  margin-top: 5px;
+  margin: 30px auto;
+  width: 80%;
+}
+/* Style for payment details */
+.payment-details {
+  display: grid;
+  justify-content: space-between;
+  margin-bottom: 5px;
+  margin-top: 5px;  
+}
+
+.process-payments {
+  margin-bottom: 5px;
+  margin-top: 5px;
+  padding: 1px;
+  padding-top: 20px
+}
+.canceled-payments {
+  margin-bottom: 10px;
+  padding: 1px;
+  padding-top: 20px
+}
+
+.payment-details {
+  display: inline-flex;
+  padding-left:10px;
+  justify-content: space-between;
+}
+
+.additional-details {
+  margin-top: 10px;
+  padding-left: 10px;
+}
+
+.payment-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px; /* Adjust margin as needed */
+}
+
+.complete-button,
+.cancel-button {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.complete-button {
+  background-color: #4caf50; /* Green */
+  color: white;
+}
+
+.cancel-button {
+  background-color: #f44336; /* Red */
+  color: white;
+}
+
+  .complete-button:hover,
+  .cancel-button:hover {
+    background-color: #45a049; /* Darker green */
+  }
+
+  .cancel-button:hover {
+    background-color: #f44336; /* Darker red */
+  }
