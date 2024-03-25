@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -293,7 +293,6 @@ namespace PROJETOESA.Controllers
 
         //Get:
         [HttpPut("api/edit-profile")]
-        [Authorize]
         public async Task<IActionResult> UpdateUserInfo([FromBody] EditUserModel model)
         {
             Debug.WriteLine("SERVIDOR");
