@@ -42,7 +42,7 @@ namespace AeroHelperTest
 
             _accountController = new CustomAccountController(
                 _userManagerMock.Object,
-                _emailSenderMock.Object,
+                null,
                 loggerMock.Object,
                 _codeGeneratorServiceMock.Object,
                 _fixture.DbContext

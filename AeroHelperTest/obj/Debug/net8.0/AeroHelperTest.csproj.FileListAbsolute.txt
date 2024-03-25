@@ -395,7 +395,6 @@ D:\ESA\PROJETOESA\ESA\AeroHelperTest\bin\Debug\net8.0\package.json
 D:\ESA\PROJETOESA\ESA\AeroHelperTest\bin\Debug\net8.0\PROJETOESA.staticwebassets.runtime.json
 D:\ESA\PROJETOESA\ESA\AeroHelperTest\bin\Debug\net8.0\PROJETOESA.exe
 D:\ESA\PROJETOESA\ESA\AeroHelperTest\bin\Debug\net8.0\testhost.exe
-D:\ESA\PROJETOESA\ESA\AeroHelperTest\bin\Debug\net8.0\xunit.runner.visualstudio.dotnetcore.testadapter.dll
 D:\ESA\PROJETOESA\ESA\AeroHelperTest\bin\Debug\net8.0\xunit.runner.reporters.netcoreapp10.dll
 D:\ESA\PROJETOESA\ESA\AeroHelperTest\bin\Debug\net8.0\xunit.runner.utility.netcoreapp10.dll
 D:\ESA\PROJETOESA\ESA\AeroHelperTest\bin\Debug\net8.0\AeroHelperTest.deps.json
@@ -1155,3 +1154,15 @@ C:\Users\Tiago\Desktop\IPS\ESA\AeroHelperTest\obj\Debug\net8.0\AeroHelperTest.pd
 C:\Users\Tiago\Desktop\IPS\ESA\AeroHelperTest\obj\Debug\net8.0\AeroHelperTest.genruntimeconfig.cache
 C:\Users\Tiago\Desktop\IPS\ESA\AeroHelperTest\obj\Debug\net8.0\ref\AeroHelperTest.dll
 C:\Users\danie\OneDrive\Documentos\Meu\UNI STUFF\EsA\Projeto\ESA\AeroHelperTest\bin\Debug\net8.0\Assets\dados.json
+D:\ESA\PROJETOESA\ESA\AeroHelperTest\bin\Debug\net8.0\Assets\dados.json
+D:\ESA\PROJETOESA\ESA\AeroHelperTest\bin\Debug\net8.0\xunit.runner.visualstudio.testadapter.dll
+D:\ESA\PROJETOESA\ESA\AeroHelperTest\bin\Debug\net8.0\APIMatic.Core.dll
+D:\ESA\PROJETOESA\ESA\AeroHelperTest\bin\Debug\net8.0\Azure.Extensions.AspNetCore.Configuration.Secrets.dll
+D:\ESA\PROJETOESA\ESA\AeroHelperTest\bin\Debug\net8.0\Azure.Security.KeyVault.Secrets.dll
+D:\ESA\PROJETOESA\ESA\AeroHelperTest\bin\Debug\net8.0\Mailjet.Client.dll
+D:\ESA\PROJETOESA\ESA\AeroHelperTest\bin\Debug\net8.0\Microsoft.Bcl.HashCode.dll
+D:\ESA\PROJETOESA\ESA\AeroHelperTest\bin\Debug\net8.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+D:\ESA\PROJETOESA\ESA\AeroHelperTest\bin\Debug\net8.0\Microsoft.Extensions.Logging.Abstractions.dll
+D:\ESA\PROJETOESA\ESA\AeroHelperTest\bin\Debug\net8.0\Microsoft.Json.Pointer.dll
+D:\ESA\PROJETOESA\ESA\AeroHelperTest\bin\Debug\net8.0\RestSharp.dll
+D:\ESA\PROJETOESA\ESA\AeroHelperTest\bin\Debug\net8.0\RestSharp.Authenticators.dll

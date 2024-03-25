@@ -629,3 +629,14 @@ C:\Users\danie\OneDrive\Documentos\Meu\UNI STUFF\EsA\Projeto\ESA\PROJETOESA\bin\
 C:\Users\danie\OneDrive\Documentos\Meu\UNI STUFF\EsA\Projeto\ESA\PROJETOESA\bin\Debug\net8.0\Microsoft.Json.Pointer.dll
 C:\Users\danie\OneDrive\Documentos\Meu\UNI STUFF\EsA\Projeto\ESA\PROJETOESA\bin\Debug\net8.0\RestSharp.dll
 C:\Users\danie\OneDrive\Documentos\Meu\UNI STUFF\EsA\Projeto\ESA\PROJETOESA\bin\Debug\net8.0\RestSharp.Authenticators.dll
+D:\ESA\PROJETOESA\ESA\PROJETOESA\bin\Debug\net8.0\Assets\dados.json
+D:\ESA\PROJETOESA\ESA\PROJETOESA\bin\Debug\net8.0\APIMatic.Core.dll
+D:\ESA\PROJETOESA\ESA\PROJETOESA\bin\Debug\net8.0\Azure.Extensions.AspNetCore.Configuration.Secrets.dll
+D:\ESA\PROJETOESA\ESA\PROJETOESA\bin\Debug\net8.0\Azure.Security.KeyVault.Secrets.dll
+D:\ESA\PROJETOESA\ESA\PROJETOESA\bin\Debug\net8.0\Mailjet.Client.dll
+D:\ESA\PROJETOESA\ESA\PROJETOESA\bin\Debug\net8.0\Microsoft.Bcl.HashCode.dll
+D:\ESA\PROJETOESA\ESA\PROJETOESA\bin\Debug\net8.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+D:\ESA\PROJETOESA\ESA\PROJETOESA\bin\Debug\net8.0\Microsoft.Extensions.Logging.Abstractions.dll
+D:\ESA\PROJETOESA\ESA\PROJETOESA\bin\Debug\net8.0\Microsoft.Json.Pointer.dll
+D:\ESA\PROJETOESA\ESA\PROJETOESA\bin\Debug\net8.0\RestSharp.dll
+D:\ESA\PROJETOESA\ESA\PROJETOESA\bin\Debug\net8.0\RestSharp.Authenticators.dll

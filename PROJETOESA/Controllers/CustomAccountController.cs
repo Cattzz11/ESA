@@ -387,7 +387,6 @@ namespace PROJETOESA.Controllers
 
         [HttpPost]
         [Route("api/update-confirmed-email")]
-        [Authorize]
         public async Task<IActionResult> UpdateConfirmedEmail([FromBody] UpdateConfirmedEmailModel model)
         {
             // Find the user in the database based on the email
