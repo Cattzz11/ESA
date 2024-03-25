@@ -38,6 +38,7 @@ import { PopUpCancelPremiumComponent } from './users/premium/PopUpCancelPremium/
 import { StatisticsPageComponent } from './users/statistics-page/statistics-page.component';
 import { GoogleMapsModule } from '@angular/google-maps';
 import { MapComponent } from './flights/map/map.component'
+import { PopUpCancelPaymentComponent } from './users/payment-component/PopUpCancelPayment/PopUpCancelPayment.component'
 
 export const MY_FORMATS = {
   parse: {
@@ -74,6 +75,7 @@ export const MY_FORMATS = {
     PopUpCancelPremiumComponent,
     StatisticsPageComponent,
     MapComponent,
+    PopUpCancelPaymentComponent,
   ],
   imports: [
     BrowserModule,

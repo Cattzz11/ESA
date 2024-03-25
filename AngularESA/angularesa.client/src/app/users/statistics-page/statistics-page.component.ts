@@ -17,11 +17,12 @@ export class StatisticsPageComponent implements OnInit{
   selectedDate!: Date;
   totalUsers: number = 0;
   totalPremiumUsers: number = 0;
+  totalAdmins: number = 0;
   maxLogins: number = 0;
   maxRegistrations: number = 0;
-  labels1: string[] = ['User Normal | User Premium'];
+  labels1: string[] = ['User Normal | User Premium | Adminstradores'];
   labels2: string[] = ['Logins | Registos'];
-  chartNameUsers: string = "Gráfico de Barras UserNormal/UserPremium";
+  chartNameUsers: string = "Gráfico de Barras UserNormal/UserPremium/Administradores";
   chartNameRegistL: string = "Gráfico de Barras Máximo Logins/Registos"
   constructor(private statisticsService: StatisticsService, private chart: StatisticsService) {}
 
@@ -29,8 +30,9 @@ export class StatisticsPageComponent implements OnInit{
     this.statisticsService.getStatistics().subscribe(data => {
       this.totalUsers = data.totalUsersStats;
       this.totalPremiumUsers = data.totalPremiumStats;
-      this.chart.doubleChart(this.chartNameUsers, 'Total Users Normais', 'Total Users Premium', this.labels1, this.totalUsers,
-        this.totalPremiumUsers, 'barchart', 'bar');
+      this.totalAdmins = data.totalAdmins;
+      this.chart.thirdChart(this.chartNameUsers, 'Total Users Normais', 'Total Users Premium', 'Total Administradores', this.labels1, this.totalUsers,
+        this.totalPremiumUsers, this.totalAdmins, 'barchart', 'bar');
       
     });
 

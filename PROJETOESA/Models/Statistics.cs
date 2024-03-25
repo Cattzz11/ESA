@@ -6,5 +6,7 @@
         public int TotalUsersStats { get; set; }
 
         public int TotalPremiumStats { get; set; }
+
+        public int TotalAdmins { get; set; }    
     }
 }

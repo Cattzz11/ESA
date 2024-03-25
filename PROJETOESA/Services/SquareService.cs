@@ -31,6 +31,7 @@ namespace PROJETOESA.Services
         private readonly IConfiguration _configuration;
         private const string subscriptionPlanID = "TAWJ57V3HV7376F4DSDG2ZED";
         private const long subscriptionPrice = 15000;
+        private const string initialTime = "2024-03-25T00:00:00Z";
 
 
         public SquareService(SquareClient client, AeroHelperContext context, IConfiguration configuration)
@@ -92,7 +93,7 @@ namespace PROJETOESA.Services
                         p.paymentState = result.Payment.Status;
                         p.date = DateTime.Now;
                         _context.Payment.Add(p);
-                        _context.SaveChanges();
+                        _context.SaveChangesAsync();
                     }
 
                     if (CustomerCreateCard())
@@ -128,7 +129,7 @@ namespace PROJETOESA.Services
             var customerID = card.Card.CustomerId;
 
             var payment = await _context.Payment
-                .Where(c => c.CustomerId == customerID)
+                .Where(c => c.CustomerId == customerID && c.paymentState == "APPROVED")
                 .OrderByDescending(c => c.date) // Assuming 'Date' is the property representing the date
                 .FirstOrDefaultAsync();
 
@@ -139,7 +140,7 @@ namespace PROJETOESA.Services
                     .Build();
                 var res = _client.PaymentsApi.CompletePayment(payment.PaymentId, paymentRequest);
                 payment.paymentState = res.Payment.Status;
-                _context.SaveChanges();
+                _context.SaveChangesAsync();
                 return res.Payment.Status.Equals("COMPLETED") ? true : false;
             }
 
@@ -177,14 +178,14 @@ namespace PROJETOESA.Services
                     p.paymentState = "COMPLETED";
                     p.date = DateTime.Now;
                     _context.Payment.Add(p);
-                    _context.SaveChanges();
+                    _context.SaveChangesAsync();
                 }
 
                 if (res.Subscription.Id != "")
                 {
                     customerToPremium.Role = TipoConta.ClientePremium;
                     customerToPremium.subscriptionID = res.Subscription.Id;
-                    _context.SaveChanges();
+                    _context.SaveChangesAsync();
                     return true;
                 }
                 else
@@ -215,6 +216,30 @@ namespace PROJETOESA.Services
                 _context.SaveChanges();
 
                 return true;
+            }
+
+            return false;
+
+        }
+
+        public async Task<bool> CancelPayment(string customerCardID)
+        {
+            var card = _client.CardsApi.RetrieveCard(customerCardID);
+
+            var customerID = card.Card.CustomerId;
+
+            var payment = await _context.Payment
+                .Where(c => c.CustomerId == customerID && c.paymentState == "APPROVED")
+                .OrderByDescending(c => c.date) // Assuming 'Date' is the property representing the date
+                .FirstOrDefaultAsync();
+
+            if (payment != null)
+            {
+
+                var res = _client.PaymentsApi.CancelPayment(payment.PaymentId);
+                payment.paymentState = res.Payment.Status;
+                _context.SaveChangesAsync();
+                return res.Payment.Status.Equals("CANCELED") ? true : false;
             }
 
             return false;
@@ -256,7 +281,7 @@ namespace PROJETOESA.Services
                 var customer = _client.CustomersApi.CreateCustomer(createCustomerRequest);
                 var user = _context.Users.FirstOrDefault(x => x.Email == _user.Email);
                 user.CustomerID = customer.Customer.Id;
-                _context.SaveChanges();
+                _context.SaveChangesAsync();
                 return customer.Customer.Id;
             }
             else
@@ -440,6 +465,63 @@ namespace PROJETOESA.Services
             return allPayments;
 
         }
+
+
+        public async Task<List<PaymentHistoryModel>> GetSquareAllPayments()
+        {
+            List<PaymentHistoryModel> allPayments = new List<PaymentHistoryModel>();
+
+            ListPaymentsResponse listOfPayments = _client.PaymentsApi.ListPayments(initialTime, null, null, null, null, null, null, null, 100);
+            
+                if (listOfPayments.Payments.Count != 0)
+                {
+                    var allCustomerIds = await _context.Payment.Select(p=> p.CustomerId).Distinct().ToListAsync();
+                    foreach (var p in listOfPayments.Payments)
+                    {
+                    if (allCustomerIds.Contains(p.CustomerId))
+                        {
+                        var getAPayment = _client.PaymentsApi.GetPayment(p.Id);
+                        var cust = _client.CustomersApi.RetrieveCustomer(p.CustomerId);
+
+                        if (getAPayment != null && getAPayment.Payment.AmountMoney.Amount == subscriptionPrice && cust != null)
+                        {
+                            PaymentHistoryModel subscriptionModel = new PaymentHistoryModel
+                            {
+                                price = subscriptionPrice / 1000,
+                                currency = "EUR",
+                                Email = cust.Customer.EmailAddress,
+                                FirstName = cust.Customer.GivenName,
+                                CreditCard = cust.Customer.Cards[0].Last4,
+                                LastName = "",
+                                ShippingAddress = "",
+                                Status = getAPayment.Payment.Status
+                            };
+                            allPayments.Add(subscriptionModel);
+                        }
+                        else if (getAPayment != null && getAPayment.Payment.AmountMoney.Amount != subscriptionPrice && cust != null)
+                        {
+                            PaymentHistoryModel paymentModel = new PaymentHistoryModel
+                            {
+                                price = (decimal)getAPayment.Payment.AmountMoney.Amount,
+                                currency = "EUR",
+                                Email = cust.Customer.EmailAddress,
+                                FirstName = cust.Customer.GivenName,
+                                CreditCard = cust.Customer.Cards[0].Last4,
+                                LastName = "",
+                                ShippingAddress = "",
+                                Status = getAPayment.Payment.Status
+                            };
+                            allPayments.Add(paymentModel);
+                        }
+                    }
+                        
+
+                    }
+                }
+            return allPayments;
+        }
+
+            
 
 
     }
