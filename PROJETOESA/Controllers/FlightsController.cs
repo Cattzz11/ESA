@@ -94,7 +94,6 @@ namespace PROJETOESA.Controllers
         {
             List<Trip> result = await _skyscannerService.GetSugestionsCompanyAsyncTest();
 
-            //Debug.WriteLine(result.ToString());
             //List<Trip> result = await _skyscannerService.GetSugestionsCompanyAsync(carrierId);
 
             return Ok(result);

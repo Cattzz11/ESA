@@ -52,55 +52,55 @@
   <img src="../../assets/Images/Fading circles.gif" alt="Carregando...">
 </div>
 
-<div *ngIf="!isLoading && this.user && this.user.role !== 1" class="viagens-list">
-  <div class="travelHistory">
-    <div *ngFor="let trip of flights" class="travel">
-      <ng-container *ngIf="trip.flights && trip.flights.length > 0 && trip.flights[0].segments && trip.flights[0].segments.length > 0">
-        <div class="flight">
-          <div class="ida">
-            <img [src]="trip.flights[1].segments[0].carrier.logoURL" alt="Logotipo da Companhia" class="airlineLogo">
-            <div class="origin">
-              <p>{{ trip.flights[1].segments[0].departure | date: 'dd/MM/YYYY' }}</p>
-              <p>{{ trip.flights[1].segments[0].departure | date: 'HH:mm' }} H</p>
-              <p>{{ trip.flights[1].segments[0].originCity.name}}</p>
+<div *ngIf="!isLoading && flights.length > 0" class="viagens-list">
+    <div class="travelHistory">
+        <div *ngFor="let trip of flights" class="travel">
+            <ng-container *ngIf="trip.flights && trip.flights.length > 0 && trip.flights[0].segments && trip.flights[0].segments.length > 0">
+                <div class="flight">
+                    <div class="ida">
+                        <img [src]="trip.flights[1].segments[0].carrier.logoURL" alt="Logotipo da Companhia" class="airlineLogo">
+                        <div class="origin">
+                            <p>{{ trip.flights[1].segments[0].departure | date: 'dd/MM/YYYY' }}</p>
+                            <p>{{ trip.flights[1].segments[0].departure | date: 'HH:mm' }} H</p>
+                            <p>{{ trip.flights[1].segments[0].originCity.name}}</p>
+                        </div>
+                        <div class="duration">
+                            <p>{{ trip.flights[1].duration }}</p>
+                            <div class="arrow-line"></div>
+                            <div class="arrow-head"></div>
+                        </div>
+                        <div class="destination">
+                            <p>{{ trip.flights[1].segments[0].arrival | date: 'dd/MM/YYYY' }}</p>
+                            <p>{{ trip.flights[1].segments[0].arrival | date: 'HH:mm' }} H</p>
+                            <p>{{ trip.flights[1].segments[0].destinationCity.name}}</p>
+                        </div>
+                    </div>
+                    <div class="volta">
+                        <img [src]="trip.flights[0].segments[0].carrier.logoURL" alt="Logotipo da Companhia" class="airlineLogo">
+                        <div class="origin">
+                            <p>{{ trip.flights[0].segments[0].departure | date: 'dd/MM/YYYY' }}</p>
+                            <p>{{ trip.flights[0].segments[0].departure | date: 'HH:mm' }} H</p>
+                            <p>{{ trip.flights[0].segments[0].originCity.name}}</p>
+                        </div>
+                        <div class="duration">
+                            <p>{{ trip.flights[0].duration }}</p>
+                            <div class="arrow-line"></div>
+                            <div class="arrow-head"></div>
+                        </div>
+                        <div class="destination">
+                            <p>{{ trip.flights[0].segments[0].arrival | date: 'dd/MM/YYYY' }}</p>
+                            <p>{{ trip.flights[0].segments[0].arrival | date: 'HH:mm' }} H</p>
+                            <p>{{ trip.flights[0].segments[0].destinationCity.name}}</p>
+                        </div>
+                    </div>
+                </div>
+            </ng-container>
+            <div class="more">
+                <p>Preço: {{ trip.price }} €</p>
+                <a (click)="selectTrip(trip)" class="button-link">Mais opções</a>
             </div>
-            <div class="duration">
-              <p>{{ trip.flights[1].duration }}</p>
-              <div class="arrow-line"></div>
-              <div class="arrow-head"></div>
-            </div>
-            <div class="destination">
-              <p>{{ trip.flights[1].segments[0].arrival | date: 'dd/MM/YYYY' }}</p>
-              <p>{{ trip.flights[1].segments[0].arrival | date: 'HH:mm' }} H</p>
-              <p>{{ trip.flights[1].segments[0].destinationCity.name}}</p>
-            </div>
-          </div>
-          <div class="volta">
-            <img [src]="trip.flights[0].segments[0].carrier.logoURL" alt="Logotipo da Companhia" class="airlineLogo">
-            <div class="origin">
-              <p>{{ trip.flights[0].segments[0].departure | date: 'dd/MM/YYYY' }}</p>
-              <p>{{ trip.flights[0].segments[0].departure | date: 'HH:mm' }} H</p>
-              <p>{{ trip.flights[0].segments[0].originCity.name}}</p>
-            </div>
-            <div class="duration">
-              <p>{{ trip.flights[0].duration }}</p>
-              <div class="arrow-line"></div>
-              <div class="arrow-head"></div>
-            </div>
-            <div class="destination">
-              <p>{{ trip.flights[0].segments[0].arrival | date: 'dd/MM/YYYY' }}</p>
-              <p>{{ trip.flights[0].segments[0].arrival | date: 'HH:mm' }} H</p>
-              <p>{{ trip.flights[0].segments[0].destinationCity.name}}</p>
-            </div>
-          </div>
         </div>
-      </ng-container>
-      <div class="more">
-        <p>Preço: {{ trip.price }} €</p>
-        <a (click)="selectTrip(trip)" class="button-link">Mais opções</a>
-      </div>
     </div>
-  </div>
 </div>
 
 <div *ngIf="!isLoading && this.user && this.user.role === 1" class="viagens-list">

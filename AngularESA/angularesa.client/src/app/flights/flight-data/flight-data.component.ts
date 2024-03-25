@@ -35,31 +35,40 @@ export class FlightDataComponent implements OnInit {
 
   ngOnInit(): void {
     const storedUser = sessionStorage.getItem('user');
+    const routerState = history.state.data;
+
     if (storedUser) {
       this.user = JSON.parse(storedUser);
-    }
-    else
-    {
+      this.assignAction(routerState);
+    } else {
       this.auth.getUserInfo().subscribe({
         next: (userInfo: User) => {
           this.user = userInfo;
-
-          const routerState = history.state.data;
-
-          if (this.user && this.user.role === 1) {
-            if (routerState) {
-              this.tripPremium = routerState;
-            }
-          } else {
-            if (routerState) {
-              this.trip = routerState;
-            }
-          }
+          this.assignAction(routerState);
         },
         error: (error) => {
           console.error('Error fetching user info', error);
+          this.defaultAction(routerState);
         }
       });
+    }
+  }
+
+  private assignAction(routerState: any) {
+    if (this.user && this.user.role === 1) {
+      if (routerState) {
+        this.tripPremium = routerState;
+      }
+    } else {
+      if (routerState) {
+        this.trip = routerState;
+      }
+    }
+  }
+
+  private defaultAction(routerState: any) {
+    if (routerState) {
+      this.trip = routerState;
     }
   }
 
@@ -98,10 +107,8 @@ export class FlightDataComponent implements OnInit {
         }
       );
     } else {
-      
-    }
 
-    
+    }
   }
 
   buyPage(trip: Trip) {

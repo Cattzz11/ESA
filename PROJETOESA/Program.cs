@@ -9,6 +9,7 @@ using Square.Apis;
 using Square.Models;
 using Microsoft.Extensions.Localization;
 using PROJETOESA.Controllers;
+using Microsoft.Extensions.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -36,7 +37,6 @@ builder.Services.AddHttpClient("CountriesAPI", client =>
     client.BaseAddress = new Uri("https://restcountries.com/");
 
 });
-
 
 string accessToken = "EAAAl7w8P9qlJgAIDzJYhYIN3XivD0gDTpSRreKD2nLgYIVqdOJDwy8DpvL_-kYU";
 SquareClient squareClient = new SquareClient.Builder()
