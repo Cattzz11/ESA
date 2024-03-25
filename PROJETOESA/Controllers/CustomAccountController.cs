@@ -9,6 +9,7 @@ using PROJETOESA.Data;
 using System.Diagnostics;
 using PROJETOESA.Services.CodeGeneratorService;
 using PROJETOESA.Services.EmailService;
+using PROJETOESA.Services;
 
 namespace PROJETOESA.Controllers
 {

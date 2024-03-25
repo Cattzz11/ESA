@@ -15,6 +15,7 @@ using PROJETOESA.Services.DataService;
 using PROJETOESA.Services.EmailService;
 using PROJETOESA.Services.FlightService;
 using PROJETOESA.Services.SkyscannerService;
+using Square.Authentication;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -30,12 +31,6 @@ builder.Services.AddHttpClient("SkyscannerAPI", client =>
     client.DefaultRequestHeaders.Add("X-RapidAPI-Host", "sky-scanner3.p.rapidapi.com");
 });
 
-builder.Services.AddHttpClient("EasyPayAPI", client =>
-{
-    client.BaseAddress = new Uri("https://api.test.easypay.pt/2.0");
-    client.DefaultRequestHeaders.Add("AccountId", "0507c24e-1222-433a-9c2c-ae578391eca7");
-    client.DefaultRequestHeaders.Add("ApiKey", "05d2b60e-ee43-46b4-bbf7-7046064af99b");
-});
 
 builder.Services.AddHttpClient("CountriesAPI", client =>
 {
@@ -44,10 +39,15 @@ builder.Services.AddHttpClient("CountriesAPI", client =>
 });
 
 string accessToken = "EAAAl7w8P9qlJgAIDzJYhYIN3XivD0gDTpSRreKD2nLgYIVqdOJDwy8DpvL_-kYU";
+
+BearerAuthModel bearerAuthModel = new BearerAuthModel.Builder(accessToken)
+    .Build();
+
 SquareClient squareClient = new SquareClient.Builder()
     .Environment(Square.Environment.Sandbox)
-    .AccessToken(accessToken)
+    .BearerAuthCredentials(bearerAuthModel)
     .Build();
+
 
 builder.Services.AddSingleton(squareClient);
 builder.Services.AddScoped<SquareService>();
@@ -105,11 +105,11 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 // Adiciona as configurações do EmailSettings a partir do appsettings.json
-builder.Services.Configure<EmailSettings>(
-builder.Configuration.GetSection("EmailSender"));
+//builder.Services.Configure<EmailSettings>(
+//builder.Configuration.GetSection("EmailSender"));
 
 // Adiciona o serviço de envio de e-mails
-builder.Services.AddTransient<IEmailSender, EmailSender>();
+//builder.Services.AddTransient<IEmailSender, EmailSender>();
 
 builder.Services.AddScoped<ICodeGeneratorService, CodeGeneratorService>();
 

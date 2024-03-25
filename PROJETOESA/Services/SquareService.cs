@@ -73,7 +73,8 @@ namespace PROJETOESA.Services
                     squareId = CreateSquareCustomer();
                     squareOrderID = CreateSquareOrder(payment);
                     var idempotencyKey = Guid.NewGuid().ToString();
-                    CreatePaymentRequest paymentRequest = new CreatePaymentRequest.Builder(squareSourceID, idempotencyKey, amountMoney)
+                    CreatePaymentRequest paymentRequest = new CreatePaymentRequest.Builder(squareSourceID, idempotencyKey)
+                        .AmountMoney(amountMoney)
                         .AcceptPartialAuthorization(false)
                         .Autocomplete(false)
                         .BuyerEmailAddress(payment.Email)
@@ -110,18 +111,18 @@ namespace PROJETOESA.Services
 
                 return true;
             }
-            else 
+            else
             {
                 return false;
             }
 
-            
-            
+
+
         }
 
 
         public async Task<bool> CompleteTicketPayment(string customerCardID)
-        { 
+        {
             var card = _client.CardsApi.RetrieveCard(customerCardID);
 
             var customerID = card.Card.CustomerId;
@@ -131,9 +132,12 @@ namespace PROJETOESA.Services
                 .OrderByDescending(c => c.date) // Assuming 'Date' is the property representing the date
                 .FirstOrDefaultAsync();
 
-            if (payment != null) 
+            if (payment != null)
             {
-                var res = _client.PaymentsApi.CompletePayment(payment.PaymentId);
+
+                CompletePaymentRequest paymentRequest = new CompletePaymentRequest.Builder()
+                    .Build();
+                var res = _client.PaymentsApi.CompletePayment(payment.PaymentId, paymentRequest);
                 payment.paymentState = res.Payment.Status;
                 _context.SaveChanges();
                 return res.Payment.Status.Equals("COMPLETED") ? true : false;
@@ -159,13 +163,11 @@ namespace PROJETOESA.Services
 
                 var res = _client.SubscriptionsApi.CreateSubscription(subscription);
 
-                var subscribeID = _client.SubscriptionsApi.RetrieveSubscription(res.Subscription.Id);
+                var invoiceID = _client.InvoicesApi.GetInvoice(res.Subscription.InvoiceIds.FirstOrDefault());
 
-                var orderID = GetOrderId(customerID);
+                var orderID = _client.OrdersApi.RetrieveOrder(invoiceID.Invoice.OrderId);
 
-                var gotOrder = _client.OrdersApi.RetrieveOrder(orderID);
-
-                var paymentID = gotOrder.Order.Tenders[0].PaymentId;
+                var paymentID = orderID.Order.Tenders.FirstOrDefault().PaymentId;
 
                 if (!String.IsNullOrEmpty(paymentID))
                 {
@@ -183,44 +185,15 @@ namespace PROJETOESA.Services
                     customerToPremium.Role = TipoConta.ClientePremium;
                     customerToPremium.subscriptionID = res.Subscription.Id;
                     _context.SaveChanges();
-                    return true; 
-                } 
-                else 
+                    return true;
+                }
+                else
                 { return false; }
             }
 
             return false;
         }
 
-        private string GetOrderId(string customerID)
-        {
-            List<string> locationIds = new List<string>();
-            locationIds.Add(squareLocation);
-            List<string> customerIds = new List<string>();
-            customerIds.Add(customerID);
-
-            InvoiceFilter invoiceFilter = new InvoiceFilter.Builder(locationIds)
-                .CustomerIds(customerIds)
-                .Build();
-
-            InvoiceSort invoiceSort = new InvoiceSort.Builder("INVOICE_SORT_DATE")
-                .Order("DESC")
-                .Build();
-
-
-
-            InvoiceQuery invoiceQuery = new InvoiceQuery.Builder(invoiceFilter)
-                .Sort(invoiceSort)
-                .Build();  
-
-            SearchInvoicesRequest search = new SearchInvoicesRequest.Builder(invoiceQuery).Build();
-
-            var invoiceId = _client.InvoicesApi.SearchInvoices(search);
-
-            string orderId = invoiceId.Invoices[0].OrderId;
-
-            return orderId;
-        }
 
         public async Task<bool> CancelSubscription(string customerCardID)
         {
@@ -258,7 +231,8 @@ namespace PROJETOESA.Services
             var month = DateTime.Now.Month;
             var year = DateTime.Now.Year;
             var dateForReq = year + "-" + month + "-" + day;
-            CreateSubscriptionRequest createSubscription = new CreateSubscriptionRequest.Builder(squareLocation, subscriptionPlanID, customerID)
+            CreateSubscriptionRequest createSubscription = new CreateSubscriptionRequest.Builder(squareLocation, customerID)
+                    .PlanVariationId(subscriptionPlanID)
                     .CardId(customerCardID)
                     .IdempotencyKey(Guid.NewGuid().ToString())
                     .StartDate(dateForReq)
@@ -340,7 +314,7 @@ namespace PROJETOESA.Services
         {
             var customer = _client.CustomersApi.RetrieveCustomer(_user.CustomerID);
             if (customer.Customer.Cards == null)
-            {   
+            {
                 var yearOfExpiration = DateTime.Now.Year + 4;
                 Card newCard = new Card.Builder()
                     .CustomerId(_user.CustomerID)
@@ -365,7 +339,8 @@ namespace PROJETOESA.Services
         {
             _user = await userManager.FindByEmailAsync(customerEmail);
 
-            try {
+            try
+            {
                 if (_user.CustomerID == null)
                 {
                     CreateSquareCustomer();
@@ -393,7 +368,7 @@ namespace PROJETOESA.Services
                 }
 
                 return null;
-                
+
             }
             catch (ApiException e)
             {
@@ -411,7 +386,7 @@ namespace PROJETOESA.Services
         {
             _user = await userManager.FindByEmailAsync(userEmail);
             List<PaymentHistoryModel> allPayments = new List<PaymentHistoryModel>();
-            if (_user.CustomerID != null) 
+            if (_user.CustomerID != null)
             {
                 var customerID = _user.CustomerID;
                 var payment = await _context.Payment
@@ -419,8 +394,8 @@ namespace PROJETOESA.Services
                 .OrderByDescending(c => c.date) // Assuming 'Date' is the property representing the date
                 .ToListAsync();
 
-               
-                if (payment.Count != 0) 
+
+                if (payment.Count != 0)
                 {
                     foreach (var p in payment)
                     {
@@ -431,7 +406,7 @@ namespace PROJETOESA.Services
                         {
                             PaymentHistoryModel subscriptionModel = new PaymentHistoryModel
                             {
-                                price = subscriptionPrice/1000,
+                                price = subscriptionPrice / 1000,
                                 currency = "EUR",
                                 Email = userEmail,
                                 FirstName = _user.Name,
@@ -457,13 +432,13 @@ namespace PROJETOESA.Services
                             };
                             allPayments.Add(paymentModel);
                         }
-                        
+
                     }
                 }
             }
 
             return allPayments;
-            
+
         }
 
 
