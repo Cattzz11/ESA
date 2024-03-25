@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace PROJETOESA.Migrations
 {
     /// <inheritdoc />
-    public partial class initial : Migration
+    public partial class AeroHelper : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -38,6 +38,9 @@ namespace PROJETOESA.Migrations
                     Occupation = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ProfilePicture = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Gender = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CustomerID = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    subscriptionID = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    registerTime = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -100,6 +103,20 @@ namespace PROJETOESA.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Logins",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UserId = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    LoginTime = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Logins", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "PasswordRecoveryCodes",
                 columns: table => new
                 {
@@ -118,13 +135,10 @@ namespace PROJETOESA.Migrations
                 name: "Payment",
                 columns: table => new
                 {
-                    PaymentId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Price = table.Column<double>(type: "float", nullable: false),
-                    Entity = table.Column<int>(type: "int", nullable: true),
-                    Reference = table.Column<int>(type: "int", nullable: true),
-                    LimitDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    paymentStatus = table.Column<int>(type: "int", nullable: false),
-                    PaymentMethod = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    PaymentId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    CustomerId = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    date = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    paymentState = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -516,6 +530,9 @@ namespace PROJETOESA.Migrations
 
             migrationBuilder.DropTable(
                 name: "ConfirmationCodes");
+
+            migrationBuilder.DropTable(
+                name: "Logins");
 
             migrationBuilder.DropTable(
                 name: "PasswordRecoveryCodes");

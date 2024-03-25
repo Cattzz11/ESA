@@ -12,8 +12,8 @@ using PROJETOESA.Data;
 namespace PROJETOESA.Migrations
 {
     [DbContext(typeof(AeroHelperContext))]
-    [Migration("20240316192128_initial")]
-    partial class initial
+    [Migration("20240325172843_AeroHelper")]
+    partial class AeroHelper
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -212,6 +212,9 @@ namespace PROJETOESA.Migrations
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("CustomerID")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Email")
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
@@ -270,6 +273,12 @@ namespace PROJETOESA.Migrations
                     b.Property<string>("UserName")
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
+
+                    b.Property<DateTime>("registerTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("subscriptionID")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -408,6 +417,26 @@ namespace PROJETOESA.Migrations
                     b.ToTable("Flights");
                 });
 
+            modelBuilder.Entity("PROJETOESA.Models.LoginModel", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("LoginTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Logins");
+                });
+
             modelBuilder.Entity("PROJETOESA.Models.PasswordRecoveryCode", b =>
                 {
                     b.Property<int>("Id")
@@ -434,27 +463,19 @@ namespace PROJETOESA.Migrations
 
             modelBuilder.Entity("PROJETOESA.Models.Payment", b =>
                 {
-                    b.Property<Guid>("PaymentId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<string>("PaymentId")
+                        .HasColumnType("nvarchar(450)");
 
-                    b.Property<int?>("Entity")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime?>("LimitDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("PaymentMethod")
+                    b.Property<string>("CustomerId")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<double>("Price")
-                        .HasColumnType("float");
+                    b.Property<DateTime>("date")
+                        .HasColumnType("datetime2");
 
-                    b.Property<int?>("Reference")
-                        .HasColumnType("int");
-
-                    b.Property<int>("paymentStatus")
-                        .HasColumnType("int");
+                    b.Property<string>("paymentState")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("PaymentId");
 
