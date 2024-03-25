@@ -5,7 +5,7 @@ import { Calendar } from '../../Models/Calendar';
 import { SkyscannerService } from '../../services/skyscannerService';
 import { FlightData } from '../../Models/flight-data';
 import { Trip } from '../../Models/Trip';
-import { Router } from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
 import { ViewEncapsulation } from '@angular/core';
 import { MatCalendarCellClassFunction, MatDatepickerInputEvent } from '@angular/material/datepicker';
 import { DatePipe } from '@angular/common';
@@ -14,6 +14,7 @@ import { User } from '../../Models/users';
 import { TripDetails } from '../../Models/TripDetails';
 import { PriceOptions } from '../../Models/PriceOptions';
 import { SearchStateService } from '../../services/SearchStateService';
+import { filter } from 'rxjs';
 
 @Component({
   selector: 'app-search-flights',
@@ -94,6 +95,31 @@ export class SearchFlightsComponent implements OnInit {
     this.dataService.getAllCities().subscribe({
       next: (response) => {
         this.cities = response;
+
+        this.router.events
+          .pipe(filter(event => event instanceof NavigationEnd))
+          .subscribe(() => {
+            const navigation = this.router.getCurrentNavigation();
+            if (navigation?.extras.state) {
+              const state = navigation.extras.state as {
+                origin: string,
+                destination: string,
+                departureDate: string,
+                arrivalDate: string
+              };
+
+              this.selectedCityFrom = state.origin;
+              this.selectedCityTo = state.destination;
+              this.departureDate = state.departureDate;
+              this.arrivalDate = state.arrivalDate;
+
+              this.isLoading = true;
+
+              console.log("AQUI!!!!");
+
+              this.searchFlights();
+            }
+          });
       },
       error: (error) => {
         console.error('Error fetching flights:', error);
@@ -325,7 +351,38 @@ export class SearchFlightsComponent implements OnInit {
   }
 
   private findCityApiKeyByName(cityName: string) {
-    var city = this.cities.find(c => c.name.toLowerCase() === cityName.toLowerCase());
-    return city?.apiKey;
+    let city = this.cities.find(c => c.name.toLowerCase() === cityName.toLowerCase());
+
+    if (city !== undefined) {
+      return city.apiKey;
+    }
+
+    let bestMatch = { city: null as City | null, score: 0 };
+    const target = cityName.toLowerCase();
+
+    this.cities.forEach(city => {
+      const cityNameLower = city.name.toLowerCase();
+      let score = this.similarityScore(target, cityNameLower);
+
+      if (score > bestMatch.score) {
+        bestMatch = { city, score };
+      }
+    });
+
+    return bestMatch.city?.apiKey;
+  }
+
+  private similarityScore(s1: string, s2: string): number {
+    const shorter = s1.length < s2.length ? s1 : s2;
+    const longer = s1.length < s2.length ? s2 : s1;
+    let score = 0;
+
+    for (let i = 0; i < shorter.length; i++) {
+      if (shorter[i] === longer[i]) {
+        score++;
+      }
+    }
+
+    return score;
   }
 }
