@@ -4,6 +4,10 @@
     <img src="../../assets/Images/Fading circles.gif" alt="Carregando...">
 </div>
 
+<div *ngIf="!isLoading && firstSearch && tripList.length === 0" class="viagens-list">
+    <h1>Não foi possivel encontrar viagens.</h1>
+</div>
+
 <div *ngIf="!isLoading && tripList.length > 0" class="viagens-list">
     <div class="travelHistory">
         <div *ngFor="let trip of tripList" class="travel">
@@ -107,4 +111,3 @@
         </div>
     </div>
 </div>
-

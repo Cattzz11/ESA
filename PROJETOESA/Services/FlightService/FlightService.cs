@@ -1,26 +1,26 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json.Linq;
 using PROJETOESA.Controllers;
 using PROJETOESA.Data;
 using PROJETOESA.Models;
 using PROJETOESA.Models.ViewModels;
+using PROJETOESA.Services.SkyscannerService;
 using System.Diagnostics;
 using System.Globalization;
 using System.Text;
-using static System.Net.Mime.MediaTypeNames;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
-namespace PROJETOESA.Services
+namespace PROJETOESA.Services.FlightService
 {
-    public class FlightService
+    public class FlightService : IFlightService
     {
         private readonly HttpClient _httpClient;
         private readonly string _apiKey = "ef9543daa9ed9c4a8cb31fca069c6107";
         private readonly string _googleApiKey = "AIzaSyD58yFxevJ8McI8Wc1WxUfx9EhVl-6D4gQ";
         private readonly AeroHelperContext _context;
-        private readonly SkyscannerService _skyscannerService;
+        private readonly ISkyscannerService _skyscannerService;
 
-        public FlightService(HttpClient httpClient, AeroHelperContext context, SkyscannerService skyscannerService)
+        public FlightService(HttpClient httpClient, AeroHelperContext context, ISkyscannerService skyscannerService)
         {
             _httpClient = httpClient;
             _context = context;
@@ -100,7 +100,7 @@ namespace PROJETOESA.Services
             }
         }
 
-        public async Task<(string latitude, string longitude)> GetCoordinatesAsync(string locationName)
+        public async Task<(string latitude, string longitude)> GetCoordenatesAsync(string locationName)
         {
             var city = await _context.City.FirstOrDefaultAsync(c => c.Name == locationName);
 
@@ -144,34 +144,9 @@ namespace PROJETOESA.Services
             return (mainLatitude, mainLongitude);
         }
 
-        public async Task<string> GenerateMapUrl()
-        {
-            string baseUrl = "https://maps.googleapis.com/maps/api/staticmap?";
-            int mapWidth = 640;
-            int mapHeight = 640;
-            var mapUrl = new StringBuilder($"{baseUrl}size={mapWidth}x{mapHeight}&maptype=roadmap");
-
-            List<FlightsItinerary> flights = await LoadFlightsAsync();
-
-            foreach (var flight in flights)
-            {
-                var departureCoordinates = await GetCoordinatesAsync(flight.DepartureLocation.Name);
-                var arrivalCoordinates = await GetCoordinatesAsync(flight.ArrivalLocation.Name);
-
-                mapUrl.Append($"&markers=color:blue%7Clabel:S%7C{departureCoordinates.latitude},{departureCoordinates.longitude}");
-                mapUrl.Append($"&markers=color:green%7Clabel:D%7C{arrivalCoordinates.latitude},{arrivalCoordinates.longitude}");
-
-                mapUrl.Append($"&path=color:0xff0000ff|weight:5|{departureCoordinates.latitude},{departureCoordinates.longitude}|{arrivalCoordinates.latitude},{arrivalCoordinates.longitude}");
-            }
-
-            mapUrl.Append($"&key={_googleApiKey}");
-
-            return mapUrl.ToString();
-        }
-
         public async Task<string> GetAirlinesDataAsync()
         {
-        
+
             var url = $"http://api.aviationstack.com/v1/airlines?access_key={_apiKey}";
             var response = await _httpClient.GetAsync(url);
             response.EnsureSuccessStatusCode();
@@ -181,9 +156,59 @@ namespace PROJETOESA.Services
             return content;
         }
 
+        //public async Task<List<Trip>> GetFlightsAsync(AddressComponents origin, AddressComponents destination)
+        //{
+        //    var allCities = await _context.City.Include(c => c.Country).ToListAsync();
+
+        //    City FindCity(AddressComponents addressComponents)
+        //    {
+        //        var city = allCities.FirstOrDefault(c => c.Name.ToLower().Equals(addressComponents.city.ToLower()));
+
+        //        if (city != null)
+        //        {
+        //            return city;
+        //        }
+
+        //        var originLatitudeText = addressComponents.latitude.Replace(',', '.');
+        //        var originLongitudeText = addressComponents.longitude.Replace(',', '.');
+
+        //        double originLatitude;
+        //        double originLongitude;
+
+        //        double.TryParse(originLatitudeText, NumberStyles.Any, CultureInfo.InvariantCulture, out originLatitude);
+        //        double.TryParse(originLongitudeText, NumberStyles.Any, CultureInfo.InvariantCulture, out originLongitude);
+
+        //        return allCities
+        //            .Select(c => new
+        //            {
+        //                City = c,
+        //                Distance = HaversineDistance(originLatitude, originLongitude, c)
+        //            })
+        //            .OrderBy(c => c.Distance)
+        //            .First().City;
+        //    }
+
+        //    City originCity = FindCity(origin);
+        //    City destinationCity = FindCity(destination);
+
+        //    string tomorrow = DateTime.Now.AddDays(1).ToString("yyyy-MM-dd");
+        //    string nextWeek = DateTime.Now.AddDays(8).ToString("yyyy-MM-dd");
+
+        //    List<Trip> tripList = await _skyscannerService.GetRoundtripAsync(new FlightData { fromEntityId = originCity.ApiKey, toEntityId = destinationCity.ApiKey, departDate = tomorrow, returnDate = nextWeek });
+
+        //    return tripList;
+        //}
+
         public async Task<List<Trip>> GetFlightsAsync(AddressComponents origin, AddressComponents destination)
         {
             var allCities = await _context.City.Include(c => c.Country).ToListAsync();
+
+            var citiesWithEmptyCoordenates = await _context.City.Include(c => c.Country).Where(c => string.IsNullOrEmpty(c.Coordinates)).ToListAsync();
+
+            if (citiesWithEmptyCoordenates.Any()) 
+            {
+                allCities = await PopulateCoordinatesAsync();
+            }
 
             City FindCity(AddressComponents addressComponents)
             {
@@ -221,19 +246,23 @@ namespace PROJETOESA.Services
 
             List<Trip> tripList = await _skyscannerService.GetRoundtripAsync(new FlightData { fromEntityId = originCity.ApiKey, toEntityId = destinationCity.ApiKey, departDate = tomorrow, returnDate = nextWeek });
 
-            return tripList; 
+            return tripList;
         }
 
         public async Task<List<TripDetailsViewModel>> GetFlightsPremiumAsync(AddressComponents origin, AddressComponents destination)
         {
             List<Trip> trips = await GetFlightsAsync(origin, destination);
 
-            List<TripDetailsViewModel> tripDetails = new List<TripDetailsViewModel>();
+            var tasks = new List<Task<TripDetailsViewModel>>();
 
             foreach (Trip trip in trips)
             {
-                tripDetails.Add(await _skyscannerService.GetTripDetailsAsync(trip.Token, trip.Id));
+                tasks.Add(_skyscannerService.GetTripDetailsAsync(trip.Token, trip.Id));
             }
+
+            var results = await Task.WhenAll(tasks);
+
+            var tripDetails = results.Where(detail => detail != null).ToList();
 
             return tripDetails;
         }
@@ -278,7 +307,7 @@ namespace PROJETOESA.Services
         }
 
         private double HaversineDistance(double lat1, double lon1, City city)
-        {          
+        {
             var coordinates = city.Coordinates.Split(';');
             double lat2;
             double lon2;
@@ -328,7 +357,6 @@ namespace PROJETOESA.Services
             return mostSimilarCarrier;
         }
 
-
         private async Task<City> GetCityAsync(string timezone, string cityName)
         {
             var timezoneCityName = timezone.Split('/').Last().Replace("\\", "");
@@ -337,7 +365,7 @@ namespace PROJETOESA.Services
 
             if (city != null && string.IsNullOrEmpty(city.Coordinates))
             {
-                await GetCoordinatesAsync(city.Name);
+                await GetCoordenatesAsync(city.Name);
             }
 
             if (city != null)
@@ -370,7 +398,7 @@ namespace PROJETOESA.Services
 
             if (string.IsNullOrEmpty(mostSimilarCity.Coordinates))
             {
-                await GetCoordinatesAsync(mostSimilarCity.Name);
+                await GetCoordenatesAsync(mostSimilarCity.Name);
             }
 
             return mostSimilarCity;

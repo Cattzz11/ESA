@@ -1,31 +1,38 @@
-@media (min-width: 900px) {
-  .home-component {
-    max-width: 100%;
-  }
+.main {
+  background-image: url(../../assets/Images/background.png);
+  background-size: cover;
+  background-position: center;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow: hidden;
+  width: 100%;
+  font-family: Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+  min-height: calc(100vh - 50px);
 }
 
-#plane {
-  float: right;
-  padding-top: 150px;
-  width: 50%;
+.logo{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  align-content: center;
+}
+
+.plane {
+  margin-right: 0px;
+  padding-top: 100px;
+  width: 50vw;
 }
 
 .slogan {
+  padding: 20px;
   font-family: 'Roboto Slab', serif;
   color: white;
   text-align: center;
   font-size: 50px;
-  padding-top: 250px;
-  padding-right: 150px;
-}
-
-.home-component {
-  background-image: url(../../assets/Images/background.png);
-  background-size: cover;
-  background-position: center;
-  height: 100vh;
-  width: 100vw;
-  font-family: Arial, sans-serif;
+  line-height: 1.2;
 }
 
 .airline-recommendations {
@@ -194,18 +201,20 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh; /* 100% da altura da viewport */
+  margin-top:200px;
 }
 
   .loading-indicator img {
-    width: 100px; /* ou o tamanho que desejar */
-    height: auto; /* mantém a proporção da imagem */
+    width: 70px;
+    height: auto;
+    animation: spin 2s linear infinite;
   }
 
 .recommendations-header {
   display: flex;
   align-items: center;
   justify-content: space-evenly;
+  padding-top: 100px;
 }
 
 .recommendations-select {
@@ -215,20 +224,17 @@
   background-color: #FAF9F6;
 }
 
-/* You might also want to style the option elements */
 .recommendations-select option {
   padding: 5px;
 }
 
 
-@media (max-width: 600px) {
-  .airlines-container {
-    flex-direction: column;
-    align-items: center;
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
   }
 
-  .airline-card {
-    width: 200px;
+  to {
+    transform: rotate(360deg);
   }
 }
-

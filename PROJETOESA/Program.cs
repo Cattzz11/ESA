@@ -1,4 +1,3 @@
-using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
 using PROJETOESA.Data;
 using PROJETOESA.Models;
@@ -10,6 +9,12 @@ using Square.Models;
 using Microsoft.Extensions.Localization;
 using PROJETOESA.Controllers;
 using Microsoft.Extensions.DependencyInjection;
+using PROJETOESA.Services.AeroDataBoxService;
+using PROJETOESA.Services.CodeGeneratorService;
+using PROJETOESA.Services.DataService;
+using PROJETOESA.Services.EmailService;
+using PROJETOESA.Services.FlightService;
+using PROJETOESA.Services.SkyscannerService;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -54,12 +59,24 @@ builder.Services.AddControllersWithViews()
 
 builder.Services.AddTransient<IStringLocalizer<PaymentController>, StringLocalizer<PaymentController>>();
 
-/*builder.Services.AddHttpClient("SquareAPI", client =>
+
+builder.Services.AddHttpClient("AeroDataBoxClient", client =>
 {
-    client.BaseAddress = new Uri("https://squareecommerceserg-osipchukv1.p.rapidapi.com/get-config");
-    client.DefaultRequestHeaders.Add("X-RapidAPI-Key", "5aeddf19cdmsh124dd08fde357b5p1533bfjsn58b2fe37abe3");
-    client.DefaultRequestHeaders.Add("X-RapidAPI-Host", "SquareECommerceserg-osipchukV1.p.rapidapi.com");
-});*/
+    client.BaseAddress = new Uri("https://aerodatabox.p.rapidapi.com/");
+    client.DefaultRequestHeaders.Add("X-RapidAPI-Key", "e1615ff456msh56f2dd1e1017e8dp1527a2jsn8e9f84f026aa");
+    client.DefaultRequestHeaders.Add("X-RapidAPI-Host", "aerodatabox.p.rapidapi.com");
+});
+
+builder.Services.AddHttpClient("FlighteraFlight", client =>
+{
+    client.BaseAddress = new Uri("https://flightera-flight-data.p.rapidapi.com/");
+    client.DefaultRequestHeaders.Add("X-RapidAPI-Key", "e1615ff456msh56f2dd1e1017e8dp1527a2jsn8e9f84f026aa");
+    client.DefaultRequestHeaders.Add("X-RapidAPI-Host", "flightera-flight-data.p.rapidapi.com");
+});
+
+builder.Services.Configure<MailjetSettings>(builder.Configuration.GetSection("MailjetSettings"));
+
+builder.Services.AddTransient<IEmailService, MailjetEmailSender>();
 
 builder.Services.AddCors(options =>
 {
@@ -73,16 +90,17 @@ builder.Services.AddCors(options =>
 
 builder.Services.AddControllersWithViews();
 
-builder.Services.AddScoped<SkyscannerService>();
-builder.Services.AddScoped<DataService>();
+builder.Services.AddHttpClient<IFlightService, FlightService>();
+builder.Services.AddScoped<ISkyscannerService, SkyscannerService>();
+builder.Services.AddScoped<IDataService, DataService>();
 builder.Services.AddScoped<ICodeGeneratorService, CodeGeneratorService>();
+builder.Services.AddScoped<IAeroDataBoxService, AeroDataBoxService>();
 
 builder.Services.AddAuthorization();
 builder.Services.AddIdentityApiEndpoints<ApplicationUser>()
     .AddEntityFrameworkStores<AeroHelperContext>();
 
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
@@ -96,6 +114,7 @@ builder.Services.AddTransient<IEmailSender, EmailSender>();
 builder.Services.AddScoped<ICodeGeneratorService, CodeGeneratorService>();
 
 
+builder.Services.AddScoped<CodeGeneratorService>();
 
 var app = builder.Build();
 
@@ -105,7 +124,6 @@ app.UseDefaultFiles();
 app.UseStaticFiles();
 app.UseCors("AllowOrigin");
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();

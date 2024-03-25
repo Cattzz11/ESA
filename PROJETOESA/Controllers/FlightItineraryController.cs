@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using PROJETOESA.Models;
-using PROJETOESA.Services;
+using PROJETOESA.Services.FlightService;
 using System.Diagnostics;
 
 namespace PROJETOESA.Controllers
@@ -8,9 +8,9 @@ namespace PROJETOESA.Controllers
     [ApiController]
     public class FlightItineraryController : Controller
     {
-        private readonly FlightService _flightService;
+        private readonly IFlightService _flightService;
 
-        public FlightItineraryController(FlightService flightService)
+        public FlightItineraryController(IFlightService flightService)
         {
             _flightService = flightService;
         }
@@ -33,15 +33,6 @@ namespace PROJETOESA.Controllers
         }
 
         [HttpGet]
-        [Route("api/flight-itinerary/generate-map")]
-        public async Task<IActionResult> CreateMap()
-        {
-            string data = await _flightService.GenerateMapUrl();
-
-            return Ok(data);
-        }
-
-        [HttpGet]
         [Route("api/flight-itinerary/search-flights")]
         public async Task<IActionResult> SearchFlights([FromQuery] AddressComponents origin, [FromQuery] AddressComponents destination)
         {
@@ -53,6 +44,7 @@ namespace PROJETOESA.Controllers
         [Route("api/flight-itinerary/search-flights-premium")]
         public async Task<IActionResult> SearchFlightsPremium([FromQuery] AddressComponents origin, [FromQuery] AddressComponents destination)
         {
+            Debug.WriteLine("Controller");
             var data = await _flightService.GetFlightsPremiumAsync(origin, destination);
             return Ok(data);
         }

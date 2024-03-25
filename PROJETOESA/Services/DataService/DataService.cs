@@ -1,29 +1,27 @@
-﻿using Microsoft.EntityFrameworkCore;
-using PROJETOESA.Models;
-using static PROJETOESA.Services.SkyscannerService;
-using System.Diagnostics;
-using System.Net.Http;
-using PROJETOESA.Data;
-using System.Text.Json;
-using PROJETOESA.Models.ViewModels;
+﻿
 
-namespace PROJETOESA.Services
+using Mailjet.Client.Resources;
+using Microsoft.EntityFrameworkCore;
+using PROJETOESA.Data;
+using PROJETOESA.Models;
+using PROJETOESA.Models.ViewModels;
+using PROJETOESA.Services.SkyscannerService;
+using System.Text.Json;
+
+namespace PROJETOESA.Services.DataService
 {
-    public class DataService
+    public class DataService : IDataService
     {
-        private readonly HttpClient _httpClient;
         private readonly AeroHelperContext _context;
         private readonly HttpClient _httpClient2;
-        private readonly SkyscannerService _skyscannerService;
+        private readonly ISkyscannerService _skyscannerService;
 
         public DataService(
-            IHttpClientFactory httpClientFactory, 
-            AeroHelperContext context, 
+            AeroHelperContext context,
             IHttpClientFactory clientFactory,
-            SkyscannerService skyscannerService
+            ISkyscannerService skyscannerService
             )
         {
-            _httpClient = httpClientFactory.CreateClient("SkyscannerAPI");
             _context = context;
             _httpClient2 = clientFactory.CreateClient("CountriesAPI");
             _skyscannerService = skyscannerService;
@@ -178,18 +176,18 @@ namespace PROJETOESA.Services
             }
             else
             {
-                var result = await _skyscannerService.GetDataAsync(country);
+                var result = await _skyscannerService.GetDataAsync(country.Name);
                 List<City> cities = new List<City>();
 
                 foreach (var item in result)
                 {
-                    if (item.flightPlaceType != "COUNTRY" && !existingCities.Any(c => c.Id == item.skyId))
+                    if (item.flightPlaceType != "COUNTRY" && !existingCities.Any(c => c.Id == item.cityId))
                     {
                         var city = new City
                         {
-                            Id = item.skyId,
-                            Name = item.localizedName,
-                            ApiKey = item.id,
+                            Id = item.cityId,
+                            Name = item.city,
+                            ApiKey = item.apiKey,
                             CountryId = country.Id
                         };
                         cities.Add(city);
@@ -234,5 +232,5 @@ namespace PROJETOESA.Services
         {
             public string common { get; set; }
         }
-    }    
+    }
 }

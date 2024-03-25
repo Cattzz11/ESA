@@ -1,13 +1,17 @@
-.container {
+.signinitial {
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
-  min-width: 100vw;
+  width: 100vw;
+  min-height: calc(100vh - 50px);
   overflow: hidden;
 }
 
-.confirmation-container {
+.login-box {
+  width: 80%;
+  min-width: calc(100vw - 500px);
+  min-height: calc(100vh - 500px);
+  margin: auto;
   display: flex;
   justify-content: space-between;
   background-color: #fff;
@@ -15,20 +19,15 @@
   border-radius: 10px;
   overflow: hidden;
   box-sizing: border-box;
-  min-height: 60vh;
 }
 
-.confirmation-form {
+.login-form {
   display: flex;
-  justify-content: space-evenly;
   flex-direction: column;
+  justify-content: center;
   padding: 20px;
   flex-basis: 50%;
   background-color: #006994;
-}
-
-.recoverItems {
-  align-self: center;
 }
 
 .titulo {
@@ -42,12 +41,12 @@ h2 {
   margin: 0;
 }
 
-.recover-form h2 {
+.login-form h2 {
   color: white;
   margin-bottom: 20px;
 }
 
-.confirmation-form input {
+.login-form input {
   display: block;
   width: 100%;
   margin-bottom: 10px;
@@ -56,7 +55,7 @@ h2 {
   border-radius: 10px;
 }
 
-.confirmation-form button {
+.login-form button {
   width: 100%;
   padding: 10px;
   margin-top: 20px;
@@ -69,12 +68,17 @@ h2 {
   font-size: large;
 }
 
-  .confirmation-form button:disabled {
+  .login-form button:disabled {
     background-color: #cccccc;
   }
 
+.login-google, .login-outlook {
+  display: flex;
+  margin-top: 10px;
+}
+
 .login-branding {
-  width: 50%;
+  width: 60%;
   background-size: cover;
   background-position: center;
 }
@@ -89,16 +93,8 @@ h2 {
   transform: translateY(-50%);
 }
 
-.login-branding {
-  width: 60%;
+.login-form input,
+.login-form button,
+.login-form a {
+  margin-bottom: 30px;
 }
-
-.resend-link {
-  color: blue;
-  text-decoration: underline;
-  cursor: pointer;
-}
-
-  .resend-link:hover {
-    color: darkblue;
-  }

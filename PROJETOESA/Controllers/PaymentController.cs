@@ -42,13 +42,13 @@ namespace PROJETOESA.Controllers
         public async Task<IActionResult> PurchaseTicket([FromBody] PaymentModel payment)
         {
 
-            try
-            {
-                // Check if required properties are present
-                if (payment == null)
-                {
-                    return BadRequest(new { Message = "Invalid request format" });
-                }
+//            try
+//            {
+//                // Check if required properties are present
+//                if (payment == null)
+//                {
+//                    return BadRequest(new { Message = "Invalid request format" });
+//                }
 
                 Task<ApplicationUser?> user = _userManager.FindByEmailAsync(payment.Email);
 
@@ -66,19 +66,19 @@ namespace PROJETOESA.Controllers
 
                 var res = await _squareService.PayAsync(paymentModel, _userManager);
 
-                await _context.SaveChangesAsync();
+//                await _context.SaveChangesAsync();
 
                 // Return a success response
                 return Ok(res);
 
 
-            }
-            catch (Exception ex)
-            {
-                // Return an error response with details
-                return BadRequest(new { Message = "Failed to purchase ticket", Error = ex.Message });
-            }
-        }
+//            }
+//            catch (Exception ex)
+//            {
+//                // Return an error response with details
+//                return BadRequest(new { Message = "Failed to purchase ticket", Error = ex.Message });
+//            }
+//        }
 
         [HttpGet("api/payment/get-cards/{customerEmail}")]
         public async Task<ActionResult<IEnumerable<SquareCard>>> GetCustomerCards(string customerEmail)

@@ -219,9 +219,8 @@ button.date-low {
     transform: translateX(135%) translateY(-50%);
   }
 
-
-@media (max-width: 768px) {
-  .search-bar {
+  @media (max-width: 768px) {
+    .search-bar {
     flex-direction: column;
   }
 

@@ -4,13 +4,11 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using PROJETOESA.Models;
 using Microsoft.AspNetCore.Identity.UI.Services;
-using PROJETOESA.Services;
 using Microsoft.EntityFrameworkCore;
 using PROJETOESA.Data;
 using System.Diagnostics;
-using Microsoft.DotNet.Scaffolding.Shared.Messaging;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Microsoft.IdentityModel.Tokens;
+using PROJETOESA.Services.CodeGeneratorService;
+using PROJETOESA.Services.EmailService;
 
 namespace PROJETOESA.Controllers
 {
@@ -19,13 +17,13 @@ namespace PROJETOESA.Controllers
     public class CustomAccountController : ControllerBase
     {
         private readonly UserManager<ApplicationUser> _userManager;
-        private readonly IEmailSender _emailSender;
+        private readonly IEmailService _emailSender;
         private readonly ILogger<CustomAccountController> _logger;
         private readonly ICodeGeneratorService _codeGeneratorService;
         private readonly AeroHelperContext _context;
 
 
-        public CustomAccountController(UserManager<ApplicationUser> userManager, IEmailSender emailSender, ILogger<CustomAccountController> logger, ICodeGeneratorService codeGeneratorService, AeroHelperContext context)
+        public CustomAccountController(UserManager<ApplicationUser> userManager, IEmailService emailSender, ILogger<CustomAccountController> logger, ICodeGeneratorService codeGeneratorService, AeroHelperContext context)
         {
             _userManager = userManager;
             _emailSender = emailSender;

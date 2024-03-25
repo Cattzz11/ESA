@@ -45,6 +45,8 @@ export class FlightItineraryService {
       .set('destination.latitude', destination.latitude)
       .set('destination.longitude', destination.longitude);
 
+    console.log("Angular Service");
+
     return this.http.get<TripDetails[]>('api/flight-itinerary/search-flights-premium', { params });
   }
 }
