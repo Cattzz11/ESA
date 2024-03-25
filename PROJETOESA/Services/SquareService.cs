@@ -159,11 +159,13 @@ namespace PROJETOESA.Services
 
                 var res = _client.SubscriptionsApi.CreateSubscription(subscription);
 
-                var invoiceID = _client.InvoicesApi.GetInvoice(res.Subscription.InvoiceIds.FirstOrDefault());
+                var subscribeID = _client.SubscriptionsApi.RetrieveSubscription(res.Subscription.Id);
 
-                var orderID = _client.OrdersApi.RetrieveOrder(invoiceID.Invoice.OrderId);
+                var orderID = GetOrderId(customerID);
 
-                var paymentID = orderID.Order.Tenders.FirstOrDefault().PaymentId;
+                var gotOrder = _client.OrdersApi.RetrieveOrder(orderID);
+
+                var paymentID = gotOrder.Order.Tenders[0].PaymentId;
 
                 if (!String.IsNullOrEmpty(paymentID))
                 {
@@ -190,6 +192,35 @@ namespace PROJETOESA.Services
             return false;
         }
 
+        private string GetOrderId(string customerID)
+        {
+            List<string> locationIds = new List<string>();
+            locationIds.Add(squareLocation);
+            List<string> customerIds = new List<string>();
+            customerIds.Add(customerID);
+
+            InvoiceFilter invoiceFilter = new InvoiceFilter.Builder(locationIds)
+                .CustomerIds(customerIds)
+                .Build();
+
+            InvoiceSort invoiceSort = new InvoiceSort.Builder("INVOICE_SORT_DATE")
+                .Order("DESC")
+                .Build();
+
+
+
+            InvoiceQuery invoiceQuery = new InvoiceQuery.Builder(invoiceFilter)
+                .Sort(invoiceSort)
+                .Build();  
+
+            SearchInvoicesRequest search = new SearchInvoicesRequest.Builder(invoiceQuery).Build();
+
+            var invoiceId = _client.InvoicesApi.SearchInvoices(search);
+
+            string orderId = invoiceId.Invoices[0].OrderId;
+
+            return orderId;
+        }
 
         public async Task<bool> CancelSubscription(string customerCardID)
         {

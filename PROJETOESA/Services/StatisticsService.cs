@@ -17,7 +17,7 @@ namespace PROJETOESA.Services
 
         public async Task<Statistics> GetStatisticsAsync()
         {
-            var totalUsers =_context.Users.Count() ; // Assumindo que você tem uma tabela de Users
+            var totalUsers =_context.Users.Count(u => u.Role.Equals(TipoConta.ClienteNormal)) ; // Assumindo que você tem uma tabela de Users
             var premiumUsers = _context.Users.Count(u => u.Role.Equals(TipoConta.ClientePremium));
 
             return new Statistics

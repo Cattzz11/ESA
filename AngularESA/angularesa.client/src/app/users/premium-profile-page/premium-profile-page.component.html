@@ -4,7 +4,6 @@
     <div class="topButtons">
         <button class="edit" *ngIf="!isLoggedInWGoogle"><a routerLink="/edit-profile">Editar Perfil</a></button>
         <button class="payments" routerLink="/payment-component" >Pagamentos</button>
-        <button class="payments">Pagamentos</button>
         <button class="estatísticas" *ngIf="user?.role===2"><a routerLink="/statistics-page" style="text-decoration:none; color:black;">Estatísticas</a></button>
         <button class="premium"><a routerLink="/premium-component" style="text-decoration:none; color:black;">Premium</a></button>
     </div>
