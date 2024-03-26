@@ -827,16 +827,16 @@ namespace PROJETOESA.Services.SkyscannerService
 
                 List<CustomGetDataModel> data = await GetDataAsync(cityName);
 
-                foreach(var item in data)
+                foreach (var item in data)
                 {
-                    if(item.cityId == cityId)
+                    if (item.cityId == cityId)
                     {
                         using var transaction = await _context.Database.BeginTransactionAsync();
                         try
                         {
                             var newCity = new City { Id = item.cityId, Name = cityName, ApiKey = item.apiKey, CountryId = country.Id, Country = country };
                             await _context.City.AddAsync(newCity);
-                            
+
                             await _context.SaveChangesAsync();
                             await transaction.CommitAsync();
 
@@ -846,11 +846,11 @@ namespace PROJETOESA.Services.SkyscannerService
                         {
                             await transaction.RollbackAsync();
                         }
-                        
+
                     }
                 }
             }
-         
+
             return result!;
         }
 

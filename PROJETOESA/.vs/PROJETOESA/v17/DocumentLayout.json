@@ -7,6 +7,9 @@
     },
     {
       "AbsoluteMoniker": "D:0:0:{FFDC8847-A03D-4B34-BF6B-037A713978B8}|..\\AngularESA\\angularesa.client\\angularesa.client.esproj|c:\\users\\tiago\\desktop\\ips\\esa\\angularesa\\angularesa.client\\src\\app\\flights\\map\\map.component.ts||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FFDC8847-A03D-4B34-BF6B-037A713978B8}|..\\AngularESA\\angularesa.client\\angularesa.client.esproj|c:\\users\\tiago\\desktop\\ips\\esa\\angularesa\\angularesa.client\\src\\app\\flights\\search-flights\\search-flights.component.html||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     }
   ],
   "DocumentGroupContainers": [
@@ -16,8 +19,21 @@
       "DocumentGroups": [
         {
           "DockedWidth": 207,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 1,
           "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "search-flights.component.html",
+              "DocumentMoniker": "C:\\Users\\Tiago\\Desktop\\IPS\\ESA\\AngularESA\\angularesa.client\\src\\app\\flights\\search-flights\\search-flights.component.html",
+              "RelativeDocumentMoniker": "..\\AngularESA\\angularesa.client\\src\\app\\flights\\search-flights\\search-flights.component.html",
+              "ToolTip": "C:\\Users\\Tiago\\Desktop\\IPS\\ESA\\AngularESA\\angularesa.client\\src\\app\\flights\\search-flights\\search-flights.component.html",
+              "RelativeToolTip": "..\\AngularESA\\angularesa.client\\src\\app\\flights\\search-flights\\search-flights.component.html",
+              "ViewState": "AQIAADwAAAAAAAAAAAAAACsAAABIAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
+              "WhenOpened": "2024-03-25T23:57:52.893Z",
+              "EditorCaption": ""
+            },
             {
               "$type": "Document",
               "DocumentIndex": 0,
@@ -26,7 +42,7 @@
               "RelativeDocumentMoniker": "..\\AngularESA\\angularesa.client\\src\\app\\flights\\search-flights\\search-flights.component.ts",
               "ToolTip": "C:\\Users\\Tiago\\Desktop\\IPS\\ESA\\AngularESA\\angularesa.client\\src\\app\\flights\\search-flights\\search-flights.component.ts",
               "RelativeToolTip": "..\\AngularESA\\angularesa.client\\src\\app\\flights\\search-flights\\search-flights.component.ts",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAGABAAAtAAAA",
+              "ViewState": "AQIAADUAAAAAAAAAAAAAwFUAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003213|",
               "WhenOpened": "2024-03-25T23:03:13.058Z",
               "EditorCaption": ""
@@ -39,7 +55,7 @@
               "RelativeDocumentMoniker": "..\\AngularESA\\angularesa.client\\src\\app\\flights\\map\\map.component.ts",
               "ToolTip": "C:\\Users\\Tiago\\Desktop\\IPS\\ESA\\AngularESA\\angularesa.client\\src\\app\\flights\\map\\map.component.ts",
               "RelativeToolTip": "..\\AngularESA\\angularesa.client\\src\\app\\flights\\map\\map.component.ts",
-              "ViewState": "AQIAAMIBAAAAAAAAAAAuwN0BAAACAAAA",
+              "ViewState": "AQIAAL8BAAAAAAAAAAAAAO0BAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003213|",
               "WhenOpened": "2024-03-25T22:27:03.786Z",
               "EditorCaption": ""

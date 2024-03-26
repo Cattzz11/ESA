@@ -1,11 +1,11 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, AfterViewInit } from '@angular/core';
 import { City } from '../../Models/City';
 import { DataService } from '../../services/DataService';
 import { Calendar } from '../../Models/Calendar';
 import { SkyscannerService } from '../../services/skyscannerService';
 import { FlightData } from '../../Models/flight-data';
 import { Trip } from '../../Models/Trip';
-import { NavigationEnd, Router } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { ViewEncapsulation } from '@angular/core';
 import { MatCalendarCellClassFunction, MatDatepickerInputEvent } from '@angular/material/datepicker';
 import { DatePipe } from '@angular/common';
@@ -53,7 +53,8 @@ export class SearchFlightsComponent implements OnInit {
     private cdr: ChangeDetectorRef,
     private datePipe: DatePipe,
     private auth: AuthorizeService,
-    private searchStateService: SearchStateService 
+    private searchStateService: SearchStateService,
+    private activatedRoute: ActivatedRoute
   )
   {}
 
@@ -77,52 +78,24 @@ export class SearchFlightsComponent implements OnInit {
       this.searchStateService.clearSearchState();
     }
 
-    const storedUser = sessionStorage.getItem('user');
-    if (storedUser) {
-      this.user = JSON.parse(storedUser);
-    }
-    else {
-      this.auth.getUserInfo().subscribe({
+    this.auth.getUserInfo().subscribe({
         next: (userInfo: User) => {
           this.user = userInfo;
-        },
-        error: (error) => {
-          console.error('Error fetching user info', error);
         }
       });
-    }
 
     this.dataService.getAllCities().subscribe({
       next: (response) => {
         this.cities = response;
+        this.activatedRoute.queryParams.subscribe(params => {
+          this.selectedCityFrom = params['origin'];
+          this.selectedCityTo = params['destination'];
+          this.departureDate = params['departureDate'];
+          this.arrivalDate = params['arrivalDate'];
+        });
+        this.isLoading = true;
+        this.searchFlights();
 
-        this.router.events
-          .pipe(filter(event => event instanceof NavigationEnd))
-          .subscribe(() => {
-            const navigation = this.router.getCurrentNavigation();
-            if (navigation?.extras.state) {
-              const state = navigation.extras.state as {
-                origin: string,
-                destination: string,
-                departureDate: string,
-                arrivalDate: string
-              };
-
-              this.selectedCityFrom = state.origin;
-              this.selectedCityTo = state.destination;
-              this.departureDate = state.departureDate;
-              this.arrivalDate = state.arrivalDate;
-
-              this.isLoading = true;
-
-              console.log("AQUI!!!!");
-
-              this.searchFlights();
-            }
-          });
-      },
-      error: (error) => {
-        console.error('Error fetching flights:', error);
       }
     });
   }
@@ -167,6 +140,8 @@ export class SearchFlightsComponent implements OnInit {
   }
 
   searchFlights() {
+    console.log("Aqui!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+
     this.isLoading = true;
 
     let data: FlightData = {
@@ -175,6 +150,14 @@ export class SearchFlightsComponent implements OnInit {
       departDate: this.departureDate,
       returnDate: this.arrivalDate
     }
+    console.log(this.cities.length);
+
+    console.log(this.selectedCityFrom);
+    console.log(this.selectedCityTo);
+    console.log(data.fromEntityId);
+    console.log(data.toEntityId);
+    console.log(data.departDate);
+    console.log(data.returnDate);
 
     if (this.user && this.user.role === 1) {
       this.skyscannerService.getRoundtripFlightsPremium(data).subscribe({
@@ -192,6 +175,9 @@ export class SearchFlightsComponent implements OnInit {
         next: (response) => {
           this.flights = response;
           this.isLoading = false;
+          console.log("Aqui!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+          console.log(response);
+          console.log(response.length);
         },
         error: (error) => {
           this.isLoading = false;
@@ -351,7 +337,7 @@ export class SearchFlightsComponent implements OnInit {
   }
 
   private findCityApiKeyByName(cityName: string) {
-    let city = this.cities.find(c => c.name.toLowerCase() === cityName.toLowerCase());
+    let city = this.cities.find(c => c.name?.toLowerCase() === cityName?.toLowerCase());
 
     if (city !== undefined) {
       return city.apiKey;
