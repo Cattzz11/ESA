@@ -93,9 +93,16 @@ export class SearchFlightsComponent implements OnInit {
           this.departureDate = params['departureDate'];
           this.arrivalDate = params['arrivalDate'];
         });
-        this.isLoading = true;
-        this.searchFlights();
+        if (this.selectedCityFrom.trim() && this.selectedCityTo.trim() && this.departureDate.trim() && this.arrivalDate.trim()) {
+          this.isLoading = true;
+          this.validateForm();
+          this.loadCalendar(this.selectedCityFrom, this.selectedCityTo);
+          this.departureEnabled = true;
+          this.arrivalEnabled = true;
+          this.searchFlights();
+        }
 
+        this.cdr.markForCheck();
       }
     });
   }
@@ -140,8 +147,6 @@ export class SearchFlightsComponent implements OnInit {
   }
 
   searchFlights() {
-    console.log("Aqui!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-
     this.isLoading = true;
 
     let data: FlightData = {
@@ -150,14 +155,6 @@ export class SearchFlightsComponent implements OnInit {
       departDate: this.departureDate,
       returnDate: this.arrivalDate
     }
-    console.log(this.cities.length);
-
-    console.log(this.selectedCityFrom);
-    console.log(this.selectedCityTo);
-    console.log(data.fromEntityId);
-    console.log(data.toEntityId);
-    console.log(data.departDate);
-    console.log(data.returnDate);
 
     if (this.user && this.user.role === 1) {
       this.skyscannerService.getRoundtripFlightsPremium(data).subscribe({
@@ -175,9 +172,6 @@ export class SearchFlightsComponent implements OnInit {
         next: (response) => {
           this.flights = response;
           this.isLoading = false;
-          console.log("Aqui!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-          console.log(response);
-          console.log(response.length);
         },
         error: (error) => {
           this.isLoading = false;
@@ -297,7 +291,6 @@ export class SearchFlightsComponent implements OnInit {
   validateForm() {
     this.fromValid = this.isCityValid(this.selectedCityFrom);
     this.toValid = this.isCityValid(this.selectedCityTo);
-    // Verifica se ambas as cidades são válidas antes de permitir a busca
     this.canSearch = this.fromValid && this.toValid && !!this.departureDate && !!this.arrivalDate;
   }
 
