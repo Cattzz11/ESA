@@ -1,36 +1,61 @@
+<script src="sweetalert2.all.min.js"></script>
+
 <div class="editInitial">
     <div class="titulo">
         <h2>Bem Vindo à edição de perfil, por favor faça as suas alterações</h2>
     </div>
     <div class="edit-wrapper">
         <div class="edit-form">
-            <form class="form-edit" [formGroup]="editForm">
-                <h2>Editar Perfil</h2>
-                <div class="edit-profile-class">
-                    <label>Foto de Perfil</label><br />
-                    <img class="profile-picture" [src]="photoPreview" *ngIf="photoPreview" alt="Preview" />
-                    <!-- (change)="onFileSelected($event)" -->
-                    <input type="file" id="profilePicture" accept="image/*" /> <br />
-                </div>
-                <input type="text" formControlName="name" placeholder="Nome" />
-                <input type="text" formControlName="email" readonly placeholder="Email" />
-                <input type="date" formControlName="birthDate" placeholder="Data de Nascimento" />
-                <div class="genderArea">
-                    <p>Género:</p>
-                    <div class="gender-option">
-                        <label for="Masculino">Masculino:</label>
-                        <input type="radio" id="Masculino" formControlName="gender" value="Masculino">
-                    </div>
-                    <div class="gender-option">
-                        <label for="Feminino">Feminino:</label>
-                        <input type="radio" id="Feminino" formControlName="gender" value="Feminino">
-                    </div>
-
-                </div>
-                <input type="text" id="nationality" formControlName="nationality" placeholder="Nacionalidade" />
-                <button class="button-save" type="submit" (click)="edit()">Salvar</button>
-                <button class="delete_button" (click)="deleteUserProfile(user.email)"> Apagar Conta</button>
-            </form>
+          <form class="form-edit" [formGroup]="editForm">
+            <h2>Editar Perfil</h2>
+            <div class="edit-profile-class">
+              <label>Foto de Perfil</label><br />
+              <img class="profile-picture" [src]="photoPreview" *ngIf="photoPreview" alt="Preview" />
+              <!-- (change)="onFileSelected($event)" -->
+              <input type="file" id="profilePicture" accept="image/*" style="color:white;"/> <br />
+            </div>
+            <div>
+              <label for="name">Nome:</label><br />
+              <input type="text" formControlName="name" placeholder="Nome" />
+            </div>
+            <div>
+              <label for="email">Email:</label><br />
+              <input type="text" formControlName="email" readonly placeholder="Email" />
+            </div>
+            <div>
+              <label for="birthDate">Data de Nascimento:</label><br />
+              <input type="date" formControlName="birthDate" placeholder="Data de Nascimento" />
+            </div>
+            <div>
+              <label for="age">Idade:</label><br />
+              <input type="text" formControlName="age" readonly placeholder="Idade"/>
+            </div>
+            <div class="genderArea">
+              <p style="color:white;">Género:</p>
+              <div class="gender-option">
+                <label for="Masculino">Masculino:</label>
+                <input type="radio" id="Masculino" formControlName="gender" value="Masculino">
+              </div>
+              <div class="gender-option">
+                <label for="Feminino">Feminino:</label>
+                <input type="radio" id="Feminino" formControlName="gender" value="Feminino">
+              </div>
+              <div class="gender-option">
+                <label for="genderOther">Outro</label>
+                <input type="radio" id="genderOther" formControlName="gender" value="Outro">
+              </div>
+            </div>
+            <div>
+              <label for="occupation">Ocupação:</label><br />
+              <input type="text" id="occupation" formControlName="occupation" placeholder="Ocupação"/>
+            </div>
+            <div>
+              <label for="nationality">Nacionalidade:</label><br />
+              <input type="text" id="nationality" formControlName="nationality" placeholder="Nacionalidade" />
+            </div>
+            <button class="button-save" type="submit" (click)="edit()">Salvar</button>
+            <button class="delete_button" (click)="deleteUserProfile(user.email)"> Apagar Conta</button>
+          </form>
         </div>
         <div class="login-branding" style="background-image: url('../assets/Images/background.png');">
             <img src="../assets/Images/logo.png" alt="Logo" class="logo" />

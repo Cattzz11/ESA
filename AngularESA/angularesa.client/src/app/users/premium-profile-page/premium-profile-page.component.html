@@ -20,7 +20,7 @@
       <div class="profile-info">
         <h1>{{ user?.name }}</h1>
         <p>E-mail: {{ user?.email }}</p>
-        <p *ngIf="user && user.age !== undefined && user.age > 0">Idade: {{ user.age }} anos</p>
+        <p *ngIf="user && user.age !== undefined">Idade: {{ user.age }}  anos</p>
         <p *ngIf="user && user.occupation !== null">Ocupação: {{ user.occupation }}</p>
         <p *ngIf="user && user.nationality !== null">Nacionalidade: {{ user.nationality }}</p>
       </div>
