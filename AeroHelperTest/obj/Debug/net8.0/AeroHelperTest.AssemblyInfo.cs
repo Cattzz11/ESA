@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("AeroHelperTest")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+aaf6b8d2a8c321adf180d49031d1c191957b88ed")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0c6514b6095249117e07f28df6f4b6aa8a48ae5f")]
 [assembly: System.Reflection.AssemblyProductAttribute("AeroHelperTest")]
 [assembly: System.Reflection.AssemblyTitleAttribute("AeroHelperTest")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

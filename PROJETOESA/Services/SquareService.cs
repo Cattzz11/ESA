@@ -160,15 +160,15 @@ namespace PROJETOESA.Services
 
             if (customerToPremium != null)
             {
-                CreateSubscriptionRequest subscription = CreateSquareSubscription(customerCardID);
+                CreateSubscriptionRequest subscription = await CreateSquareSubscription(customerCardID);
 
-                var res = _client.SubscriptionsApi.CreateSubscription(subscription);
+                var res = await _client.SubscriptionsApi.CreateSubscriptionAsync(subscription);
 
-                var invoiceID = _client.InvoicesApi.GetInvoice(res.Subscription.InvoiceIds.FirstOrDefault());
+                var orderID = GetOrderId(customerID);
 
-                var orderID = _client.OrdersApi.RetrieveOrder(invoiceID.Invoice.OrderId);
+                var gotOrder = _client.OrdersApi.RetrieveOrder(orderID);
 
-                var paymentID = orderID.Order.Tenders.FirstOrDefault().PaymentId;
+                var paymentID = gotOrder.Order.Tenders.FirstOrDefault().PaymentId;
 
                 if (!String.IsNullOrEmpty(paymentID))
                 {
@@ -195,6 +195,35 @@ namespace PROJETOESA.Services
             return false;
         }
 
+        private string GetOrderId(string customerID)
+        {
+            List<string> locationIds = new List<string>();
+            locationIds.Add(squareLocation);
+            List<string> customerIds = new List<string>();
+            customerIds.Add(customerID);
+
+            InvoiceFilter invoiceFilter = new InvoiceFilter.Builder(locationIds)
+                .CustomerIds(customerIds)
+                .Build();
+
+            InvoiceSort invoiceSort = new InvoiceSort.Builder("INVOICE_SORT_DATE")
+                .Order("DESC")
+                .Build();
+
+
+
+            InvoiceQuery invoiceQuery = new InvoiceQuery.Builder(invoiceFilter)
+                .Sort(invoiceSort)
+                .Build();
+
+            SearchInvoicesRequest search = new SearchInvoicesRequest.Builder(invoiceQuery).Build();
+
+            var invoiceId = _client.InvoicesApi.SearchInvoices(search);
+
+            string orderId = invoiceId.Invoices[0].OrderId;
+
+            return orderId;
+        }
 
         public async Task<bool> CancelSubscription(string customerCardID)
         {
@@ -247,7 +276,7 @@ namespace PROJETOESA.Services
         }
 
 
-        public CreateSubscriptionRequest CreateSquareSubscription(string customerCardID)
+        public async Task<CreateSubscriptionRequest> CreateSquareSubscription(string customerCardID)
         {
             var card = _client.CardsApi.RetrieveCard(customerCardID);
             var customerID = card.Card.CustomerId;
@@ -272,10 +301,19 @@ namespace PROJETOESA.Services
 
             if (_user.CustomerID == null || _user.CustomerID == "")
             {
+                var userDOB = "";
+                if (_user.BirthDate != null)
+                {
+                    var userMonth = ""+_user.BirthDate.Value.Month;
+                    if (_user.BirthDate.Value.Month < 10)
+                    { userMonth = "0" + userMonth; }
+                    
+                    userDOB = _user.BirthDate.Value.Year + "-" + userMonth + "-" + _user.BirthDate.Value.Day;
+                }
                 CreateCustomerRequest createCustomerRequest = new CreateCustomerRequest.Builder()
                     .GivenName(_user.Name)
                     .IdempotencyKey(Guid.NewGuid().ToString())
-                    .Birthday(_user.BirthDate.ToString())
+                    .Birthday(userDOB)
                     .EmailAddress(_user.Email)
                     .Build();
                 var customer = _client.CustomersApi.CreateCustomer(createCustomerRequest);
