@@ -7,6 +7,7 @@ import { User } from '../../../Models/users';
 import { AuthorizeService } from '../../../../api-authorization/authorize.service';
 import { FormArray } from '@angular/forms';
 import { toArray } from 'rxjs';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-PopUpPayment',
@@ -116,16 +117,32 @@ export class PopUpPaymentComponent implements OnInit {
               setTimeout(() => {
                 this.isPaymentProcessing = false;
               }, 2000);
+
+              
               
             } else {  
               // Payment failed
               console.error('Payment failed');
               this.isPaymentProcessing = false;
+              //Swal.fire({
+              //  position: 'center',
+              //  icon: 'error',
+              //  title: 'O pagamento falhou!',
+              //  text: 'O pagamento falhou, por favor tente novamente.',
+              //  showConfirmButton: true, // You might want the user to acknowledge the error
+              //});
             }
           },
           (error) => {
             console.error('Payment failed:', error);
-            this.isPaymentProcessing = false; 
+            this.isPaymentProcessing = false;
+            //Swal.fire({
+            //  position: 'center',
+            //  icon: 'error',
+            //  title: 'O pagamento falhou!',
+            //  text: 'O pagamento falhou, por favor tente novamente.',
+            //  showConfirmButton: true, // You might want the user to acknowledge the error
+            //});
           }
         );
       }

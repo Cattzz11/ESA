@@ -7,6 +7,7 @@ import { User } from '../../../Models/users';
 import { AuthorizeService } from '../../../../api-authorization/authorize.service';
 import { FormArray } from '@angular/forms';
 import { toArray } from 'rxjs';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-PopUpCancelPayment',
@@ -112,6 +113,7 @@ export class PopUpCancelPaymentComponent implements OnInit {
             if (response === true) {
               // Payment successful
               console.log('Cancelation Successful successful');
+              
               this.transactionCompleted = true;
               setTimeout(() => {
                 this.dialogRef.close();
@@ -119,24 +121,40 @@ export class PopUpCancelPaymentComponent implements OnInit {
               setTimeout(() => {
                 this.isPaymentProcessing = false;
               }, 2000);
-              
-            } else {  
+              //Swal.fire({
+              //  position: "center",
+              //  icon: "success",
+              //  title: "O cancelamento foi efetuado com sucesso",
+              //  showConfirmButton: false,
+              //  timer: 2100
+              //});
+
+            } else {
               // Payment failed
               console.error('Payment failed');
               this.isPaymentProcessing = false;
+              //Swal.fire({
+              //  position: 'center',
+              //  icon: 'error',
+              //  title: 'O pagamento falhou!',
+              //  text: 'O pagamento falhou, por favor tente novamente.',
+              //  showConfirmButton: true, // You might want the user to acknowledge the error
+              //});
             }
           },
           (error) => {
             console.error('Payment failed:', error);
-            this.isPaymentProcessing = false; 
+            this.isPaymentProcessing = false;
+            //Swal.fire({
+            //  position: 'center',
+            //  icon: 'error',
+            //  title: 'O pagamento falhou!',
+            //  text: 'O pagamento falhou, por favor tente novamente.',
+            //  showConfirmButton: true, // You might want the user to acknowledge the error
+            //});
           }
         );
       }
     }
-
-    
   }
-
-
-
 }
