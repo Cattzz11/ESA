@@ -205,7 +205,7 @@ namespace PROJETOESA.Services.FlightService
 
             var citiesWithEmptyCoordenates = await _context.City.Include(c => c.Country).Where(c => string.IsNullOrEmpty(c.Coordinates)).ToListAsync();
 
-            if (citiesWithEmptyCoordenates.Any()) 
+            if (citiesWithEmptyCoordenates.Any())
             {
                 allCities = await PopulateCoordinatesAsync();
             }

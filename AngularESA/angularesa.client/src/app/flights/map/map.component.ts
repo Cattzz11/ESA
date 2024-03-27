@@ -389,7 +389,7 @@ export class MapComponent implements OnInit, AfterViewInit {
 
               infoWindow.open(this.map, marker);
 
-              function addListenersToInfoWindowButtons() {
+              const addListenersToInfoWindowButtons = () => {
                 const btnNextFlights = document.getElementById('btnNextFlights');
                 const btnBackToMain = document.getElementById('btnBackToMain');
                 const btnBuyTickets = document.getElementById('btnBuyTickets');
@@ -401,8 +401,7 @@ export class MapComponent implements OnInit, AfterViewInit {
 
                 if (btnNextFlights) {
                   btnNextFlights.addEventListener('click', () => {
-                    infoWindow.setContent(infoNextFlights);
-                    addListenersToInfoWindowButtons();
+                    this.openFlightInfo(flight);
                   });
                 }
 
@@ -474,7 +473,25 @@ export class MapComponent implements OnInit, AfterViewInit {
         });
       }
     });
-  }  
+  }
+
+  openFlightInfo(flight: FlightsItinerary): void {
+    const tomorrow = new Date();
+    tomorrow.setDate(tomorrow.getDate() + 1);
+
+    const oneWeekLater = new Date(tomorrow);
+    oneWeekLater.setDate(tomorrow.getDate() + 7);
+
+    const queryParams = {
+      origin: flight.departureLocation.name,
+      destination: flight.arrivalLocation.name,
+      departureDate: tomorrow.toISOString().split('T')[0],
+      arrivalDate: oneWeekLater.toISOString().split('T')[0]
+    };
+
+    this.router.navigate(['/search-flights'], { queryParams });
+  }
+
 
   getRandomPoint(polyline: google.maps.Polyline): { position: google.maps.LatLng, heading: number } {
     const path = polyline.getPath();

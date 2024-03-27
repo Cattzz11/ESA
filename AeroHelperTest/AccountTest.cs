@@ -40,13 +40,6 @@ namespace AeroHelperTest
             var loggerMock = new Mock<ILogger<CustomAccountController>>();
             _fixture = fixture;
 
-            _accountController = new CustomAccountController(
-                _userManagerMock.Object,
-                _emailSenderMock.Object,
-                loggerMock.Object,
-                _codeGeneratorServiceMock.Object,
-                _fixture.DbContext
-                );
         }
 
         [Fact]

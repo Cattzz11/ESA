@@ -3,7 +3,7 @@
     <h1 id="title">Perfil do Utilizador</h1>
     <div class="topButtons">
         <button class="edit" *ngIf="!isLoggedInWGoogle"><a routerLink="/edit-profile">Editar Perfil</a></button>
-        <button class="payments" routerLink="/payment-component" >Pagamentos</button>
+        <button class="payments" routerLink="/payment-component">Pagamentos</button>
         <button class="estatísticas" *ngIf="user?.role===2"><a routerLink="/statistics-page" style="text-decoration:none; color:black;">Estatísticas</a></button>
         <button class="premium"><a routerLink="/premium-component" style="text-decoration:none; color:black;">Premium</a></button>
     </div>
@@ -20,12 +20,9 @@
       <div class="profile-info">
         <h1>{{ user?.name }}</h1>
         <p>E-mail: {{ user?.email }}</p>
-        <p *ngIf="user && user.age !== undefined">Idade: {{ user.age }} anos</p>
+        <p *ngIf="user && user.age !== undefined && user.age > 0">Idade: {{ user.age }} anos</p>
         <p *ngIf="user && user.occupation !== null">Ocupação: {{ user.occupation }}</p>
         <p *ngIf="user && user.nationality !== null">Nacionalidade: {{ user.nationality }}</p>
-      </div>
-      <div class="delete" *ngIf="user && user.email !== undefined">
-        <button id="delete_button" (click)="deleteUserProfile(user.email)"> Apagar Conta</button>
       </div>
     </div>
     <div *ngIf="user?.role === 1" class="history">

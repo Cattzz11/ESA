@@ -1,89 +1,55 @@
-*{
-    font-family:'Roboto Slab';
+* {
+  font-family: 'Roboto Slab';
 }
 
-ul{
-    list-style:none;
-    padding: 10px;
-}
-
-li{
-    text-align:justify;
-    padding:7px;
-}
-
-
-
-.edit-wrapper {
+.editInitial {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 80vh;
-  width: 80vw;
-  max-height: 1500px;
-  max-width: 1500px;
-  margin-left:10%;
-  padding-right:10px;
-  margin-top:23%;
+  width: 100vw;
+  min-height: calc(100vh - 50px);
+  overflow: hidden;
+  flex-direction: column;
 }
 
-.edit-box {
+.titulo {
   display: flex;
-  width: 120%;
-  height: 210%;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  border-radius: 40px;
+  justify-content: center;
+  align-items: center;
+  padding-top: 100px;
+}
+
+.edit-wrapper {
+  width: 80%;
+  min-width: calc(100vw - 500px);
+  min-height: calc(100vh - 500px);
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+  background-color: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
   overflow: hidden;
   box-sizing: border-box;
 }
 
-.form-edit {
-  padding: 20px;
-  background-color: #006994;
-  width: 500px;
+.edit-form {
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
-  justify-content: space-evenly;
-  padding-left:10%;
+  padding: 20px;
+  flex-basis: 50%;
+  background-color: #006994;
 }
 
-label{
-    color:white;
+.edit-form h2 {
+  text-align: center;
+  color: white;
+  margin-bottom: 20px;
 }
 
-.form-photo-div img {
-  width: 100px;
-  height: 100px;
-  margin-left:150px;
-  padding-bottom:10px;
-}
-
-.profpic label{
-    
-}
-
-h2{
-    padding-right:3%;
-}
-
-.login-branding {
-  width: 70%;
-  background-size: cover;
-  background-position: center;
-}
-
-.logo {
-  max-width: 100%;
-  height: auto;
-  display: block;
-  margin: auto;
-  position: relative;
-  top: 50%;
-  transform: translateY(-50%);
-}
-
-.form-edit input {
+.edit-form input {
   display: block;
   width: 100%;
   margin-bottom: 10px;
@@ -92,19 +58,10 @@ h2{
   border-radius: 10px;
 }
 
-
-#title-pic{
-    padding-bottom:5px;
-}
-
-label:last-child{
-    padding-bottom:0px;
-}
-
-button {
-  width: 80%;
+.edit-form button {
+  width: 100%;
   padding: 10px;
-  margin-top: 7px;
+  margin-top: 20px;
   margin-bottom: 10px;
   border: 1px solid #000000;
   border-radius: 30px;
@@ -112,5 +69,75 @@ button {
   cursor: pointer;
   font-weight: bold;
   font-size: large;
-  padding-right:3%;
+}
+
+.login-branding {
+  width: 60%;
+  background-size: cover;
+  background-position: center;
+}
+
+.logo {
+  max-width: 80%;
+  height: auto;
+  display: block;
+  margin: auto;
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.edit-form input,
+.edit-form button,
+.edit-form a {
+  margin-bottom: 30px;
+}
+
+.edit-profile-class {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.edit-profile-class label {
+  color: white;
+}
+
+.profile-picture {
+  width: 150px;
+  height: 150px;
+  padding-bottom: 10px;
+}
+
+.edit-profile-class input {
+  margin-top: 20px;
+}
+
+.genderArea {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px; 
+}
+
+.gender-option {
+  display: flex;
+  flex-direction: row;
+  padding-bottom: 20px;
+}
+
+.gender-option label {
+    padding-right: 10px;
+}
+
+  .gender-option input {
+    margin-bottom: -2px;
+  }
+
+.delete_button {
+  background-color: red !important;
+  color: white !important;
+ /* -webkit-text-stroke: 1px black !important;
+  text-stroke: 1px black !important;*/
 }

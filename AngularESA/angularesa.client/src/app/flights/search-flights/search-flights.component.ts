@@ -1,11 +1,11 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, AfterViewInit } from '@angular/core';
 import { City } from '../../Models/City';
 import { DataService } from '../../services/DataService';
 import { Calendar } from '../../Models/Calendar';
 import { SkyscannerService } from '../../services/skyscannerService';
 import { FlightData } from '../../Models/flight-data';
 import { Trip } from '../../Models/Trip';
-import { Router } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { ViewEncapsulation } from '@angular/core';
 import { MatCalendarCellClassFunction, MatDatepickerInputEvent } from '@angular/material/datepicker';
 import { DatePipe } from '@angular/common';
@@ -14,6 +14,7 @@ import { User } from '../../Models/users';
 import { TripDetails } from '../../Models/TripDetails';
 import { PriceOptions } from '../../Models/PriceOptions';
 import { SearchStateService } from '../../services/SearchStateService';
+import { filter } from 'rxjs';
 
 @Component({
   selector: 'app-search-flights',
@@ -52,7 +53,8 @@ export class SearchFlightsComponent implements OnInit {
     private cdr: ChangeDetectorRef,
     private datePipe: DatePipe,
     private auth: AuthorizeService,
-    private searchStateService: SearchStateService 
+    private searchStateService: SearchStateService,
+    private activatedRoute: ActivatedRoute
   )
   {}
 
@@ -76,27 +78,31 @@ export class SearchFlightsComponent implements OnInit {
       this.searchStateService.clearSearchState();
     }
 
-    const storedUser = sessionStorage.getItem('user');
-    if (storedUser) {
-      this.user = JSON.parse(storedUser);
-    }
-    else {
-      this.auth.getUserInfo().subscribe({
+    this.auth.getUserInfo().subscribe({
         next: (userInfo: User) => {
           this.user = userInfo;
-        },
-        error: (error) => {
-          console.error('Error fetching user info', error);
         }
       });
-    }
 
     this.dataService.getAllCities().subscribe({
       next: (response) => {
         this.cities = response;
-      },
-      error: (error) => {
-        console.error('Error fetching flights:', error);
+        this.activatedRoute.queryParams.subscribe(params => {
+          this.selectedCityFrom = params['origin'];
+          this.selectedCityTo = params['destination'];
+          this.departureDate = params['departureDate'];
+          this.arrivalDate = params['arrivalDate'];
+        });
+        if (this.selectedCityFrom.trim() && this.selectedCityTo.trim() && this.departureDate.trim() && this.arrivalDate.trim()) {
+          this.isLoading = true;
+          this.validateForm();
+          this.loadCalendar(this.selectedCityFrom, this.selectedCityTo);
+          this.departureEnabled = true;
+          this.arrivalEnabled = true;
+          this.searchFlights();
+        }
+
+        this.cdr.markForCheck();
       }
     });
   }
@@ -285,7 +291,6 @@ export class SearchFlightsComponent implements OnInit {
   validateForm() {
     this.fromValid = this.isCityValid(this.selectedCityFrom);
     this.toValid = this.isCityValid(this.selectedCityTo);
-    // Verifica se ambas as cidades são válidas antes de permitir a busca
     this.canSearch = this.fromValid && this.toValid && !!this.departureDate && !!this.arrivalDate;
   }
 
@@ -325,7 +330,38 @@ export class SearchFlightsComponent implements OnInit {
   }
 
   private findCityApiKeyByName(cityName: string) {
-    var city = this.cities.find(c => c.name.toLowerCase() === cityName.toLowerCase());
-    return city?.apiKey;
+    let city = this.cities.find(c => c.name?.toLowerCase() === cityName?.toLowerCase());
+
+    if (city !== undefined) {
+      return city.apiKey;
+    }
+
+    let bestMatch = { city: null as City | null, score: 0 };
+    const target = cityName.toLowerCase();
+
+    this.cities.forEach(city => {
+      const cityNameLower = city.name.toLowerCase();
+      let score = this.similarityScore(target, cityNameLower);
+
+      if (score > bestMatch.score) {
+        bestMatch = { city, score };
+      }
+    });
+
+    return bestMatch.city?.apiKey;
+  }
+
+  private similarityScore(s1: string, s2: string): number {
+    const shorter = s1.length < s2.length ? s1 : s2;
+    const longer = s1.length < s2.length ? s2 : s1;
+    let score = 0;
+
+    for (let i = 0; i < shorter.length; i++) {
+      if (shorter[i] === longer[i]) {
+        score++;
+      }
+    }
+
+    return score;
   }
 }
