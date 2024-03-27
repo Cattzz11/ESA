@@ -40,6 +40,7 @@
     "oidc-client": "^1.11.5",
     "run-script-os": "*",
     "rxjs": "~7.8.0",
+    "sweetalert2": "^11.10.7",
     "tslib": "^2.3.0",
     "zone.js": "~0.14.2"
   },

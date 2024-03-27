@@ -25,7 +25,7 @@
   </div>
   <div class="input-group date-group">
       <mat-form-field>
-          <mat-label>Partida:</mat-label>
+          <mat-label>Destino:</mat-label>
           <input matInput [matDatepicker]="arrival" id="arrival" [(ngModel)]="arrivalDate" [disabled]="!arrivalEnabled" (dateChange)="onArrivalDateChange($event)">
           <mat-datepicker-toggle matIconSuffix [for]="arrival"></mat-datepicker-toggle>
           <mat-datepicker [dateClass]="dateClass" #arrival></mat-datepicker>

@@ -52,7 +52,6 @@ namespace PROJETOESA.Controllers
 
         [HttpPost]
         [Route("api/login-time")]
-        [Authorize]
         public async Task<IActionResult> LoginTime([FromBody] CustomLoginModel model)
         {
             try{
@@ -306,6 +305,7 @@ namespace PROJETOESA.Controllers
             user.Name = model.Name;
             user.Email = model.Email;
             user.BirthDate = model.BirthDate;
+            user.Age = model.Age;
             user.Occupation = model.Occupation;
             user.Nationality = model.Nationality;
             user.ProfilePicture = model.ProfilePicture;
@@ -387,7 +387,6 @@ namespace PROJETOESA.Controllers
 
         [HttpPost]
         [Route("api/update-confirmed-email")]
-        [Authorize]
         public async Task<IActionResult> UpdateConfirmedEmail([FromBody] UpdateConfirmedEmailModel model)
         {
             // Find the user in the database based on the email
@@ -488,7 +487,7 @@ namespace PROJETOESA.Controllers
         public string Name { get; set; }
         public string Email { get; set; }
         public DateTime? BirthDate { get; set; }
-        public int? Age { get; set; }
+        public int Age { get; set; }
         public string? Occupation { get; set; }
 
         public string? Nationality { get; set; }
