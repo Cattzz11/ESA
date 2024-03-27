@@ -45,7 +45,7 @@ export class ConfirmationAccountComponent implements OnInit {
         // Call the new API endpoint to update confirmedEmail status
         this.authService.updateConfirmedEmail(this.userEmail).subscribe({
           next: (updateResponse) => {
-            this.router.navigate(['/success']);
+            this.sendConfirmationEmail();
           },
           error: (updateError) => {
             this.confirmationMessage = "Erro ao confirmar o email";
@@ -58,15 +58,23 @@ export class ConfirmationAccountComponent implements OnInit {
     });
   }
 
+  sendConfirmationEmail() {
+    this.authService.confirmationAccountEmail(this.userEmail).subscribe({
+      next: (updateResponse) => {
+        this.router.navigate(['/success']);
+      }
+    });
+  }
+
   public resendConfirmationCode() {
     // Implement logic to resend the confirmation code
     this.authService.resendConfirmationCode(this.userEmail).subscribe({
       next: (response) => {
-        // Handle successful resend, e.g., show a success message
+        this.confirmationMessage = "O código de confirmação foi enviado.";
         console.log('Confirmation code resent successfully');
       },
       error: (error) => {
-        // Handle error during resend, e.g., show an error message
+        this.confirmationMessage = "Ocorreu um erro a enviar o código de confirmação.";
         console.error('Error resending confirmation code', error);
       }
     });

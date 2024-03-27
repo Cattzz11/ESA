@@ -18,6 +18,8 @@
   flex-direction: row;
   align-items: center;
   align-content: center;
+  min-width:100vw;
+  justify-content: space-around;
 }
 
 .plane {
@@ -45,6 +47,8 @@
   justify-content: space-around;
   flex-wrap: wrap;
   gap: 20px;
+  max-width: 1500px;
+  margin: auto;
 }
 
 .airline-card {
@@ -125,6 +129,7 @@
   box-shadow: 0 2px 4px rgba(0,0,0,0.05);
   font-weight: bold;
   color: white;
+  max-width: 1500px;
 }
 
   .viagem-card:hover {
@@ -149,6 +154,7 @@
 
   .price a.button-link:hover {
     text-decoration: underline;
+    cursor: pointer;
   }
 
 .departure, .price, .destination {

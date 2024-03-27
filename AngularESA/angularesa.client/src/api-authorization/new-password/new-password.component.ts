@@ -52,6 +52,18 @@ export class NewPasswordComponent implements OnInit {
 
     this.authService.changePassword(newPassword, this.userEmail).subscribe({
       next: (response) => {
+        this.sendEmail();
+      },
+      error: (error) => {
+        this.changeFailed = true;
+        this.errors = ['Erro ao alterar a senha. Tente novamente.'];
+      }
+    });
+  }
+
+  sendEmail() {
+    this.authService.recoverPasswordEmail(this.userEmail).subscribe({
+      next: (response) => {
         this.changeSucceeded = true;
         this.router.navigate(['/login']);
       },

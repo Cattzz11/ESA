@@ -387,7 +387,6 @@ namespace PROJETOESA.Controllers
 
         [HttpPost]
         [Route("api/update-confirmed-email")]
-        [Authorize]
         public async Task<IActionResult> UpdateConfirmedEmail([FromBody] UpdateConfirmedEmailModel model)
         {
             // Find the user in the database based on the email
@@ -408,8 +407,46 @@ namespace PROJETOESA.Controllers
             return BadRequest(new { Message = "Failed to confirm email." });
         }
 
+        [HttpPost]
+        [Route("api/email-confirm-regist")]
+        public async Task<IActionResult> confirmationAccountEmail([FromBody] CustomRecoverModel model)
+        {
+            var user = await _userManager.FindByEmailAsync(model.Email);
 
-       
+            if (user != null)
+            {
+                var htmlContent = @"
+                    <h1 style=""font-size: 32px; font-weight: 700; line-height: 48px;"">Bem vindo!</h1>
+                    <p>Bem-vindo a bordo da AeroHelper! Estamos entusiasmados por tê-lo conosco nesta jornada rumo a novos horizontes. Com um universo de destinos e companhias aéreas ao seu alcance, nossa missão é simplificar cada etapa da sua viagem, desde a pesquisa até a compra dos bilhetes. Explore, sonhe e descubra o mundo de maneira mais fácil e conveniente. Prepara-se, a aventura espera por você!</p>
+                    <p>Cumprimentos,<br>Equipa AeroHelper</p>
+                ";
+
+                await _emailSender.SendEmailAsync(model.Email, "Confirmação de Registo", htmlContent);
+            }
+
+            return Ok();
+        }
+
+        [HttpPost]
+        [Route("api/email-recover-completed")]
+        public async Task<IActionResult> recoverPasswordEmail([FromBody] CustomRecoverModel model)
+        {
+            var user = await _userManager.FindByEmailAsync(model.Email);
+
+            if (user != null)
+            {
+                var htmlContent = @"
+                    <h1 style=""font-size: 32px; font-weight: 700; line-height: 48px;"">Alteração de password efetuada com sucesso!</h1>
+                    <p>A sua senha foi atualizada com sucesso!<br>Se não solicitou esta alteração, por favor entre em contato conosco imediatamente para garantir a segurança da sua conta.</p>
+                    <p>Cumprimentos,<br>Equipa AeroHelper</p>
+                ";
+
+                await _emailSender.SendEmailAsync(model.Email, "Confirmação de Alteração de Password", htmlContent);
+            }
+
+            return Ok();
+        }
+
         //[HttpPost("api/upload-photo")]
         //public async Task<IActionResult> UploadPhoto(IFormFile file)
         //{

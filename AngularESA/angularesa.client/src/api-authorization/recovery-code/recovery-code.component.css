@@ -5,6 +5,8 @@
   min-height: 100vh;
   min-width: 100vw;
   overflow: hidden;
+  margin: auto;
+  max-width: 1500px;
 }
 
 .recover-container {

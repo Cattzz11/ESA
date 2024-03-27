@@ -5,6 +5,8 @@
   width: 100vw;
   min-height: calc(100vh - 50px);
   overflow: hidden;
+  margin: auto;
+  max-width: 1500px;
 }
 
 .login-box {

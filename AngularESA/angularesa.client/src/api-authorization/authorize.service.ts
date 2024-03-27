@@ -66,6 +66,30 @@ export class AuthorizeService {
     return this.http.get<boolean>(`/api/check-email-confirmation-status?email=${email}`);
   }
 
+  public confirmationAccountEmail(email: string) {
+    return this.http.post('api/email-confirm-regist', {
+      email: email
+    }, {
+      observe: 'response',
+      responseType: 'text'
+    })
+      .pipe<boolean>(map((res: HttpResponse<string>) => {
+        return res.ok;
+      }));
+  }
+
+  public recoverPasswordEmail(email: string) {
+    return this.http.post('api/email-recover-completed', {
+      email: email
+    }, {
+      observe: 'response',
+      responseType: 'text'
+    })
+      .pipe<boolean>(map((res: HttpResponse<string>) => {
+        return res.ok;
+      }));
+  }
+
   // register new user
   public registerCustom(name: string, email: string, password: string) {
     return this.http.post('api/register', {
