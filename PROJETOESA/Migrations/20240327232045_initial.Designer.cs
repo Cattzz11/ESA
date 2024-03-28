@@ -12,15 +12,15 @@ using PROJETOESA.Data;
 namespace PROJETOESA.Migrations
 {
     [DbContext(typeof(AeroHelperContext))]
-    [Migration("20240325172843_AeroHelper")]
-    partial class AeroHelper
+    [Migration("20240327232045_initial")]
+    partial class initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.1")
+                .HasAnnotation("ProductVersion", "8.0.3")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -323,7 +323,7 @@ namespace PROJETOESA.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Coordinates")
+                    b.Property<string>("Coordenates")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("CountryId")
@@ -393,6 +393,10 @@ namespace PROJETOESA.Migrations
                     b.Property<string>("DestinationCityId")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Direction")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Duration")
                         .IsRequired()
@@ -531,10 +535,7 @@ namespace PROJETOESA.Migrations
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<double>("Price")
-                        .HasColumnType("float");
-
-                    b.Property<double>("Score")
+                    b.Property<double?>("Price")
                         .HasColumnType("float");
 
                     b.Property<string>("SessionId")
@@ -542,24 +543,6 @@ namespace PROJETOESA.Migrations
 
                     b.Property<string>("Token")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("isCancellationAllowed")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("isChangeAllowed")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("isPartiallyChangeable")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("isPartiallyRefundable")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("isProtectedSelfTransfer")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("isSelfTransfer")
-                        .HasColumnType("bit");
 
                     b.HasKey("Id");
 

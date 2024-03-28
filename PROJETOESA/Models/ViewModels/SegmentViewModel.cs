@@ -1,4 +1,7 @@
-﻿namespace PROJETOESA.Models.ViewModels
+﻿using PROJETOESA.Models;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace PROJETOESA.Models.ViewModels
 {
     public class SegmentViewModel
     {
@@ -8,6 +11,6 @@
         public string Duration { get; set; }
         public CityViewModel OriginCity { get; set; }
         public CityViewModel DestinationCity { get; set; }
-        public CarrierViewModel? Carrier { get; set; }
+        public Carrier? Carrier { get; set; }
     }
 }

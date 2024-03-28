@@ -11,10 +11,9 @@ import { MatCalendarCellClassFunction, MatDatepickerInputEvent } from '@angular/
 import { DatePipe } from '@angular/common';
 import { AuthorizeService } from '../../../api-authorization/authorize.service';
 import { User } from '../../Models/users';
-import { TripDetails } from '../../Models/TripDetails';
 import { PriceOptions } from '../../Models/PriceOptions';
 import { SearchStateService } from '../../services/SearchStateService';
-import { filter } from 'rxjs';
+import { catchError, filter, of, throwError } from 'rxjs';
 
 @Component({
   selector: 'app-search-flights',
@@ -29,7 +28,6 @@ export class SearchFlightsComponent implements OnInit {
   calendar: Calendar[] | undefined;
   filteredCities: City[] = [];
   flights: Trip[] = [];
-  flightsPremium: TripDetails[] = [];
 
   selectedCityFrom = '';
   selectedCityTo = '';
@@ -45,6 +43,9 @@ export class SearchFlightsComponent implements OnInit {
   departureEnabled = false;
   arrivalEnabled = false;
   isLoading = false;
+
+  minDepartureDate = new Date();
+  minArrivalDate: Date | null = null;
 
   constructor(
     private dataService: DataService,
@@ -73,41 +74,52 @@ export class SearchFlightsComponent implements OnInit {
       this.cities = savedState.cities;
       this.calendar = savedState.calendar;
       this.flights = savedState.flights;
-      this.flightsPremium = savedState.flightsPremium;
 
       this.searchStateService.clearSearchState();
     }
 
-    this.auth.getUserInfo().subscribe({
-        next: (userInfo: User) => {
+    this.auth.getUserInfo().pipe(
+      catchError(error => {
+        if (error.status === 401 || error.status === 404) {
+          console.log('Nenhum user autenticado ou não encontrado.');
+          return of(null);
+        }
+        return throwError(() => error);
+      })
+    ).subscribe({
+      next: (userInfo: User | null) => {
+        if (userInfo) {
           this.user = userInfo;
         }
-      });
+      }
+    });
 
     this.dataService.getAllCities().subscribe({
       next: (response) => {
         this.cities = response;
         this.activatedRoute.queryParams.subscribe(params => {
-          this.selectedCityFrom = params['origin'];
-          this.selectedCityTo = params['destination'];
-          this.departureDate = params['departureDate'];
-          this.arrivalDate = params['arrivalDate'];
-        });
-        if (this.selectedCityFrom.trim() && this.selectedCityTo.trim() && this.departureDate.trim() && this.arrivalDate.trim()) {
-          this.isLoading = true;
-          this.validateForm();
-          this.loadCalendar(this.selectedCityFrom, this.selectedCityTo);
-          this.departureEnabled = true;
-          this.arrivalEnabled = true;
-          this.searchFlights();
-        }
+          if (params['origin'] && params['destination'] && params['departureDate'] && params['arrivalDate']) {
+            this.selectedCityFrom = params['origin'];
+            this.selectedCityTo = params['destination'];
+            this.departureDate = params['departureDate'];
+            this.arrivalDate = params['arrivalDate'];
+          }
 
-        this.cdr.markForCheck();
+          if (this.selectedCityFrom && this.selectedCityTo && this.departureDate && this.arrivalDate) {
+            this.isLoading = true;
+            this.validateForm();
+            this.loadCalendar(this.selectedCityFrom, this.selectedCityTo);
+            this.departureEnabled = true;
+            this.arrivalEnabled = true;
+            this.searchFlights();
+            this.cdr.markForCheck();
+          }
+        });
       }
     });
   }
 
-  saveStateAndNavigate(trip: Trip | TripDetails) {
+  saveStateAndNavigate(trip: Trip) {
     const currentState = {
       selectedCityFrom: this.selectedCityFrom,
       selectedCityTo: this.selectedCityTo,
@@ -120,8 +132,7 @@ export class SearchFlightsComponent implements OnInit {
       arrivalEnabled: this.arrivalEnabled,
       cities: this.cities,
       calendar: this.calendar,
-      flights: this.flights,
-      flightsPremium: this.flightsPremium
+      flights: this.flights
     };
 
     this.searchStateService.saveSearchState(currentState);
@@ -159,7 +170,7 @@ export class SearchFlightsComponent implements OnInit {
     if (this.user && this.user.role === 1) {
       this.skyscannerService.getRoundtripFlightsPremium(data).subscribe({
         next: (response) => {
-          this.flightsPremium = response;
+          this.flights = response;
           this.isLoading = false;
         },
         error: (error) => {
@@ -182,8 +193,8 @@ export class SearchFlightsComponent implements OnInit {
     
   }
 
-  calculatePrices(inputField: 'max' | 'med' | 'min', options: PriceOptions[]) {
-    const prices = options.map(option => option.totalPrice);
+  calculatePrices(inputField: 'max' | 'med' | 'min', options: PriceOptions[] | undefined) {
+    const prices = options!.map(option => option.totalPrice);
 
     switch (inputField) {
       case 'max':
@@ -307,7 +318,7 @@ export class SearchFlightsComponent implements OnInit {
         this.toValid = this.isCityValid(this.selectedCityTo);
       }
     }
-
+    
     if (this.fromValid && this.toValid) {
       this.loadCalendar(this.selectedCityFrom, this.selectedCityTo);
     }
@@ -317,9 +328,17 @@ export class SearchFlightsComponent implements OnInit {
 
   onDepartureDateChange(event: MatDatepickerInputEvent<Date>) {
     const formatted = this.datePipe.transform(event.value, 'yyyy-MM-dd');
-    if (formatted)
+    this.minArrivalDate = event.value ? new Date(event.value) : null;
+
+    if (formatted) {
       this.departureDate = formatted;
-    this.arrivalEnabled = !!this.departureDate;
+    }
+
+    this.arrivalEnabled = !!formatted;
+
+    if (this.arrivalDate && this.minArrivalDate && new Date(this.arrivalDate) < this.minArrivalDate) {
+      this.arrivalDate = this.datePipe.transform(this.minArrivalDate, 'yyyy-MM-dd')!;
+    }
   }
 
   onArrivalDateChange(event: MatDatepickerInputEvent<Date>) {
@@ -328,6 +347,7 @@ export class SearchFlightsComponent implements OnInit {
       this.arrivalDate = formatted;
     this.validateForm();
   }
+
 
   private findCityApiKeyByName(cityName: string) {
     let city = this.cities.find(c => c.name?.toLowerCase() === cityName?.toLowerCase());

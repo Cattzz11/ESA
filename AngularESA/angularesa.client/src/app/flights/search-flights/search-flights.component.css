@@ -122,11 +122,6 @@ button.date-low {
   margin-bottom: 20px;
 }
 
-.history {
-  padding-left: 20px;
-  width: 75%;
-}
-
 .travelHistory {
   display: flex;
   flex-direction: column;
@@ -151,6 +146,10 @@ button.date-low {
   color: white;
 }
 
+  .travel:hover {
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+  }
+
 .flight {
   display: flex;
   flex-direction: column;
@@ -170,7 +169,7 @@ button.date-low {
 .airlineLogo {
   width: 90px;
   height: auto;
-  margin-right: 20px;
+  margin-left: 100px;
 }
 
 .travel:last-child {
@@ -232,6 +231,27 @@ button.date-low {
     transform: translateX(135%) translateY(-50%);
   }
 
+.volta .duration::after {
+  left: auto;
+  right: 30%;
+  transform: translateX(45%);
+}
+
+.volta .duration::before {
+  left: auto;
+  right: calc(100% + 10px);
+  transform: translateX(-135%) translateY(-50%) rotate(180deg);
+}
+
+.more {
+  min-width: 150px;
+  margin-left: 150px;
+}
+
+  .more a:hover {
+    text-decoration: underline;
+    cursor: pointer;
+  }
 
 @media (max-width: 1370px) {
   .search-bar {

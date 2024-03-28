@@ -17,7 +17,7 @@ namespace PROJETOESA.Services.FlightService
 
         Task<List<Trip>> GetFlightsAsync(AddressComponents origin, AddressComponents destination);
 
-        Task<List<TripDetailsViewModel>> GetFlightsPremiumAsync(AddressComponents origin, AddressComponents destination);
+        Task<List<TripViewModel>> GetFlightsPremiumAsync(AddressComponents origin, AddressComponents destination);
 
         Task<List<City>> PopulateCoordinatesAsync();
     }

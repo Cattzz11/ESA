@@ -67,7 +67,7 @@ namespace PROJETOESA.Services.DataService
                         {
                             Id = s.OriginCity.Id,
                             Name = s.OriginCity.Name,
-                            Country = new CountryViewModel
+                            Country = new Country
                             {
                                 Id = s.OriginCity.Country.Id,
                                 Name = s.OriginCity.Country.Name,
@@ -77,13 +77,13 @@ namespace PROJETOESA.Services.DataService
                         {
                             Id = s.DestinationCity.Id,
                             Name = s.DestinationCity.Name,
-                            Country = new CountryViewModel
+                            Country = new Country
                             {
                                 Id = s.DestinationCity.Country.Id,
                                 Name = s.DestinationCity.Country.Name,
                             }
                         },
-                        Carrier = s.Carrier != null ? new CarrierViewModel
+                        Carrier = s.Carrier != null ? new Carrier
                         {
                             Id = s.Carrier.Id,
                             Name = s.Carrier.Name,
@@ -106,7 +106,7 @@ namespace PROJETOESA.Services.DataService
                 Id = c.Id,
                 Name = c.Name,
                 ApiKey = c.ApiKey,
-                Country = new CountryViewModel
+                Country = new Country
                 {
                     Id = c.Country.Id,
                     Name = c.Country.Name

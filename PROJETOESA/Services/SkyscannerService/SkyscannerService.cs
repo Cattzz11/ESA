@@ -73,18 +73,12 @@ namespace PROJETOESA.Services.SkyscannerService
                     {
                         Id = itinerary["id"]?.ToString(),
                         Price = (double?)itinerary["price"]?["raw"] ?? 0.0,
-                        isSelfTransfer = itinerary["isSelfTransfer"]?.ToObject<bool>() ?? false,
-                        isProtectedSelfTransfer = itinerary["isProtectedSelfTransfer"]?.ToObject<bool>() ?? false,
-                        isChangeAllowed = itinerary["farePolicy"]?["isChangeAllowed"]?.ToObject<bool>() ?? false,
-                        isPartiallyChangeable = itinerary["farePolicy"]?["isPartiallyChangeable"]?.ToObject<bool>() ?? false,
-                        isCancellationAllowed = itinerary["farePolicy"]?["isCancellationAllowed"]?.ToObject<bool>() ?? false,
-                        isPartiallyRefundable = itinerary["farePolicy"]?["isPartiallyRefundable"]?.ToObject<bool>() ?? false,
-                        Score = itinerary["score"]?.ToObject<double>() ?? 0,
                         SessionId = sessionID,
                         Token = token,
                         Flights = new List<Flight>()
                     };
 
+                    int position = 0;
                     var legs = itinerary["legs"] as JArray;
                     if (legs != null)
                     {
@@ -103,8 +97,11 @@ namespace PROJETOESA.Services.SkyscannerService
                                 DestinationCityId = leg["destination"]["id"]?.ToString(),
                                 OriginCity = originCity,
                                 DestinationCity = destinationCity,
+                                Direction = position == 0 ? "Departure" : "Arrival",
                                 Segments = new List<Segment>()
                             };
+
+                            position++;
 
                             var carriersObj = leg["carriers"] as JObject;
                             var marketingCarriers = carriersObj?["marketing"] as JArray;
@@ -152,14 +149,14 @@ namespace PROJETOESA.Services.SkyscannerService
             return trips;
         }
 
-        public async Task<List<TripDetailsViewModel>> GetRoundtripPremiumAsync(FlightData data)
+        public async Task<List<TripViewModel>> GetRoundtripPremiumAsync(FlightData data)
         {
             List<Trip> trips = await GetRoundtripAsync(data);
 
             Debug.WriteLine("alasjdçaojisºdfoajsdfgºoaidjfgçºzlkdmfºvbgaopidfjgçºaoidfjhhg+ºoahjiertfgoiaehjtgoihjaetroghjaeotijhgaoetihjgajhertgjaodpkfmgº-aPojidkerºtpgjaºerpjgºae+9irjgõeparkjgkeoprg~pajkeri~gp9okedrpºalasjdçaojisºdfoajsdfgºoaidjfgçºzlkdmfºvbgaopidfjgçºaoidfjhhg+ºoahjiertfgoiaehjtgoihjaetroghjaeotijhgaoetihjgajhertgjaodpkfmgº-aPojidkerºtpgjaºerpjgºae+9irjgõeparkjgkeoprg~pajkeri~gp9okedrpº");
             Debug.WriteLine(trips.Count);
 
-            var tasks = new List<Task<TripDetailsViewModel>>();
+            var tasks = new List<Task<TripViewModel>>();
 
             foreach (Trip trip in trips)
             {
@@ -177,7 +174,7 @@ namespace PROJETOESA.Services.SkyscannerService
         }
 
 
-        public async Task<TripDetailsViewModel> GetTripDetailsAsync(string token, string itineraryId)
+        public async Task<TripViewModel> GetTripDetailsAsync(string token, string itineraryId)
         {
             HttpResponseMessage response = await _httpClient.GetAsync($"/flights/detail?token={token}&itineraryId={itineraryId}");
 
@@ -197,17 +194,16 @@ namespace PROJETOESA.Services.SkyscannerService
             var jsonObject = JObject.Parse(content);
             var itineraryData = jsonObject["data"]["itinerary"];
 
-            TripDetailsViewModel model = new TripDetailsViewModel();
+            TripViewModel model = new TripViewModel();
 
             if (itineraryData != null)
             {
                 //Debug.WriteLine(itineraryData["id"].ToString());
                 //Debug.WriteLine(itineraryData["destinationImage"].ToString());
 
-                model = new TripDetailsViewModel
+                model = new TripViewModel
                 {
                     Id = itineraryData["id"].ToString(),
-                    DestinationImage = itineraryData["destinationImage"].ToString(),
                     Flights = new List<FlightViewModel>(),
                     PriceOptions = new List<PriceOptions>()
                 };
@@ -219,31 +215,8 @@ namespace PROJETOESA.Services.SkyscannerService
                 {
                     foreach (var leg in legs)
                     {
-                        //Debug.WriteLine("asdhasdohaoiudaiohdiauhdiuahdihdiuahdiuhaidhadhaidhaidhaidhaiuhdaihdishdiaushdiahdiuahdihdiaasdhasdohaoiudaiohdiauhdiuahdihdiuahdiuhaidhadhaidhaidhaidhaiuhdaihdishdiaushdiahdiuahdihdiaasdhasdohaoiudaiohdiauhdiuahdihdiuahdiuhaidhadhaidhaidhaidhaiuhdaihdishdiaushdiahdiuahdihdiaasdhasdohaoiudaiohdiauhdiuahdihdiuahdiuhaidhadhaidhaidhaidhaiuhdaihdishdiaushdiahdiuahdihdia");
-
-                        //Debug.WriteLine("originDisplaycode");
-                        //Debug.WriteLine(leg["origin"]["displayCode"]?.ToString());
-                        //Debug.WriteLine("destination Display code");
-                        //Debug.WriteLine(leg["destination"]["displayCode"]?.ToString());
-
                         City originCity = await GetCityAsync(leg["origin"]["displayCode"]?.ToString());
                         City destinationCity = await GetCityAsync(leg["destination"]["displayCode"]?.ToString());
-
-                        //Debug.WriteLine("Depois da pesquisa, nome da origem");
-                        //Debug.WriteLine(originCity.Name);
-                        //Debug.WriteLine("Depois da pesquisa, nome do destino");
-                        //Debug.WriteLine(destinationCity.Name);
-
-                        //Debug.WriteLine("trip ID");
-                        //Debug.WriteLine(leg["id"]?.ToString());
-                        //Debug.WriteLine("Departure");
-                        //Debug.WriteLine(leg["departure"]?.ToString());
-                        //Debug.WriteLine("Arrival");
-                        //Debug.WriteLine(leg["arrival"]?.ToString());
-                        //Debug.WriteLine("duration");
-                        //Debug.WriteLine(leg["duration"].ToObject<int>());
-                        //Debug.WriteLine("stop count");
-                        //Debug.WriteLine(leg["stopCount"]?.ToObject<int>());
 
                         var flight = new FlightViewModel
                         {
@@ -256,7 +229,7 @@ namespace PROJETOESA.Services.SkyscannerService
                                 Id = originCity.Id,
                                 Name = originCity.Name,
                                 ApiKey = originCity.ApiKey,
-                                Country = new CountryViewModel
+                                Country = new Country
                                 {
                                     Id = originCity.Country.Id,
                                     Name = originCity.Country.Name
@@ -267,13 +240,12 @@ namespace PROJETOESA.Services.SkyscannerService
                                 Id = destinationCity.Id,
                                 Name = destinationCity.Name,
                                 ApiKey = destinationCity.ApiKey,
-                                Country = new CountryViewModel
+                                Country = new Country
                                 {
                                     Id = destinationCity.Country.Id,
                                     Name = destinationCity.Country.Name
                                 }
                             },
-                            StopCount = leg["stopCount"]?.ToObject<int>(),
                             Segments = new List<SegmentViewModel>()
                         };
 
@@ -282,33 +254,9 @@ namespace PROJETOESA.Services.SkyscannerService
                         {
                             foreach (var segment in segments)
                             {
-                                //Debug.WriteLine("Segmento");
-                                //Debug.WriteLine("originDisplaycode");
-                                //Debug.WriteLine(segment["origin"]["displayCode"]?.ToString());
-                                //Debug.WriteLine("destination Display code");
-                                //Debug.WriteLine(segment["destination"]["displayCode"]?.ToString());
-                                //Debug.WriteLine("Carrier");
-                                //Debug.WriteLine(segment["marketingCarrier"]["id"]?.ToString());
-
                                 City originCitySegment = await GetCityAsync(segment["origin"]["displayCode"]?.ToString());
                                 City destinationCitySegment = await GetCityAsync(segment["destination"]["displayCode"]?.ToString());
                                 Carrier carrierSegment = await GetCarrierAsync(segment["marketingCarrier"]["id"]?.ToString());
-
-                                //Debug.WriteLine("Depois da pesquisa Origem");
-                                //Debug.WriteLine(originCitySegment.Name);
-                                //Debug.WriteLine("Depois da pesquisa destino");
-                                //Debug.WriteLine(destinationCitySegment.Name);
-                                //Debug.WriteLine("Depois da pesquisa Carrier");
-                                //Debug.WriteLine(carrierSegment.Name);
-
-                                //Debug.WriteLine("Flight Number");
-                                //Debug.WriteLine(segment["flightNumber"]?.ToString());
-                                //Debug.WriteLine("Departure");
-                                //Debug.WriteLine(segment["departure"]?.ToString());
-                                //Debug.WriteLine("Arrival");
-                                //Debug.WriteLine(segment["arrival"]?.ToString());
-                                //Debug.WriteLine("Duration");
-                                //Debug.WriteLine(segment["duration"].ToObject<int>()); 
 
                                 var item = new SegmentViewModel
                                 {
@@ -321,7 +269,7 @@ namespace PROJETOESA.Services.SkyscannerService
                                         Id = originCitySegment.Id,
                                         Name = originCitySegment.Name,
                                         ApiKey = originCitySegment.ApiKey,
-                                        Country = new CountryViewModel
+                                        Country = new Country
                                         {
                                             Id = originCitySegment.Country.Id,
                                             Name = originCitySegment.Country.Name
@@ -332,13 +280,13 @@ namespace PROJETOESA.Services.SkyscannerService
                                         Id = destinationCitySegment.Id,
                                         Name = destinationCitySegment.Name,
                                         ApiKey = destinationCitySegment.ApiKey,
-                                        Country = new CountryViewModel
+                                        Country = new Country
                                         {
                                             Id = destinationCitySegment.Country.Id,
                                             Name = destinationCitySegment.Country.Name
                                         }
                                     },
-                                    Carrier = new CarrierViewModel
+                                    Carrier = new Carrier
                                     {
                                         Id = carrierSegment.Id,
                                         Name = carrierSegment.Name,
@@ -358,16 +306,6 @@ namespace PROJETOESA.Services.SkyscannerService
                     foreach (var price in priceOptions)
                     {
                         var agents = price["agents"] as JArray;
-                        //Debug.WriteLine("ID");
-                        //Debug.WriteLine(agents[0]["id"]?.ToString());
-                        //Debug.WriteLine("Agente");
-                        //Debug.WriteLine(agents[0]["name"]?.ToString());
-                        //Debug.WriteLine("Position");
-                        //Debug.WriteLine(agents[0]["bookingProposition"]?.ToString());
-                        //Debug.WriteLine("URL");
-                        //Debug.WriteLine(agents[0]["url"]?.ToString());
-                        //Debug.WriteLine("Price");
-                        //Debug.WriteLine((double)price["totalPrice"]);
 
                         var option = new PriceOptions
                         {
@@ -624,13 +562,6 @@ namespace PROJETOESA.Services.SkyscannerService
             {
                 Id = "13577-2402250945--31781-0-11469-2402251030|11469-2403051635--31781-0-13577-2403051725",
                 Price = 84.99,
-                isSelfTransfer = false,
-                isProtectedSelfTransfer = false,
-                isChangeAllowed = false,
-                isPartiallyChangeable = false,
-                isCancellationAllowed = false,
-                isPartiallyRefundable = false,
-                Score = 0.999,
                 Flights = new List<Flight>()
             };
 
@@ -644,6 +575,7 @@ namespace PROJETOESA.Services.SkyscannerService
                 DestinationCityId = "FAO",
                 OriginCity = await GetCityAsync("LIS"),
                 DestinationCity = await GetCityAsync("FAO"),
+                Direction = "Departure",
                 Segments = new List<Segment>()
             };
 
@@ -674,6 +606,7 @@ namespace PROJETOESA.Services.SkyscannerService
                 DestinationCityId = "LIS",
                 OriginCity = await GetCityAsync("FAO"),
                 DestinationCity = await GetCityAsync("LIS"),
+                Direction = "Arrival",
                 Segments = new List<Segment>()
             };
 

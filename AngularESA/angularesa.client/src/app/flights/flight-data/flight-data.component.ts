@@ -2,11 +2,9 @@ import { Component, OnInit, numberAttribute } from '@angular/core';
 import { Trip } from '../../Models/Trip';
 import { User } from '../../Models/users';
 import { AuthorizeService } from '../../../api-authorization/authorize.service';
-import { TripDetails } from '../../Models/TripDetails';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SquareService } from '../../services/SquareService';
 import { PaymentModel } from '../../Models/PaymentModel';
-import { PriceOptions } from '../../Models/PriceOptions';
 import { MatDialog } from '@angular/material/dialog';
 import { PopUpPaymentComponent } from './PopUpPayment/PopUpPayment.component';
 
@@ -20,7 +18,6 @@ export class FlightDataComponent implements OnInit {
   user: User | null = null;
 
   trip: Trip | undefined;
-  tripPremium: TripDetails | undefined;
   processingTicket: boolean = false;
   payment: PaymentModel | undefined;
   paymentToDo: boolean = false;
@@ -57,7 +54,7 @@ export class FlightDataComponent implements OnInit {
   private assignAction(routerState: any) {
     if (this.user && this.user.role === 1) {
       if (routerState) {
-        this.tripPremium = routerState;
+        this.trip = routerState;
       }
     } else {
       if (routerState) {
@@ -76,7 +73,7 @@ export class FlightDataComponent implements OnInit {
     if (this.user && this.user.role !== 1) {
       this.processingTicket = true;
       let payment: PaymentModel = {
-        price: trip.price,
+        price: trip.price!,
         currency: "EUR",
         email: this.user.email,
         creditCard: this.user.email,

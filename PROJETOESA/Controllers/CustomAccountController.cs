@@ -117,6 +117,11 @@ namespace PROJETOESA.Controllers
         [Authorize]
         public async Task<IActionResult> GetUserInfo()
         {
+            if (!User.Identity.IsAuthenticated)
+            {
+                return Ok(new { message = "Nenhum user autenticado." });
+            }
+
             var user = await _userManager.GetUserAsync(User);
             if (user == null) return NotFound();
 

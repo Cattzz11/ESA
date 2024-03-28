@@ -11,7 +11,7 @@ namespace PROJETOESA.Models
         public string ApiKey { get; set; }
 
         public string CountryId { get; set; }
-        public string? Coordinates { get; set; }
+        public string? Coordenates { get; set; }
         public virtual Country Country { get; set; }
     }
 }

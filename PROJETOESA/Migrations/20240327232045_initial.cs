@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace PROJETOESA.Migrations
 {
     /// <inheritdoc />
-    public partial class AeroHelper : Migration
+    public partial class initial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -150,14 +150,7 @@ namespace PROJETOESA.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    Price = table.Column<double>(type: "float", nullable: false),
-                    isSelfTransfer = table.Column<bool>(type: "bit", nullable: false),
-                    isProtectedSelfTransfer = table.Column<bool>(type: "bit", nullable: false),
-                    isChangeAllowed = table.Column<bool>(type: "bit", nullable: false),
-                    isPartiallyChangeable = table.Column<bool>(type: "bit", nullable: false),
-                    isCancellationAllowed = table.Column<bool>(type: "bit", nullable: false),
-                    isPartiallyRefundable = table.Column<bool>(type: "bit", nullable: false),
-                    Score = table.Column<double>(type: "float", nullable: false),
+                    Price = table.Column<double>(type: "float", nullable: true),
                     SessionId = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Token = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
@@ -280,7 +273,7 @@ namespace PROJETOESA.Migrations
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ApiKey = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CountryId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    Coordinates = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    Coordenates = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -325,6 +318,7 @@ namespace PROJETOESA.Migrations
                     Duration = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Departure = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Arrival = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Direction = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     OriginCityId = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     DestinationCityId = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     TripId = table.Column<string>(type: "nvarchar(450)", nullable: false)

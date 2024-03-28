@@ -2,7 +2,6 @@ import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from "@angula
 import { FlightItineraryService } from "../../services/FlightItineraryService";
 import { FlightsItinerary } from "../../Models/FlightsItinerary";
 import { Trip } from "../../Models/Trip";
-import { TripDetails } from "../../Models/TripDetails";
 import { Router } from "@angular/router";
 import { User } from "../../Models/users";
 import { AuthorizeService } from "../../../api-authorization/authorize.service";
@@ -24,7 +23,6 @@ export class MapComponent implements OnInit, AfterViewInit {
 
   flightsList: FlightsItinerary[] = [];
   tripList: Trip[] = [];
-  tripListPremium: TripDetails[] = [];
   aircraftData: AircraftData | undefined;
 
   display: any;
@@ -184,7 +182,7 @@ export class MapComponent implements OnInit, AfterViewInit {
       if (this.user && this.user.role === 1) {
         this.flights.getTripsPremium(originAddress, destinationAddress).subscribe({
           next: (response) => {
-            this.tripListPremium = response;
+            this.tripList = response;
             this.isLoading = false;
           },
           error: (error) => {
@@ -226,14 +224,14 @@ export class MapComponent implements OnInit, AfterViewInit {
       let departureCoordinates;
       let arrivalCoordinates;
 
-      if (flight.departureLocation.coordinates) {
-        const [depLat, depLng] = flight.departureLocation.coordinates.split(';').map(Number);
+      if (flight.departureLocation.coordenates) {
+        const [depLat, depLng] = flight.departureLocation.coordenates.split(';').map(Number);
         departureCoordinates = { lat: depLat, lng: depLng };
         this.addMarker(depLat, depLng, 'departure');
       }
 
-      if (flight.arrivalLocation.coordinates) {
-        const [arrLat, arrLng] = flight.arrivalLocation.coordinates.split(';').map(Number);
+      if (flight.arrivalLocation.coordenates) {
+        const [arrLat, arrLng] = flight.arrivalLocation.coordenates.split(';').map(Number);
         arrivalCoordinates = { lat: arrLat, lng: arrLng };
         this.addMarker(arrLat, arrLng, 'arrival');
       }
@@ -533,8 +531,8 @@ export class MapComponent implements OnInit, AfterViewInit {
     this.router.navigate(['/flight-data'], { state: { data: trip } });
   }
 
-  calculatePrices(inputField: 'max' | 'med' | 'min', options: PriceOptions[]) {
-    const prices = options.map(option => option.totalPrice);
+  calculatePrices(inputField: 'max' | 'med' | 'min', options: PriceOptions[] | undefined) {
+    const prices = options!.map(option => option.totalPrice);
 
     switch (inputField) {
       case 'max':
@@ -549,7 +547,7 @@ export class MapComponent implements OnInit, AfterViewInit {
         return closestToAveragePrice;
       case 'min':
         return Math.min(...prices);;
-    }
+    } 
   }
 }
 

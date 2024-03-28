@@ -4,7 +4,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Carrier } from '../../Models/Carrier';
 import { Trip } from '../../Models/Trip';
 import { HttpClient } from '@angular/common/http';
-import { TripDetails } from '../../Models/TripDetails';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { AuthorizeService } from '../../../api-authorization/authorize.service';
 import { City } from '../../Models/City';

@@ -9,6 +9,7 @@ namespace PROJETOESA.Models
         public string Duration { get; set; }
         public DateTime Departure { get; set; }
         public DateTime Arrival { get; set; }
+        public string Direction { get; set; }
 
         public string OriginCityId { get; set; }
         public string DestinationCityId { get; set; }

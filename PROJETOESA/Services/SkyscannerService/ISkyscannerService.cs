@@ -9,9 +9,9 @@ namespace PROJETOESA.Services.SkyscannerService
     {
         Task<List<Trip>> GetRoundtripAsync(FlightData data);
 
-        Task<List<TripDetailsViewModel>> GetRoundtripPremiumAsync(FlightData data);
+        Task<List<TripViewModel>> GetRoundtripPremiumAsync(FlightData data);
 
-        Task<TripDetailsViewModel> GetTripDetailsAsync(string token, string itineraryId);
+        Task<TripViewModel> GetTripDetailsAsync(string token, string itineraryId);
 
         Task<List<Country>> GetEverywhereAsync(FlightData data);
 

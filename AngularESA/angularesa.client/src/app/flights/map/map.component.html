@@ -61,7 +61,7 @@
 
 <div *ngIf="!isLoading && this.user && this.user.role === 1" class="viagens-list">
     <div class="travelHistory">
-        <div *ngFor="let trip of tripListPremium" class="travel">
+        <div *ngFor="let trip of tripList" class="travel">
             <ng-container *ngIf="trip.flights && trip.flights.length > 0 && trip.flights[0].segments && trip.flights[0].segments.length > 0">
                 <div class="flight">
                     <div class="ida">

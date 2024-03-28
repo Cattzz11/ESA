@@ -107,9 +107,9 @@ namespace PROJETOESA.Services.FlightService
             string mainLatitude = "";
             string mainLongitude = "";
 
-            if (city != null && !string.IsNullOrEmpty(city.Coordinates))
+            if (city != null && !string.IsNullOrEmpty(city.Coordenates))
             {
-                var parts = city.Coordinates.Split(';');
+                var parts = city.Coordenates.Split(';');
                 if (parts.Length == 2)
                 {
                     mainLatitude = parts[0];
@@ -135,7 +135,7 @@ namespace PROJETOESA.Services.FlightService
 
                         if (city != null)
                         {
-                            city.Coordinates = $"{mainLatitude};{mainLongitude}";
+                            city.Coordenates = $"{mainLatitude};{mainLongitude}";
                             _context.SaveChanges();
                         }
                     }
@@ -156,54 +156,11 @@ namespace PROJETOESA.Services.FlightService
             return content;
         }
 
-        //public async Task<List<Trip>> GetFlightsAsync(AddressComponents origin, AddressComponents destination)
-        //{
-        //    var allCities = await _context.City.Include(c => c.Country).ToListAsync();
-
-        //    City FindCity(AddressComponents addressComponents)
-        //    {
-        //        var city = allCities.FirstOrDefault(c => c.Name.ToLower().Equals(addressComponents.city.ToLower()));
-
-        //        if (city != null)
-        //        {
-        //            return city;
-        //        }
-
-        //        var originLatitudeText = addressComponents.latitude.Replace(',', '.');
-        //        var originLongitudeText = addressComponents.longitude.Replace(',', '.');
-
-        //        double originLatitude;
-        //        double originLongitude;
-
-        //        double.TryParse(originLatitudeText, NumberStyles.Any, CultureInfo.InvariantCulture, out originLatitude);
-        //        double.TryParse(originLongitudeText, NumberStyles.Any, CultureInfo.InvariantCulture, out originLongitude);
-
-        //        return allCities
-        //            .Select(c => new
-        //            {
-        //                City = c,
-        //                Distance = HaversineDistance(originLatitude, originLongitude, c)
-        //            })
-        //            .OrderBy(c => c.Distance)
-        //            .First().City;
-        //    }
-
-        //    City originCity = FindCity(origin);
-        //    City destinationCity = FindCity(destination);
-
-        //    string tomorrow = DateTime.Now.AddDays(1).ToString("yyyy-MM-dd");
-        //    string nextWeek = DateTime.Now.AddDays(8).ToString("yyyy-MM-dd");
-
-        //    List<Trip> tripList = await _skyscannerService.GetRoundtripAsync(new FlightData { fromEntityId = originCity.ApiKey, toEntityId = destinationCity.ApiKey, departDate = tomorrow, returnDate = nextWeek });
-
-        //    return tripList;
-        //}
-
         public async Task<List<Trip>> GetFlightsAsync(AddressComponents origin, AddressComponents destination)
         {
             var allCities = await _context.City.Include(c => c.Country).ToListAsync();
 
-            var citiesWithEmptyCoordenates = await _context.City.Include(c => c.Country).Where(c => string.IsNullOrEmpty(c.Coordinates)).ToListAsync();
+            var citiesWithEmptyCoordenates = await _context.City.Include(c => c.Country).Where(c => string.IsNullOrEmpty(c.Coordenates)).ToListAsync();
 
             if (citiesWithEmptyCoordenates.Any())
             {
@@ -249,11 +206,11 @@ namespace PROJETOESA.Services.FlightService
             return tripList;
         }
 
-        public async Task<List<TripDetailsViewModel>> GetFlightsPremiumAsync(AddressComponents origin, AddressComponents destination)
+        public async Task<List<TripViewModel>> GetFlightsPremiumAsync(AddressComponents origin, AddressComponents destination)
         {
             List<Trip> trips = await GetFlightsAsync(origin, destination);
 
-            var tasks = new List<Task<TripDetailsViewModel>>();
+            var tasks = new List<Task<TripViewModel>>();
 
             foreach (Trip trip in trips)
             {
@@ -272,7 +229,7 @@ namespace PROJETOESA.Services.FlightService
             var allCities = await _context.City.Include(c => c.Country).ToListAsync();
             foreach (var city in allCities)
             {
-                if (string.IsNullOrEmpty(city.Coordinates))
+                if (string.IsNullOrEmpty(city.Coordenates))
                 {
                     Debug.WriteLine("Cidade!!", city.Name);
                     string geocodeUrl = $"https://maps.googleapis.com/maps/api/geocode/json?address={Uri.EscapeDataString(city.Name)}&key={_googleApiKey}";
@@ -292,8 +249,8 @@ namespace PROJETOESA.Services.FlightService
 
                             if (city != null)
                             {
-                                city.Coordinates = $"{mainLatitude};{mainLongitude}";
-                                Debug.WriteLine("Coordenadas!!", city.Coordinates);
+                                city.Coordenates = $"{mainLatitude};{mainLongitude}";
+                                Debug.WriteLine("Coordenadas!!", city.Coordenates);
 
                                 _context.SaveChanges();
                             }
@@ -308,7 +265,7 @@ namespace PROJETOESA.Services.FlightService
 
         private double HaversineDistance(double lat1, double lon1, City city)
         {
-            var coordinates = city.Coordinates.Split(';');
+            var coordinates = city.Coordenates.Split(';');
             double lat2;
             double lon2;
 
@@ -363,7 +320,7 @@ namespace PROJETOESA.Services.FlightService
 
             var city = await _context.City.Include(c => c.Country).FirstOrDefaultAsync(c => EF.Functions.Like(c.Name, $"%{timezoneCityName}%"));
 
-            if (city != null && string.IsNullOrEmpty(city.Coordinates))
+            if (city != null && string.IsNullOrEmpty(city.Coordenates))
             {
                 await GetCoordenatesAsync(city.Name);
             }
@@ -396,7 +353,7 @@ namespace PROJETOESA.Services.FlightService
                 }
             }
 
-            if (string.IsNullOrEmpty(mostSimilarCity.Coordinates))
+            if (string.IsNullOrEmpty(mostSimilarCity.Coordenates))
             {
                 await GetCoordenatesAsync(mostSimilarCity.Name);
             }

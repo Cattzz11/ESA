@@ -48,7 +48,7 @@ export class HomeComponent implements OnInit {
     this.router.navigate(['/filter-by-airline'], { state: { data: data } });
   }
 
-  selectTrip(trip: any) {
+  selectTrip(trip: Trip) {
     this.router.navigate(['/flight-data'], { state: { data: trip } });
   }
   

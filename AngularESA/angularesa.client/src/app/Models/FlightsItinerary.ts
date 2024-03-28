@@ -9,5 +9,5 @@ export interface FlightsItinerary {
   departureSchedule: Date;
   arrivalLocation: City;
   arrivalSchedule: Date;
-  airline: Carrier;
+  airline?: Carrier;
 }

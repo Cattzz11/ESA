@@ -17,7 +17,6 @@ export class GoogleMapsService {
 
   public loadGoogleMaps(): Observable<void> {
     return new Observable(observer => {
-      // Adiciona o script de forma dinâmica
       const script = document.createElement('script');
       script.src = this.googleMapsUrl;
       script.async = true;

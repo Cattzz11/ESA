@@ -7,7 +7,6 @@ import { Carrier } from '../Models/Carrier';
 import { Trip } from '../Models/Trip';
 import { Country } from '../Models/country';
 import { Calendar } from '../Models/Calendar';
-import { TripDetails } from '../Models/TripDetails';
 
 @Injectable({
   providedIn: 'root'
@@ -36,7 +35,7 @@ export class SkyscannerService {
     return this.http.get<Trip[]>('api/flight/search-roundtrip', { params: params });
   }
 
-  public getRoundtripFlightsPremium(data: FlightData): Observable<TripDetails[]> {
+  public getRoundtripFlightsPremium(data: FlightData): Observable<Trip[]> {
     let params = new HttpParams();
 
     // Campos obrigatórios
@@ -54,7 +53,7 @@ export class SkyscannerService {
     if (data.infants) params = params.set('infants', data.infants);
     if (data.cabinClass) params = params.set('cabinClass', data.cabinClass);
 
-    return this.http.get<TripDetails[]>('api/flight/search-roundtrip-premium', { params: params });
+    return this.http.get<Trip[]>('api/flight/search-roundtrip-premium', { params: params });
   }
 
   public getEverywhereFlights(data: FlightData): Observable<any> {

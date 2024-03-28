@@ -4,7 +4,6 @@ import { Observable } from "rxjs";
 import { FlightsItinerary } from "../Models/FlightsItinerary";
 import { AddressComponents } from "../flights/map/map.component";
 import { Trip } from "../Models/Trip";
-import { TripDetails } from "../Models/TripDetails";
 
 @Injectable({
   providedIn: 'root'
@@ -34,7 +33,7 @@ export class FlightItineraryService {
     return this.http.get<Trip[]>('api/flight-itinerary/search-flights', { params });
   }
 
-  public getTripsPremium(origin: AddressComponents, destination: AddressComponents): Observable<TripDetails[]> {
+  public getTripsPremium(origin: AddressComponents, destination: AddressComponents): Observable<Trip[]> {
     let params = new HttpParams()
       .set('origin.city', origin.city)
       .set('origin.country', origin.country)
@@ -45,8 +44,6 @@ export class FlightItineraryService {
       .set('destination.latitude', destination.latitude)
       .set('destination.longitude', destination.longitude);
 
-    console.log("Angular Service");
-
-    return this.http.get<TripDetails[]>('api/flight-itinerary/search-flights-premium', { params });
+    return this.http.get<Trip[]>('api/flight-itinerary/search-flights-premium', { params });
   }
 }

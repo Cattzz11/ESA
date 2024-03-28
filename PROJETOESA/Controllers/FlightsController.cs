@@ -130,7 +130,7 @@ namespace PROJETOESA.Controllers
         [Route("api/flight/trip-details")]
         public async Task<IActionResult> getTripDetails(string token, string itineraryId)
         {
-            TripDetailsViewModel result = await _skyscannerService.GetTripDetailsAsync(token, itineraryId);
+            var result = await _skyscannerService.GetTripDetailsAsync(token, itineraryId);
 
             return Ok(result);
         }
