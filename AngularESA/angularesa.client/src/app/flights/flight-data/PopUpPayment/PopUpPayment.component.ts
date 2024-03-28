@@ -124,25 +124,25 @@ export class PopUpPaymentComponent implements OnInit {
               // Payment failed
               console.error('Payment failed');
               this.isPaymentProcessing = false;
-              //Swal.fire({
-              //  position: 'center',
-              //  icon: 'error',
-              //  title: 'O pagamento falhou!',
-              //  text: 'O pagamento falhou, por favor tente novamente.',
-              //  showConfirmButton: true, // You might want the user to acknowledge the error
-              //});
+              Swal.fire({
+                position: 'center',
+                icon: 'error',
+                title: 'O pagamento falhou!',
+                text: 'O pagamento falhou, por favor tente novamente.',
+                showConfirmButton: true, // You might want the user to acknowledge the error
+              });
             }
           },
           (error) => {
             console.error('Payment failed:', error);
             this.isPaymentProcessing = false;
-            //Swal.fire({
-            //  position: 'center',
-            //  icon: 'error',
-            //  title: 'O pagamento falhou!',
-            //  text: 'O pagamento falhou, por favor tente novamente.',
-            //  showConfirmButton: true, // You might want the user to acknowledge the error
-            //});
+            Swal.fire({
+              position: 'center',
+              icon: 'error',
+              title: 'O pagamento falhou!',
+              text: 'O pagamento falhou, por favor tente novamente.',
+              showConfirmButton: true, // You might want the user to acknowledge the error
+            });
           }
         );
       }

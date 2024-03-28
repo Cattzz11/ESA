@@ -121,37 +121,37 @@ export class PopUpCancelPaymentComponent implements OnInit {
               setTimeout(() => {
                 this.isPaymentProcessing = false;
               }, 2000);
-              //Swal.fire({
-              //  position: "center",
-              //  icon: "success",
-              //  title: "O cancelamento foi efetuado com sucesso",
-              //  showConfirmButton: false,
-              //  timer: 2100
-              //});
+              Swal.fire({
+                position: "center",
+                icon: "success",
+                title: "O cancelamento foi efetuado com sucesso",
+                showConfirmButton: false,
+                timer: 2100
+              });
 
             } else {
               // Payment failed
               console.error('Payment failed');
               this.isPaymentProcessing = false;
-              //Swal.fire({
-              //  position: 'center',
-              //  icon: 'error',
-              //  title: 'O pagamento falhou!',
-              //  text: 'O pagamento falhou, por favor tente novamente.',
-              //  showConfirmButton: true, // You might want the user to acknowledge the error
-              //});
+              Swal.fire({
+                position: 'center',
+                icon: 'error',
+                title: 'O pagamento falhou!',
+                text: 'O pagamento falhou, por favor tente novamente.',
+                showConfirmButton: true, // You might want the user to acknowledge the error
+              });
             }
           },
           (error) => {
             console.error('Payment failed:', error);
             this.isPaymentProcessing = false;
-            //Swal.fire({
-            //  position: 'center',
-            //  icon: 'error',
-            //  title: 'O pagamento falhou!',
-            //  text: 'O pagamento falhou, por favor tente novamente.',
-            //  showConfirmButton: true, // You might want the user to acknowledge the error
-            //});
+            Swal.fire({
+              position: 'center',
+              icon: 'error',
+              title: 'O pagamento falhou!',
+              text: 'O pagamento falhou, por favor tente novamente.',
+              showConfirmButton: true, // You might want the user to acknowledge the error
+            });
           }
         );
       }
