@@ -22,6 +22,8 @@ export class FlightDataComponent implements OnInit {
   payment: PaymentModel | undefined;
   paymentToDo: boolean = false;
 
+  userPremium = false;
+
   constructor(
     private auth: AuthorizeService,
     private route: ActivatedRoute,
@@ -34,25 +36,21 @@ export class FlightDataComponent implements OnInit {
     const storedUser = sessionStorage.getItem('user');
     const routerState = history.state.data;
 
-    if (storedUser) {
-      this.user = JSON.parse(storedUser);
-      this.assignAction(routerState);
-    } else {
-      this.auth.getUserInfo().subscribe({
-        next: (userInfo: User) => {
-          this.user = userInfo;
-          this.assignAction(routerState);
-        },
-        error: (error) => {
-          console.error('Error fetching user info', error);
-          this.defaultAction(routerState);
-        }
-      });
-    }
+    this.auth.getUserInfo().subscribe({
+      next: (userInfo: User) => {
+        this.user = userInfo;
+        this.assignAction(routerState);
+      },
+      error: (error) => {
+        console.error('Error fetching user info', error);
+        this.defaultAction(routerState);
+      }
+    });
   }
 
   private assignAction(routerState: any) {
     if (this.user && this.user.role === 1) {
+      this.userPremium = true;
       if (routerState) {
         this.trip = routerState;
       }
@@ -106,6 +104,19 @@ export class FlightDataComponent implements OnInit {
     } else {
 
     }
+  }
+
+  calculateWaitTime(arrival: Date, departure: Date): string {
+    let arrivalDate = arrival instanceof Date ? arrival : new Date(arrival);
+    let departureDate = departure instanceof Date ? departure : new Date(departure);
+
+    let difference = departureDate.getTime() - arrivalDate.getTime();
+
+    let hours = Math.floor(difference / (1000 * 60 * 60));
+    let minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+
+    // Retorna a diferença formatada como uma string
+    return `${hours} horas e ${minutes} minutos`;
   }
 
   buyPage(trip: Trip) {

@@ -156,7 +156,7 @@ namespace PROJETOESA.Services.FlightService
             return content;
         }
 
-        public async Task<List<Trip>> GetFlightsAsync(AddressComponents origin, AddressComponents destination)
+        public async Task<List<TripViewModel>> GetFlightsAsync(AddressComponents origin, AddressComponents destination)
         {
             var allCities = await _context.City.Include(c => c.Country).ToListAsync();
 
@@ -201,20 +201,20 @@ namespace PROJETOESA.Services.FlightService
             string tomorrow = DateTime.Now.AddDays(1).ToString("yyyy-MM-dd");
             string nextWeek = DateTime.Now.AddDays(8).ToString("yyyy-MM-dd");
 
-            List<Trip> tripList = await _skyscannerService.GetRoundtripAsync(new FlightData { fromEntityId = originCity.ApiKey, toEntityId = destinationCity.ApiKey, departDate = tomorrow, returnDate = nextWeek });
+            List<TripViewModel> tripList = await _skyscannerService.GetRoundtripAsync(new FlightData { fromEntityId = originCity.ApiKey, toEntityId = destinationCity.ApiKey, departDate = tomorrow, returnDate = nextWeek });
 
             return tripList;
         }
 
         public async Task<List<TripViewModel>> GetFlightsPremiumAsync(AddressComponents origin, AddressComponents destination)
         {
-            List<Trip> trips = await GetFlightsAsync(origin, destination);
+            List<TripViewModel> trips = await GetFlightsAsync(origin, destination);
 
             var tasks = new List<Task<TripViewModel>>();
 
-            foreach (Trip trip in trips)
+            foreach (TripViewModel trip in trips)
             {
-                tasks.Add(_skyscannerService.GetTripDetailsAsync(trip.Token, trip.Id));
+                tasks.Add(_skyscannerService.GetTripDetailsAsync(trip.Token, trip.Id, trip.SessionId));
             }
 
             var results = await Task.WhenAll(tasks);

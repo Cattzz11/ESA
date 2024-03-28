@@ -422,7 +422,7 @@ namespace PROJETOESA.Controllers
             {
                 var htmlContent = @"
                     <h1 style=""font-size: 32px; font-weight: 700; line-height: 48px;"">Bem vindo!</h1>
-                    <p>Bem-vindo a bordo da AeroHelper! Estamos entusiasmados por tê-lo conosco nesta jornada rumo a novos horizontes. Com um universo de destinos e companhias aéreas ao seu alcance, nossa missão é simplificar cada etapa da sua viagem, desde a pesquisa até a compra dos bilhetes. Explore, sonhe e descubra o mundo de maneira mais fácil e conveniente. Prepara-se, a aventura espera por você!</p>
+                    <p>Bem-vindo a bordo da AeroHelper! Estamos entusiasmados por tê-lo connosco nesta jornada rumo a novos horizontes. Com um universo de destinos e companhias aéreas ao seu alcance, a nossa missão é simplificar cada etapa da sua viagem, desde a pesquisa até à compra dos bilhetes. Explore, sonhe e descubra o mundo de maneira mais fácil e conveniente. Prepare-se, a aventura espera por si!</p>
                     <p>Cumprimentos,<br>Equipa AeroHelper</p>
                 ";
 
@@ -442,7 +442,7 @@ namespace PROJETOESA.Controllers
             {
                 var htmlContent = @"
                     <h1 style=""font-size: 32px; font-weight: 700; line-height: 48px;"">Alteração de password efetuada com sucesso!</h1>
-                    <p>A sua senha foi atualizada com sucesso!<br>Se não solicitou esta alteração, por favor entre em contato conosco imediatamente para garantir a segurança da sua conta.</p>
+                    <p>A sua senha foi atualizada com sucesso!<br>Se não solicitou esta alteração, por favor entre em contato connosco imediatamente para garantir a segurança da sua conta.</p>
                     <p>Cumprimentos,<br>Equipa AeroHelper</p>
                 ";
 

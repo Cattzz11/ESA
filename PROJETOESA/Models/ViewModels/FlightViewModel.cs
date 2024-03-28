@@ -10,6 +10,7 @@ namespace PROJETOESA.Models.ViewModels
         public DateTime Arrival { get; set; }
         public CityViewModel OriginCity { get; set; }
         public CityViewModel DestinationCity { get; set; }
+        public string Direction { get; set; }
         public List<SegmentViewModel> Segments { get; set; } = new List<SegmentViewModel>();
     }
 }

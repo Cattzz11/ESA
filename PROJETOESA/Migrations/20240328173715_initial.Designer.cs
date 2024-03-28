@@ -12,7 +12,7 @@ using PROJETOESA.Data;
 namespace PROJETOESA.Migrations
 {
     [DbContext(typeof(AeroHelperContext))]
-    [Migration("20240327232045_initial")]
+    [Migration("20240328173715_initial")]
     partial class initial
     {
         /// <inheritdoc />
@@ -299,7 +299,6 @@ namespace PROJETOESA.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("LogoURL")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")

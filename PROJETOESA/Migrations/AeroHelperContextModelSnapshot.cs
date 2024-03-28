@@ -296,7 +296,6 @@ namespace PROJETOESA.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("LogoURL")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")

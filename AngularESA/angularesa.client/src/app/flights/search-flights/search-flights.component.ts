@@ -44,6 +44,8 @@ export class SearchFlightsComponent implements OnInit {
   arrivalEnabled = false;
   isLoading = false;
 
+  userPremium = false;
+
   minDepartureDate = new Date();
   minArrivalDate: Date | null = null;
 
@@ -90,6 +92,9 @@ export class SearchFlightsComponent implements OnInit {
       next: (userInfo: User | null) => {
         if (userInfo) {
           this.user = userInfo;
+          if (this.user && this.user.role === 1) {
+            this.userPremium = true;
+          }
         }
       }
     });
@@ -172,6 +177,15 @@ export class SearchFlightsComponent implements OnInit {
         next: (response) => {
           this.flights = response;
           this.isLoading = false;
+          this.flights.forEach(function (value) {
+            value.flights.forEach(function (value) {
+              console.log(value.originCity);
+              console.log(value.destinationCity);
+              console.log(value.arrival);
+              console.log(value.departure);
+              console.log(value.id);
+            });
+          });
         },
         error: (error) => {
           this.isLoading = false;

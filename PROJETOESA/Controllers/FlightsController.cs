@@ -72,9 +72,9 @@ namespace PROJETOESA.Controllers
 
         [HttpGet]
         [Route("api/flight/auto-complete")]
-        public async Task<IActionResult> searchData([FromQuery] Country data)
+        public async Task<IActionResult> searchData([FromQuery] string data)
         {
-            var result = await _skyscannerService.GetDataAsync(data.Name);
+            var result = await _skyscannerService.GetDataAsync(data);
 
             return Ok(result);
         }
@@ -92,9 +92,9 @@ namespace PROJETOESA.Controllers
         [Route("api/flight/sugestions-company")]
         public async Task<IActionResult> getSugestionsCompany([FromQuery] string carrierId)
         {
-            List<Trip> result = await _skyscannerService.GetSugestionsCompanyAsyncTest();
+            //var result = await _skyscannerService.GetSugestionsCompanyAsyncTest();
 
-            //List<Trip> result = await _skyscannerService.GetSugestionsCompanyAsync(carrierId);
+            var result = await _skyscannerService.GetSugestionsCompanyAsync(carrierId);
 
             return Ok(result);
         }
@@ -121,16 +121,16 @@ namespace PROJETOESA.Controllers
         [Route("api/flight/sugestions-destinations")]
         public async Task<IActionResult> getSugestionsDestinations()
         {
-            List<Trip> result = await _skyscannerService.GetSugestionsDestinationsAsync();
+            var result = await _skyscannerService.GetSugestionsDestinationsAsync();
 
             return Ok(result);
         }
 
         [HttpGet]
         [Route("api/flight/trip-details")]
-        public async Task<IActionResult> getTripDetails(string token, string itineraryId)
+        public async Task<IActionResult> getTripDetails(string token, string itineraryId, string sessionId)
         {
-            var result = await _skyscannerService.GetTripDetailsAsync(token, itineraryId);
+            var result = await _skyscannerService.GetTripDetailsAsync(token, itineraryId, sessionId);
 
             return Ok(result);
         }

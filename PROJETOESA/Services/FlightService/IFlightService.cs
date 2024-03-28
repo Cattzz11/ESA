@@ -15,7 +15,7 @@ namespace PROJETOESA.Services.FlightService
 
         Task<string> GetAirlinesDataAsync();
 
-        Task<List<Trip>> GetFlightsAsync(AddressComponents origin, AddressComponents destination);
+        Task<List<TripViewModel>> GetFlightsAsync(AddressComponents origin, AddressComponents destination);
 
         Task<List<TripViewModel>> GetFlightsPremiumAsync(AddressComponents origin, AddressComponents destination);
 

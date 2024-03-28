@@ -8,7 +8,7 @@ namespace PROJETOESA.Models
         [Key]
         public string Id { get; set; }
         public string Name { get; set; }
-        public string LogoURL { get; set; }
+        public string? LogoURL { get; set; }
         public int SearchTimes { get; set; }
     }
 }

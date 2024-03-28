@@ -7,58 +7,55 @@
 
 .flight-data-container {
   width: 95%;
-  max-width: 1200px;
+  max-width: 1500px;
   margin: 20px auto;
   padding: 20px;
-  background-color: #003366;
-  border-radius: 5px;
-  color: white;
+  background-color: #FAF9F6;
+  border-radius: 10px;
 }
 
   .flight-data-container h2 {
-    border-bottom: 1px solid #fff;
+    border-bottom: 2px solid #0E1111;
     padding-bottom: 5px;
   }
 
-.details-list, .flight-details, .segment-details {
-  background-color: #004080;
-  padding: 10px;
-  margin-bottom: 20px;
-  border-radius: 5px;
-}
-
-  .details-list p, .flight-details p, .segment-details p {
-    margin: 5px 0;
-  }
-
-.flight-section {
-  margin-bottom: 20px;
-}
-
 .segment-section {
-  background-color: #00509e;
+  background-color: #87CEEB;
   padding: 10px;
   margin-bottom: 20px;
-  border-radius: 5px;
+  border-radius: 10px;
 }
 
   .segment-section h5 {
-    color: #ffcc00;
+    color: black;
     margin-top: 0;
   }
 
+.flight-details, .segment-details {
+  background-color: #006994;
+  padding: 10px;
+  margin-bottom: 20px;
+  border-radius: 10px;
+}
+
 .details-list {
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+  justify-content: space-evenly;
   align-items: center;
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  border-radius: 10px;
+  background-color: #87CEEB;
 }
 
-.details-list .button {
-  order: 1;
+.legend {
+  padding: 10px 0 10px 30px;
 }
 
-.details-list .legend {
-  margin-right: auto;
+.button {
+  padding: 10px 30px 10px 0;
 }
 
 .search-btn {
@@ -77,4 +74,21 @@
 
 .payment-message {
   text-align: center;
+}
+
+.flight-details,
+.segment-details,
+.legend {
+  color: white;
+}
+
+.option {
+  display: flex;
+  flex-direction: row;
+  width: 90%;
+  background-color: #006994;
+  margin: 10px;
+  border-radius: 10px;
+  align-items: center;
+  justify-content: space-between;
 }

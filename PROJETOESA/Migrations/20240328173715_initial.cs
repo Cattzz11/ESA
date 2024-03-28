@@ -67,7 +67,7 @@ namespace PROJETOESA.Migrations
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    LogoURL = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    LogoURL = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     SearchTimes = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>

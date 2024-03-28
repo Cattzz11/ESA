@@ -17,8 +17,11 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddScoped<StatisticsService>();
 
-builder.Services.AddDbContext<AeroHelperContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("AeroHelperContext") ?? throw new InvalidOperationException("Connection string 'AeroHelperContext' not found.")));
+//builder.Services.AddDbContext<AeroHelperContext>(options =>
+//    options.UseSqlServer(builder.Configuration.GetConnectionString("AeroHelperContext") ?? throw new InvalidOperationException("Connection string 'AeroHelperContext' not found.")));
+
+builder.Services.AddDbContextFactory<AeroHelperContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("AeroHelperContext")));
 
 builder.Services.AddHttpClient("SkyscannerAPI", client =>
 {

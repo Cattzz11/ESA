@@ -7,11 +7,11 @@ namespace PROJETOESA.Services.SkyscannerService
 {
     public interface ISkyscannerService
     {
-        Task<List<Trip>> GetRoundtripAsync(FlightData data);
+        Task<List<TripViewModel>> GetRoundtripAsync(FlightData data);
 
         Task<List<TripViewModel>> GetRoundtripPremiumAsync(FlightData data);
 
-        Task<TripViewModel> GetTripDetailsAsync(string token, string itineraryId);
+        Task<TripViewModel> GetTripDetailsAsync(string token, string itineraryId, string sessionId);
 
         Task<List<Country>> GetEverywhereAsync(FlightData data);
 
@@ -23,13 +23,13 @@ namespace PROJETOESA.Services.SkyscannerService
 
         Task<List<City>> GetAirportListAsync(Country country);
 
-        Task<List<Trip>> GetSugestionsCompanyAsyncTest();
+        Task<List<TripViewModel>> GetSugestionsCompanyAsyncTest();
 
-        Task<List<Trip>> GetSugestionsCompanyAsync(string carrierId);
+        Task<List<TripViewModel>> GetSugestionsCompanyAsync(string carrierId);
 
         Task<List<City>> GetFavouriteDestinationsAsync();
 
-        Task<List<Trip>> GetSugestionsDestinationsAsync();
+        Task<List<TripViewModel>> GetSugestionsDestinationsAsync();
 
         Task<List<Carrier>> GetFavoriteAirlineAsync();
     }
